@@ -3,7 +3,6 @@ package boards;
 import boards.layout.Board;
 import boards.layout.Edge;
 import boards.spaces.BaseSpace;
-import boards.spaces.EventSpace;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -35,8 +34,8 @@ public abstract class BaseBoard {
 
         for (int i = 0; i < destinations.size(); i++) {
             BaseSpace space = destinations.get(i);
-            if (space instanceof EventSpace) {
-                destinations.set(i, handleEventSpace((EventSpace) space));
+            if (space.moveToSpace() > 0) {
+                destinations.set(i, gameBoard.getNode(space.moveToSpace()));
             }
         }
 
@@ -63,13 +62,6 @@ public abstract class BaseBoard {
         return Collections.emptyList();
     }
 
-    private BaseSpace handleEventSpace(EventSpace eventSpace) {
-        if (eventSpace.getSpaceToMoveToID() > 0) {
-            return gameBoard.getNode(eventSpace.getSpaceToMoveToID());
-        }
-        return eventSpace;
-    }
-
     public BaseSpace getStartSpace() {
         return gameBoard.getStartNode();
     }
@@ -93,8 +85,8 @@ public abstract class BaseBoard {
             }
         }
 
-        if (currentSpace instanceof EventSpace) {
-            currentSpace = handleEventSpace((EventSpace) currentSpace);
+        if (currentSpace.moveToSpace() > 0) {
+            currentSpace = gameBoard.getNode(currentSpace.moveToSpace());
         }
 
         return currentSpace;
