@@ -20,7 +20,7 @@ import java.util.Random;
 public class Simulation {
     private static final int TURN_COUNT = 20;
 
-    private static final int SIM_COUNT = 500000;
+    private static final int SIM_COUNT = 1000000;
 
     public void simulateBasic() {
         for (Dice characterDie : Dice.values()) {

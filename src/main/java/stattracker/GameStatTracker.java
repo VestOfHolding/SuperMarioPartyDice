@@ -1,15 +1,13 @@
 package stattracker;
 
 import boards.spaces.BaseSpace;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import partydice.Dice;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -23,18 +21,18 @@ public class GameStatTracker {
     private int distanceTotal;
     private int coinTotal;
 
-    private Map<Integer, Integer> allyGainOnTurn;
+    private Int2IntOpenHashMap allyGainOnTurn;
 
-    private Map<Integer, Integer> landedSpacesAmounts;
+    private Int2IntOpenHashMap landedSpacesAmounts;
 
     public GameStatTracker(Dice characterDie) {
         this.characterDie = characterDie;
         allyTotal = 0;
         distanceTotal = 0;
         coinTotal = 0;
-        landedSpacesAmounts = new HashMap<>();
+        landedSpacesAmounts = createNewInt2IntOpenHashMap();
 
-        allyGainOnTurn = new HashMap<>();
+        allyGainOnTurn = createNewInt2IntOpenHashMap();
         //No allies "gained" on the first turn.
         allyGainOnTurn.put(0, 1);
     }
@@ -48,9 +46,15 @@ public class GameStatTracker {
     }
 
     public void addLandedSpace(BaseSpace baseSpace) {
-        Integer amount = landedSpacesAmounts.get(baseSpace.getSpaceID());
-        amount = amount == null ? 1 : amount + 1;
+        int amount = landedSpacesAmounts.get(baseSpace.getSpaceID());
+        amount = amount > 0 ? 1 : amount + 1;
 
         landedSpacesAmounts.put(baseSpace.getSpaceID(), amount);
+    }
+
+    private Int2IntOpenHashMap createNewInt2IntOpenHashMap() {
+        Int2IntOpenHashMap result = new Int2IntOpenHashMap();
+        result.defaultReturnValue(-1);
+        return result;
     }
 }

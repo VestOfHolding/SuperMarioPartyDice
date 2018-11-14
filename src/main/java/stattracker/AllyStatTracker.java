@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.apache.commons.collections4.CollectionUtils;
+import utils.OnlineStatistics;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Builder
@@ -21,78 +19,64 @@ public class AllyStatTracker {
 
     private int allyCount;
 
-    private List<Integer> turnsAdded;
+    private OnlineStatistics turnsAdded;
 
-    private List<Integer> distances;
+    private OnlineStatistics distances;
 
-    private List<Integer> coinCounts;
+    private OnlineStatistics coinCounts;
 
-    //Yeah? Yeah. At the very least this should go here.
-    // I could just keep this as a map of totals, but I'm keeping track
-    // of the individual counts for the other variables, so let's do that here too.
-    // And this feels marginally better than a list of maps.
-    Map<Integer, List<Integer>> landedSpacesCounts;
+    Map<Integer, OnlineStatistics> landedSpacesStats;
 
     public AllyStatTracker(int allyCount) {
         this.allyCount = allyCount;
-        turnsAdded = new ArrayList<>();
-        distances = new ArrayList<>();
-        coinCounts = new ArrayList<>();
-        landedSpacesCounts = new HashMap<>();
+        turnsAdded = new OnlineStatistics();
+        distances = new OnlineStatistics();
+        coinCounts = new OnlineStatistics();
+        landedSpacesStats = new HashMap<>();
     }
 
     public void addTurnAdded(int turnAdded) {
-        turnsAdded.add(turnAdded);
+        turnsAdded.addValue(turnAdded);
     }
 
     public void addDistance(int distance) {
-        distances.add(distance);
+        distances.addValue(distance);
     }
 
     public void addCoinCount(int coinCount) {
-        coinCounts.add(coinCount);
+        coinCounts.addValue(coinCount);
     }
 
     public void addLandedSpaceCount(Map<Integer, Integer> landedSpaceCount) {
         for (Integer spaceID : landedSpaceCount.keySet()) {
-            List<Integer> spaceCountList = landedSpacesCounts.get(spaceID);
+            OnlineStatistics spaceStats = landedSpacesStats.get(spaceID);
 
-            if (CollectionUtils.isEmpty(spaceCountList)) {
-                spaceCountList = new ArrayList<>();
+            if (spaceStats == null) {
+                spaceStats = new OnlineStatistics();
             }
-            spaceCountList.add(landedSpaceCount.get(spaceID));
-            landedSpacesCounts.put(spaceID, spaceCountList);
+            spaceStats.addValue(landedSpaceCount.get(spaceID));
+            landedSpacesStats.put(spaceID, spaceStats);
         }
     }
 
     public double getAverageTurnAdded() {
-        return turnsAdded.stream()
-                .mapToDouble(a -> a)
-                .average()
-                .orElse(0.0);
+        return turnsAdded.getMean();
     }
 
     public double getAverageDistance() {
-        return distances.stream()
-                .mapToDouble(a -> a)
-                .average()
-                .orElse(0.0);
+        return distances.getMean();
     }
 
     public double getAverageCoinCount() {
-        return coinCounts.stream()
-                .mapToDouble(a -> a)
-                .average()
-                .orElse(0.0);
+        return coinCounts.getMean();
     }
 
     public int getAmountOccured() {
-        return distances.size();
+        return distances.getCount();
     }
 
     public String toStatString(int gameCount, int possibleSpaces) {
-        double divisionResult = ((double)getAmountOccured()) / ((double)gameCount);
-        String formatResult = DECIMAL_FORMAT.format(divisionResult * 100.0);
+        String formatResult = DECIMAL_FORMAT.format((((double)getAmountOccured()) / ((double)gameCount)) * 100.0);
 
         StringBuilder result = new StringBuilder().append(allyCount).append("\t")
                 .append(formatResult).append("%\t")
@@ -100,19 +84,18 @@ public class AllyStatTracker {
                 .append(DECIMAL_FORMAT.format(getAverageDistance())).append('\t')
                 .append(DECIMAL_FORMAT.format(getAverageCoinCount())).append('\t');
 
-        double spaceCountSum = landedSpacesCounts.values().stream()
-                .mapToDouble(list -> list.stream().mapToDouble(Integer::doubleValue).sum())
+        double spaceCountSum = landedSpacesStats.values().stream()
+                .mapToDouble(OnlineStatistics::getCount)
                 .sum();
 
         for (int i = 0; i < possibleSpaces; ++i) {
-            List<Integer> spaceCounts = landedSpacesCounts.get(i);
+            OnlineStatistics spaceStats = landedSpacesStats.get(i);
 
-            if (CollectionUtils.isEmpty(spaceCounts)) {
+            if (spaceStats == null) {
                 result.append("0%\t");
             }
             else {
-                double spaceSum = spaceCounts.stream().mapToDouble(Integer::doubleValue).sum();
-                result.append(DECIMAL_FORMAT.format((spaceSum / spaceCountSum) * 100.0))
+                result.append(DECIMAL_FORMAT.format((spaceStats.getCount() / spaceCountSum) * 100.0))
                         .append("%\t");
             }
         }

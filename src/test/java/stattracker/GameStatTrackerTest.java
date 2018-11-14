@@ -4,9 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import partydice.Dice;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GameStatTrackerTest {
 
@@ -22,8 +20,8 @@ class GameStatTrackerTest {
         //At first, there shouldn't be anything there.
         assertEquals(0, classUnderTest.getAllyTotal());
         assertEquals(1, classUnderTest.getAllyGainOnTurn().size());
-        assertTrue(Optional.ofNullable(classUnderTest.getAllyGainOnTurn().get(0)).isPresent());
-        assertEquals(Optional.of(1), Optional.ofNullable(classUnderTest.getAllyGainOnTurn().get(0)));
+
+        assertEquals(1, classUnderTest.getAllyGainOnTurn().get(0));
 
         int turnGainedFirstAlly = 5;
 
@@ -31,7 +29,6 @@ class GameStatTrackerTest {
 
         assertEquals(1, classUnderTest.getAllyTotal());
         assertEquals(2, classUnderTest.getAllyGainOnTurn().size());
-        assertTrue(Optional.ofNullable(classUnderTest.getAllyGainOnTurn().get(1)).isPresent());
-        assertEquals(Optional.of(turnGainedFirstAlly), Optional.ofNullable(classUnderTest.getAllyGainOnTurn().get(1)));
+        assertEquals(turnGainedFirstAlly, classUnderTest.getAllyGainOnTurn().get(1));
     }
 }
