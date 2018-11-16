@@ -80,9 +80,12 @@ public class AllyStatTracker {
 
         StringBuilder result = new StringBuilder().append(allyCount).append("\t")
                 .append(formatResult).append("%\t")
-                .append(DECIMAL_FORMAT.format(getAverageTurnAdded())).append('\t')
-                .append(DECIMAL_FORMAT.format(getAverageDistance())).append('\t')
-                .append(DECIMAL_FORMAT.format(getAverageCoinCount())).append('\t');
+                .append(DECIMAL_FORMAT.format(getAverageTurnAdded())).append("\t")
+                .append(DECIMAL_FORMAT.format(turnsAdded.getStandardDeviation())).append("\t")
+                .append(DECIMAL_FORMAT.format(getAverageDistance())).append("\t")
+                .append(DECIMAL_FORMAT.format(distances.getStandardDeviation())).append("\t")
+                .append(DECIMAL_FORMAT.format(getAverageCoinCount())).append("\t")
+                .append(DECIMAL_FORMAT.format(coinCounts.getStandardDeviation())).append("\t");
 
         double spaceCountSum = landedSpacesStats.values().stream()
                 .mapToDouble(OnlineStatistics::getCount)

@@ -12,30 +12,38 @@ import results.MoveResult;
 import stattracker.AllyStatTracker;
 import stattracker.GameStatTracker;
 import stattracker.SimulationStatTracker;
+import utils.OnlineStatistics;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Simulation {
-    private static final int TURN_COUNT = 20;
+    private static final Random RANDOM = new Random();
 
-    private static final int SIM_COUNT = 1000000;
+    private static final int TURN_COUNT = 20;
+    private static final int SIM_COUNT = 100000;
 
     public void simulateBasic() {
-        for (Dice characterDie : Dice.values()) {
-            double averageCoins;
-            double averageDistance;
+        final DecimalFormat decimalFormat = new DecimalFormat("####.#######");
 
-            List<Double> coinsPerGame = new ArrayList<>();
-            List<Double> distancesPerGame = new ArrayList<>();
+        System.out.println("Character\tDistance Avg\tDistance SD\tCoin Avg\tCoin SD");
+
+        OnlineStatistics coins;
+        OnlineStatistics distance;
+        double totalCoins;
+        double totalDistance;
+        DieResult result;
+
+        for (Dice characterDie : Dice.values()) {
+            coins = new OnlineStatistics();
+            distance = new OnlineStatistics();
 
             for (int i = 0; i < SIM_COUNT; ++i) {
-                double totalCoins = 0;
-                double totalDistance = 0;
+                totalCoins = 0;
+                totalDistance = 0;
 
                 for (int j = 0; j < TURN_COUNT; ++j) {
-                    DieResult result = characterDie.roll();
+                    result = characterDie.roll();
 
                     if (result instanceof MoveResult) {
                         totalDistance += result.getResult();
@@ -45,19 +53,16 @@ public class Simulation {
                     }
                 }
 
-                coinsPerGame.add(totalCoins);
-                distancesPerGame.add(totalDistance);
+                coins.addValue(totalCoins);
+                distance.addValue(totalDistance);
             }
 
-            averageCoins = coinsPerGame.stream().mapToDouble(a -> a).average().orElse(0.0);
-            averageDistance = distancesPerGame.stream().mapToDouble(a -> a).average().orElse(0.0);
-
-            System.out.println(String.join(",",
+            System.out.println(String.join("\t",
                     characterDie.getName(),
-                    String.valueOf(averageCoins),
-                    String.valueOf(Math.round(averageCoins)),
-                    String.valueOf(averageDistance),
-                    String.valueOf(Math.round(averageDistance))));
+                    decimalFormat.format(distance.getMean()),
+                    decimalFormat.format(distance.getStandardDeviation()),
+                    decimalFormat.format(coins.getMean()),
+                    decimalFormat.format(coins.getStandardDeviation())));
         }
     }
 
@@ -71,8 +76,7 @@ public class Simulation {
             simulationStatTracker = new SimulationStatTracker(characterDie);
 
             for (int i = 0; i < SIM_COUNT; ++i) {
-                GameStatTracker gameStatTracker = simulateGame(characterDie, whompsRuinsBoard, simulationStatTracker);
-                simulationStatTracker.endGame(gameStatTracker);
+                simulationStatTracker.endGame(simulateGame(characterDie, whompsRuinsBoard, simulationStatTracker));
             }
 
             printSimulationResult(characterDie, simulationStatTracker, whompsRuinsBoard.getTotalBoardSize());
@@ -80,7 +84,7 @@ public class Simulation {
     }
 
     protected void printTableHeaders(BaseBoard gameBoard) {
-        System.out.print("Character\tAllyCount\tFrequency\tAvg Turn Gained\tDistance Avg\tCoin Avg\t");
+        System.out.print("Character\tAllyCount\tFrequency\tAvg Turn Gained\tTurn Gained SD\tDistance Avg\tDistance SD\tCoin Avg\tCoin SD\t");
         for (int i = 0; i < gameBoard.getTotalBoardSize(); ++i) {
             System.out.print("Space" + i + "\t");
         }
@@ -94,9 +98,10 @@ public class Simulation {
 
         int coinCount = 5;
         int totalDistance = 0;
+        DieResult result;
 
         for (int j = 0; j < TURN_COUNT; ++j) {
-            DieResult result = characterDie.roll();
+            result = characterDie.roll();
 
             int moveAmount = 0;
 
@@ -132,7 +137,8 @@ public class Simulation {
         return gameStatTracker;
     }
 
-    protected void printSimulationResult(Dice characterDie, SimulationStatTracker simulationStatTracker,
+    protected void printSimulationResult(Dice characterDie,
+                                         SimulationStatTracker simulationStatTracker,
                                          int possibleSpaces) {
         for (AllyStatTracker allyStatTracker : simulationStatTracker.getAllyStatTrackers().values()) {
             System.out.println(characterDie.getName() + "\t" + allyStatTracker.toStatString(SIM_COUNT, possibleSpaces));
@@ -142,11 +148,10 @@ public class Simulation {
     protected int rollAllies(int numAllies) {
         numAllies = Math.min(numAllies, 4);
         int result = 0;
-        Random random = new Random();
 
         //Each ally rolls either 1 or 2.
         for (int i = 0; i < numAllies; ++i) {
-            result += random.nextInt(2) + 1;
+            result += RANDOM.nextInt(2) + 1;
         }
 
         return result;
