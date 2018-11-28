@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import partydice.Dice;
+import results.CoinResult;
+import results.DieResult;
+import results.MoveResult;
 
 @Getter
 @Setter
@@ -35,6 +38,23 @@ public class GameStatTracker {
         allyGainOnTurn = createNewInt2IntOpenHashMap();
         //No allies "gained" on the first turn.
         allyGainOnTurn.put(0, 1);
+    }
+
+    public void addCoins(int coins) {
+        coinTotal += coins;
+    }
+
+    public void addDistance(int distanceTraveled) {
+        distanceTotal += distanceTraveled;
+    }
+
+    public void addDiceResult(DieResult dieResult) {
+        if (dieResult instanceof MoveResult) {
+            addDistance(dieResult.getResult());
+        }
+        else if (dieResult instanceof CoinResult) {
+            addCoins(dieResult.getResult());
+        }
     }
 
     public void addAlly(int turnNumber) {

@@ -1,11 +1,11 @@
-package partydice;
+package simulation;
 
 import boards.BaseBoard;
-import boards.WhompsDominoRuins;
 import boards.spaces.AllySpace;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
+import partydice.Dice;
 import results.CoinResult;
 import results.DieResult;
 import results.MoveResult;
@@ -18,68 +18,41 @@ import java.text.DecimalFormat;
 import java.util.Random;
 
 public class Simulation {
-    private static final Random RANDOM = new Random();
+    protected static final Random RANDOM = new Random();
 
-    private static final int TURN_COUNT = 20;
-    private static final int SIM_COUNT = 100000;
+    protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
 
-    public void simulateBasic() {
-        final DecimalFormat decimalFormat = new DecimalFormat("####.#######");
+    protected static final int TURN_COUNT = 20;
+    protected static final int SIM_COUNT = 10000000;
 
+    public void simulate() throws Exception {
         System.out.println("Character\tDistance Avg\tDistance SD\tCoin Avg\tCoin SD");
 
         OnlineStatistics coins;
         OnlineStatistics distance;
-        double totalCoins;
-        double totalDistance;
-        DieResult result;
+        GameStatTracker gameStatTracker;
 
         for (Dice characterDie : Dice.values()) {
             coins = new OnlineStatistics();
             distance = new OnlineStatistics();
 
             for (int i = 0; i < SIM_COUNT; ++i) {
-                totalCoins = 0;
-                totalDistance = 0;
+                gameStatTracker = new GameStatTracker();
 
                 for (int j = 0; j < TURN_COUNT; ++j) {
-                    result = characterDie.roll();
-
-                    if (result instanceof MoveResult) {
-                        totalDistance += result.getResult();
-                    }
-                    else if (result instanceof CoinResult) {
-                        totalCoins += result.getResult();
-                    }
+                    gameStatTracker.addDiceResult(characterDie.roll());
                 }
 
-                coins.addValue(totalCoins);
-                distance.addValue(totalDistance);
+                coins.addValue(gameStatTracker.getCoinTotal());
+                distance.addValue(gameStatTracker.getDistanceTotal());
             }
 
             System.out.println(String.join("\t",
                     characterDie.getName(),
-                    decimalFormat.format(distance.getMean()),
-                    decimalFormat.format(distance.getStandardDeviation()),
-                    decimalFormat.format(coins.getMean()),
-                    decimalFormat.format(coins.getStandardDeviation())));
-        }
-    }
-
-    public void simulateWhomps() {
-        WhompsDominoRuins whompsRuinsBoard = new WhompsDominoRuins();
-        SimulationStatTracker simulationStatTracker;
-
-        printTableHeaders(whompsRuinsBoard);
-
-        for (Dice characterDie : Dice.values()) {
-            simulationStatTracker = new SimulationStatTracker(characterDie);
-
-            for (int i = 0; i < SIM_COUNT; ++i) {
-                simulationStatTracker.endGame(simulateGame(characterDie, whompsRuinsBoard, simulationStatTracker));
-            }
-
-            printSimulationResult(characterDie, simulationStatTracker, whompsRuinsBoard.getTotalBoardSize());
+                    DECIMAL_FORMAT.format(distance.getMean()),
+                    DECIMAL_FORMAT.format(distance.getStandardDeviation()),
+                    DECIMAL_FORMAT.format(coins.getMean()),
+                    DECIMAL_FORMAT.format(coins.getStandardDeviation())));
         }
     }
 
@@ -96,8 +69,7 @@ public class Simulation {
 
         BaseSpace currentSpace = gameBoard.getStartSpace();
 
-        int coinCount = 5;
-        int totalDistance = 0;
+        gameStatTracker.setCoinTotal(5);
         DieResult result;
 
         for (int j = 0; j < TURN_COUNT; ++j) {
@@ -109,14 +81,14 @@ public class Simulation {
                 moveAmount = result.getResult();
             }
             else if (result instanceof CoinResult) {
-                coinCount += result.getResult();
+                gameStatTracker.addCoins(result.getResult());
             }
 
             if (gameStatTracker.getAllyTotal() > 0) {
                 moveAmount += rollAllies(gameStatTracker.getAllyTotal());
             }
 
-            totalDistance += moveAmount;
+            gameStatTracker.addDistance(moveAmount);
 
             if (moveAmount > 0) {
                 currentSpace = gameBoard.getDestination(currentSpace, moveAmount);
@@ -125,14 +97,12 @@ public class Simulation {
             gameStatTracker.addLandedSpace(currentSpace);
 
             if (currentSpace instanceof BlueSpace || currentSpace instanceof RedSpace) {
-                coinCount += currentSpace.coinGain();
+                gameStatTracker.addCoins(currentSpace.coinGain());
             }
             else if (currentSpace instanceof AllySpace) {
                 gameStatTracker.addAlly(j + 1);
             }
         }
-        gameStatTracker.setCoinTotal(coinCount);
-        gameStatTracker.setDistanceTotal(totalDistance);
 
         return gameStatTracker;
     }
