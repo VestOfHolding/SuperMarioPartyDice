@@ -38,6 +38,10 @@ public class BaseSpace {
         return -1;
     }
 
+    public boolean affectsMovement() {
+        return true;
+    }
+
     public void addEdge(Edge edge) {
         if (CollectionUtils.isEmpty(edges)) {
             edges = new HashSet<>();

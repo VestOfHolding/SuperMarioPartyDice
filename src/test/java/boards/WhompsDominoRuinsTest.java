@@ -1,10 +1,8 @@
 package boards;
 
-import boards.spaces.AllySpace;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.EventSpace;
-import boards.spaces.OtherSpace;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -21,30 +19,6 @@ class WhompsDominoRuinsTest {
     static void setup() {
         //Run the real initialization so we're dealing with the real board.
         classUnderTest = new WhompsDominoRuins();
-    }
-
-    @Test
-    void getPossibleDestinations_simple() {
-        BaseSpace start = classUnderTest.getStartSpace();
-
-        List<BaseSpace> results = classUnderTest.getPossibleDestinations(start.getSpaceID(), 4);
-
-        assertEquals(results.size(), 1);
-        assertEquals(results.get(0).getSpaceID(), 4);
-        assertTrue(results.get(0) instanceof EventSpace);
-    }
-
-    @Test
-    void getPossibleDestinations_many() {
-        BaseSpace start = classUnderTest.getStartSpace();
-
-        List<BaseSpace> results = classUnderTest.getPossibleDestinations(start.getSpaceID(), 6);
-
-        //The path branches twice, so three destinations should result from this.
-        assertEquals(results.size(), 3);
-        assertTrue(results.get(0) instanceof AllySpace);
-        assertTrue(results.get(1) instanceof OtherSpace);
-        assertTrue(results.get(2) instanceof BlueSpace);
     }
 
     @Test
