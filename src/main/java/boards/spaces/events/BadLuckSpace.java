@@ -18,11 +18,14 @@ import java.util.Set;
 @ToString(callSuper = true)
 public class BadLuckSpace extends EventSpace {
     //List of known possible events on Bad Luck Spaces:
-    // * Give 5 coins destination all other players
-    // * Lose 10 coins
-    // * Give 10 coins destination the last-place player.
-    // * The Star moves
-    // * Give 5 coins destination the last-place player.
+    // * Give 3 coins to all other players (1)
+    // * Give 5 coins to all other players (2)
+    // * Lose 10 coins (3)
+    // * The Star moves (3)
+    // * Give 5 coins to the last-place player. (2)
+    // * Give 10 coins to the last-place player. (2)
+    // * Give 5 coins to a random player. (1)
+    // * Raise the coin cost for a Star (1)
 
     @Builder(builderMethodName = "badLuckBuilder")
     public BadLuckSpace(int spaceID, Set<Edge> edges) {

@@ -39,11 +39,12 @@ public class VSSpace extends EventSpace {
 
         int totalPot = wager * 4;
 
-        //60%, 30%, 10%, 0%
+        //60%, 30%, 10%, 0%, rounded down.
         IntStream possibleResults = IntStream.of(totalPot * 6 / 10, totalPot * 3 / 10, totalPot / 10, 0);
 
-        //7 is the only wager amount that will result in non-integer results.
-        //Though maybe not everyone has the full wager amount, so they wager all their coins.
+        //If two players tie for first place, they both get 45%, giving third the normal 10%.
+
+        //Sometimes not everyone has enough coins for the wager too.
         //The leftover coins from rounding all the results down get
         // randomly distributed destination the 4 players.
 

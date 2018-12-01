@@ -114,18 +114,16 @@ public class WhompsDominoRuins extends BaseBoard {
         //Path Split 3-2
         gameBoard.addNode(RedSpace.builder().spaceID(index++).build());//ID = 36
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());//ID = 38
+        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());
+        gameBoard.addNode(AllySpace.builder().spaceID(index++).build());//ID = 39
 
-        //Path Split 3-2-1
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());//ID = 39
+        //Path Split 3-3
+        gameBoard.addNode(EventSpace.builder().spaceID(index++).build());//ID = 40
         gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
         gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(EventSpace.builder().spaceID(index++).build());//ID = 44
-
-        //Path Split 3-2-2
-        gameBoard.addNode(AllySpace.builder().spaceID(index).build());//ID = 45
+        gameBoard.addNode(OtherSpace.builder().spaceID(index).build());//ID = 45
 
         //Edges
         for (int i = 28; i < 35; ++i) {
@@ -135,13 +133,17 @@ public class WhompsDominoRuins extends BaseBoard {
         gameBoard.addEdge(gameBoard.getNode(27), gameBoard.getNode(36));
         gameBoard.addEdge(gameBoard.getNode(27), gameBoard.getNode(28));
 
-        for (int i = 36; i < 44; ++i) {
+        for (int i = 36; i < 39; ++i) {
             gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
         }
 
-        gameBoard.addEdge(gameBoard.getNode(27), gameBoard.getNode(36));
-        gameBoard.addEdge(gameBoard.getNode(38), gameBoard.getNode(45));
-        gameBoard.addEdge(gameBoard.getNode(45), gameBoard.getNode(34));
+        for (int i = 40; i < 45; ++i) {
+            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
+        }
+
+        gameBoard.addEdge(gameBoard.getNode(35), gameBoard.getNode(40));
+        gameBoard.addEdge(gameBoard.getNode(39), gameBoard.getNode(34));
+        gameBoard.addEdge(gameBoard.getNode(45), gameBoard.getNode(39));
     }
 
     private void addSectionFour() {
