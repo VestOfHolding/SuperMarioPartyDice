@@ -3,7 +3,10 @@ package boards;
 import boards.layout.Board;
 import boards.layout.Edge;
 import boards.spaces.BaseSpace;
+import boards.spaces.events.EventSpace;
+import boards.spaces.events.MoveEventSpace;
 import org.apache.commons.collections4.CollectionUtils;
+import stattracker.GameStatTracker;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,7 +29,7 @@ public abstract class BaseBoard {
         try {
             return startingSpaces.stream()
                     .flatMap(space -> space.getEdges().stream())
-                    .map(Edge::getTo)
+                    .map(Edge::getDestination)
                     .collect(Collectors.toList());
         } catch (NullPointerException npe) {
             System.out.println("Null pointer on this space: " + String.join(",", startingSpaces.toString()));
@@ -43,7 +46,7 @@ public abstract class BaseBoard {
         return gameBoard.getNodesSize();
     }
 
-    public BaseSpace getDestination(BaseSpace startSpace, int distance) {
+    public BaseSpace getDestination(BaseSpace startSpace, int distance, GameStatTracker gameStatTracker) {
         BaseSpace currentSpace = startSpace;
         Random random = new Random();
 
@@ -62,8 +65,16 @@ public abstract class BaseBoard {
             }
         }
 
-        if (currentSpace.moveToSpace() > 0) {
-            currentSpace = gameBoard.getNode(currentSpace.moveToSpace());
+        if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
+            if (currentSpace instanceof MoveEventSpace && ((MoveEventSpace) currentSpace).getSpaceToMoveToID() > -1) {
+                MoveEventSpace eventSpace = (MoveEventSpace) currentSpace;
+                currentSpace = gameBoard.getNode(((MoveEventSpace) currentSpace).getSpaceToMoveToID());
+                //This is where the event space gets transformed into a blue space.
+                eventSpace.processEvent(gameBoard, gameStatTracker, eventSpace);
+            }
+            else {
+                currentSpace.processEvent(gameBoard, gameStatTracker, currentSpace);
+            }
         }
 
         return currentSpace;

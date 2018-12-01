@@ -2,7 +2,7 @@ package boards;
 
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
-import boards.spaces.EventSpace;
+import boards.spaces.events.EventSpace;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
 package boards.spaces;
 
+import boards.layout.Board;
 import boards.layout.Edge;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.collections4.CollectionUtils;
+import stattracker.GameStatTracker;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,8 +40,14 @@ public class BaseSpace {
         return -1;
     }
 
+    public void processEvent(Board gameBoard, GameStatTracker gameStatTracker, BaseSpace space) { }
+
     public boolean affectsMovement() {
         return true;
+    }
+
+    public boolean isPassingEvent() {
+        return false;
     }
 
     public void addEdge(Edge edge) {

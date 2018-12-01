@@ -72,10 +72,16 @@ public class Simulation {
         gameStatTracker.setCoinTotal(5);
         DieResult result;
 
+        int coinSpaceMultiply = 1;
+
         for (int j = 0; j < TURN_COUNT; ++j) {
             result = characterDie.roll();
 
             int moveAmount = 0;
+
+            if (j > TURN_COUNT - 5) {
+                coinSpaceMultiply = 2;
+            }
 
             if (result instanceof MoveResult) {
                 moveAmount = result.getResult();
@@ -91,13 +97,13 @@ public class Simulation {
             gameStatTracker.addDistance(moveAmount);
 
             if (moveAmount > 0) {
-                currentSpace = gameBoard.getDestination(currentSpace, moveAmount);
+                currentSpace = gameBoard.getDestination(currentSpace, moveAmount, gameStatTracker);
             }
 
             gameStatTracker.addLandedSpace(currentSpace);
 
             if (currentSpace instanceof BlueSpace || currentSpace instanceof RedSpace) {
-                gameStatTracker.addCoins(currentSpace.coinGain());
+                gameStatTracker.addCoins(currentSpace.coinGain() * coinSpaceMultiply);
             }
             else if (currentSpace instanceof AllySpace) {
                 gameStatTracker.addAlly(j + 1);

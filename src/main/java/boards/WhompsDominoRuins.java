@@ -3,9 +3,11 @@ package boards;
 import boards.layout.Board;
 import boards.spaces.AllySpace;
 import boards.spaces.BlueSpace;
-import boards.spaces.EventSpace;
+import boards.spaces.StartSpace;
+import boards.spaces.events.EventSpace;
 import boards.spaces.OtherSpace;
 import boards.spaces.RedSpace;
+import boards.spaces.events.MoveEventSpace;
 
 public class WhompsDominoRuins extends BaseBoard {
     public WhompsDominoRuins() {
@@ -26,7 +28,7 @@ public class WhompsDominoRuins extends BaseBoard {
         int index = 0;
 
         //Start
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());//ID = 0
+        gameBoard.addNode(StartSpace.builder().spaceID(index++).build());//ID = 0
 
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
         gameBoard.addNode(RedSpace.builder().spaceID(index++).build());
@@ -59,9 +61,9 @@ public class WhompsDominoRuins extends BaseBoard {
         //Path Split 2-1
         gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());//ID = 12
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        //14 here is where the event spaces along the top row can send you back to
+        //14 here is where the event spaces along the top row can send you back destination
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());//ID = 14
-        gameBoard.addNode(EventSpace.builder().spaceID(index++).spaceToMoveToID(14).build());
+        gameBoard.addNode(MoveEventSpace.moveBuilder().spaceID(index++).spaceToMoveToID(getMoveEventDestinationID()).build());
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());//ID = 17
 
@@ -76,7 +78,7 @@ public class WhompsDominoRuins extends BaseBoard {
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
         gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(EventSpace.builder().spaceID(index).spaceToMoveToID(14).build());//ID = 27
+        gameBoard.addNode(MoveEventSpace.moveBuilder().spaceID(index).spaceToMoveToID(getMoveEventDestinationID()).build());//ID = 27
 
         //Edges
         for (int i = 11; i < 17; ++i) {
@@ -100,7 +102,7 @@ public class WhompsDominoRuins extends BaseBoard {
         int index = 28;
 
         //Path Split 3-1
-        gameBoard.addNode(EventSpace.builder().spaceID(index++).spaceToMoveToID(14).build());//ID = 28
+        gameBoard.addNode(MoveEventSpace.moveBuilder().spaceID(index++).spaceToMoveToID(getMoveEventDestinationID()).build());//ID = 28
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
@@ -180,5 +182,9 @@ public class WhompsDominoRuins extends BaseBoard {
         gameBoard.addEdge(gameBoard.getNode(55), gameBoard.getNode(52));
         gameBoard.addEdge(gameBoard.getNode(52), gameBoard.getNode(56));
         gameBoard.addEdge(gameBoard.getNode(56), gameBoard.getNode(9));
+    }
+
+    public int getMoveEventDestinationID() {
+        return 14;
     }
 }

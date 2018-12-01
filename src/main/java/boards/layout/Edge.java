@@ -12,14 +12,14 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Edge {
     private BaseSpace from;
-    private BaseSpace to;
+    private BaseSpace destination;
 
     public BaseSpace getNeighbor(BaseSpace node) {
-        if (!node.equals(from) && !node.equals(to)) {
+        if (!node.equals(from) && !node.equals(destination)) {
             return null;
         }
 
-        return node.equals(from) ? to : from;
+        return node.equals(from) ? destination : from;
     }
 
     public BaseSpace getFromSpace() {
@@ -27,11 +27,11 @@ public class Edge {
     }
 
     public BaseSpace getToSpace() {
-        return to;
+        return destination;
     }
 
     @Override
     public String toString() {
-        return "Edge{from = " + from.getSpaceID() + ", to = " + to.getSpaceID() + "}";
+        return "Edge{from = " + from.getSpaceID() + ", destination = " + destination.getSpaceID() + "}";
     }
 }
