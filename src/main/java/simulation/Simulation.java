@@ -79,7 +79,7 @@ public class Simulation {
 
             int moveAmount = 0;
 
-            if (j > TURN_COUNT - 5) {
+            if (j > TURN_COUNT - 3) {
                 coinSpaceMultiply = 2;
             }
 
