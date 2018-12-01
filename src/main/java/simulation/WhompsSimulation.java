@@ -5,7 +5,6 @@ import partydice.Dice;
 import stattracker.SimulationStatTracker;
 
 public class WhompsSimulation extends Simulation {
-    protected static final int SIM_COUNT = 2000000;
 
     @Override
     public void simulate() {

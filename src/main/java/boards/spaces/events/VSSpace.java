@@ -4,7 +4,6 @@ import boards.layout.Board;
 import boards.layout.Edge;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
-import boards.spaces.events.EventSpace;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
