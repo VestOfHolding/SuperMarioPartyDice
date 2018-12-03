@@ -27,12 +27,13 @@ public class Board {
         }
     }
 
-    public void addNode(BaseSpace node) {
-        nodes.putIfAbsent(node.getSpaceID(), node);
+    public void clearBoard() {
+        nodes.clear();
+        edges.clear();
     }
 
-    public boolean containsNode(BaseSpace node) {
-        return nodes.get(node.getSpaceID()) != null;
+    public void addNode(BaseSpace node) {
+        nodes.putIfAbsent(node.getSpaceID(), node);
     }
 
     public BaseSpace getNode(int index) {
@@ -72,10 +73,6 @@ public class Board {
         edges.add(edge);
 
         from.addEdge(edge);
-    }
-
-    public boolean containsEdge(Edge edge) {
-        return edge.getFrom() != null && edge.getDestination() != null && edges.contains(edge);
     }
 
     public Set<Edge> getEdgesByDestination(int destinationID) {

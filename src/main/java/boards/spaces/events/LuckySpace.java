@@ -18,12 +18,15 @@ import java.util.Set;
 @ToString(callSuper = true)
 public class LuckySpace extends EventSpace {
     //List of known possible events on Lucky Spaces:
-    // * Receive a Dash Mushroom (2)
-    // * Get several Dash Mushrooms (1)
-    // * Receive a Golden Dash Mushroom (1)
-    // * Make a rival lose 5 coins (seen twice at once) (3)
-    // * Receive 3 coins (1)
-    // * Receive 5 coins (2)
+    // * Receive a Dash Mushroom (10)
+    // * Get several Dash Mushrooms (4)
+    // * Receive a Golden Dash Mushroom (6)
+    // * Get several Golden Dash Mushrooms (3)
+    // * Make a rival lose 5 coins (seen twice at once) (12)
+    // * Make a rival lose 10 coins (1)
+    // * Receive 3 coins (6)
+    // * Receive 5 coins (13)
+    // * Steal one ally from a rival (1)
 
     @Builder(builderMethodName = "luckyBuilder")
     public LuckySpace(int spaceID, Set<Edge> edges) {

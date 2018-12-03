@@ -7,6 +7,7 @@ import boards.spaces.OtherSpace;
 import boards.spaces.RedSpace;
 import boards.spaces.StartSpace;
 import boards.spaces.events.BadLuckSpace;
+import boards.spaces.events.ChooseTreasureChestEvent;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.LuckySpace;
 import boards.spaces.events.MoveEventSpace;
@@ -25,6 +26,12 @@ public class WhompsDominoRuins extends BaseBoard {
         addSectionTwo();
         addSectionThree();
         addSectionFour();
+    }
+
+    @Override
+    public void resetBoard() {
+        gameBoard.clearBoard();
+        initializeBoard();
     }
 
     private void addInitialLoop() {
@@ -73,7 +80,7 @@ public class WhompsDominoRuins extends BaseBoard {
         //Path Split 2-2
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());//ID = 18
         gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(EventSpace.builder().spaceID(index++).build());
+        gameBoard.addNode(ChooseTreasureChestEvent.chooseChestEventBuilder().spaceID(index++).build());
         gameBoard.addNode(BadLuckSpace.builder().spaceID(index++).build());
         gameBoard.addNode(AllySpace.builder().spaceID(index++).build());//ID = 22
 

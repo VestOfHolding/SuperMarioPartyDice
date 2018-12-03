@@ -18,6 +18,8 @@ public abstract class BaseBoard {
 
     protected abstract void initializeBoard();
 
+    public abstract void resetBoard();
+
     public List<BaseSpace> travelToNextSpaces(BaseSpace startingSpace) {
         return travelToNextSpaces(Collections.singletonList(startingSpace));
     }

@@ -42,6 +42,8 @@ public class VSSpace extends EventSpace {
         IntStream possibleResults = IntStream.of(totalPot * 6 / 10, totalPot * 3 / 10, totalPot / 10, 0);
 
         //If two players tie for first place, they both get 45%, giving third the normal 10%.
+        //If three players tie for second place, 1st gets the normal 60%,
+        //    while the remaining three evenly split the remaining 40%.
 
         //Sometimes not everyone has enough coins for the wager too.
         //The leftover coins from rounding all the results down get

@@ -18,6 +18,7 @@ public class WhompsSimulation extends Simulation {
 
             for (int i = 0; i < SIM_COUNT; ++i) {
                 simulationStatTracker.endGame(simulateGame(characterDie, whompsRuinsBoard, simulationStatTracker));
+                whompsRuinsBoard.resetBoard();
             }
 
             printSimulationResult(characterDie, simulationStatTracker, whompsRuinsBoard.getTotalBoardSize());
