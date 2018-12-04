@@ -1,9 +1,7 @@
 package boards.spaces.events;
 
 import boards.layout.Board;
-import boards.layout.Edge;
 import boards.spaces.BaseSpace;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -30,9 +27,8 @@ public class ChooseTreasureChestEvent extends EventSpace {
     //3. 3 coins
     List<Integer> REWARDS;
 
-    @Builder(builderMethodName = "chooseChestEventBuilder")
-    public ChooseTreasureChestEvent(int spaceID, Set<Edge> edges) {
-        super(spaceID, edges);
+    public ChooseTreasureChestEvent(int spaceID) {
+        super(spaceID);
 
         //Not using items yet.
         REWARDS = new ArrayList<>(Arrays.asList(0, 3, 10));

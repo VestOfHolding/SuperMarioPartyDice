@@ -1,10 +1,8 @@
 package boards.spaces.events;
 
 import boards.layout.Board;
-import boards.layout.Edge;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,6 @@ import stattracker.GameStatTracker;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.stream.IntStream;
 
 @EqualsAndHashCode(callSuper = true)
@@ -27,9 +24,8 @@ public class VSSpace extends EventSpace {
 
     List<Integer> POSSIBLE_WAGERS = Arrays.asList(5, 7, 10, 15, 20, 25, 30);
 
-    @Builder(builderMethodName = "vsBuilder")
-    public VSSpace(int spaceID, Set<Edge> edges) {
-        super(spaceID, edges);
+    public VSSpace(int spaceID) {
+        super(spaceID);
     }
 
     @Override

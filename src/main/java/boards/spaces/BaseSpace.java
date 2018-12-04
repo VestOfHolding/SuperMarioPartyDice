@@ -26,6 +26,7 @@ public class BaseSpace {
 
     public BaseSpace(int spaceID) {
         edges = new HashSet<>();
+        this.spaceID = spaceID;
     }
 
     public int coinGain() {

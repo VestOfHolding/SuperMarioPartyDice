@@ -1,16 +1,12 @@
 package boards.spaces.events;
 
 import boards.layout.Board;
-import boards.layout.Edge;
 import boards.spaces.BaseSpace;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
-
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -28,9 +24,8 @@ public class LuckySpace extends EventSpace {
     // * Receive 5 coins (13)
     // * Steal one ally from a rival (1)
 
-    @Builder(builderMethodName = "luckyBuilder")
-    public LuckySpace(int spaceID, Set<Edge> edges) {
-        super(spaceID, edges);
+    public LuckySpace(int spaceID) {
+        super(spaceID);
     }
 
     @Override

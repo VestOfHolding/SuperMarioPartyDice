@@ -18,7 +18,10 @@ public abstract class BaseBoard {
 
     protected abstract void initializeBoard();
 
-    public abstract void resetBoard();
+    public void resetBoard() {
+        gameBoard.clearBoard();
+        initializeBoard();
+    }
 
     public List<BaseSpace> travelToNextSpaces(BaseSpace startingSpace) {
         return travelToNextSpaces(Collections.singletonList(startingSpace));

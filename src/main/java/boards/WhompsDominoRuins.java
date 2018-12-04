@@ -28,33 +28,27 @@ public class WhompsDominoRuins extends BaseBoard {
         addSectionFour();
     }
 
-    @Override
-    public void resetBoard() {
-        gameBoard.clearBoard();
-        initializeBoard();
-    }
-
     private void addInitialLoop() {
         int index = 0;
 
         //Start
-        gameBoard.addNode(StartSpace.builder().spaceID(index++).build());//ID = 0
+        gameBoard.addNode(new StartSpace(index++));//ID = 0
 
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(RedSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(EventSpace.builder().spaceID(index++).build());
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new RedSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new EventSpace(index++));
 
         //Path Path 1-1
-        gameBoard.addNode(EventSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(AllySpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(LuckySpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());//ID = 10
+        gameBoard.addNode(new EventSpace(index++));
+        gameBoard.addNode(new AllySpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new LuckySpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));//ID = 10
 
         //Path Path 1-2
-        gameBoard.addNode(BlueSpace.builder().spaceID(index).build());//ID = 11
+        gameBoard.addNode(new BlueSpace(index));//ID = 11
 
         //Edges
         for (int i = 0; i < 10; ++i) {
@@ -69,26 +63,26 @@ public class WhompsDominoRuins extends BaseBoard {
         int index = 12;
 
         //Path Split 2-1
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());//ID = 12
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
+        gameBoard.addNode(new OtherSpace(index++));//ID = 12
+        gameBoard.addNode(new BlueSpace(index++));
         //14 here is where the event spaces along the top row can send you back destination
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());//ID = 14
-        gameBoard.addNode(MoveEventSpace.moveBuilder().spaceID(index++).spaceToMoveToID(getMoveEventDestinationID()).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());//ID = 17
+        gameBoard.addNode(new BlueSpace(index++));//ID = 14
+        gameBoard.addNode(new MoveEventSpace(index++, getMoveEventDestinationID()));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));//ID = 17
 
         //Path Split 2-2
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());//ID = 18
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(ChooseTreasureChestEvent.chooseChestEventBuilder().spaceID(index++).build());
-        gameBoard.addNode(BadLuckSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(AllySpace.builder().spaceID(index++).build());//ID = 22
+        gameBoard.addNode(new BlueSpace(index++));//ID = 18
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new ChooseTreasureChestEvent(index++));
+        gameBoard.addNode(new BadLuckSpace(index++));
+        gameBoard.addNode(new AllySpace(index++));//ID = 22
 
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());//ID = 23
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(MoveEventSpace.moveBuilder().spaceID(index).spaceToMoveToID(getMoveEventDestinationID()).build());//ID = 27
+        gameBoard.addNode(new OtherSpace(index++));//ID = 23
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new OtherSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new MoveEventSpace(index, getMoveEventDestinationID()));//ID = 27
 
         //Edges
         for (int i = 11; i < 17; ++i) {
@@ -112,28 +106,28 @@ public class WhompsDominoRuins extends BaseBoard {
         int index = 28;
 
         //Path Split 3-1
-        gameBoard.addNode(MoveEventSpace.moveBuilder().spaceID(index++).spaceToMoveToID(getMoveEventDestinationID()).build());//ID = 28
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BadLuckSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(EventSpace.builder().spaceID(index++).build());//ID = 35
+        gameBoard.addNode(new MoveEventSpace(index++, getMoveEventDestinationID()));//ID = 28
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BadLuckSpace(index++));
+        gameBoard.addNode(new OtherSpace(index++));
+        gameBoard.addNode(new EventSpace(index++));//ID = 35
 
         //Path Split 3-2
-        gameBoard.addNode(RedSpace.builder().spaceID(index++).build());//ID = 36
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(VSSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(AllySpace.builder().spaceID(index++).build());//ID = 39
+        gameBoard.addNode(new RedSpace(index++));//ID = 36
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new VSSpace(index++));
+        gameBoard.addNode(new AllySpace(index++));//ID = 39
 
         //Path Split 3-3
-        gameBoard.addNode(EventSpace.builder().spaceID(index++).build());//ID = 40
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BadLuckSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BadLuckSpace.builder().spaceID(index).build());//ID = 45
+        gameBoard.addNode(new EventSpace(index++));//ID = 40
+        gameBoard.addNode(new OtherSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BadLuckSpace(index++));
+        gameBoard.addNode(new BadLuckSpace(index));//ID = 45
 
         //Edges
         for (int i = 28; i < 35; ++i) {
@@ -159,22 +153,22 @@ public class WhompsDominoRuins extends BaseBoard {
     private void addSectionFour() {
         int index = 46;
 
-        gameBoard.addNode(VSSpace.builder().spaceID(index++).build());//ID = 46
+        gameBoard.addNode(new VSSpace(index++));//ID = 46
 
         //Path Split 4-1
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());//ID = 47
-        gameBoard.addNode(LuckySpace.builder().spaceID(index++).build());
-        gameBoard.addNode(LuckySpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(AllySpace.builder().spaceID(index++).build());//ID = 52
+        gameBoard.addNode(new BlueSpace(index++));//ID = 47
+        gameBoard.addNode(new LuckySpace(index++));
+        gameBoard.addNode(new LuckySpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new AllySpace(index++));//ID = 52
 
         //Path Split 4-2
-        gameBoard.addNode(RedSpace.builder().spaceID(index++).build());//ID = 53
-        gameBoard.addNode(BlueSpace.builder().spaceID(index++).build());
-        gameBoard.addNode(OtherSpace.builder().spaceID(index++).build());//ID = 55
+        gameBoard.addNode(new RedSpace(index++));//ID = 53
+        gameBoard.addNode(new BlueSpace(index++));
+        gameBoard.addNode(new OtherSpace(index++));//ID = 55
 
-        gameBoard.addNode(BadLuckSpace.builder().spaceID(index).build());//ID = 56
+        gameBoard.addNode(new BadLuckSpace(index));//ID = 56
 
         //Edges
 

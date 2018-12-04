@@ -1,14 +1,10 @@
 package boards.spaces.events;
 
-import boards.layout.Edge;
 import boards.spaces.BaseSpace;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -16,8 +12,7 @@ import java.util.Set;
 @ToString(callSuper = true)
 public class EventSpace extends BaseSpace {
 
-    @Builder
-    protected EventSpace(int spaceID, Set<Edge> edges) {
-        super(spaceID, edges);
+    public EventSpace(int spaceID) {
+        super(spaceID);
     }
 }

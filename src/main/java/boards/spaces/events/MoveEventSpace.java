@@ -1,10 +1,8 @@
 package boards.spaces.events;
 
 import boards.layout.Board;
-import boards.layout.Edge;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -12,7 +10,6 @@ import lombok.ToString;
 import stattracker.GameStatTracker;
 
 import java.util.Objects;
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -21,9 +18,8 @@ import java.util.Set;
 public class MoveEventSpace extends EventSpace {
     private Integer spaceToMoveToID;
 
-    @Builder(builderMethodName = "moveBuilder")
-    private MoveEventSpace(int spaceID, Set<Edge> edges, Integer spaceToMoveToID) {
-        super(spaceID, edges);
+    public MoveEventSpace(int spaceID, Integer spaceToMoveToID) {
+        super(spaceID);
         this.spaceToMoveToID = Objects.requireNonNullElse(spaceToMoveToID, -1);
     }
 
