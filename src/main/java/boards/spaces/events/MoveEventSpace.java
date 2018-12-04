@@ -18,9 +18,18 @@ import java.util.Objects;
 public class MoveEventSpace extends EventSpace {
     private Integer spaceToMoveToID;
 
+    private boolean turnsBlue;
+
     public MoveEventSpace(int spaceID, Integer spaceToMoveToID) {
         super(spaceID);
         this.spaceToMoveToID = Objects.requireNonNullElse(spaceToMoveToID, -1);
+        turnsBlue = true;
+    }
+
+    public MoveEventSpace(int spaceID, Integer spaceToMoveToID, boolean turnsBlue) {
+        super(spaceID);
+        this.spaceToMoveToID = Objects.requireNonNullElse(spaceToMoveToID, -1);
+        this.turnsBlue = turnsBlue;
     }
 
     @Override
@@ -30,7 +39,9 @@ public class MoveEventSpace extends EventSpace {
 
     @Override
     public void processEvent(Board gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
-        //For now, just handle the fact that this space becomes a Blue Space once it's used.
-        gameBoard.setNode(space.getSpaceID(), new BlueSpace());
+        if (turnsBlue) {
+            //For now, just handle the fact that this space becomes a Blue Space once it's used.
+            gameBoard.setNode(space.getSpaceID(), new BlueSpace());
+        }
     }
 }
