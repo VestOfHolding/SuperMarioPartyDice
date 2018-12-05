@@ -1,11 +1,12 @@
 package boards.spaces.events;
 
-import boards.layout.Board;
+import boards.layout.CustomSimpleDirectedGraph;
 import boards.spaces.BaseSpace;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class ChooseTreasureChestEvent extends EventSpace {
     }
 
     @Override
-    public void processEvent(Board gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
+    public void processEvent(CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> gameBoard,
+                             GameStatTracker gameStatTracker, BaseSpace space) {
         if (REWARDS.isEmpty()) {
             return;
         }

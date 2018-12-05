@@ -1,6 +1,7 @@
 package boards;
 
 import boards.layout.Board;
+import boards.layout.CustomSimpleDirectedGraph;
 import boards.spaces.AllySpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.NonMovementSpace;
@@ -12,6 +13,7 @@ import boards.spaces.events.EventSpace;
 import boards.spaces.events.LuckySpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.VSSpace;
+import org.jgrapht.graph.DefaultEdge;
 
 public class KingBobombsPowderkegMine extends BaseBoard {
     public KingBobombsPowderkegMine() {
@@ -21,6 +23,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
     @Override
     protected void initializeBoard() {
         gameBoard = new Board();
+        board = new CustomSimpleDirectedGraph<>(DefaultEdge.class);
 
         addStartAndInnerLoop();
         addUpperOuterLoop();

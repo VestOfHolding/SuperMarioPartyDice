@@ -18,50 +18,12 @@ public class Board {
         edges = new HashSet<>();
     }
 
-    public Board(List<BaseSpace> nodeList) {
-        nodes = new HashMap<>();
-        edges = new HashSet<>();
-
-        for (BaseSpace node : nodeList) {
-            nodes.put(node.getSpaceID(), node);
-        }
-    }
-
-    public void clearBoard() {
-        nodes.clear();
-        edges.clear();
-    }
-
     public void addNode(BaseSpace node) {
         nodes.putIfAbsent(node.getSpaceID(), node);
     }
 
     public BaseSpace getNode(int index) {
         return nodes.get(index);
-    }
-
-    public void setNode(int spaceId, BaseSpace newSpace) {
-        BaseSpace previous = nodes.getOrDefault(spaceId, null);
-
-        if (previous == null) {
-            addNode(newSpace);
-            return;
-        }
-
-        newSpace.setSpaceID(previous.getSpaceID());
-        newSpace.setEdges(previous.getEdges());
-
-        //With the new space all set up, replace it in the graph.
-        getEdgesByDestination(spaceId).forEach(e -> e.setDestination(newSpace));
-        nodes.put(spaceId, newSpace);
-    }
-
-    public BaseSpace getStartNode() {
-        return nodes.get(0);
-    }
-
-    public int getNodesSize() {
-        return nodes.size();
     }
 
     public void addEdge(BaseSpace from, BaseSpace to) {
@@ -73,11 +35,5 @@ public class Board {
         edges.add(edge);
 
         from.addEdge(edge);
-    }
-
-    public Set<Edge> getEdgesByDestination(int destinationID) {
-        return edges.stream()
-                .filter(e -> e.getDestination().getSpaceID() == destinationID)
-                .collect(Collectors.toSet());
     }
 }

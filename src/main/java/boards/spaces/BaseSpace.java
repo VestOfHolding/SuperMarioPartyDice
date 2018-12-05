@@ -1,6 +1,6 @@
 package boards.spaces;
 
-import boards.layout.Board;
+import boards.layout.CustomSimpleDirectedGraph;
 import boards.layout.Edge;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.collections4.CollectionUtils;
+import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class BaseSpace {
         return -1;
     }
 
-    public void processEvent(Board gameBoard, GameStatTracker gameStatTracker, BaseSpace space) { }
+    public void processEvent(CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) { }
 
     public boolean affectsMovement() {
         return true;
@@ -57,13 +58,5 @@ public class BaseSpace {
         }
 
         edges.add(edge);
-    }
-
-    public boolean containsEdge(Edge edge) {
-        return edges.contains(edge);
-    }
-
-    public int getNeighborCount() {
-        return edges.size();
     }
 }

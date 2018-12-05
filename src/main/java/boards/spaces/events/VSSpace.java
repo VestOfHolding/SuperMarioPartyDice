@@ -1,12 +1,13 @@
 package boards.spaces.events;
 
-import boards.layout.Board;
+import boards.layout.CustomSimpleDirectedGraph;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 import java.util.Arrays;
@@ -29,7 +30,8 @@ public class VSSpace extends EventSpace {
     }
 
     @Override
-    public void processEvent(Board gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
+    public void processEvent(CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> gameBoard,
+                             GameStatTracker gameStatTracker, BaseSpace space) {
         int wager = POSSIBLE_WAGERS.get(RAND.nextInt(POSSIBLE_WAGERS.size()));
 
         int totalPot = wager * 4;
@@ -47,6 +49,6 @@ public class VSSpace extends EventSpace {
 
 
         //Lastly, this space turns blue after it has been landed on.
-        gameBoard.setNode(space.getSpaceID(), new BlueSpace());
+        gameBoard.setOrReplaceVertex(space.getSpaceID(), new BlueSpace());
     }
 }

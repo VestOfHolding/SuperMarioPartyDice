@@ -1,11 +1,12 @@
 package boards;
 
 import boards.layout.Board;
-import boards.layout.Edge;
+import boards.layout.CustomSimpleDirectedGraph;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
 import org.apache.commons.collections4.CollectionUtils;
+import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 import java.util.Collections;
@@ -16,10 +17,12 @@ import java.util.stream.Collectors;
 public abstract class BaseBoard {
     protected Board gameBoard;
 
+    protected CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> board;
+
     protected abstract void initializeBoard();
 
     public void resetBoard() {
-        gameBoard.clearBoard();
+        board = new CustomSimpleDirectedGraph<>(DefaultEdge.class);
         initializeBoard();
     }
 
@@ -33,9 +36,10 @@ public abstract class BaseBoard {
         }
         try {
             return startingSpaces.stream()
-                    .flatMap(space -> space.getEdges().stream())
-                    .map(Edge::getDestination)
+                    .flatMap(space -> board.outgoingEdgesOf(space).stream())
+                    .map(edge -> board.getEdgeTarget(edge))
                     .collect(Collectors.toList());
+
         } catch (NullPointerException npe) {
             System.out.println("Null pointer on this space: " + String.join(",", startingSpaces.toString()));
         }
@@ -44,11 +48,11 @@ public abstract class BaseBoard {
     }
 
     public BaseSpace getStartSpace() {
-        return gameBoard.getStartNode();
+        return board.getStartSpace();
     }
 
     public int getTotalBoardSize() {
-        return gameBoard.getNodesSize();
+        return board.getGraphSize();
     }
 
     public BaseSpace getDestination(BaseSpace startSpace, int distance, GameStatTracker gameStatTracker) {
@@ -73,12 +77,12 @@ public abstract class BaseBoard {
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
             if (currentSpace instanceof MoveEventSpace && ((MoveEventSpace) currentSpace).getSpaceToMoveToID() > -1) {
                 MoveEventSpace eventSpace = (MoveEventSpace) currentSpace;
-                currentSpace = gameBoard.getNode(((MoveEventSpace) currentSpace).getSpaceToMoveToID());
+                currentSpace = board.getVertexById(((MoveEventSpace) currentSpace).getSpaceToMoveToID());
                 //This is where the event space gets transformed into a blue space.
-                eventSpace.processEvent(gameBoard, gameStatTracker, eventSpace);
+                eventSpace.processEvent(board, gameStatTracker, eventSpace);
             }
             else {
-                currentSpace.processEvent(gameBoard, gameStatTracker, currentSpace);
+                currentSpace.processEvent(board, gameStatTracker, currentSpace);
             }
         }
 
