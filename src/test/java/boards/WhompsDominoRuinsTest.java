@@ -35,7 +35,7 @@ class WhompsDominoRuinsTest {
     @Test
     void travelToNextSpaces_many() {
         //Get the first space that has more than one Edge.
-        BaseSpace branchingSpace = classUnderTest.gameBoard.getNode(4);
+        BaseSpace branchingSpace = classUnderTest.board.getVertexById(4);
 
         List<BaseSpace> results = classUnderTest.travelToNextSpaces(branchingSpace);
 

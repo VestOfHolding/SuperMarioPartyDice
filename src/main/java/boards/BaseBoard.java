@@ -1,12 +1,13 @@
 package boards;
 
-import boards.layout.Board;
 import boards.layout.CustomSimpleDirectedGraph;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
 import org.apache.commons.collections4.CollectionUtils;
+import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.builder.GraphBuilder;
 import stattracker.GameStatTracker;
 
 import java.util.Collections;
@@ -15,9 +16,9 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public abstract class BaseBoard {
-    protected Board gameBoard;
-
     protected CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> board;
+
+    protected GraphBuilder<BaseSpace, DefaultEdge, CustomSimpleDirectedGraph<BaseSpace, DefaultEdge>> graphBuilder;
 
     protected abstract void initializeBoard();
 
@@ -36,8 +37,8 @@ public abstract class BaseBoard {
         }
         try {
             return startingSpaces.stream()
-                    .flatMap(space -> board.outgoingEdgesOf(space).stream())
-                    .map(edge -> board.getEdgeTarget(edge))
+                    .flatMap(space -> Graphs.successorListOf(board, space).stream())
+                    .distinct()
                     .collect(Collectors.toList());
 
         } catch (NullPointerException npe) {

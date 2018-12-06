@@ -1,9 +1,9 @@
 package boards;
 
-import boards.layout.Board;
 import boards.layout.CustomSimpleDirectedGraph;
 import boards.spaces.AllySpace;
 import boards.spaces.BlueSpace;
+import boards.spaces.NonMovementSpace;
 import boards.spaces.OtherSpace;
 import boards.spaces.RedSpace;
 import boards.spaces.StartSpace;
@@ -14,186 +14,130 @@ import boards.spaces.events.LuckySpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.VSSpace;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.builder.GraphBuilder;
 
 public class WhompsDominoRuins extends BaseBoard {
+
     public WhompsDominoRuins() {
         initializeBoard();
     }
 
     @Override
     protected void initializeBoard() {
-        gameBoard = new Board();
         board = new CustomSimpleDirectedGraph<>(DefaultEdge.class);
 
-        addInitialLoop();
-        addSectionTwo();
-        addSectionThree();
-        addSectionFour();
+        graphBuilder = new GraphBuilder<>(new CustomSimpleDirectedGraph<>(DefaultEdge.class));
+
+        buildInitialGraph();
     }
 
-    private void addInitialLoop() {
+    private void buildInitialGraph() {
         int index = 0;
 
-        //Start
-        gameBoard.addNode(new StartSpace(index++));//ID = 0
+        graphBuilder.addEdgeChain(
+                //Start
+                new StartSpace(index++), //ID = 0
+                new BlueSpace(index++),
+                new RedSpace(index++),
+                new BlueSpace(index++),
+                new EventSpace(index++),
+                new NonMovementSpace(index++), //ID = 5
+                new BlueSpace(index++),
+                new NonMovementSpace(index++), //ID = 7
+                new OtherSpace(index++),
+                new BlueSpace(index++),
+                new BlueSpace(index++), //ID = 10
+                new MoveEventSpace(index++, getMoveEventDestinationID()),
+                new BlueSpace(index++),
+                new BlueSpace(index++),
+                new AllySpace(index++),
+                new OtherSpace(index++), //ID = 15
+                new BlueSpace(index++),
+                new OtherSpace(index++),
+                new MoveEventSpace(index++, getMoveEventDestinationID()),
+                new NonMovementSpace(index++), //ID = 19
+                new MoveEventSpace(index++, getMoveEventDestinationID()),
+                new BlueSpace(index++),
+                new BlueSpace(index++),
+                new NonMovementSpace(index++),
+                new BlueSpace(index++),
+                new BadLuckSpace(index++),
+                new OtherSpace(index++), //ID = 26
+                new EventSpace(index++),
+                new NonMovementSpace(index++), //ID = 28
+                new VSSpace(index++),
+                new NonMovementSpace(index++), //ID = 30
+                new BlueSpace(index++),
+                new NonMovementSpace(index++),
+                new LuckySpace(index++),
+                new LuckySpace(index++),
+                new BlueSpace(index++),
+                new BlueSpace(index++),
+                new AllySpace(index++), //ID = 37
+                new BadLuckSpace(index++),
+                new BlueSpace(index++), //ID = 39
+                new NonMovementSpace(index++),
+                new BlueSpace(index++)
+        ).addEdgeChain(
+                //Inner Loop
+                new EventSpace(index++), //ID = 42
+                new AllySpace(index++),
+                new BlueSpace(index++),
+                new LuckySpace(index++) //ID = 45
+        ).addEdgeChain(
+                //Side Path 1
+                new BlueSpace(index++),  //ID = 46
+                new NonMovementSpace(index++),
+                new BlueSpace(index++),
+                new ChooseTreasureChestEvent(index++),
+                new BadLuckSpace(index++) //ID = 50
+        ).addEdgeChain(
+                //Side Path 2
+                new RedSpace(index++), //ID = 51
+                new BlueSpace(index++),
+                new VSSpace(index++),
+                new AllySpace(index++) //ID = 54
+        ).addEdgeChain(
+                //Side Path 3
+                new EventSpace(index++), //ID = 55
+                new OtherSpace(index++),
+                new BlueSpace(index++),
+                new BlueSpace(index++),
+                new BadLuckSpace(index++),
+                new BadLuckSpace(index++) //ID = 60
+        ).addEdgeChain(
+                //Side Path 4
+                new RedSpace(index++), //ID = 61
+                new BlueSpace(index++),
+                new BlueSpace(index++),
+                new OtherSpace(index) //ID = 64
+        );
 
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new RedSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new EventSpace(index++));
-
-        //Path Path 1-1
-        gameBoard.addNode(new EventSpace(index++));
-        gameBoard.addNode(new AllySpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new LuckySpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));//ID = 10
-
-        //Path Path 1-2
-        gameBoard.addNode(new BlueSpace(index));//ID = 11
-
-        //Edges
-        for (int i = 0; i < 10; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
-
-        gameBoard.addEdge(gameBoard.getNode(10), gameBoard.getNode(1));
-        gameBoard.addEdge(gameBoard.getNode(4), gameBoard.getNode(11));
+        board = graphBuilder.build();
+        connectPaths();
     }
 
-    private void addSectionTwo() {
-        int index = 12;
+    public void connectPaths() {
+        board.addEdge(board.getVertexById(5), board.getVertexById(42));
+        board.addEdge(board.getVertexById(45), board.getVertexById(39));
 
-        //Path Split 2-1
-        gameBoard.addNode(new OtherSpace(index++));//ID = 12
-        gameBoard.addNode(new BlueSpace(index++));
-        //14 here is where the event spaces along the top row can send you back destination
-        gameBoard.addNode(new BlueSpace(index++));//ID = 14
-        gameBoard.addNode(new MoveEventSpace(index++, getMoveEventDestinationID()));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));//ID = 17
+        board.addEdge(board.getVertexById(7), board.getVertexById(46));
+        board.addEdge(board.getVertexById(50), board.getVertexById(14));
 
-        //Path Split 2-2
-        gameBoard.addNode(new BlueSpace(index++));//ID = 18
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new ChooseTreasureChestEvent(index++));
-        gameBoard.addNode(new BadLuckSpace(index++));
-        gameBoard.addNode(new AllySpace(index++));//ID = 22
+        board.addEdge(board.getVertexById(19), board.getVertexById(51));
+        board.addEdge(board.getVertexById(54), board.getVertexById(26));
 
-        gameBoard.addNode(new OtherSpace(index++));//ID = 23
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new OtherSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new MoveEventSpace(index, getMoveEventDestinationID()));//ID = 27
+        board.addEdge(board.getVertexById(19), board.getVertexById(51));
+        board.addEdge(board.getVertexById(54), board.getVertexById(26));
 
-        //Edges
-        for (int i = 11; i < 17; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
+        board.addEdge(board.getVertexById(28), board.getVertexById(55));
+        board.addEdge(board.getVertexById(60), board.getVertexById(54));
 
-        gameBoard.addEdge(gameBoard.getNode(11), gameBoard.getNode(18));
-
-        for (int i = 18; i < 22; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
-
-        gameBoard.addEdge(gameBoard.getNode(17), gameBoard.getNode(22));
-
-        for (int i = 22; i < 27; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
-    }
-
-    private void addSectionThree() {
-        int index = 28;
-
-        //Path Split 3-1
-        gameBoard.addNode(new MoveEventSpace(index++, getMoveEventDestinationID()));//ID = 28
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BadLuckSpace(index++));
-        gameBoard.addNode(new OtherSpace(index++));
-        gameBoard.addNode(new EventSpace(index++));//ID = 35
-
-        //Path Split 3-2
-        gameBoard.addNode(new RedSpace(index++));//ID = 36
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new VSSpace(index++));
-        gameBoard.addNode(new AllySpace(index++));//ID = 39
-
-        //Path Split 3-3
-        gameBoard.addNode(new EventSpace(index++));//ID = 40
-        gameBoard.addNode(new OtherSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BadLuckSpace(index++));
-        gameBoard.addNode(new BadLuckSpace(index));//ID = 45
-
-        //Edges
-        for (int i = 28; i < 35; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
-
-        gameBoard.addEdge(gameBoard.getNode(27), gameBoard.getNode(36));
-        gameBoard.addEdge(gameBoard.getNode(27), gameBoard.getNode(28));
-
-        for (int i = 36; i < 39; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
-
-        for (int i = 40; i < 45; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
-
-        gameBoard.addEdge(gameBoard.getNode(35), gameBoard.getNode(40));
-        gameBoard.addEdge(gameBoard.getNode(39), gameBoard.getNode(34));
-        gameBoard.addEdge(gameBoard.getNode(45), gameBoard.getNode(39));
-    }
-
-    private void addSectionFour() {
-        int index = 46;
-
-        gameBoard.addNode(new VSSpace(index++));//ID = 46
-
-        //Path Split 4-1
-        gameBoard.addNode(new BlueSpace(index++));//ID = 47
-        gameBoard.addNode(new LuckySpace(index++));
-        gameBoard.addNode(new LuckySpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new AllySpace(index++));//ID = 52
-
-        //Path Split 4-2
-        gameBoard.addNode(new RedSpace(index++));//ID = 53
-        gameBoard.addNode(new BlueSpace(index++));
-        gameBoard.addNode(new OtherSpace(index++));//ID = 55
-
-        gameBoard.addNode(new BadLuckSpace(index));//ID = 56
-
-        //Edges
-
-        gameBoard.addEdge(gameBoard.getNode(35), gameBoard.getNode(46));
-        gameBoard.addEdge(gameBoard.getNode(44), gameBoard.getNode(46));
-
-        for (int i = 46; i < 52; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
-
-        gameBoard.addEdge(gameBoard.getNode(46), gameBoard.getNode(53));
-
-        for (int i = 53; i < 55; ++i) {
-            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-        }
-
-        gameBoard.addEdge(gameBoard.getNode(55), gameBoard.getNode(52));
-        gameBoard.addEdge(gameBoard.getNode(52), gameBoard.getNode(56));
-        gameBoard.addEdge(gameBoard.getNode(56), gameBoard.getNode(9));
+        board.addEdge(board.getVertexById(30), board.getVertexById(61));
+        board.addEdge(board.getVertexById(64), board.getVertexById(37));
     }
 
     public int getMoveEventDestinationID() {
-        return 14;
+        return 10;
     }
 }
