@@ -1,6 +1,6 @@
 package boards;
 
-import boards.layout.CustomSimpleDirectedGraph;
+import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
@@ -16,14 +16,14 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 public abstract class BaseBoard {
-    protected CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> board;
+    protected MPBoard<BaseSpace, DefaultEdge> board;
 
-    protected GraphBuilder<BaseSpace, DefaultEdge, CustomSimpleDirectedGraph<BaseSpace, DefaultEdge>> graphBuilder;
+    protected GraphBuilder<BaseSpace, DefaultEdge, MPBoard<BaseSpace, DefaultEdge>> graphBuilder;
 
     protected abstract void initializeBoard();
 
     public void resetBoard() {
-        board = new CustomSimpleDirectedGraph<>(DefaultEdge.class);
+        board = new MPBoard<>(DefaultEdge.class);
         initializeBoard();
     }
 

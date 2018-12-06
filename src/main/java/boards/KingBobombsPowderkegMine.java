@@ -1,6 +1,6 @@
 package boards;
 
-import boards.layout.CustomSimpleDirectedGraph;
+import boards.layout.MPBoard;
 import org.jgrapht.graph.DefaultEdge;
 
 public class KingBobombsPowderkegMine extends BaseBoard {
@@ -10,7 +10,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
     @Override
     protected void initializeBoard() {
-        board = new CustomSimpleDirectedGraph<>(DefaultEdge.class);
+        board = new MPBoard<>(DefaultEdge.class);
 
         addStartAndInnerLoop();
         addUpperOuterLoop();

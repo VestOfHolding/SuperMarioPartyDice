@@ -1,6 +1,6 @@
 package boards.spaces.events;
 
-import boards.layout.CustomSimpleDirectedGraph;
+import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -30,7 +30,7 @@ public class LuckySpace extends EventSpace {
     }
 
     @Override
-    public void processEvent(CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> gameBoard,
+    public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
                              GameStatTracker gameStatTracker, BaseSpace space) {
 
     }

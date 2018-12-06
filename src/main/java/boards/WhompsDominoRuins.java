@@ -1,6 +1,6 @@
 package boards;
 
-import boards.layout.CustomSimpleDirectedGraph;
+import boards.layout.MPBoard;
 import boards.spaces.AllySpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.NonMovementSpace;
@@ -24,9 +24,9 @@ public class WhompsDominoRuins extends BaseBoard {
 
     @Override
     protected void initializeBoard() {
-        board = new CustomSimpleDirectedGraph<>(DefaultEdge.class);
+        board = new MPBoard<>(DefaultEdge.class);
 
-        graphBuilder = new GraphBuilder<>(new CustomSimpleDirectedGraph<>(DefaultEdge.class));
+        graphBuilder = new GraphBuilder<>(new MPBoard<>(DefaultEdge.class));
 
         buildInitialGraph();
     }

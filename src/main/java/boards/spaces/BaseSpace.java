@@ -1,6 +1,6 @@
 package boards.spaces;
 
-import boards.layout.CustomSimpleDirectedGraph;
+import boards.layout.MPBoard;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -30,7 +30,7 @@ public class BaseSpace {
         return -1;
     }
 
-    public void processEvent(CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) { }
+    public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) { }
 
     public boolean affectsMovement() {
         return true;

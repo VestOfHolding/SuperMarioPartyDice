@@ -7,10 +7,10 @@ import org.jgrapht.graph.SimpleDirectedGraph;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CustomSimpleDirectedGraph<V extends BaseSpace, E extends DefaultEdge> extends SimpleDirectedGraph<V, E> {
+public class MPBoard<V extends BaseSpace, E extends DefaultEdge> extends SimpleDirectedGraph<V, E> {
     Map<Integer, V> VERTEX_MAP;
 
-    public CustomSimpleDirectedGraph(Class<? extends E> edgeClass) {
+    public MPBoard(Class<? extends E> edgeClass) {
         super(edgeClass);
 
         VERTEX_MAP = new HashMap<>();

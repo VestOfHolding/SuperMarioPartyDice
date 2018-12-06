@@ -1,6 +1,6 @@
 package boards.spaces.events;
 
-import boards.layout.CustomSimpleDirectedGraph;
+import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import lombok.Data;
@@ -39,7 +39,7 @@ public class MoveEventSpace extends EventSpace {
     }
 
     @Override
-    public void processEvent(CustomSimpleDirectedGraph<BaseSpace, DefaultEdge> gameBoard,
+    public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
                              GameStatTracker gameStatTracker, BaseSpace space) {
         if (turnsBlue) {
             //For now, just handle the fact that this space becomes a Blue Space once it's used.
