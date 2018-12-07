@@ -5,7 +5,9 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class MPBoard<V extends BaseSpace, E extends DefaultEdge> extends SimpleDirectedGraph<V, E> {
     Map<Integer, V> VERTEX_MAP;
@@ -17,14 +19,23 @@ public class MPBoard<V extends BaseSpace, E extends DefaultEdge> extends SimpleD
     }
 
     @Override
-    public boolean addVertex(V vertex) {
-        if (vertex == null || VERTEX_MAP.containsKey(vertex.getSpaceID())) {
+    public boolean addVertex(V v) {
+        if (v == null || VERTEX_MAP.containsKey(v.getSpaceID())) {
             return false;
         }
 
-        VERTEX_MAP.put(vertex.getSpaceID(), vertex);
+        VERTEX_MAP.put(v.getSpaceID(), v);
+        return super.addVertex(v);
+    }
 
-        return super.addVertex(vertex);
+    @Override
+    public boolean removeVertex(V v) {
+        if (v == null || !VERTEX_MAP.containsKey(v.getSpaceID())) {
+            return false;
+        }
+
+        VERTEX_MAP.remove(v.getSpaceID());
+        return super.removeVertex(v);
     }
 
     public BaseSpace getStartSpace() {
@@ -49,15 +60,18 @@ public class MPBoard<V extends BaseSpace, E extends DefaultEdge> extends SimpleD
             return;
         }
 
+        //Need to preserve a copy of these before we remove the vertex.
+        Set<E> outgoingEdges = new HashSet<>(outgoingEdgesOf(previous));
+        Set<E> incomingEdges = new HashSet<>(incomingEdgesOf(previous));
+
+        removeVertex(previous);
         addVertex(newVertex);
-        for (E edge : outgoingEdgesOf(previous)) {
+
+        for (E edge : outgoingEdges) {
             addEdge(newVertex, getEdgeTarget(edge), edge);
         }
-        for (E edge : incomingEdgesOf(previous))  {
+        for (E edge : incomingEdges)  {
             addEdge(getEdgeSource(edge), newVertex, edge);
         }
-        removeVertex(previous);
-
-        VERTEX_MAP.put(spaceId, newVertex);
     }
 }

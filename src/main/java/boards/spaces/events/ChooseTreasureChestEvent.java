@@ -20,12 +20,16 @@ import java.util.Random;
 @ToString(callSuper = true)
 public class ChooseTreasureChestEvent extends EventSpace {
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Random RAND;
 
     //Three treasures event space. Rewards:
     //1. Golden Dash Mushroom
     //2. 10 coins
     //3. 3 coins
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     List<Integer> REWARDS;
 
     public ChooseTreasureChestEvent(int spaceID) {

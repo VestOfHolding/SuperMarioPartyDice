@@ -21,8 +21,12 @@ import java.util.stream.IntStream;
 @ToString(callSuper = true)
 public class VSSpace extends EventSpace {
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Random RAND = new Random();
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     List<Integer> POSSIBLE_WAGERS = Arrays.asList(5, 7, 10, 15, 20, 25, 30);
 
     public VSSpace(int spaceID) {

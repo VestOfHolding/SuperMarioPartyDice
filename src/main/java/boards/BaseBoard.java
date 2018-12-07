@@ -84,6 +84,7 @@ public abstract class BaseBoard {
             }
             else {
                 currentSpace.processEvent(board, gameStatTracker, currentSpace);
+                currentSpace = board.getVertexById(currentSpace.getSpaceID());
             }
         }
 

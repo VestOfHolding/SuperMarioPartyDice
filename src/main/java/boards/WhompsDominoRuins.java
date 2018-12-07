@@ -118,6 +118,8 @@ public class WhompsDominoRuins extends BaseBoard {
     }
 
     public void connectPaths() {
+        board.addEdge(board.getVertexById(41), board.getVertexById(1));
+
         board.addEdge(board.getVertexById(5), board.getVertexById(42));
         board.addEdge(board.getVertexById(45), board.getVertexById(39));
 
