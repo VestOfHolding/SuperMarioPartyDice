@@ -42,7 +42,7 @@ public class SimulationStatTracker {
         AllyStatTracker allyStatTracker = allyStatTrackers.get(allyCount);
         allyStatTracker.addCoinCount(gameStatTracker.getCoinTotal());
         allyStatTracker.addDistance(gameStatTracker.getDistanceTotal());
-        allyStatTracker.addLandedSpaceCount(gameStatTracker.getLandedSpacesAmounts());
+//        allyStatTracker.addLandedSpaceCount(gameStatTracker.getLandedSpacesAmounts());
 
         //Keep track of what turns all allies were gained, not just the last one.
         for (int allies : gameStatTracker.getAllyGainOnTurn().keySet()) {

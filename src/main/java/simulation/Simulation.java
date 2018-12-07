@@ -58,9 +58,9 @@ public class Simulation {
 
     protected void printTableHeaders(BaseBoard gameBoard) {
         System.out.print("Character\tAllyCount\tFrequency\tAvg Turn Gained\tTurn Gained SD\tDistance Avg\tDistance SD\tCoin Avg\tCoin SD\t");
-        for (int i = 0; i < gameBoard.getTotalBoardSize(); ++i) {
-            System.out.print("Space" + i + "\t");
-        }
+//        for (int i = 0; i < gameBoard.getTotalBoardSize(); ++i) {
+//            System.out.print("Space" + i + "\t");
+//        }
         System.out.println();
     }
 
@@ -100,7 +100,7 @@ public class Simulation {
                 currentSpace = gameBoard.getDestination(currentSpace, moveAmount, gameStatTracker);
             }
 
-            gameStatTracker.addLandedSpace(currentSpace);
+//            gameStatTracker.addLandedSpace(currentSpace);
 
             if (currentSpace instanceof BlueSpace || currentSpace instanceof RedSpace) {
                 gameStatTracker.addCoins(currentSpace.coinGain() * coinSpaceMultiply);

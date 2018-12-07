@@ -87,21 +87,21 @@ public class AllyStatTracker {
                 .append(DECIMAL_FORMAT.format(getAverageCoinCount())).append("\t")
                 .append(DECIMAL_FORMAT.format(coinCounts.getStandardDeviation())).append("\t");
 
-        double spaceCountSum = landedSpacesStats.values().stream()
-                .mapToDouble(OnlineStatistics::getCount)
-                .sum();
+//        double spaceCountSum = landedSpacesStats.values().stream()
+//                .mapToDouble(OnlineStatistics::getCount)
+//                .sum();
 
-        for (int i = 0; i < possibleSpaces; ++i) {
-            OnlineStatistics spaceStats = landedSpacesStats.get(i);
-
-            if (spaceStats == null) {
-                result.append("0%\t");
-            }
-            else {
-                result.append(DECIMAL_FORMAT.format((spaceStats.getCount() / spaceCountSum) * 100.0))
-                        .append("%\t");
-            }
-        }
+//        for (int i = 0; i < possibleSpaces; ++i) {
+//            OnlineStatistics spaceStats = landedSpacesStats.get(i);
+//
+//            if (spaceStats == null) {
+//                result.append("0%\t");
+//            }
+//            else {
+//                result.append(DECIMAL_FORMAT.format((spaceStats.getCount() / spaceCountSum) * 100.0))
+//                        .append("%\t");
+//            }
+//        }
 
         return result.toString();
     }
