@@ -25,7 +25,6 @@ public class WhompsDominoRuins extends BaseBoard {
     @Override
     protected void initializeBoard() {
         board = new MPBoard<>(DefaultEdge.class);
-
         graphBuilder = new GraphBuilder<>(new MPBoard<>(DefaultEdge.class));
 
         buildInitialGraph();
@@ -117,7 +116,7 @@ public class WhompsDominoRuins extends BaseBoard {
         connectPaths();
     }
 
-    public void connectPaths() {
+    private void connectPaths() {
         board.addEdge(board.getVertexById(41), board.getVertexById(1));
 
         board.addEdge(board.getVertexById(5), board.getVertexById(42));
@@ -139,7 +138,7 @@ public class WhompsDominoRuins extends BaseBoard {
         board.addEdge(board.getVertexById(64), board.getVertexById(37));
     }
 
-    public int getMoveEventDestinationID() {
+    private int getMoveEventDestinationID() {
         return 10;
     }
 }

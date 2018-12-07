@@ -1,7 +1,21 @@
 package boards;
 
 import boards.layout.MPBoard;
+import boards.spaces.AllySpace;
+import boards.spaces.BlueSpace;
+import boards.spaces.NonMovementSpace;
+import boards.spaces.OtherSpace;
+import boards.spaces.RedSpace;
+import boards.spaces.StartSpace;
+import boards.spaces.events.BadLuckSpace;
+import boards.spaces.events.EventSpace;
+import boards.spaces.events.KBPM.KBPMChangePathEvent;
+import boards.spaces.events.KBPM.RoyalExplosionEvent;
+import boards.spaces.events.LuckySpace;
+import boards.spaces.events.MoveEventSpace;
+import boards.spaces.events.VSSpace;
 import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.builder.GraphBuilder;
 
 public class KingBobombsPowderkegMine extends BaseBoard {
     public KingBobombsPowderkegMine() {
@@ -11,93 +25,106 @@ public class KingBobombsPowderkegMine extends BaseBoard {
     @Override
     protected void initializeBoard() {
         board = new MPBoard<>(DefaultEdge.class);
+        graphBuilder = new GraphBuilder<>(new MPBoard<>(DefaultEdge.class));
 
-        addStartAndInnerLoop();
-        addUpperOuterLoop();
+        buildInitialGraph();
     }
 
-    private void addStartAndInnerLoop() {
+    private void buildInitialGraph() {
         int index = 0;
 
-        //Start
-//        gameBoard.addNode(new StartSpace(index++));//ID = 0
-//
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new RedSpace(index++));
-//
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new EventSpace(index++));
-//        gameBoard.addNode(new AllySpace(index++));
-//        gameBoard.addNode(new EventSpace(index++));
-//        gameBoard.addNode(new NonMovementSpace(index++));//ID = 8
-//
-//        gameBoard.addNode(new OtherSpace(index++));
-//        gameBoard.addNode(new LuckySpace(index++));
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new RedSpace(index++));
-//        gameBoard.addNode(new EventSpace(index++));//ID = 14
-//
-//        gameBoard.addNode(new OtherSpace(index++));
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new EventSpace(index++));
-//        gameBoard.addNode(new NonMovementSpace(index));//ID = 18
-//
-//        //Edges
-//        for (int i = 0; i < 18; ++i) {
-//            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-//        }
-//
-//        gameBoard.addEdge(gameBoard.getNode(18), gameBoard.getNode(3));
+        graphBuilder.addEdgeChain(
+                //Start
+                new StartSpace(index++), //ID = 0
+                new BlueSpace(index++),
+                new RedSpace(index++),
+                new BlueSpace(index++), //ID = 3
+                new RoyalExplosionEvent(index++),
+                new AllySpace(index++),
+                new RoyalExplosionEvent(index++),
+                new NonMovementSpace(index++), //ID = 7
+                new OtherSpace(index++),
+                new LuckySpace(index++),
+                new BlueSpace(index++),
+                new BlueSpace(index++),
+                new RedSpace(index++),
+                new RoyalExplosionEvent(index++), //ID = 13
+                new OtherSpace(index++),
+                new BlueSpace(index++),
+                new RoyalExplosionEvent(index++),
+                new NonMovementSpace(index++), //ID = 17
+                new BlueSpace(index++)
+        ).addEdgeChain(
+                //Upper Loop
+                new BlueSpace(index++),
+                new NonMovementSpace(index++), //ID = 20
+                new OtherSpace(index++),
+                new OtherSpace(index++),
+                new NonMovementSpace(index++),
+                new BlueSpace(index++),
+                new MoveEventSpace(index++, 54), //ID = 25
+                new BlueSpace(index++),
+                new KBPMChangePathEvent(index++), //ID = 27
+                new LuckySpace(index++),
+                new OtherSpace(index++),
+                new LuckySpace(index++),
+                new KBPMChangePathEvent(index++), //ID = 31
+                new BlueSpace(index++),
+                new BlueSpace(index++),
+                new BadLuckSpace(index++),
+                new NonMovementSpace(index++),
+                new BlueSpace(index++), //ID = 36
+                new VSSpace(index++) //ID = 37
+        ).addEdgeChain(
+                //Upper Loop Side Path
+                new BlueSpace(index++), //ID = 38
+                new NonMovementSpace(index++),
+                new VSSpace(index++) //ID = 40
+        ).addEdgeChain(
+                //Lower Right
+                new BlueSpace(index++), //ID = 41
+                new BlueSpace(index++),
+                new RedSpace(index++),
+                new OtherSpace(index++),
+                new BadLuckSpace(index++),
+                new BlueSpace(index++),
+                new OtherSpace(index++),
+                new AllySpace(index++) //ID = 48
+        ).addEdgeChain(
+                //Lower Left
+                new BadLuckSpace(index++), //ID = 49
+                new NonMovementSpace(index++), //ID = 50
+                new RedSpace(index++),
+                new BlueSpace(index++),
+                new NonMovementSpace(index++),
+                new MoveEventSpace(index++, 25), //ID = 54
+                new AllySpace(index++),
+                new BlueSpace(index++),
+                new VSSpace(index++) //ID = 57
+        ).addEdgeChain(
+                //Middle Right
+                new EventSpace(index++), //ID = 58
+                new BlueSpace(index++),
+                new EventSpace(index) //ID = 60
+        );
+
+        board = graphBuilder.build();
+        connectPaths();
     }
 
-    private void addUpperOuterLoop() {
-        int index = 19;
-//
-//        gameBoard.addNode(new BlueSpace(index++));//ID = 19
-//        gameBoard.addNode(new NonMovementSpace(index++));
-//
-//        gameBoard.addNode(new OtherSpace(index++));//ID = 21
-//        gameBoard.addNode(new OtherSpace(index++));
-//        gameBoard.addNode(new NonMovementSpace(index++));
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new MoveEventSpace(index++, -1, false));
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new EventSpace(index++));//ID = 27
-//
-//        gameBoard.addNode(new LuckySpace(index++));//ID = 28
-//        gameBoard.addNode(new OtherSpace(index++));
-//        gameBoard.addNode(new LuckySpace(index++));
-//
-//        gameBoard.addNode(new BlueSpace(index++));//ID = 31
-//        gameBoard.addNode(new NonMovementSpace(index++));
-//        gameBoard.addNode(new VSSpace(index++));
-//
-//        gameBoard.addNode(new EventSpace(index++));//ID = 34
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new BadLuckSpace(index++));
-//        gameBoard.addNode(new NonMovementSpace(index++));
-//        gameBoard.addNode(new BlueSpace(index++));
-//        gameBoard.addNode(new VSSpace(index));//ID = 40
-//
-//        //Edges
-//        gameBoard.addEdge(gameBoard.getNode(8), gameBoard.getNode(19));
-//
-//        for (int i = 19; i < 30; ++i) {
-//            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-//        }
-//
-//        //These are initially not attached.
-//        gameBoard.addEdge(gameBoard.getNode(31), gameBoard.getNode(32));
-//        gameBoard.addEdge(gameBoard.getNode(32), gameBoard.getNode(33));
-//
-//        gameBoard.addEdge(gameBoard.getNode(30), gameBoard.getNode(34));
-//
-//        for (int i = 34; i < 40; ++i) {
-//            gameBoard.addEdge(gameBoard.getNode(i), gameBoard.getNode(i+1));
-//        }
-//
-//        gameBoard.addEdge(gameBoard.getNode(40), gameBoard.getNode(14));
+    private void connectPaths() {
+        board.addEdge(board.getVertexById(18), board.getVertexById(3));
+
+        board.addEdge(board.getVertexById(7), board.getVertexById(19));
+        board.addEdge(board.getVertexById(37), board.getVertexById(13));
+
+        board.addEdge(board.getVertexById(20), board.getVertexById(41));
+        board.addEdge(board.getVertexById(48), board.getVertexById(1));
+
+        board.addEdge(board.getVertexById(17), board.getVertexById(49));
+        board.addEdge(board.getVertexById(57), board.getVertexById(1));
+
+        board.addEdge(board.getVertexById(50), board.getVertexById(58));
+        board.addEdge(board.getVertexById(60), board.getVertexById(36));
     }
 }
