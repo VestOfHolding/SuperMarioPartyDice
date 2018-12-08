@@ -22,7 +22,7 @@ public class BaseSpace {
         return 0;
     }
 
-    public boolean addPartner() {
+    public boolean addAlly() {
         return false;
     }
 

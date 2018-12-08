@@ -5,6 +5,8 @@ import boards.spaces.AllySpace;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
+import org.apache.commons.collections4.CollectionUtils;
+import partydice.BobombAlly;
 import partydice.Dice;
 import results.CoinResult;
 import results.DieResult;
@@ -91,7 +93,7 @@ public class Simulation {
             }
 
             if (gameStatTracker.getAllyTotal() > 0) {
-                moveAmount += rollAllies(gameStatTracker.getAllyTotal());
+                moveAmount += rollAllies(gameStatTracker);
             }
 
             gameStatTracker.addDistance(moveAmount);
@@ -121,13 +123,21 @@ public class Simulation {
         }
     }
 
-    protected int rollAllies(int numAllies) {
-        numAllies = Math.min(numAllies, 4);
+    protected int rollAllies(GameStatTracker gameStatTracker) {
+        int numAllies = Math.min(gameStatTracker.getAllyTotal(), 4);
         int result = 0;
 
         //Each ally rolls either 1 or 2.
         for (int i = 0; i < numAllies; ++i) {
             result += RANDOM.nextInt(2) + 1;
+        }
+
+        if (CollectionUtils.isNotEmpty(gameStatTracker.getBobombAllies())) {
+            for (BobombAlly bobombAlly : gameStatTracker.getBobombAllies()) {
+                result += bobombAlly.rollBobombAlly();
+            }
+
+            gameStatTracker.getBobombAllies().removeIf(BobombAlly::explode);
         }
 
         return result;

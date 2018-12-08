@@ -16,7 +16,7 @@ public class AllySpace extends BaseSpace {
     }
 
     @Override
-    public boolean addPartner() {
+    public boolean addAlly() {
         return true;
     }
 }

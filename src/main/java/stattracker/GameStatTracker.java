@@ -7,10 +7,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import partydice.BobombAlly;
 import partydice.Dice;
 import results.CoinResult;
 import results.DieResult;
 import results.MoveResult;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,6 +27,8 @@ public class GameStatTracker {
     private int allyTotal;
     private int distanceTotal;
     private int coinTotal;
+
+    private List<BobombAlly> bobombAllies;
 
     private Int2IntOpenHashMap allyGainOnTurn;
 
@@ -57,12 +63,31 @@ public class GameStatTracker {
         }
     }
 
+    public int getTrueAllyCount() {
+        return bobombAllies == null ? allyTotal : allyTotal + bobombAllies.size();
+    }
+
     public void addAlly(int turnNumber) {
-        if (allyTotal >= 4) {
+        if (getTrueAllyCount() >= 4) {
             return;
         }
         allyTotal = Math.min(allyTotal + 1, 4);
         allyGainOnTurn.put(allyTotal, turnNumber);
+    }
+
+    public void addBobombAlly() {
+        //Most of the time it's not worth initializing, so only do it
+        // when this actually comes up.
+        if (bobombAllies == null) {
+            bobombAllies = new ArrayList<>();
+        }
+
+        bobombAllies.add(new BobombAlly());
+
+        //Bo-bomb allies can replace real allies.
+        if (allyTotal >= 4) {
+            allyTotal--;
+        }
     }
 
     public void addLandedSpace(BaseSpace baseSpace) {

@@ -9,6 +9,7 @@ import boards.spaces.RedSpace;
 import boards.spaces.StartSpace;
 import boards.spaces.events.BadLuckSpace;
 import boards.spaces.events.EventSpace;
+import boards.spaces.events.KBPM.BobombAllySpace;
 import boards.spaces.events.KBPM.KBPMChangePathEvent;
 import boards.spaces.events.KBPM.RoyalExplosionEvent;
 import boards.spaces.events.LuckySpace;
@@ -78,7 +79,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
         ).addEdgeChain(
                 //Upper Loop Side Path
                 new BlueSpace(index++), //ID = 38
-                new NonMovementSpace(index++),
+                new BobombAllySpace(index++),
                 new VSSpace(index++) //ID = 40
         ).addEdgeChain(
                 //Lower Right

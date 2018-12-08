@@ -47,6 +47,10 @@ public abstract class BaseBoard {
             if (!currentSpace.affectsMovement()) {
                 i -= 1;
             }
+
+            if (currentSpace.isPassingEvent()) {
+                currentSpace.processEvent(board, gameStatTracker, currentSpace);
+            }
         }
 
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
