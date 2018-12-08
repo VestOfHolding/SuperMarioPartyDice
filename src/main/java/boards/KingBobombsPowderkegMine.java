@@ -126,5 +126,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
         board.addEdge(board.getVertexById(50), board.getVertexById(58));
         board.addEdge(board.getVertexById(60), board.getVertexById(36));
+
+        board.addEdge(board.getVertexById(40), board.getVertexById(31));
     }
 }

@@ -33,16 +33,10 @@ public class KBPMChangePathEvent extends EventSpace {
         if (nextSpace instanceof LuckySpace) {
             gameBoard.removeEdge(firstEventSpace, gameBoard.getVertexById(28));
             gameBoard.addEdge(firstEventSpace, gameBoard.getVertexById(38));
-
-            gameBoard.removeEdge(gameBoard.getVertexById(30), gameBoard.getVertexById(31));
-            gameBoard.addEdge(gameBoard.getVertexById(40), gameBoard.getVertexById(31));
         }
         else if (nextSpace instanceof BlueSpace) {
             gameBoard.removeEdge(firstEventSpace, gameBoard.getVertexById(38));
             gameBoard.addEdge(firstEventSpace, gameBoard.getVertexById(28));
-
-            gameBoard.removeEdge(gameBoard.getVertexById(40), gameBoard.getVertexById(31));
-            gameBoard.addEdge(gameBoard.getVertexById(30), gameBoard.getVertexById(31));
         }
     }
 }
