@@ -2,14 +2,11 @@ package boards.spaces.events.KBPM;
 
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.BlueSpace;
 import boards.spaces.events.EventSpace;
-import boards.spaces.events.LuckySpace;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
@@ -25,7 +22,10 @@ public class RoyalExplosionEvent extends EventSpace {
     @Override
     public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
                              GameStatTracker gameStatTracker, BaseSpace space) {
+        boolean explosionTime = gameBoard.decrementCountdown();
 
-
+        if (explosionTime) {
+            gameStatTracker.setCoinTotal(gameStatTracker.getCoinTotal() / 2);
+        }
     }
 }

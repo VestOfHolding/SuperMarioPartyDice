@@ -12,6 +12,10 @@ import java.util.Set;
 public class MPBoard<V extends BaseSpace, E extends DefaultEdge> extends SimpleDirectedGraph<V, E> {
     Map<Integer, V> VERTEX_MAP;
 
+    private static final int kingBobombCountdownStart = 5;
+
+    private int kingBobombCountdown = 5;
+
     public MPBoard(Class<? extends E> edgeClass) {
         super(edgeClass);
 
@@ -73,5 +77,15 @@ public class MPBoard<V extends BaseSpace, E extends DefaultEdge> extends SimpleD
         for (E edge : incomingEdges)  {
             addEdge(getEdgeSource(edge), newVertex, edge);
         }
+    }
+
+    public boolean decrementCountdown() {
+        kingBobombCountdown--;
+
+        if (kingBobombCountdown <= 0) {
+            kingBobombCountdown = kingBobombCountdownStart;
+            return true;
+        }
+        return false;
     }
 }
