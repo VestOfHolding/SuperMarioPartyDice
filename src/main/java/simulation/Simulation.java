@@ -15,17 +15,15 @@ import stattracker.AllyStatTracker;
 import stattracker.GameStatTracker;
 import stattracker.SimulationStatTracker;
 import utils.OnlineStatistics;
+import utils.RandomUtils;
 
 import java.text.DecimalFormat;
-import java.util.Random;
 
 public class Simulation {
-    protected static final Random RANDOM = new Random();
-
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
 
     protected static final int TURN_COUNT = 20;
-    protected static final int SIM_COUNT = 2000000;
+    protected static final int SIM_COUNT = 2500000;
 
     public void simulate() throws Exception {
         System.out.println("Character\tDistance Avg\tDistance SD\tCoin Avg\tCoin SD");
@@ -129,7 +127,7 @@ public class Simulation {
 
         //Each ally rolls either 1 or 2.
         for (int i = 0; i < numAllies; ++i) {
-            result += RANDOM.nextInt(2) + 1;
+            result += RandomUtils.getRandomInt(1, 2);
         }
 
         if (CollectionUtils.isNotEmpty(gameStatTracker.getBobombAllies())) {

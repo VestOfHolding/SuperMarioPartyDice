@@ -5,10 +5,10 @@ import org.apache.commons.text.WordUtils;
 import results.CoinResult;
 import results.DieResult;
 import results.MoveResult;
+import utils.RandomUtils;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @Getter
@@ -65,7 +65,7 @@ public enum Dice {
     }
 
     public DieResult roll() {
-        return this.possibleRolls.get(new Random().nextInt(6));
+        return this.possibleRolls.get(RandomUtils.getRandomInt(5));
     }
 
     public String getName() {

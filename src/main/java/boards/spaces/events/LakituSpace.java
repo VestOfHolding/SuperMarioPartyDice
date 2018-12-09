@@ -8,30 +8,25 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
+import utils.RandomUtils;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class LuckySpace extends EventSpace {
-    //List of known possible events on Lucky Spaces:
-    // * Receive a Dash Mushroom (10)
-    // * Get several Dash Mushrooms (5)
-    // * Receive a Golden Dash Mushroom (6)
-    // * Get several Golden Dash Mushrooms (4)
-    // * Make a rival lose 5 coins (seen twice at once) (13)
-    // * Make a rival lose 10 coins (2)
-    // * Receive 3 coins (6)
-    // * Receive 5 coins (13)
-    // * Steal one ally from a rival (2)
-
-    public LuckySpace(int spaceID) {
+public class LakituSpace extends EventSpace {
+    public LakituSpace(int spaceID) {
         super(spaceID);
+    }
+
+    @Override
+    public boolean isPassingEvent() {
+        return true;
     }
 
     @Override
     public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
                              GameStatTracker gameStatTracker, BaseSpace space) {
-
+        gameStatTracker.addCoins(RandomUtils.getRandomInt(5, 10));
     }
 }

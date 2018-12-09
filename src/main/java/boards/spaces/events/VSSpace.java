@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
+import utils.RandomUtils;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
 @EqualsAndHashCode(callSuper = true)
@@ -20,10 +20,6 @@ import java.util.stream.IntStream;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class VSSpace extends EventSpace {
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    Random RAND = new Random();
 
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -36,7 +32,7 @@ public class VSSpace extends EventSpace {
     @Override
     public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
                              GameStatTracker gameStatTracker, BaseSpace space) {
-        int wager = POSSIBLE_WAGERS.get(RAND.nextInt(POSSIBLE_WAGERS.size()));
+        int wager = POSSIBLE_WAGERS.get(RandomUtils.getRandomInt(POSSIBLE_WAGERS.size() - 1));
 
         int totalPot = wager * 4;
 

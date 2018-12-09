@@ -8,21 +8,17 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
+import utils.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class ChooseTreasureChestEvent extends EventSpace {
-
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    Random RAND;
 
     //Three treasures event space. Rewards:
     //1. Golden Dash Mushroom
@@ -37,7 +33,6 @@ public class ChooseTreasureChestEvent extends EventSpace {
 
         //Not using items yet.
         REWARDS = new ArrayList<>(Arrays.asList(0, 3, 10));
-        RAND = new Random();
     }
 
     @Override
@@ -47,7 +42,7 @@ public class ChooseTreasureChestEvent extends EventSpace {
             return;
         }
 
-        Integer reward = REWARDS.get(REWARDS.size() == 1 ? 0 : RAND.nextInt(REWARDS.size()));
+        Integer reward = REWARDS.get(REWARDS.size() == 1 ? 0 : RandomUtils.getRandomInt(REWARDS.size() - 1));
 
         REWARDS.remove(reward);
 

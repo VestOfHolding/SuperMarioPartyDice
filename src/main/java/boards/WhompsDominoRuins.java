@@ -10,6 +10,7 @@ import boards.spaces.StartSpace;
 import boards.spaces.events.BadLuckSpace;
 import boards.spaces.events.ChooseTreasureChestEvent;
 import boards.spaces.events.EventSpace;
+import boards.spaces.events.LakituSpace;
 import boards.spaces.events.LuckySpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.VSSpace;
@@ -58,7 +59,7 @@ public class WhompsDominoRuins extends BaseBoard {
                 new MoveEventSpace(index++, getMoveEventDestinationID()),
                 new BlueSpace(index++),
                 new BlueSpace(index++),
-                new NonMovementSpace(index++),
+                new LakituSpace(index++),
                 new BlueSpace(index++),
                 new BadLuckSpace(index++),
                 new OtherSpace(index++), //ID = 26

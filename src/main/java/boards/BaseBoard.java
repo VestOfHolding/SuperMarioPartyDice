@@ -8,13 +8,11 @@ import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.builder.GraphBuilder;
 import stattracker.GameStatTracker;
+import utils.RandomUtils;
 
 import java.util.List;
-import java.util.Random;
 
 public abstract class BaseBoard {
-    protected Random random = new Random();
-
     protected MPBoard<BaseSpace, DefaultEdge> board;
 
     protected GraphBuilder<BaseSpace, DefaultEdge, MPBoard<BaseSpace, DefaultEdge>> graphBuilder;
@@ -37,7 +35,7 @@ public abstract class BaseBoard {
     public BaseSpace getNextSpace(BaseSpace startingSpace) {
         List<BaseSpace> nextSpaces = Graphs.successorListOf(board, startingSpace);
 
-        return nextSpaces.get(nextSpaces.size() > 1 ? random.nextInt(nextSpaces.size()) : 0);
+        return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
     }
 
     public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
