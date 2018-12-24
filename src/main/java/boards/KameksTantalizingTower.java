@@ -9,6 +9,7 @@ import boards.spaces.RedSpace;
 import boards.spaces.StartSpace;
 import boards.spaces.events.BadLuckSpace;
 import boards.spaces.events.EventSpace;
+import boards.spaces.events.KTT.NonMovementMoveSpace;
 import boards.spaces.events.LuckySpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.VSSpace;
@@ -54,8 +55,8 @@ public class KameksTantalizingTower extends BaseBoard  {
                 newBlueKamekSpace(index++), //ID = 17
                 new BadLuckSpace(index++),
                 new EventSpace(index++),
-                newBlueKamekSpace(index++),
-                new MoveEventSpace(index++, 35) //ID = 21
+                new NonMovementSpace(index++),
+                new NonMovementMoveSpace(index++, 34) //ID = 21
         ).addEdgeChain(
                 //Past the Thwomp
                 newRedKamekSpace(index++), //ID = 22
@@ -73,14 +74,25 @@ public class KameksTantalizingTower extends BaseBoard  {
                 newBlueKamekSpace(index++), //ID = 30
                 new NonMovementSpace(index++),
                 new VSSpace(index++),
-                new MoveEventSpace(index++, 35)  //ID = 34
+                new NonMovementMoveSpace(index++, 34)  //ID = 33
         ).addEdgeChain(
                 //And wrapping it back around
-                newRedKamekSpace(index++), //ID = 35
+                newRedKamekSpace(index++), //ID = 34
                 new OtherSpace(index++),
                 new AllySpace(index++),
-                new VSSpace(index) //ID = 38
+                new VSSpace(index) //ID = 37
         );
+
+        board = graphBuilder.build();
+        connectPaths();
+    }
+
+    private void connectPaths() {
+        board.addEdge(board.getVertexById(9), board.getVertexById(22));
+        board.addEdge(board.getVertexById(27), board.getVertexById(10));
+        board.addEdge(board.getVertexById(26), board.getVertexById(28));
+        board.addEdge(board.getVertexById(29), board.getVertexById(17));
+        board.addEdge(board.getVertexById(37), board.getVertexById(1));
     }
     
     private BlueSpace newBlueKamekSpace(int index) {
