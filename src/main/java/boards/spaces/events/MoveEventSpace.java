@@ -17,14 +17,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class MoveEventSpace extends EventSpace {
-    private Integer spaceToMoveToID;
+    protected Integer spaceToMoveToID;
 
-    private boolean turnsBlue;
+    protected boolean turnsBlue;
 
     public MoveEventSpace(int spaceID, Integer spaceToMoveToID) {
         super(spaceID);
         this.spaceToMoveToID = Objects.requireNonNullElse(spaceToMoveToID, -1);
-        turnsBlue = true;
+        turnsBlue = false;
     }
 
     public MoveEventSpace(int spaceID, Integer spaceToMoveToID, boolean turnsBlue) {
@@ -39,11 +39,13 @@ public class MoveEventSpace extends EventSpace {
     }
 
     @Override
-    public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
-                             GameStatTracker gameStatTracker, BaseSpace space) {
+    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+                                GameStatTracker gameStatTracker, BaseSpace space) {
         if (turnsBlue) {
             //For now, just handle the fact that this space becomes a Blue Space once it's used.
             gameBoard.setOrReplaceVertex(space.getSpaceID(), new BlueSpace());
+            return true;
         }
+        return false;
     }
 }

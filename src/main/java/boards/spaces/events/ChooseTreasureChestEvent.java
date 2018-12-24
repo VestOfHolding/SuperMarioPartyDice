@@ -36,10 +36,10 @@ public class ChooseTreasureChestEvent extends EventSpace {
     }
 
     @Override
-    public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
-                             GameStatTracker gameStatTracker, BaseSpace space) {
+    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+                                GameStatTracker gameStatTracker, BaseSpace space) {
         if (REWARDS.isEmpty()) {
-            return;
+            return false;
         }
 
         Integer reward = REWARDS.get(REWARDS.size() == 1 ? 0 : RandomUtils.getRandomInt(REWARDS.size() - 1));
@@ -47,5 +47,7 @@ public class ChooseTreasureChestEvent extends EventSpace {
         REWARDS.remove(reward);
 
         gameStatTracker.addCoins(reward);
+
+        return true;
     }
 }

@@ -20,12 +20,14 @@ public class RoyalExplosionEvent extends EventSpace {
     }
 
     @Override
-    public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
-                             GameStatTracker gameStatTracker, BaseSpace space) {
+    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+                                GameStatTracker gameStatTracker, BaseSpace space) {
         boolean explosionTime = gameBoard.decrementCountdown();
 
         if (explosionTime) {
             gameStatTracker.setCoinTotal(gameStatTracker.getCoinTotal() / 2);
+            return true;
         }
+        return false;
     }
 }

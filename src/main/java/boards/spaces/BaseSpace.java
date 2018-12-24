@@ -30,7 +30,9 @@ public class BaseSpace {
         return -1;
     }
 
-    public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) { }
+    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
+        return false;
+    }
 
     public boolean affectsMovement() {
         return true;

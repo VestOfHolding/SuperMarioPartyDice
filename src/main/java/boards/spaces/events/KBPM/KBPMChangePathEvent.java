@@ -23,8 +23,8 @@ public class KBPMChangePathEvent extends EventSpace {
     }
 
     @Override
-    public void processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
-                             GameStatTracker gameStatTracker, BaseSpace space) {
+    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+                                GameStatTracker gameStatTracker, BaseSpace space) {
 
         KBPMChangePathEvent firstEventSpace = (KBPMChangePathEvent)gameBoard.getVertexById(27);
 
@@ -38,5 +38,6 @@ public class KBPMChangePathEvent extends EventSpace {
             gameBoard.removeEdge(firstEventSpace, gameBoard.getVertexById(38));
             gameBoard.addEdge(firstEventSpace, gameBoard.getVertexById(28));
         }
+        return true;
     }
 }

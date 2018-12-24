@@ -47,16 +47,16 @@ public class WhompsDominoRuins extends BaseBoard {
                 new OtherSpace(index++),
                 new BlueSpace(index++),
                 new BlueSpace(index++), //ID = 10
-                new MoveEventSpace(index++, getMoveEventDestinationID()),
+                new MoveEventSpace(index++, getMoveEventDestinationID(), true),
                 new BlueSpace(index++),
                 new BlueSpace(index++),
                 new AllySpace(index++),
                 new OtherSpace(index++), //ID = 15
                 new BlueSpace(index++),
                 new OtherSpace(index++),
-                new MoveEventSpace(index++, getMoveEventDestinationID()),
+                new MoveEventSpace(index++, getMoveEventDestinationID(), true),
                 new NonMovementSpace(index++), //ID = 19
-                new MoveEventSpace(index++, getMoveEventDestinationID()),
+                new MoveEventSpace(index++, getMoveEventDestinationID(), true),
                 new BlueSpace(index++),
                 new BlueSpace(index++),
                 new LakituSpace(index++),
