@@ -9,14 +9,24 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class BlueSpace extends BaseSpace{
+public class BlueSpace extends BaseSpace {
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private int coins;
 
     public BlueSpace(int spaceID) {
         super(spaceID);
+        coins = 3;
+    }
+
+    public BlueSpace(int spaceID, int coins) {
+        super(spaceID);
+        this.coins = coins;
     }
 
     @Override
     public int coinGain() {
-        return 3;
+        return coins;
     }
 }

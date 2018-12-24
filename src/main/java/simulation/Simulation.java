@@ -72,15 +72,13 @@ public class Simulation {
         gameStatTracker.setCoinTotal(5);
         DieResult result;
 
-        int coinSpaceMultiply = 1;
-
         for (int j = 0; j < TURN_COUNT; ++j) {
             result = characterDie.roll();
 
             int moveAmount = 0;
 
-            if (j > TURN_COUNT - 3) {
-                coinSpaceMultiply = 2;
+            if (j == TURN_COUNT - 3) {
+                lastThreeTurns(gameBoard);
             }
 
             if (result instanceof MoveResult) {
@@ -103,7 +101,7 @@ public class Simulation {
 //            gameStatTracker.addLandedSpace(currentSpace);
 
             if (currentSpace instanceof BlueSpace || currentSpace instanceof RedSpace) {
-                gameStatTracker.addCoins(currentSpace.coinGain() * coinSpaceMultiply);
+                gameStatTracker.addCoins(currentSpace.coinGain());
             }
             else if (currentSpace instanceof AllySpace) {
                 gameStatTracker.addAlly(j + 1);
@@ -111,6 +109,10 @@ public class Simulation {
         }
 
         return gameStatTracker;
+    }
+
+    protected void lastThreeTurns(BaseBoard gameBoard) {
+        gameBoard.lastThreeTurns(3);
     }
 
     protected void printSimulationResult(Dice characterDie,

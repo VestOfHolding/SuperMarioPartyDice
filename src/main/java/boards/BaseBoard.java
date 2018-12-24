@@ -2,6 +2,8 @@ package boards;
 
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
+import boards.spaces.BlueSpace;
+import boards.spaces.RedSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.SandBridgeCollapse;
@@ -63,6 +65,17 @@ public abstract class BaseBoard {
         }
 
         return currentSpace;
+    }
+
+    public void lastThreeTurns(int coinChangeAmount) {
+        for (BaseSpace space : board.vertexSet()) {
+            if (space instanceof BlueSpace) {
+                ((BlueSpace) space).setCoins(((BlueSpace) space).getCoins() + coinChangeAmount);
+            }
+            else if (space instanceof RedSpace) {
+                ((RedSpace) space).setCoins(((RedSpace) space).getCoins() - coinChangeAmount);
+            }
+        }
     }
 
     protected BaseSpace processBridgeCollapseEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
