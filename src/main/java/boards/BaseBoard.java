@@ -20,7 +20,14 @@ public abstract class BaseBoard {
 
     protected GraphBuilder<BaseSpace, DefaultEdge, MPBoard<BaseSpace, DefaultEdge>> graphBuilder;
 
-    protected abstract void initializeBoard();
+    protected void initializeBoard() {
+        board = new MPBoard<>(DefaultEdge.class);
+        graphBuilder = new GraphBuilder<>(new MPBoard<>(DefaultEdge.class));
+
+        buildInitialGraph();
+    }
+
+    protected abstract void buildInitialGraph();
 
     public void resetBoard() {
         board = new MPBoard<>(DefaultEdge.class);

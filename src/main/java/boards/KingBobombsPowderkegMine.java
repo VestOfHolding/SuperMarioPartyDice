@@ -1,6 +1,5 @@
 package boards;
 
-import boards.layout.MPBoard;
 import boards.spaces.AllySpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.NonMovementSpace;
@@ -16,8 +15,6 @@ import boards.spaces.events.LakituSpace;
 import boards.spaces.events.LuckySpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.VSSpace;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.builder.GraphBuilder;
 
 public class KingBobombsPowderkegMine extends BaseBoard {
     public KingBobombsPowderkegMine() {
@@ -25,14 +22,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
     }
 
     @Override
-    protected void initializeBoard() {
-        board = new MPBoard<>(DefaultEdge.class);
-        graphBuilder = new GraphBuilder<>(new MPBoard<>(DefaultEdge.class));
-
-        buildInitialGraph();
-    }
-
-    private void buildInitialGraph() {
+    protected void buildInitialGraph() {
         int index = 0;
 
         graphBuilder.addEdgeChain(
