@@ -103,7 +103,7 @@ public class Simulation {
             if (currentSpace instanceof BlueSpace || currentSpace instanceof RedSpace) {
                 gameStatTracker.addCoins(currentSpace.coinGain());
             }
-            else if (currentSpace instanceof AllySpace) {
+            else if (currentSpace.addAlly()) {
                 gameStatTracker.addAlly(j + 1);
             }
         }
