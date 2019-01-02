@@ -44,63 +44,64 @@ public class WhompsDominoRuins extends BaseBoard {
                 new OtherSpace(index++), //ID = 15
                 new BlueSpace(index++),
                 new OtherSpace(index++),
+                new BlueSpace(index++),
                 new MoveEventSpace(index++, getMoveEventDestinationID(), true),
-                new NonMovementSpace(index++), //ID = 19
+                new NonMovementSpace(index++), //ID = 20
                 new MoveEventSpace(index++, getMoveEventDestinationID(), true),
                 new BlueSpace(index++),
                 new BlueSpace(index++),
                 new LakituSpace(index++),
                 new BlueSpace(index++),
                 new BadLuckSpace(index++),
-                new OtherSpace(index++), //ID = 26
+                new OtherSpace(index++), //ID = 27
                 new EventSpace(index++),
-                new NonMovementSpace(index++), //ID = 28
+                new NonMovementSpace(index++), //ID = 29
                 new VSSpace(index++),
-                new NonMovementSpace(index++), //ID = 30
+                new NonMovementSpace(index++), //ID = 31
                 new BlueSpace(index++),
                 new NonMovementSpace(index++),
                 new LuckySpace(index++),
                 new LuckySpace(index++),
                 new BlueSpace(index++),
                 new BlueSpace(index++),
-                new AllySpace(index++), //ID = 37
+                new AllySpace(index++), //ID = 38
                 new BadLuckSpace(index++),
-                new BlueSpace(index++), //ID = 39
+                new BlueSpace(index++), //ID = 40
                 new NonMovementSpace(index++),
                 new BlueSpace(index++)
         ).addEdgeChain(
                 //Inner Loop
-                new EventSpace(index++), //ID = 42
+                new EventSpace(index++), //ID = 43
                 new AllySpace(index++),
                 new BlueSpace(index++),
-                new LuckySpace(index++) //ID = 45
+                new LuckySpace(index++) //ID = 46
         ).addEdgeChain(
                 //Side Path 1
-                new BlueSpace(index++),  //ID = 46
+                new BlueSpace(index++),  //ID = 47
                 new NonMovementSpace(index++),
                 new BlueSpace(index++),
                 new ChooseTreasureChestEvent(index++),
-                new BadLuckSpace(index++) //ID = 50
+                new BadLuckSpace(index++) //ID = 51
         ).addEdgeChain(
                 //Side Path 2
-                new RedSpace(index++), //ID = 51
+                new RedSpace(index++), //ID = 52
                 new BlueSpace(index++),
                 new VSSpace(index++),
-                new AllySpace(index++) //ID = 54
+                new AllySpace(index++) //ID = 55
         ).addEdgeChain(
                 //Side Path 3
-                new EventSpace(index++), //ID = 55
+                new EventSpace(index++), //ID = 56
                 new OtherSpace(index++),
                 new BlueSpace(index++),
                 new BlueSpace(index++),
                 new BadLuckSpace(index++),
-                new BadLuckSpace(index++) //ID = 60
+                new BadLuckSpace(index++) //ID = 61
         ).addEdgeChain(
                 //Side Path 4
-                new RedSpace(index++), //ID = 61
+                new RedSpace(index++), //ID = 62
                 new BlueSpace(index++),
                 new BlueSpace(index++),
-                new OtherSpace(index) //ID = 64
+                new OtherSpace(index) //ID = 65
         );
 
         board = graphBuilder.build();
@@ -108,25 +109,25 @@ public class WhompsDominoRuins extends BaseBoard {
     }
 
     private void connectPaths() {
-        board.addEdge(board.getVertexById(41), board.getVertexById(1));
+        board.addEdge(board.getVertexById(42), board.getVertexById(1));
 
-        board.addEdge(board.getVertexById(5), board.getVertexById(42));
-        board.addEdge(board.getVertexById(45), board.getVertexById(39));
+        board.addEdge(board.getVertexById(5), board.getVertexById(43));
+        board.addEdge(board.getVertexById(46), board.getVertexById(40));
 
-        board.addEdge(board.getVertexById(7), board.getVertexById(46));
-        board.addEdge(board.getVertexById(50), board.getVertexById(14));
+        board.addEdge(board.getVertexById(7), board.getVertexById(47));
+        board.addEdge(board.getVertexById(51), board.getVertexById(14));
 
-        board.addEdge(board.getVertexById(19), board.getVertexById(51));
-        board.addEdge(board.getVertexById(54), board.getVertexById(26));
+        board.addEdge(board.getVertexById(20), board.getVertexById(52));
+        board.addEdge(board.getVertexById(55), board.getVertexById(27));
 
-        board.addEdge(board.getVertexById(19), board.getVertexById(51));
-        board.addEdge(board.getVertexById(54), board.getVertexById(26));
+        board.addEdge(board.getVertexById(20), board.getVertexById(52));
+        board.addEdge(board.getVertexById(55), board.getVertexById(27));
 
-        board.addEdge(board.getVertexById(28), board.getVertexById(55));
-        board.addEdge(board.getVertexById(60), board.getVertexById(54));
+        board.addEdge(board.getVertexById(29), board.getVertexById(56));
+        board.addEdge(board.getVertexById(61), board.getVertexById(55));
 
-        board.addEdge(board.getVertexById(30), board.getVertexById(61));
-        board.addEdge(board.getVertexById(64), board.getVertexById(37));
+        board.addEdge(board.getVertexById(31), board.getVertexById(62));
+        board.addEdge(board.getVertexById(65), board.getVertexById(38));
     }
 
     private int getMoveEventDestinationID() {
