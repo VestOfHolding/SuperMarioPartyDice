@@ -7,15 +7,19 @@ import boards.spaces.RedSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.SandBridgeCollapse;
+import lombok.Getter;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.builder.GraphBuilder;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class BaseBoard {
+    @Getter
     protected MPBoard<BaseSpace, DefaultEdge> board;
 
     protected GraphBuilder<BaseSpace, DefaultEdge, MPBoard<BaseSpace, DefaultEdge>> graphBuilder;
@@ -43,9 +47,13 @@ public abstract class BaseBoard {
     }
 
     public BaseSpace getNextSpace(BaseSpace startingSpace) {
-        List<BaseSpace> nextSpaces = Graphs.successorListOf(board, startingSpace);
+        List<BaseSpace> nextSpaces = getNextSpaces(startingSpace);
 
         return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
+    }
+
+    public List<BaseSpace> getNextSpaces(BaseSpace startingSpace) {
+        return Graphs.successorListOf(board, startingSpace);
     }
 
     public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
@@ -72,6 +80,52 @@ public abstract class BaseBoard {
         }
 
         return currentSpace;
+    }
+
+    public List<BaseSpace> getDestinations(BaseSpace startingSpace, int distance, GameStatTracker gameStatTracker) {
+        List<BaseSpace> currentSpaces = new ArrayList<>(Collections.singletonList(startingSpace));
+
+       return depthFirstSearch(currentSpaces, distance, gameStatTracker);
+    }
+
+    protected List<BaseSpace> depthFirstSearch(List<BaseSpace> currentSpaces, int distance, GameStatTracker gameStatTracker) {
+        List<BaseSpace> returnList = new ArrayList<>();
+
+        if (distance <= 0) {
+            //If we're left with any non-movement spaces, push those forward one more.
+            if (currentSpaces.stream().anyMatch(s -> !s.affectsMovement())) {
+                for (BaseSpace space : currentSpaces) {
+                    if (space.affectsMovement()) {
+                        returnList.add(space);
+                    }
+                    else {
+                        returnList.addAll(processSpaceForDFS(space, 0, gameStatTracker));
+                    }
+                }
+
+                return returnList;
+            }
+            else {
+                return currentSpaces;
+            }
+        }
+
+        for (BaseSpace space : currentSpaces) {
+            returnList.addAll(processSpaceForDFS(space, distance, gameStatTracker));
+        }
+
+        return returnList;
+    }
+
+    private List<BaseSpace> processSpaceForDFS(BaseSpace space, int distance, GameStatTracker gameStatTracker) {
+        boolean affectsMovement = space.affectsMovement();
+        if (space.isPassingEvent()) {
+            space = processEvent(gameStatTracker, space);
+        }
+
+        return depthFirstSearch(getNextSpaces(space),
+                affectsMovement ? distance - 1 : distance,
+                gameStatTracker);
     }
 
     public void lastThreeTurns(int coinChangeAmount) {
