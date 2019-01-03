@@ -1,17 +1,7 @@
 package boards;
 
-import boards.spaces.AllySpace;
-import boards.spaces.BlueSpace;
-import boards.spaces.NonMovementSpace;
-import boards.spaces.OtherSpace;
-import boards.spaces.RedSpace;
-import boards.spaces.StartSpace;
-import boards.spaces.events.BadLuckSpace;
-import boards.spaces.events.EventSpace;
-import boards.spaces.events.LuckySpace;
-import boards.spaces.events.MoveEventSpace;
+import boards.spaces.SpaceFactory;
 import boards.spaces.events.SandBridgeCollapse;
-import boards.spaces.events.VSSpace;
 
 public class MegafruitParadise extends BaseBoard {
     private static int I0_DEST = 7;
@@ -29,67 +19,67 @@ public class MegafruitParadise extends BaseBoard {
 
         graphBuilder.addEdgeChain(
                 //Start
-                new StartSpace(index++), //ID = 0
-                new BlueSpace(index++),
-                new BlueSpace(index++),
-                new BlueSpace(index++),
-                new OtherSpace(index++),
-                new BlueSpace(index++),
-                new MoveEventSpace(index++, I2_DEST), //ID = 6
-                new MoveEventSpace(index++, I2_DEST),
-                new BlueSpace(index++),
-                new NonMovementSpace(index++), //ID = 9
-                new LuckySpace(index++),
-                new NonMovementSpace(index++),
-                new BlueSpace(index++),
-                new RedSpace(index++) //ID = 13
+                SpaceFactory.createStartSpace(index++), //ID = 0
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createMoveEventSpace(index++, I2_DEST), //ID = 6
+                SpaceFactory.createMoveEventSpace(index++, I2_DEST),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createNonMovementSpace(index++), //ID = 9
+                SpaceFactory.createLuckySpace(index++),
+                SpaceFactory.createNonMovementSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createRedSpace(index++) //ID = 13
             ).addEdgeChain(
-                new NonMovementSpace(index++), //ID = 14
-                new OtherSpace(index++),
-                new OtherSpace(index++),
-                new RedSpace(index++),
-                new MoveEventSpace(index++, I3_DEST), //ID = 18
-                new MoveEventSpace(index++, I3_DEST),
-                new BlueSpace(index++),
-                new AllySpace(index++),
-                new LuckySpace(index++),
-                new BlueSpace(index++),
-                new NonMovementSpace(index++),
-                new BlueSpace(index++),
-                new BlueSpace(index++),
-                new LuckySpace(index++) //ID = 27
+                SpaceFactory.createNonMovementSpace(index++), //ID = 14
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createRedSpace(index++),
+                SpaceFactory.createMoveEventSpace(index++, I3_DEST), //ID = 18
+                SpaceFactory.createMoveEventSpace(index++, I3_DEST),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createAllySpace(index++),
+                SpaceFactory.createLuckySpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createNonMovementSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createLuckySpace(index++) //ID = 27
             ).addEdgeChain(
-                new OtherSpace(index++), //ID = 28
-                new BadLuckSpace(index++),
-                new AllySpace(index++),
-                new NonMovementSpace(index++),
-                new BlueSpace(index++),
-                new BlueSpace(index++),
-                new OtherSpace(index++),
-                new BlueSpace(index++),
-                new MoveEventSpace(index++, I0_DEST), //ID = 36
-                new MoveEventSpace(index++, I0_DEST),
-                new BlueSpace(index++),
-                new RedSpace(index++),
-                new NonMovementSpace(index++), //ID = 40
-                new MoveEventSpace(index++, 0),
-                new BlueSpace(index++),
-                new MoveEventSpace(index++, 0),
-                new BlueSpace(index++),
-                new MoveEventSpace(index++, 0),
-                new NonMovementSpace(index++), //ID = 46
-                new BlueSpace(index++),
-                new EventSpace(index++),
-                new OtherSpace(index++),
-                new OtherSpace(index++),
-                new BlueSpace(index++),
-                new MoveEventSpace(index++, I1_DEST), //ID = 52
-                new MoveEventSpace(index++, I1_DEST),
-                new BadLuckSpace(index++),
-                new BlueSpace(index++),
-                new OtherSpace(index++),
-                new VSSpace(index++),
-                new BlueSpace(index++) //ID = 58
+                SpaceFactory.createOtherSpace(index++), //ID = 28
+                SpaceFactory.createBadLuckSpace(index++),
+                SpaceFactory.createAllySpace(index++),
+                SpaceFactory.createNonMovementSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createMoveEventSpace(index++, I0_DEST), //ID = 36
+                SpaceFactory.createMoveEventSpace(index++, I0_DEST),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createRedSpace(index++),
+                SpaceFactory.createNonMovementSpace(index++), //ID = 40
+                SpaceFactory.createMoveEventSpace(index++, 0),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createMoveEventSpace(index++, 0),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createMoveEventSpace(index++, 0),
+                SpaceFactory.createNonMovementSpace(index++), //ID = 46
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createEventSpace(index++),
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createMoveEventSpace(index++, I1_DEST), //ID = 52
+                SpaceFactory.createMoveEventSpace(index++, I1_DEST),
+                SpaceFactory.createBadLuckSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createVSSpace(index++),
+                SpaceFactory.createBlueSpace(index++) //ID = 58
         )
                 .addVertex(new SandBridgeCollapse(index, 8));
 

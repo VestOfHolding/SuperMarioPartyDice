@@ -1,18 +1,8 @@
 package boards;
 
-import boards.spaces.AllySpace;
-import boards.spaces.BlueSpace;
-import boards.spaces.NonMovementSpace;
-import boards.spaces.OtherSpace;
-import boards.spaces.RedSpace;
-import boards.spaces.StartSpace;
-import boards.spaces.events.BadLuckSpace;
+import boards.spaces.SpaceFactory;
 import boards.spaces.events.ChooseTreasureChestEvent;
-import boards.spaces.events.EventSpace;
 import boards.spaces.events.LakituSpace;
-import boards.spaces.events.LuckySpace;
-import boards.spaces.events.MoveEventSpace;
-import boards.spaces.events.VSSpace;
 
 public class WhompsDominoRuins extends BaseBoard {
 
@@ -26,82 +16,82 @@ public class WhompsDominoRuins extends BaseBoard {
 
         graphBuilder.addEdgeChain(
                 //Start
-                new StartSpace(index++), //ID = 0
-                new BlueSpace(index++),
-                new RedSpace(index++),
-                new BlueSpace(index++),
-                new EventSpace(index++),
-                new NonMovementSpace(index++), //ID = 5
-                new BlueSpace(index++),
-                new NonMovementSpace(index++), //ID = 7
-                new OtherSpace(index++),
-                new BlueSpace(index++),
-                new BlueSpace(index++), //ID = 10
-                new MoveEventSpace(index++, getMoveEventDestinationID(), true),
-                new BlueSpace(index++),
-                new BlueSpace(index++),
-                new AllySpace(index++),
-                new OtherSpace(index++), //ID = 15
-                new BlueSpace(index++),
-                new OtherSpace(index++),
-                new BlueSpace(index++),
-                new MoveEventSpace(index++, getMoveEventDestinationID(), true),
-                new NonMovementSpace(index++), //ID = 20
-                new MoveEventSpace(index++, getMoveEventDestinationID(), true),
-                new BlueSpace(index++),
-                new BlueSpace(index++),
+                SpaceFactory.createStartSpace(index++), //ID = 0
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createRedSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createEventSpace(index++),
+                SpaceFactory.createNonMovementSpace(index++), //ID = 5
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createNonMovementSpace(index++), //ID = 7
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++), //ID = 10
+                SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createAllySpace(index++),
+                SpaceFactory.createOtherSpace(index++), //ID = 15
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true),
+                SpaceFactory.createNonMovementSpace(index++), //ID = 20
+                SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
                 new LakituSpace(index++),
-                new BlueSpace(index++),
-                new BadLuckSpace(index++),
-                new OtherSpace(index++), //ID = 27
-                new EventSpace(index++),
-                new NonMovementSpace(index++), //ID = 29
-                new VSSpace(index++),
-                new NonMovementSpace(index++), //ID = 31
-                new BlueSpace(index++),
-                new NonMovementSpace(index++),
-                new LuckySpace(index++),
-                new LuckySpace(index++),
-                new BlueSpace(index++),
-                new BlueSpace(index++),
-                new AllySpace(index++), //ID = 38
-                new BadLuckSpace(index++),
-                new BlueSpace(index++), //ID = 40
-                new NonMovementSpace(index++),
-                new BlueSpace(index++)
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBadLuckSpace(index++),
+                SpaceFactory.createOtherSpace(index++), //ID = 27
+                SpaceFactory.createEventSpace(index++),
+                SpaceFactory.createNonMovementSpace(index++), //ID = 29
+                SpaceFactory.createVSSpace(index++),
+                SpaceFactory.createNonMovementSpace(index++), //ID = 31
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createNonMovementSpace(index++),
+                SpaceFactory.createLuckySpace(index++),
+                SpaceFactory.createLuckySpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createAllySpace(index++), //ID = 38
+                SpaceFactory.createBadLuckSpace(index++),
+                SpaceFactory.createBlueSpace(index++), //ID = 40
+                SpaceFactory.createNonMovementSpace(index++),
+                SpaceFactory.createBlueSpace(index++)
         ).addEdgeChain(
                 //Inner Loop
-                new EventSpace(index++), //ID = 43
-                new AllySpace(index++),
-                new BlueSpace(index++),
-                new LuckySpace(index++) //ID = 46
+                SpaceFactory.createEventSpace(index++), //ID = 43
+                SpaceFactory.createAllySpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createLuckySpace(index++) //ID = 46
         ).addEdgeChain(
                 //Side Path 1
-                new BlueSpace(index++),  //ID = 47
-                new NonMovementSpace(index++),
-                new BlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),  //ID = 47
+                SpaceFactory.createNonMovementSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
                 new ChooseTreasureChestEvent(index++),
-                new BadLuckSpace(index++) //ID = 51
+                SpaceFactory.createBadLuckSpace(index++) //ID = 51
         ).addEdgeChain(
                 //Side Path 2
-                new RedSpace(index++), //ID = 52
-                new BlueSpace(index++),
-                new VSSpace(index++),
-                new AllySpace(index++) //ID = 55
+                SpaceFactory.createRedSpace(index++), //ID = 52
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createVSSpace(index++),
+                SpaceFactory.createAllySpace(index++) //ID = 55
         ).addEdgeChain(
                 //Side Path 3
-                new EventSpace(index++), //ID = 56
-                new OtherSpace(index++),
-                new BlueSpace(index++),
-                new BlueSpace(index++),
-                new BadLuckSpace(index++),
-                new BadLuckSpace(index++) //ID = 61
+                SpaceFactory.createEventSpace(index++), //ID = 56
+                SpaceFactory.createOtherSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBadLuckSpace(index++),
+                SpaceFactory.createBadLuckSpace(index++) //ID = 61
         ).addEdgeChain(
                 //Side Path 4
-                new RedSpace(index++), //ID = 62
-                new BlueSpace(index++),
-                new BlueSpace(index++),
-                new OtherSpace(index) //ID = 65
+                SpaceFactory.createRedSpace(index++), //ID = 62
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createBlueSpace(index++),
+                SpaceFactory.createOtherSpace(index) //ID = 65
         );
 
         board = graphBuilder.build();
