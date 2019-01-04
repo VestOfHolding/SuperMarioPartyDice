@@ -4,8 +4,6 @@ import boards.BaseBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
-import org.apache.commons.collections4.CollectionUtils;
-import partydice.BobombAlly;
 import partydice.Dice;
 import results.CoinResult;
 import results.DieResult;
@@ -129,14 +127,6 @@ public class Simulation {
         //Each ally rolls either 1 or 2.
         for (int i = 0; i < numAllies; ++i) {
             result += RandomUtils.getRandomInt(1, 2);
-        }
-
-        if (CollectionUtils.isNotEmpty(gameStatTracker.getBobombAllies())) {
-            for (BobombAlly bobombAlly : gameStatTracker.getBobombAllies()) {
-                result += bobombAlly.rollBobombAlly();
-            }
-
-            gameStatTracker.getBobombAllies().removeIf(BobombAlly::explode);
         }
 
         return result;

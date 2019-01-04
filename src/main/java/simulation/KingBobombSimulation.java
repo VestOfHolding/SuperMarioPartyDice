@@ -1,7 +1,10 @@
 package simulation;
 
 import boards.KingBobombsPowderkegMine;
+import org.apache.commons.collections4.CollectionUtils;
+import partydice.BobombAlly;
 import partydice.Dice;
+import stattracker.GameStatTracker;
 import stattracker.SimulationStatTracker;
 
 public class KingBobombSimulation extends Simulation  {
@@ -22,5 +25,20 @@ public class KingBobombSimulation extends Simulation  {
 
             printSimulationResult(characterDie, simulationStatTracker, kingBobombsBoard.getTotalBoardSize());
         }
+    }
+
+    @Override
+    protected int rollAllies(GameStatTracker gameStatTracker) {
+        int result = super.rollAllies(gameStatTracker);
+
+        if (CollectionUtils.isNotEmpty(gameStatTracker.getBobombAllies())) {
+            for (BobombAlly bobombAlly : gameStatTracker.getBobombAllies()) {
+                result += bobombAlly.rollBobombAlly();
+            }
+
+            gameStatTracker.getBobombAllies().removeIf(BobombAlly::explode);
+        }
+
+        return result;
     }
 }

@@ -12,8 +12,8 @@ public class MainSim {
 //        ShortestAllyPath shortestAllyPath = new ShortestAllyPath();
 //        shortestAllyPath.shortestPathToFirstAlly();
 
-        stopWatch.stop();
-
+        stopWatch.split();
         System.out.println("\n\nTime elapsed: " + stopWatch.toSplitString());
+        stopWatch.stop();
     }
 }
