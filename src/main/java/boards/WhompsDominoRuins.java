@@ -98,6 +98,18 @@ public class WhompsDominoRuins extends BaseBoard {
         connectPaths();
     }
 
+    @Override
+    public void resetBoard() {
+        board.setOrReplaceVertex(11, SpaceFactory.createMoveEventSpace(11, getMoveEventDestinationID(), true));
+        board.setOrReplaceVertex(19, SpaceFactory.createMoveEventSpace(19, getMoveEventDestinationID(), true));
+        board.setOrReplaceVertex(21, SpaceFactory.createMoveEventSpace(21, getMoveEventDestinationID(), true));
+
+        board.setOrReplaceVertex(50, new ChooseTreasureChestEvent(50));
+
+        board.setOrReplaceVertex(30, SpaceFactory.createVSSpace(30));
+        board.setOrReplaceVertex(54, SpaceFactory.createVSSpace(54));
+    }
+
     private void connectPaths() {
         board.addEdge(board.getVertexById(42), board.getVertexById(1));
 
