@@ -109,7 +109,7 @@ public class Simulation {
     }
 
     protected void lastThreeTurns(BaseBoard gameBoard) {
-        gameBoard.lastThreeTurns(3);
+        gameBoard.lastThreeTurns();
     }
 
     protected void printSimulationResult(Dice characterDie,

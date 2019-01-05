@@ -108,6 +108,8 @@ public class WhompsDominoRuins extends BaseBoard {
 
         board.setOrReplaceVertex(30, SpaceFactory.createVSSpace(30));
         board.setOrReplaceVertex(54, SpaceFactory.createVSSpace(54));
+
+        resetRedAndBlueCoinAmounts();
     }
 
     private void connectPaths() {

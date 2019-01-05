@@ -128,13 +128,21 @@ public abstract class BaseBoard {
                 gameStatTracker);
     }
 
-    public void lastThreeTurns(int coinChangeAmount) {
+    public void lastThreeTurns() {
+        setRedAndBlueCoinAmounts(6);
+    }
+
+    public void resetRedAndBlueCoinAmounts() {
+        setRedAndBlueCoinAmounts(3);
+    }
+
+    protected void setRedAndBlueCoinAmounts(int newCoinAmount) {
         for (BaseSpace space : board.vertexSet()) {
             if (space instanceof BlueSpace) {
-                ((BlueSpace) space).setCoins(((BlueSpace) space).getCoins() + coinChangeAmount);
+                ((BlueSpace) space).setCoins(newCoinAmount);
             }
             else if (space instanceof RedSpace) {
-                ((RedSpace) space).setCoins(((RedSpace) space).getCoins() - coinChangeAmount);
+                ((RedSpace) space).setCoins(-newCoinAmount);
             }
         }
     }

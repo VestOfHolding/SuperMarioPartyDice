@@ -68,6 +68,16 @@ public class KameksTantalizingTower extends BaseBoard  {
         connectPaths();
     }
 
+    @Override
+    public void lastThreeTurns() {
+        setRedAndBlueCoinAmounts(10);
+    }
+
+    @Override
+    public void resetRedAndBlueCoinAmounts() {
+        setRedAndBlueCoinAmounts(6);
+    }
+
     private void connectPaths() {
         board.addEdge(board.getVertexById(9), board.getVertexById(22));
         board.addEdge(board.getVertexById(27), board.getVertexById(10));

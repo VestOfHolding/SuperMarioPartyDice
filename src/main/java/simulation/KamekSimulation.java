@@ -1,6 +1,5 @@
 package simulation;
 
-import boards.BaseBoard;
 import boards.KameksTantalizingTower;
 import partydice.Dice;
 import stattracker.SimulationStatTracker;
@@ -23,10 +22,5 @@ public class KamekSimulation extends Simulation {
 
             printSimulationResult(characterDie, simulationStatTracker, kamekBoard.getTotalBoardSize());
         }
-    }
-
-    @Override
-    protected void lastThreeTurns(BaseBoard gameBoard) {
-        gameBoard.lastThreeTurns(4);
     }
 }
