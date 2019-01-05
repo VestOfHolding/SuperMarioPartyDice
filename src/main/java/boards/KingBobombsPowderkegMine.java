@@ -94,6 +94,23 @@ public class KingBobombsPowderkegMine extends BaseBoard {
         connectPaths();
     }
 
+    @Override
+    public void resetBoard() {
+
+        board.setOrReplaceVertex(37, SpaceFactory.createVSSpace(37));
+        board.setOrReplaceVertex(40, SpaceFactory.createVSSpace(40));
+        board.setOrReplaceVertex(57, SpaceFactory.createVSSpace(57));
+
+        resetRedAndBlueCoinAmounts();
+        board.resetCountdown();
+
+        //Reset the path if needed
+        if (board.containsEdge(board.getVertexById(27), board.getVertexById(38))) {
+            board.removeEdge(board.getVertexById(27), board.getVertexById(38));
+            board.addEdge(board.getVertexById(27), board.getVertexById(28));
+        }
+    }
+
     private void connectPaths() {
         board.addEdge(board.getVertexById(18), board.getVertexById(3));
 

@@ -6,7 +6,7 @@ public class MainSim {
     public static void main(String[] args) throws Exception {
         StopWatch stopWatch = StopWatch.createStarted();
 
-        Simulation simulation = new WhompsSimulation();
+        Simulation simulation = new KamekSimulation();
         simulation.simulate();
 
 //        ShortestAllyPath shortestAllyPath = new ShortestAllyPath();

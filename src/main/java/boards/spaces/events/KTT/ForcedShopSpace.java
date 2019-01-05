@@ -27,7 +27,7 @@ public class ForcedShopSpace extends NonMovementSpace {
     @Override
     public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
-        //This is a shop that sells everything for 6 coins, and you MUSt buy something.
+        //This is a shop that sells everything for 6 coins, and you MUST buy something.
         gameStatTracker.addCoins(-6);
         return true;
     }

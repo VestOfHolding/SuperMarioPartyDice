@@ -88,4 +88,8 @@ public class MPBoard<V extends BaseSpace, E extends DefaultEdge> extends SimpleD
         }
         return false;
     }
+
+    public void resetCountdown() {
+        kingBobombCountdown = kingBobombCountdownStart;
+    }
 }

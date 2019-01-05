@@ -3,6 +3,9 @@ package boards;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
 import boards.spaces.SpaceFactory;
+import boards.spaces.events.KTT.ChainChompSpace;
+import boards.spaces.events.KTT.ForcedShopSpace;
+import boards.spaces.events.KTT.ThwompShortcutSpace;
 
 public class KameksTantalizingTower extends BaseBoard  {
     public KameksTantalizingTower() {
@@ -28,11 +31,11 @@ public class KameksTantalizingTower extends BaseBoard  {
                 SpaceFactory.createNonMovementSpace(index++), //ID = 9
                 SpaceFactory.createLuckySpace(index++),
                 newBlueKamekSpace(index++),
-                SpaceFactory.createNonMovementSpace(index++), //ID = 12
+                new ForcedShopSpace(index++), //ID = 12
                 newBlueKamekSpace(index++),
                 newBlueKamekSpace(index++),
-                SpaceFactory.createEventSpace(index++),
-                SpaceFactory.createEventSpace(index++),
+                new ChainChompSpace(index++),
+                new ChainChompSpace(index++),
                 newBlueKamekSpace(index++), //ID = 17
                 SpaceFactory.createBadLuckSpace(index++),
                 SpaceFactory.createEventSpace(index++),
@@ -48,7 +51,7 @@ public class KameksTantalizingTower extends BaseBoard  {
                 SpaceFactory.createOtherSpace(index++) //ID = 27
         ).addEdgeChain(
                 //Through the Thwomp
-                SpaceFactory.createNonMovementSpace(index++), //ID = 28
+                new ThwompShortcutSpace(index++), //ID = 28
                 newBlueKamekSpace(index++) //ID = 29
         ).addEdgeChain(
                 //Odd side path
@@ -78,6 +81,16 @@ public class KameksTantalizingTower extends BaseBoard  {
         setRedAndBlueCoinAmounts(6);
     }
 
+    @Override
+    public void resetBoard() {
+        board.setOrReplaceVertex(32, SpaceFactory.createVSSpace(32));
+        board.setOrReplaceVertex(37, SpaceFactory.createVSSpace(37));
+
+        board.setOrReplaceVertex(28, new ThwompShortcutSpace(28));
+
+        resetRedAndBlueCoinAmounts();
+    }
+
     private void connectPaths() {
         board.addEdge(board.getVertexById(9), board.getVertexById(22));
         board.addEdge(board.getVertexById(27), board.getVertexById(10));
@@ -86,7 +99,7 @@ public class KameksTantalizingTower extends BaseBoard  {
         board.addEdge(board.getVertexById(37), board.getVertexById(1));
 
         board.addEdge(board.getVertexById(21), board.getVertexById(34));
-        board.addEdge(board.getVertexById(23), board.getVertexById(34));
+        board.addEdge(board.getVertexById(33), board.getVertexById(34));
     }
     
     private BlueSpace newBlueKamekSpace(int index) {
