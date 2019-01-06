@@ -15,10 +15,10 @@ import java.util.stream.Collectors;
 public enum Dice {
     BOO(Arrays.asList(new CoinResult(-2), new CoinResult(-2), new MoveResult(5),
             new MoveResult(5), new MoveResult(7), new MoveResult(7))),
-    BOWSER_JR(Arrays.asList(new MoveResult(1), new MoveResult(1), new MoveResult(1),
-            new MoveResult(4), new MoveResult(4), new MoveResult(9))),
     BOWSER(Arrays.asList(new CoinResult(-3), new CoinResult(-3), new MoveResult(1),
             new MoveResult(8), new MoveResult(9), new MoveResult(10))),
+    BOWSER_JR(Arrays.asList(new MoveResult(1), new MoveResult(1), new MoveResult(1),
+            new MoveResult(4), new MoveResult(4), new MoveResult(9))),
     DAISY(Arrays.asList(new MoveResult(3), new MoveResult(3), new MoveResult(3),
             new MoveResult(3), new MoveResult(4), new MoveResult(4))),
     DIDDY_KONG(Arrays.asList(new MoveResult(0), new MoveResult(0), new MoveResult(0),

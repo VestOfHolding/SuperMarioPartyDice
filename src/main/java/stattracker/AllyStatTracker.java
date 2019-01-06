@@ -80,11 +80,23 @@ public class AllyStatTracker {
 
         StringBuilder result = new StringBuilder().append(allyCount).append("\t")
                 .append(formatResult).append("%\t")
+                .append(DECIMAL_FORMAT.format(turnsAdded.getMin())).append("\t")
+                .append(DECIMAL_FORMAT.format(turnsAdded.getFirstQuartile())).append("\t")
                 .append(DECIMAL_FORMAT.format(getAverageTurnAdded())).append("\t")
+                .append(DECIMAL_FORMAT.format(turnsAdded.getThirdQuartile())).append("\t")
+                .append(DECIMAL_FORMAT.format(turnsAdded.getMax())).append("\t")
                 .append(DECIMAL_FORMAT.format(turnsAdded.getStandardDeviation())).append("\t")
+                .append(DECIMAL_FORMAT.format(distances.getMin())).append("\t")
+                .append(DECIMAL_FORMAT.format(distances.getFirstQuartile())).append("\t")
                 .append(DECIMAL_FORMAT.format(getAverageDistance())).append("\t")
+                .append(DECIMAL_FORMAT.format(distances.getThirdQuartile())).append("\t")
+                .append(DECIMAL_FORMAT.format(distances.getMax())).append("\t")
                 .append(DECIMAL_FORMAT.format(distances.getStandardDeviation())).append("\t")
+                .append(DECIMAL_FORMAT.format(coinCounts.getMin())).append("\t")
+                .append(DECIMAL_FORMAT.format(coinCounts.getFirstQuartile())).append("\t")
                 .append(DECIMAL_FORMAT.format(getAverageCoinCount())).append("\t")
+                .append(DECIMAL_FORMAT.format(coinCounts.getThirdQuartile())).append("\t")
+                .append(DECIMAL_FORMAT.format(coinCounts.getMax())).append("\t")
                 .append(DECIMAL_FORMAT.format(coinCounts.getStandardDeviation())).append("\t");
 
 //        double spaceCountSum = landedSpacesStats.values().stream()
