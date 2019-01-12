@@ -50,3 +50,17 @@ These are goals that don't necessarily have a time when they're done, and I'll a
 
  * Gather data on what events come up when landing on a Lucky Space.
  * Gather data on what events come up when landing on a Bad Luck Space (only non-Kamek boards since Kamek is different).
+ 
+ ## Future Goals
+ 
+ These are goals that are a long way off, and would be done as a proper next version rather than any time soon.
+ 
+ * Implement the stars.
+   * Easy enough to implement these once I know the full list of possible spaces on each board that a star could show up on.
+   * Also include implementing some percentage chance that another player gets the star on any given turn.
+ * Implement an AI.
+   * With the stars in place, that gives the AI the goal of what they need to gather, and if it'd be great to make a proper learning agent so that it can figure out on its own just how important coins, allies, etc are towards the goal of gathering the most stars.
+   * In some games, like Super Smash Bros, this is ends up being a lot waiting for the agents to train, because each character is different enough that you can't simply train an agent once, and expect it to do well for other characters. I don't believe that's the case here, as the strategies and tools available to you don't really change, only what spaces in front of you you're likely to land on based on your dice.
+ * Extend the AI to choose which dice to use.
+   * Phase 1 can be being able to choose between their character dice and the d6.
+   * Phase 2 would be also having access to their ally dice they could use.
