@@ -47,7 +47,7 @@ public class GameStatTracker {
     }
 
     public void addCoins(int coins) {
-        coinTotal += coins;
+        coinTotal = Math.max(0, coinTotal + coins);
     }
 
     public void addDistance(int distanceTraveled) {
