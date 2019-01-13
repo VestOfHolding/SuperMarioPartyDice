@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
+import utils.RandomUtils;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -38,10 +39,23 @@ public class WhompsOnTheRun extends EventSpace {
 
         gameStatTracker.addCoins(-COST);
 
-        active = false;
-        ((WhompsOnTheRun)gameBoard.getVertexById(partnerID)).setActive(true);
-
+        whompSwitch(gameBoard);
         return true;
+    }
+
+    public void whompSwitch(MPBoard<BaseSpace, DefaultEdge> gameBoard) {
+        // Let's go with a 10% chance that some other player has come along and also swapped the Whomps
+        // so you just swap them back.
+        // I fully acknowledge this is absolutely nothing more than a "better than nothing" approach
+        // that isn't the most accurate.
+        if (RandomUtils.getRandomInt(0, 9) == 0) {
+            return;
+        }
+
+        active = !active;
+
+        WhompsOnTheRun secondWhomp = (WhompsOnTheRun)gameBoard.getVertexById(partnerID);
+        secondWhomp.setActive(!secondWhomp.isActive());
     }
 
     @Override

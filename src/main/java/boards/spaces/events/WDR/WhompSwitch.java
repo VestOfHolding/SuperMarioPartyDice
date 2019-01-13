@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
+import utils.RandomUtils;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -32,14 +33,9 @@ public class WhompSwitch extends EventSpace {
         WhompsOnTheRun firstWhomp = (WhompsOnTheRun)gameBoard.getVertexById(firstWhompID);
         WhompsOnTheRun secondWhomp = (WhompsOnTheRun)gameBoard.getVertexById(secondWhompID);
 
-        if (firstWhomp.isActive() && !secondWhomp.isActive()) {
-            firstWhomp.setActive(false);
-            secondWhomp.setActive(true);
-            return true;
-        }
-        else if (!firstWhomp.isActive() && secondWhomp.isActive()) {
-            firstWhomp.setActive(true);
-            secondWhomp.setActive(false);
+        //The two states of activity must be opposite of each other.
+        if (firstWhomp.isActive() ^ secondWhomp.isActive()) {
+            firstWhomp.whompSwitch(gameBoard);
             return true;
         }
 
