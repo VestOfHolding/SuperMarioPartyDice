@@ -41,4 +41,12 @@ public class BaseSpace {
     public boolean isPassingEvent() {
         return false;
     }
+
+    public boolean hasToll() {
+        return false;
+    }
+
+    public boolean canCross(GameStatTracker gameStatTracker) {
+        return false;
+    }
 }

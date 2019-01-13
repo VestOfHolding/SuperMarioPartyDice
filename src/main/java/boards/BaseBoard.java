@@ -17,6 +17,7 @@ import utils.RandomUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class BaseBoard {
     @Getter
@@ -46,8 +47,10 @@ public abstract class BaseBoard {
         return board.getGraphSize();
     }
 
-    public BaseSpace getNextSpace(BaseSpace startingSpace) {
-        List<BaseSpace> nextSpaces = getNextSpaces(startingSpace);
+    public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
+        List<BaseSpace> nextSpaces = getNextSpaces(startingSpace).stream()
+                .filter(s -> !s.hasToll() || s.canCross(gameStatTracker))
+                .collect(Collectors.toList());
 
         return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
     }
@@ -59,7 +62,7 @@ public abstract class BaseBoard {
     public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
 
         for (int i = 0; i < distance; ++i) {
-            currentSpace = getNextSpace(currentSpace);
+            currentSpace = getNextSpace(currentSpace, gameStatTracker);
 
             if (!currentSpace.affectsMovement()) {
                 i -= 1;

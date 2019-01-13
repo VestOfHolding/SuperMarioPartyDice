@@ -5,16 +5,10 @@ import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
-import utils.RandomUtils;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -25,8 +19,6 @@ public class WhompsOnTheRun extends EventSpace {
 
     private int partnerID;
 
-    @Getter
-    @Setter
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private boolean active;
@@ -60,5 +52,15 @@ public class WhompsOnTheRun extends EventSpace {
     @Override
     public boolean isPassingEvent() {
         return true;
+    }
+
+    @Override
+    public boolean hasToll() {
+        return isActive();
+    }
+
+    @Override
+    public boolean canCross(GameStatTracker gameStatTracker) {
+        return gameStatTracker.getCoinTotal() - COST >= 0;
     }
 }

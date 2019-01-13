@@ -1,8 +1,8 @@
 package boards;
 
 import boards.spaces.SpaceFactory;
-import boards.spaces.events.WDR.ChooseTreasureChestEvent;
 import boards.spaces.events.LakituSpace;
+import boards.spaces.events.WDR.ChooseTreasureChestEvent;
 import boards.spaces.events.WDR.WhompSwitch;
 import boards.spaces.events.WDR.WhompsOnTheRun;
 
