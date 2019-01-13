@@ -17,7 +17,6 @@ import utils.RandomUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class BaseBoard {
     @Getter
@@ -47,6 +46,16 @@ public abstract class BaseBoard {
         return board.getGraphSize();
     }
 
+    public BaseSpace getNextSpace(BaseSpace startingSpace) {
+        List<BaseSpace> nextSpaces = getNextSpaces(startingSpace);
+
+        return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
+    }
+
+    /**
+     * This function is way noticeably expensive for some reason, so only use it with boards
+     *  that actually have a toll somewhere. Otherwise, use the function above.
+     */
     public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
         List<BaseSpace> nextSpaces = new ArrayList<>();
 
@@ -66,7 +75,7 @@ public abstract class BaseBoard {
     public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
 
         for (int i = 0; i < distance; ++i) {
-            currentSpace = getNextSpace(currentSpace, gameStatTracker);
+            currentSpace = getNextSpace(currentSpace);
 
             if (!currentSpace.affectsMovement()) {
                 i -= 1;

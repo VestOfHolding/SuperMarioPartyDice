@@ -1,11 +1,15 @@
 package boards;
 
+import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
 import boards.spaces.SpaceFactory;
+import boards.spaces.events.EventSpace;
 import boards.spaces.events.KTT.ChainChompSpace;
 import boards.spaces.events.KTT.ForcedShopSpace;
 import boards.spaces.events.KTT.ThwompShortcutSpace;
+import boards.spaces.events.SandBridgeCollapse;
+import stattracker.GameStatTracker;
 
 public class KameksTantalizingTower extends BaseBoard  {
     public KameksTantalizingTower() {
@@ -108,5 +112,32 @@ public class KameksTantalizingTower extends BaseBoard  {
     
     private RedSpace newRedKamekSpace(int index) {
         return SpaceFactory.createRedSpace(index,-6);
+    }
+
+    @Override
+    public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
+
+        for (int i = 0; i < distance; ++i) {
+            currentSpace = getNextSpace(currentSpace, gameStatTracker);
+
+            if (!currentSpace.affectsMovement()) {
+                i -= 1;
+            }
+
+            if (currentSpace.isPassingEvent()) {
+                if (currentSpace instanceof SandBridgeCollapse) {
+                    currentSpace = processBridgeCollapseEvent(gameStatTracker, currentSpace);
+                }
+                else {
+                    currentSpace = processEvent(gameStatTracker, currentSpace);
+                }
+            }
+        }
+
+        if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
+            currentSpace = processEvent(gameStatTracker, currentSpace);
+        }
+
+        return currentSpace;
     }
 }
