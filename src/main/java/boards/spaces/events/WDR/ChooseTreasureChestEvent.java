@@ -1,7 +1,8 @@
-package boards.spaces.events;
+package boards.spaces.events.WDR;
 
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
+import boards.spaces.events.EventSpace;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

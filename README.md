@@ -39,9 +39,10 @@ The current version of these simulations is much more limited than the real SMP 
 ## Current Goals/Questions
 
 - [x] Oh. Right. Character shouldn't be allowed to have less than zero coins. That will probably noticeably increase everyone's coin averages, lol. 
-- [ ] Implement the "Whomps on the Move" event in the Whomp's Domino Ruins board.
+- [x] Implement the "Whomps on the Move" event in the Whomp's Domino Ruins board.
 - [ ] After addressing the above two issues, we need a look-ahead system for the paths that have some sort of coin toll. That way an agent knows that they can't take a path if they can't pay the toll.
 - [ ] Get any data on what events come up for Extra Bad Luck spaces (though I have a feeling landing on them happens infrequently enough that it won't really affect the data in the end).
+- [ ] Take advantage of the capabilities I get with JGraphT to create a visualization of the board graphs.
 - [ ] Fine-tune the Sand Bridge collapsing in Megafruit Paradise. I've heard it can randomly collapse after 3-5 uses, but in the four cases I've witnessed it's been 5. Either that's coincidence, or it's not 3-5, or the randomness isn't uniform. Without more data I don't know which it is for certain.
 
 ## Ongoing Goals
