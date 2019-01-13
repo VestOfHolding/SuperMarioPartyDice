@@ -48,9 +48,13 @@ public abstract class BaseBoard {
     }
 
     public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
-        List<BaseSpace> nextSpaces = getNextSpaces(startingSpace).stream()
-                .filter(s -> !s.hasToll() || s.canCross(gameStatTracker))
-                .collect(Collectors.toList());
+        List<BaseSpace> nextSpaces = new ArrayList<>();
+
+        for (BaseSpace nextSpace : getNextSpaces(startingSpace)) {
+            if (!nextSpace.hasToll() || nextSpace.canCross(gameStatTracker)) {
+                nextSpaces.add(nextSpace);
+            }
+        }
 
         return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
     }

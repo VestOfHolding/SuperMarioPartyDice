@@ -120,6 +120,11 @@ public class WhompsDominoRuins extends BaseBoard {
         board.setOrReplaceVertex(32, SpaceFactory.createVSSpace(32));
         board.setOrReplaceVertex(58, SpaceFactory.createVSSpace(58));
 
+        ((WhompsOnTheRun)board.getVertexById(WHOMP1_1)).setActive(true);
+        ((WhompsOnTheRun)board.getVertexById(WHOMP1_2)).setActive(false);
+        ((WhompsOnTheRun)board.getVertexById(WHOMP2_1)).setActive(true);
+        ((WhompsOnTheRun)board.getVertexById(WHOMP2_2)).setActive(false);
+
         resetRedAndBlueCoinAmounts();
     }
 
