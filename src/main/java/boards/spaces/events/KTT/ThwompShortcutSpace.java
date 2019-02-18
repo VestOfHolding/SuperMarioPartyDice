@@ -19,6 +19,7 @@ public class ThwompShortcutSpace extends NonMovementSpace {
     @EqualsAndHashCode.Exclude
     private int cost;
 
+    @EqualsAndHashCode.Exclude
     private int nextCost;
 
     public ThwompShortcutSpace(int spaceID) {
