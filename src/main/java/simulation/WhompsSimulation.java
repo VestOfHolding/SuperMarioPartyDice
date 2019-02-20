@@ -1,7 +1,6 @@
 package simulation;
 
 import boards.WhompsDominoRuins;
-import org.apache.commons.lang3.time.StopWatch;
 import partydice.Dice;
 import stattracker.SimulationStatTracker;
 

@@ -1,5 +1,6 @@
 package boards.spaces.events.KBPM;
 
+import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
@@ -7,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 @EqualsAndHashCode(callSuper = true)
@@ -20,7 +20,7 @@ public class RoyalExplosionEvent extends EventSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
         boolean explosionTime = gameBoard.decrementCountdown();
 

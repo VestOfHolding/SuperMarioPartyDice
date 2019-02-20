@@ -1,13 +1,19 @@
 package simulation;
 
+import display.GraphDisplay;
 import org.apache.commons.lang3.time.StopWatch;
 
 public class MainSim {
     public static void main(String[] args) throws Exception {
+        System.setProperty("org.graphstream.ui", "swing");
+
         StopWatch stopWatch = StopWatch.createStarted();
 
-        Simulation simulation = new KamekSimulation();
-        simulation.simulate();
+        GraphDisplay display = new GraphDisplay();
+        display.display();
+
+//        Simulation simulation = new KamekSimulation();
+//        simulation.simulate();
 
 //        ShortestAllyPath shortestAllyPath = new ShortestAllyPath();
 //        shortestAllyPath.shortestPathToFirstAlly();

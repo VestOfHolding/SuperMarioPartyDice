@@ -9,7 +9,6 @@ import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.SandBridgeCollapse;
 import lombok.Getter;
 import org.jgrapht.Graphs;
-import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.builder.GraphBuilder;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
@@ -20,13 +19,13 @@ import java.util.List;
 
 public abstract class BaseBoard {
     @Getter
-    protected MPBoard<BaseSpace, DefaultEdge> board;
+    protected MPBoard<BaseSpace, MPEdge> board;
 
-    protected GraphBuilder<BaseSpace, DefaultEdge, MPBoard<BaseSpace, DefaultEdge>> graphBuilder;
+    protected GraphBuilder<BaseSpace, MPEdge, MPBoard<BaseSpace, MPEdge>> graphBuilder;
 
     protected void initializeBoard() {
-        board = new MPBoard<>(DefaultEdge.class);
-        graphBuilder = new GraphBuilder<>(new MPBoard<>(DefaultEdge.class));
+        board = new MPBoard<>(MPEdge.class);
+        graphBuilder = new GraphBuilder<>(new MPBoard<>(MPEdge.class));
 
         buildInitialGraph();
     }
@@ -34,7 +33,7 @@ public abstract class BaseBoard {
     protected abstract void buildInitialGraph();
 
     public void resetBoard() {
-        board = new MPBoard<>(DefaultEdge.class);
+        board = new MPBoard<>(MPEdge.class);
         initializeBoard();
     }
 

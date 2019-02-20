@@ -1,5 +1,6 @@
 package boards.spaces.events.KTT;
 
+import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
@@ -7,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 @EqualsAndHashCode(callSuper = true)
@@ -21,7 +21,7 @@ public class ChainChompSpace extends EventSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
         //The Chain Chomp comes and steals coins.
         // Not fully sure what the range of possibilities is here yet.

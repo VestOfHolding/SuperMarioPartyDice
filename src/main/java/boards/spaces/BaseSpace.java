@@ -1,10 +1,10 @@
 package boards.spaces;
 
+import boards.MPEdge;
 import boards.layout.MPBoard;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 @NoArgsConstructor
@@ -30,7 +30,7 @@ public class BaseSpace {
         return -1;
     }
 
-    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
         return false;
     }
 

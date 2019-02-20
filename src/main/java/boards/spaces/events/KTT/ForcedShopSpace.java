@@ -1,5 +1,6 @@
 package boards.spaces.events.KTT;
 
+import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.NonMovementSpace;
@@ -7,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 @EqualsAndHashCode(callSuper = true)
@@ -25,7 +25,7 @@ public class ForcedShopSpace extends NonMovementSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
         //This is a shop that sells everything for 6 coins, and you MUST buy something.
         gameStatTracker.addCoins(-6);

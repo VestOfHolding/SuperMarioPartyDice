@@ -1,5 +1,6 @@
 package boards.spaces.events;
 
+import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
@@ -7,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
@@ -30,7 +30,7 @@ public class VSSpace extends EventSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
         int wager = POSSIBLE_WAGERS.get(RandomUtils.getRandomInt(POSSIBLE_WAGERS.size() - 1));
 

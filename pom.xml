@@ -8,6 +8,13 @@
     <artifactId>characterDice</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
             <plugin>
@@ -23,6 +30,7 @@
     </build>
 
     <dependencies>
+        <!--A few basic utility dependencies.-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -48,24 +56,41 @@
             <version>3.8.1</version>
         </dependency>
 
+        <!--The main graph library dependency.-->
         <dependency>
             <groupId>org.jgrapht</groupId>
             <artifactId>jgrapht-core</artifactId>
             <version>1.3.0</version>
         </dependency>
 
+        <!--Used to try and use highly optimized objects to enhance simulation speed.-->
         <dependency>
             <groupId>it.unimi.dsi</groupId>
             <artifactId>fastutil</artifactId>
             <version>8.2.2</version>
         </dependency>
 
+        <!--More trying to do things as efficiently as possible,
+        this is a great library for more efficiently calculating the quartiles we want.-->
         <dependency>
             <groupId>com.tdunning</groupId>
             <artifactId>t-digest</artifactId>
             <version>3.2</version>
         </dependency>
 
+        <!--Used for graph visualization.-->
+        <dependency>
+            <groupId>com.github.graphstream</groupId>
+            <artifactId>gs-core</artifactId>
+            <version>dbdf94680e</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.graphstream</groupId>
+            <artifactId>gs-ui-swing</artifactId>
+            <version>6fc63626a9</version>
+        </dependency>
+
+        <!--Haven't worked much with JUnit 5 yet, so why not?-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>

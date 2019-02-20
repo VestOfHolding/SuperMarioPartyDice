@@ -1,5 +1,6 @@
 package boards.spaces.events.WDR;
 
+import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
@@ -7,9 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
-import utils.RandomUtils;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,7 +26,7 @@ public class WhompSwitch extends EventSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
 
         WhompsOnTheRun firstWhomp = (WhompsOnTheRun)gameBoard.getVertexById(firstWhompID);

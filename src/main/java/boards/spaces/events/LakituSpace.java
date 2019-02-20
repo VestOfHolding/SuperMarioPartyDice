@@ -1,12 +1,12 @@
 package boards.spaces.events;
 
+import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 
 @EqualsAndHashCode(callSuper = true)
@@ -24,7 +24,7 @@ public class LakituSpace extends EventSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
 //        gameStatTracker.addCoins(RandomUtils.getRandomInt(5, 10));
         return true;

@@ -1,5 +1,6 @@
 package boards.spaces.events.WDR;
 
+import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
@@ -7,7 +8,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.jgrapht.graph.DefaultEdge;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
@@ -31,7 +31,7 @@ public class WhompsOnTheRun extends EventSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, DefaultEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
         if (!isActive()) {
             return false;
@@ -43,7 +43,7 @@ public class WhompsOnTheRun extends EventSpace {
         return true;
     }
 
-    public void whompSwitch(MPBoard<BaseSpace, DefaultEdge> gameBoard) {
+    public void whompSwitch(MPBoard<BaseSpace, MPEdge> gameBoard) {
         // Let's go with a 10% chance that some other player has come along and also swapped the Whomps
         // so you just swap them back.
         // I fully acknowledge this is absolutely nothing more than a "better than nothing" approach

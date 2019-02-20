@@ -1,7 +1,7 @@
 package boards.layout;
 
+import boards.MPEdge;
 import boards.spaces.BaseSpace;
-import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class MPBoard<V extends BaseSpace, E extends DefaultEdge> extends SimpleDirectedGraph<V, E> {
+public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirectedGraph<V, E> {
     Map<Integer, V> VERTEX_MAP;
 
     private static final int kingBobombCountdownStart = 5;
