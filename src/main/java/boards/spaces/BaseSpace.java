@@ -14,6 +14,9 @@ public class BaseSpace {
 
     protected int spaceID;
 
+    protected int x;
+    protected int y;
+
     public BaseSpace(int spaceID) {
         this.spaceID = spaceID;
     }
