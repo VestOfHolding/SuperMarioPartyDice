@@ -25,9 +25,15 @@ public class WhompsOnTheRun extends EventSpace {
     private boolean active;
 
     public WhompsOnTheRun(int spaceID, int partnerID, boolean active) {
+        this(spaceID, partnerID, active, -1, -1);
+    }
+
+    public WhompsOnTheRun(int spaceID, int partnerID, boolean active, int x, int y) {
         super(spaceID);
         this.partnerID = partnerID;
         this.active = active;
+        this.x = x;
+        this.y = y;
     }
 
     @Override

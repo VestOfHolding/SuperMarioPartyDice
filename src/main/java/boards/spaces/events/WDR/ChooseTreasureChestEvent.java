@@ -30,7 +30,13 @@ public class ChooseTreasureChestEvent extends EventSpace {
     List<Integer> REWARDS;
 
     public ChooseTreasureChestEvent(int spaceID) {
+        this(spaceID, -1, -1);
+    }
+
+    public ChooseTreasureChestEvent(int spaceID, int x, int y) {
         super(spaceID);
+        this.x = x;
+        this.y = y;
 
         //Not using items yet.
         REWARDS = new ArrayList<>(Arrays.asList(0, 3, 10));

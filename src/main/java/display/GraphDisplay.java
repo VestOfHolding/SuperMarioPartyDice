@@ -6,9 +6,12 @@ import boards.WhompsDominoRuins;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
+import boards.spaces.NonMovementSpace;
 import boards.spaces.RedSpace;
 import boards.spaces.StartSpace;
+import boards.spaces.events.BadLuckSpace;
 import boards.spaces.events.VSSpace;
+import boards.spaces.events.WDR.WhompsOnTheRun;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
@@ -40,7 +43,20 @@ public class GraphDisplay {
             else if (space instanceof StartSpace) {
                 node.setAttribute("ui.class", "green");
             }
+            else if (space instanceof WhompsOnTheRun || space instanceof NonMovementSpace) {
+                node.setAttribute("ui.class", "gray");
+            }
+            else if (space instanceof BadLuckSpace) {
+                node.setAttribute("ui.class", "darkred");
+            }
+            else {
+                node.setAttribute("ui.class", "green");
+            }
             node.setAttribute("ui.label", Integer.toString(space.getSpaceID()));
+
+            if (space.getX() > 0 && space.getY() > 0) {
+                node.setAttribute("xyz", space.getX(), space.getY(), 0);
+            }
         }
 
         for (MPEdge edge : mpBoard.edgeSet()) {
@@ -53,7 +69,7 @@ public class GraphDisplay {
         layout.setForce(0.9f);
 
         Viewer viewer = gsGraph.display();
-        viewer.enableAutoLayout(layout);
+        viewer.disableAutoLayout();
     }
 
     public String getStyleSheet() {
@@ -62,6 +78,7 @@ public class GraphDisplay {
                 "node.yellow { fill-color: yellow; }" +
                 "node.green { fill-color: green; }" +
                 "node.blue { fill-color: blue; }" +
-                "node.gray { fill-color: gray; }";
+                "node.gray { fill-color: gray; }" +
+                "node.darkred { fill-color: darkred; }";
     }
 }

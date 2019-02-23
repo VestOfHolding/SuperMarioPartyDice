@@ -15,7 +15,13 @@ import stattracker.GameStatTracker;
 @ToString(callSuper = true)
 public class LakituSpace extends EventSpace {
     public LakituSpace(int spaceID) {
+        this(spaceID, -1, -1);
+    }
+
+    public LakituSpace(int spaceID, int x, int y) {
         super(spaceID);
+        this.x = x;
+        this.y = y;
     }
 
     @Override

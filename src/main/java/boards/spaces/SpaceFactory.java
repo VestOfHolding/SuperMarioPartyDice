@@ -40,6 +40,10 @@ public class SpaceFactory {
         return createBlueSpace(index, coinAmount, -1, -1);
     }
 
+    public static BlueSpace createBlueSpace(int index, int x, int y) {
+        return createBlueSpace(index, 3, x, y);
+    }
+
     public static BlueSpace createBlueSpace(int index, int coinAmount, int x, int y) {
         BlueSpace space;
         if (!spaceCache.containsKey(index)) {
@@ -62,6 +66,10 @@ public class SpaceFactory {
 
     public static RedSpace createRedSpace(int index, int coinAmount) {
         return createRedSpace(index, coinAmount, -1, -1);
+    }
+
+    public static RedSpace createRedSpace(int index, int x, int y) {
+        return createRedSpace(index, 3, x, y);
     }
 
     public static RedSpace createRedSpace(int index, int coinAmount, int x, int y) {

@@ -20,9 +20,15 @@ public class WhompSwitch extends EventSpace {
     private int secondWhompID;
 
     public WhompSwitch(int spaceID, int firstWhompID, int secondWhompID) {
+        this(spaceID, firstWhompID, secondWhompID, -1, -1);
+    }
+
+    public WhompSwitch(int spaceID, int firstWhompID, int secondWhompID, int x, int y) {
         super(spaceID);
         this.firstWhompID = firstWhompID;
         this.secondWhompID = secondWhompID;
+        this.x = x;
+        this.y = y;
     }
 
     @Override
