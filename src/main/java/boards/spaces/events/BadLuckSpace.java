@@ -11,6 +11,7 @@ import lombok.ToString;
 import org.apache.commons.lang3.Range;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
+import utils.SpaceUIClass;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,5 +95,10 @@ public class BadLuckSpace extends EventSpace {
                     .findFirst()
                     .orElse(ANYTHING_ELSE);
         }
+    }
+
+    @Override
+    public SpaceUIClass getNodeClass() {
+        return SpaceUIClass.BADLUCK;
     }
 }

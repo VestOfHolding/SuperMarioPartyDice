@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import utils.SpaceUIClass;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -28,5 +29,10 @@ public class RedSpace extends BaseSpace {
     @Override
     public int coinGain() {
         return coins;
+    }
+
+    @Override
+    public SpaceUIClass getNodeClass() {
+        return SpaceUIClass.RED;
     }
 }

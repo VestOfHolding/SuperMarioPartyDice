@@ -17,6 +17,8 @@ import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.layout.Layout;
 import org.graphstream.ui.layout.springbox.implementations.LinLog;
+import org.graphstream.ui.spriteManager.Sprite;
+import org.graphstream.ui.spriteManager.SpriteManager;
 import org.graphstream.ui.view.Viewer;
 
 public class GraphDisplay {
@@ -31,28 +33,8 @@ public class GraphDisplay {
         for (BaseSpace space : mpBoard.vertexSet()) {
             Node node = gsGraph.addNode(Integer.toString(space.getSpaceID()));
 
-            if (space instanceof BlueSpace) {
-                node.setAttribute("ui.class", "blue");
-            }
-            else if (space instanceof RedSpace) {
-                node.setAttribute("ui.class", "red");
-            }
-            else if (space instanceof VSSpace) {
-                node.setAttribute("ui.class", "yellow");
-            }
-            else if (space instanceof StartSpace) {
-                node.setAttribute("ui.class", "green");
-            }
-            else if (space instanceof WhompsOnTheRun || space instanceof NonMovementSpace) {
-                node.setAttribute("ui.class", "gray");
-            }
-            else if (space instanceof BadLuckSpace) {
-                node.setAttribute("ui.class", "darkred");
-            }
-            else {
-                node.setAttribute("ui.class", "green");
-            }
-            node.setAttribute("ui.label", Integer.toString(space.getSpaceID()));
+            node.setAttribute("ui.class", space.getNodeClass().name().toLowerCase());
+//            node.setAttribute("ui.label", Integer.toString(space.getSpaceID()));
 
             if (space.getX() > 0 && space.getY() > 0) {
                 node.setAttribute("xyz", space.getX(), space.getY(), 0);
@@ -73,12 +55,42 @@ public class GraphDisplay {
     }
 
     public String getStyleSheet() {
-        return "node{ size: 20px; }" +
-                "node.red { fill-color: red; }" +
-                "node.yellow { fill-color: yellow; }" +
-                "node.green { fill-color: green; }" +
-                "node.blue { fill-color: blue; }" +
-                "node.gray { fill-color: gray; }" +
-                "node.darkred { fill-color: darkred; }";
+        return "node {\n" +
+                "\tsize: 34px;\n" +
+                "\tfill-mode: image-scaled-ratio-max;\n" +
+                "\tfill-image: url('images/OtherSpace.png');\n" +
+                "}\n" +
+                "node.red {\n" +
+                "\tfill-image: url('images/RedSpace.png');\n" +
+                "}\n" +
+                "node.blue {\n" +
+                "\tfill-image: url('images/BlueSpace.png');\n" +
+                "}\n" +
+                "node.event {\n" +
+                "\tfill-image: url('images/EventSpace.png');\n" +
+                "}\n" +
+                "node.badluck {\n" +
+                "\tsize: 40px;\n" +
+                "\tfill-image: url('images/BadLuckSpace.png');\n" +
+                "}\n" +
+                "node.item {\n" +
+                "\tfill-image: url('images/ItemSpace.png');\n" +
+                "}\n" +
+                "node.lucky {\n" +
+                "\tfill-image: url('images/LuckySpace.png');\n" +
+                "}\n" +
+                "node.nonmovement {\n" +
+                "\tsize: 6px;\n" +
+                "\tstroke-mode: plain;\n" +
+                "\tstroke-color: #999;\n" +
+                "\tstroke-width: 1px;\n" +
+                "\tfill-image: url('images/NonMovementSpace.png');\n" +
+                "}\n" +
+                "node.other {\n" +
+                "\tfill-image: url('images/OtherSpace.png');\n" +
+                "}\n" +
+                "node.vs {\n" +
+                "\tfill-image: url('images/VSSpace.png');\n" +
+                "}";
     }
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
+import utils.SpaceUIClass;
 
 @NoArgsConstructor
 @Data
@@ -51,5 +52,9 @@ public class BaseSpace {
 
     public boolean canCross(GameStatTracker gameStatTracker) {
         return false;
+    }
+
+    public SpaceUIClass getNodeClass() {
+        return SpaceUIClass.OTHER;
     }
 }

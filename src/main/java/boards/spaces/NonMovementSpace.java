@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import utils.SpaceUIClass;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -18,5 +19,10 @@ public class NonMovementSpace extends BaseSpace {
     @Override
     public boolean affectsMovement() {
         return false;
+    }
+
+    @Override
+    public SpaceUIClass getNodeClass() {
+        return SpaceUIClass.NONMOVEMENT;
     }
 }

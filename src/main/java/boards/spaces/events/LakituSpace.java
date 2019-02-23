@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
+import utils.SpaceUIClass;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -34,5 +35,10 @@ public class LakituSpace extends EventSpace {
                                 GameStatTracker gameStatTracker, BaseSpace space) {
 //        gameStatTracker.addCoins(RandomUtils.getRandomInt(5, 10));
         return true;
+    }
+
+    @Override
+    public SpaceUIClass getNodeClass() {
+        return SpaceUIClass.NONMOVEMENT;
     }
 }

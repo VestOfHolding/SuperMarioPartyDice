@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
+import utils.SpaceUIClass;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -82,5 +83,10 @@ public class WhompsOnTheRun extends EventSpace {
     @Override
     public boolean canCross(GameStatTracker gameStatTracker) {
         return gameStatTracker.getCoinTotal() - COST >= 0;
+    }
+
+    @Override
+    public SpaceUIClass getNodeClass() {
+        return SpaceUIClass.NONMOVEMENT;
     }
 }

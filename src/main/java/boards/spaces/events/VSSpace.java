@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
+import utils.SpaceUIClass;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,5 +53,10 @@ public class VSSpace extends EventSpace {
         gameBoard.setOrReplaceVertex(space.getSpaceID(), new BlueSpace());
 
         return true;
+    }
+
+    @Override
+    public SpaceUIClass getNodeClass() {
+        return SpaceUIClass.VS;
     }
 }
