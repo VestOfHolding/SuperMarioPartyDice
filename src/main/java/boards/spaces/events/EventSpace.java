@@ -17,6 +17,10 @@ public class EventSpace extends BaseSpace {
         super(spaceID);
     }
 
+    public EventSpace(int spaceID, int x, int y) {
+        super(spaceID, x, y);
+    }
+
     @Override
     public SpaceUIClass getNodeClass() {
         return SpaceUIClass.EVENT;

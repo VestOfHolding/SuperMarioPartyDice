@@ -19,6 +19,10 @@ public class BobombAllySpace extends EventSpace {
         super(spaceID);
     }
 
+    public BobombAllySpace(int spaceID, int x, int y) {
+        super(spaceID, x, y);
+    }
+
     @Override
     public boolean isPassingEvent() {
         return true;

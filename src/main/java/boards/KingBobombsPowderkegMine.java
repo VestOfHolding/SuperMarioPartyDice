@@ -17,77 +17,76 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
         graphBuilder.addEdgeChain(
                 //Start
-                SpaceFactory.createStartSpace(index++), //ID = 0
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createRedSpace(index++),
-                SpaceFactory.createBlueSpace(index++), //ID = 3
-                new RoyalExplosionEvent(index++),
-                SpaceFactory.createAllySpace(index++),
-                new RoyalExplosionEvent(index++),
-                SpaceFactory.createNonMovementSpace(index++), //ID = 7
-                SpaceFactory.createOtherSpace(index++),
-                SpaceFactory.createLuckySpace(index++),
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createRedSpace(index++),
-                new RoyalExplosionEvent(index++), //ID = 13
-                SpaceFactory.createOtherSpace(index++),
-                SpaceFactory.createBlueSpace(index++),
-                new RoyalExplosionEvent(index++),
-                SpaceFactory.createNonMovementSpace(index++), //ID = 17
-                SpaceFactory.createBlueSpace(index++)
+                SpaceFactory.createStartSpace(index++, 16, 2), //ID = 0
+                SpaceFactory.createBlueSpace(index++, 16, 8),
+                SpaceFactory.createRedSpace(index++, 16, 12),
+                SpaceFactory.createBlueSpace(index++, 16, 16), //ID = 3
+                new RoyalExplosionEvent(index++, 18, 16),
+                SpaceFactory.createAllySpace(index++, 20, 16),
+                new RoyalExplosionEvent(index++, 20, 18),
+                SpaceFactory.createNonMovementSpace(index++, 20, 20), //ID = 7
+                SpaceFactory.createItemSpace(index++, 20, 22),
+                SpaceFactory.createLuckySpace(index++, 20, 24),
+                SpaceFactory.createBlueSpace(index++, 18, 24),
+                SpaceFactory.createBlueSpace(index++, 16, 24),
+                SpaceFactory.createRedSpace(index++, 14, 24),
+                new RoyalExplosionEvent(index++, 12, 24), //ID = 13
+                SpaceFactory.createItemSpace(index++, 12, 22),
+                SpaceFactory.createBlueSpace(index++, 12, 20),
+                new RoyalExplosionEvent(index++, 12, 18),
+                SpaceFactory.createNonMovementSpace(index++, 12, 16), //ID = 17
+                SpaceFactory.createBlueSpace(index++, 14, 16)
         ).addEdgeChain(
                 //Upper Loop
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createNonMovementSpace(index++), //ID = 20
-                SpaceFactory.createOtherSpace(index++),
-                SpaceFactory.createOtherSpace(index++),
-                SpaceFactory.createNonMovementSpace(index++),
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createMoveEventSpace(index++, 54), //ID = 25
-                SpaceFactory.createBlueSpace(index++),
-                new KBPMChangePathEvent(index++), //ID = 27
-                SpaceFactory.createLuckySpace(index++),
-                SpaceFactory.createOtherSpace(index++),
-                SpaceFactory.createLuckySpace(index++),
-                new KBPMChangePathEvent(index++), //ID = 31
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createBadLuckSpace(index++),
-                new LakituSpace(index++),
-                SpaceFactory.createBlueSpace(index++), //ID = 36
-                SpaceFactory.createVSSpace(index++) //ID = 37
+                SpaceFactory.createBlueSpace(index++, 24, 20),
+                SpaceFactory.createNonMovementSpace(index++, 28, 20), //ID = 20
+                SpaceFactory.createItemSpace(index++, 28, 22),
+                SpaceFactory.createItemSpace(index++, 28, 24),
+                SpaceFactory.createNonMovementSpace(index++, 28, 28),
+                SpaceFactory.createBlueSpace(index++, 28, 31),
+                SpaceFactory.createMoveEventSpace(index++, 54, 28, 34), //ID = 25
+                SpaceFactory.createBlueSpace(index++, 25, 32),
+                new KBPMChangePathEvent(index++, 22, 32), //ID = 27
+                SpaceFactory.createLuckySpace(index++, 20, 30),
+                SpaceFactory.createLuckySpace(index++, 12, 30),
+                new KBPMChangePathEvent(index++, 10, 32), //ID = 30
+                SpaceFactory.createBlueSpace(index++, 7, 32),
+                SpaceFactory.createBlueSpace(index++, 4, 32),
+                SpaceFactory.createBadLuckSpace(index++, 4, 30),
+                new LakituSpace(index++, 4, 28),
+                SpaceFactory.createBlueSpace(index++, 4, 24), //ID = 35
+                SpaceFactory.createVSSpace(index++, 8, 24) //ID = 36
         ).addEdgeChain(
                 //Upper Loop Side Path
-                SpaceFactory.createBlueSpace(index++), //ID = 38
-                new BobombAllySpace(index++),
-                SpaceFactory.createVSSpace(index++) //ID = 40
+                SpaceFactory.createBlueSpace(index++, 20, 34), //ID = 37
+                new BobombAllySpace(index++, 16, 34),
+                SpaceFactory.createVSSpace(index++, 12, 34) //ID = 39
         ).addEdgeChain(
                 //Lower Right
-                SpaceFactory.createBlueSpace(index++), //ID = 41
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createRedSpace(index++),
-                SpaceFactory.createOtherSpace(index++),
-                SpaceFactory.createBadLuckSpace(index++),
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createOtherSpace(index++),
-                SpaceFactory.createAllySpace(index++) //ID = 48
+                SpaceFactory.createBlueSpace(index++, 28, 18), //ID = 40
+                SpaceFactory.createBlueSpace(index++, 28, 16),
+                SpaceFactory.createRedSpace(index++, 28, 14),
+                SpaceFactory.createItemSpace(index++, 28, 12),
+                SpaceFactory.createBadLuckSpace(index++, 28, 8),
+                SpaceFactory.createBlueSpace(index++, 24, 8),
+                SpaceFactory.createItemSpace(index++, 22, 8),
+                SpaceFactory.createAllySpace(index++, 19, 8) //ID = 47
         ).addEdgeChain(
                 //Lower Left
-                SpaceFactory.createBadLuckSpace(index++), //ID = 49
-                SpaceFactory.createNonMovementSpace(index++), //ID = 50
-                SpaceFactory.createRedSpace(index++),
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createNonMovementSpace(index++),
-                SpaceFactory.createMoveEventSpace(index++, 25), //ID = 54
-                SpaceFactory.createAllySpace(index++),
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createVSSpace(index++) //ID = 57
+                SpaceFactory.createBadLuckSpace(index++, 8, 16), //ID = 48
+                SpaceFactory.createNonMovementSpace(index++, 4, 16), //ID = 49
+                SpaceFactory.createRedSpace(index++, 4, 14),
+                SpaceFactory.createBlueSpace(index++, 4, 12),
+                SpaceFactory.createNonMovementSpace(index++, 4, 9),
+                SpaceFactory.createMoveEventSpace(index++, 25, 4, 6), //ID = 53
+                SpaceFactory.createAllySpace(index++, 8, 8),
+                SpaceFactory.createBlueSpace(index++, 10, 8),
+                SpaceFactory.createVSSpace(index++, 13, 8) //ID = 56
         ).addEdgeChain(
                 //Middle Right
-                SpaceFactory.createEventSpace(index++), //ID = 58
-                SpaceFactory.createBlueSpace(index++),
-                SpaceFactory.createEventSpace(index) //ID = 60
+                SpaceFactory.createEventSpace(index++, 2, 18), //ID = 57
+                SpaceFactory.createBlueSpace(index++, 2, 20),
+                SpaceFactory.createEventSpace(index, 2, 22) //ID = 59
         );
 
         board = graphBuilder.build();
@@ -96,17 +95,16 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
     @Override
     public void resetBoard() {
-
-        board.setOrReplaceVertex(37, SpaceFactory.createVSSpace(37));
-        board.setOrReplaceVertex(40, SpaceFactory.createVSSpace(40));
-        board.setOrReplaceVertex(57, SpaceFactory.createVSSpace(57));
+        board.setOrReplaceVertex(36, SpaceFactory.createVSSpace(36));
+        board.setOrReplaceVertex(39, SpaceFactory.createVSSpace(39));
+        board.setOrReplaceVertex(56, SpaceFactory.createVSSpace(56));
 
         resetRedAndBlueCoinAmounts();
         board.resetCountdown();
 
         //Reset the path if needed
-        if (board.containsEdge(board.getVertexById(27), board.getVertexById(38))) {
-            board.removeEdge(board.getVertexById(27), board.getVertexById(38));
+        if (board.containsEdge(board.getVertexById(27), board.getVertexById(37))) {
+            board.removeEdge(board.getVertexById(27), board.getVertexById(37));
             board.addEdge(board.getVertexById(27), board.getVertexById(28));
         }
     }
@@ -115,17 +113,17 @@ public class KingBobombsPowderkegMine extends BaseBoard {
         board.addEdge(board.getVertexById(18), board.getVertexById(3));
 
         board.addEdge(board.getVertexById(7), board.getVertexById(19));
-        board.addEdge(board.getVertexById(37), board.getVertexById(13));
+        board.addEdge(board.getVertexById(36), board.getVertexById(13));
 
-        board.addEdge(board.getVertexById(20), board.getVertexById(41));
-        board.addEdge(board.getVertexById(48), board.getVertexById(1));
+        board.addEdge(board.getVertexById(20), board.getVertexById(40));
+        board.addEdge(board.getVertexById(47), board.getVertexById(1));
 
-        board.addEdge(board.getVertexById(17), board.getVertexById(49));
-        board.addEdge(board.getVertexById(57), board.getVertexById(1));
+        board.addEdge(board.getVertexById(17), board.getVertexById(48));
+        board.addEdge(board.getVertexById(56), board.getVertexById(1));
 
-        board.addEdge(board.getVertexById(50), board.getVertexById(58));
-        board.addEdge(board.getVertexById(60), board.getVertexById(36));
+        board.addEdge(board.getVertexById(49), board.getVertexById(57));
+        board.addEdge(board.getVertexById(59), board.getVertexById(35));
 
-        board.addEdge(board.getVertexById(40), board.getVertexById(31));
+        board.addEdge(board.getVertexById(39), board.getVertexById(30));
     }
 }

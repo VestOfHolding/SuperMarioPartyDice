@@ -20,9 +20,7 @@ public class LakituSpace extends EventSpace {
     }
 
     public LakituSpace(int spaceID, int x, int y) {
-        super(spaceID);
-        this.x = x;
-        this.y = y;
+        super(spaceID, x, y);
     }
 
     @Override

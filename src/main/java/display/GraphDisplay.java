@@ -1,6 +1,7 @@
 package display;
 
 import boards.BaseBoard;
+import boards.KingBobombsPowderkegMine;
 import boards.MPEdge;
 import boards.WhompsDominoRuins;
 import boards.layout.MPBoard;
@@ -14,7 +15,7 @@ import org.graphstream.ui.view.Viewer;
 
 public class GraphDisplay {
     public void display() {
-        BaseBoard board = new WhompsDominoRuins();
+        BaseBoard board = new KingBobombsPowderkegMine();
 
         Graph gsGraph = new SingleGraph("Super Mario Party Board");
         gsGraph.setAttribute("ui.stylesheet", getStyleSheet());

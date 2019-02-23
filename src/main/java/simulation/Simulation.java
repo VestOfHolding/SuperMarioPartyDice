@@ -16,7 +16,9 @@ import utils.RandomUtils;
 
 import java.text.DecimalFormat;
 
-public class Simulation {
+public class
+
+Simulation {
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
 
     protected static final int TURN_COUNT = 20;

@@ -22,6 +22,10 @@ public class KBPMChangePathEvent extends EventSpace {
         super(spaceID);
     }
 
+    public KBPMChangePathEvent(int spaceID, int x, int y) {
+        super(spaceID, x, y);
+    }
+
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
