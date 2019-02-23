@@ -9,5 +9,6 @@ public enum SpaceUIClass {
     LUCKY,
     NONMOVEMENT,
     OTHER,
-    VS
+    VS,
+    ALLY
 }

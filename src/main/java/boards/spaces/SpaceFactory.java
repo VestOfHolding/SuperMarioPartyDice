@@ -256,6 +256,22 @@ public class SpaceFactory {
         return (VSSpace)setXandY(space, x, y);
     }
 
+    public static ItemSpace createItemSpace(int index, int x, int y) {
+        ItemSpace space;
+        if (!spaceCache.containsKey(index)) {
+            space = new ItemSpace(index);
+            spaceCache.put(index, space);
+        }
+        else if (!(spaceCache.get(index) instanceof StartSpace)) {
+            space = new ItemSpace(index);
+        }
+        else {
+            space = (ItemSpace)spaceCache.get(index);
+        }
+
+        return (ItemSpace)setXandY(space, x, y);
+    }
+
     private static BaseSpace setXandY(BaseSpace space, int x, int y) {
         if (space != null && x > 0 && y > 0) {
             space.setX(x);

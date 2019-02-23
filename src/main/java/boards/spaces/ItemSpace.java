@@ -10,19 +10,13 @@ import utils.SpaceUIClass;
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class AllySpace extends BaseSpace {
-
-    public AllySpace(int spaceID) {
+public class ItemSpace extends BaseSpace {
+    public ItemSpace(int spaceID) {
         super(spaceID);
     }
 
     @Override
-    public boolean addAlly() {
-        return true;
-    }
-
-    @Override
     public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.ALLY;
+        return SpaceUIClass.ITEM;
     }
 }

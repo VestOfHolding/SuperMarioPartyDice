@@ -22,6 +22,12 @@ public class BaseSpace {
         this.spaceID = spaceID;
     }
 
+    public BaseSpace(int spaceID, int x, int y) {
+        this.spaceID = spaceID;
+        this.x = x;
+        this.y = y;
+    }
+
     public int coinGain() {
         return 0;
     }

@@ -61,7 +61,6 @@ public class GraphDisplay {
                 "\tfill-image: url('images/EventSpace.png');\n" +
                 "}\n" +
                 "node.badluck {\n" +
-                "\tsize: 40px;\n" +
                 "\tfill-image: url('images/BadLuckSpace.png');\n" +
                 "}\n" +
                 "node.item {\n" +
@@ -69,6 +68,9 @@ public class GraphDisplay {
                 "}\n" +
                 "node.lucky {\n" +
                 "\tfill-image: url('images/LuckySpace.png');\n" +
+                "}\n" +
+                "node.ally {\n" +
+                "\tfill-image: url('images/AllySpace.png');\n" +
                 "}\n" +
                 "node.nonmovement {\n" +
                 "\tsize: 6px;\n" +
