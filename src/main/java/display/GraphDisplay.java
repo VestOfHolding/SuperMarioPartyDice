@@ -5,20 +5,11 @@ import boards.MPEdge;
 import boards.WhompsDominoRuins;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.BlueSpace;
-import boards.spaces.NonMovementSpace;
-import boards.spaces.RedSpace;
-import boards.spaces.StartSpace;
-import boards.spaces.events.BadLuckSpace;
-import boards.spaces.events.VSSpace;
-import boards.spaces.events.WDR.WhompsOnTheRun;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
 import org.graphstream.ui.layout.Layout;
 import org.graphstream.ui.layout.springbox.implementations.LinLog;
-import org.graphstream.ui.spriteManager.Sprite;
-import org.graphstream.ui.spriteManager.SpriteManager;
 import org.graphstream.ui.view.Viewer;
 
 public class GraphDisplay {
