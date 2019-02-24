@@ -27,6 +27,12 @@ public class MoveEventSpace extends EventSpace {
         turnsBlue = false;
     }
 
+    public MoveEventSpace(int spaceID, Integer spaceToMoveToID, int x, int y) {
+        super(spaceID, x, y);
+        this.spaceToMoveToID = Objects.requireNonNullElse(spaceToMoveToID, -1);
+        turnsBlue = false;
+    }
+
     public MoveEventSpace(int spaceID, Integer spaceToMoveToID, boolean turnsBlue) {
         super(spaceID);
         this.spaceToMoveToID = Objects.requireNonNullElse(spaceToMoveToID, -1);

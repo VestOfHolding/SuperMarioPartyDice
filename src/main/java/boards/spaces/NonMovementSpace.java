@@ -16,6 +16,10 @@ public class NonMovementSpace extends BaseSpace {
         super(spaceID);
     }
 
+    public NonMovementSpace(int spaceID, int x, int y) {
+        super(spaceID, x, y);
+    }
+
     @Override
     public boolean affectsMovement() {
         return false;

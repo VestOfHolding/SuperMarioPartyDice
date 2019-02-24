@@ -19,6 +19,10 @@ public class ForcedShopSpace extends NonMovementSpace {
         super(spaceID);
     }
 
+    public ForcedShopSpace(int spaceID, int x, int y) {
+        super(spaceID, x, y);
+    }
+
     @Override
     public boolean isPassingEvent() {
         return true;

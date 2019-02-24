@@ -26,6 +26,10 @@ public class ThwompShortcutSpace extends NonMovementSpace {
         super(spaceID);
     }
 
+    public ThwompShortcutSpace(int spaceID, int x, int y) {
+        super(spaceID, x, y);
+    }
+
     @Override
     public boolean isPassingEvent() {
         return true;

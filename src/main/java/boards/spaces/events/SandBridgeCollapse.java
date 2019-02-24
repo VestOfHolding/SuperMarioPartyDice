@@ -24,6 +24,11 @@ public class SandBridgeCollapse extends MoveEventSpace {
         countdown = 5;
     }
 
+    public SandBridgeCollapse(int spaceID, Integer spaceToMoveToID, int x, int y) {
+        super(spaceID, spaceToMoveToID, x, y);
+        countdown = 5;
+    }
+
     @Override
     public boolean affectsMovement() {
         return false;
