@@ -20,13 +20,12 @@ public class SandBridgeCollapse extends MoveEventSpace {
     protected int countdown;
 
     public SandBridgeCollapse(int spaceID, Integer spaceToMoveToID) {
-        super(spaceID, spaceToMoveToID);
-        countdown = 5;
+        this(spaceID, spaceToMoveToID, -1, -1);
     }
 
     public SandBridgeCollapse(int spaceID, Integer spaceToMoveToID, int x, int y) {
         super(spaceID, spaceToMoveToID, x, y);
-        countdown = 5;
+        countdown = RandomUtils.getRandomInt(4, 5);
     }
 
     @Override
