@@ -97,7 +97,7 @@ public class WhompsDominoRuins extends BaseBoard {
                 //Side Path 3
                 new WhompsOnTheRun(index++, WHOMP2_1, true, 4, 16),  //ID = 59
                 new WhompSwitch(index++, WHOMP2_1, WHOMP2_2, 6, 16),
-                SpaceFactory.createOtherSpace(index++, 9, 16),
+                SpaceFactory.createItemSpace(index++, 9, 16),
                 SpaceFactory.createBlueSpace(index++, 12, 16),
                 SpaceFactory.createBlueSpace(index++, 12, 20),
                 SpaceFactory.createBadLuckSpace(index++, 10, 20),
