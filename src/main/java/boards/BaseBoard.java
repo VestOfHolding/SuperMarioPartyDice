@@ -175,11 +175,22 @@ public abstract class BaseBoard {
         if (currentSpace instanceof MoveEventSpace && currentSpace.moveToSpace() > -1) {
             MoveEventSpace eventSpace = (MoveEventSpace) currentSpace;
             currentSpace = board.getVertexById(eventSpace.moveToSpace());
-            //This is where the event space gets transformed into a blue space.
-            eventSpace.processEvent(board, gameStatTracker, eventSpace);
+
+            if (this instanceof KameksTantalizingTower) {
+                eventSpace.processKamekEvent(board, gameStatTracker, eventSpace);
+            }
+            else {
+                //This is where the event space gets transformed into a blue space.
+                eventSpace.processEvent(board, gameStatTracker, eventSpace);
+            }
         }
         else {
-            currentSpace.processEvent(board, gameStatTracker, currentSpace);
+            if (this instanceof KameksTantalizingTower) {
+                currentSpace.processKamekEvent(board, gameStatTracker, currentSpace);
+            }
+            else {
+                currentSpace.processEvent(board, gameStatTracker, currentSpace);
+            }
             currentSpace = board.getVertexById(currentSpace.getSpaceID());
         }
 

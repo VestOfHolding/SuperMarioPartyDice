@@ -44,6 +44,10 @@ public class BaseSpace {
         return false;
     }
 
+    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
+        return processEvent(gameBoard, gameStatTracker, space);
+    }
+
     public boolean affectsMovement() {
         return true;
     }

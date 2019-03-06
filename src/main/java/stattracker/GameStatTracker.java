@@ -24,6 +24,7 @@ import java.util.List;
 public class GameStatTracker {
     private Dice characterDie;
     private int turnNumber;
+    private int turnMax;
 
     private int allyTotal;
     private int distanceTotal;
@@ -38,6 +39,7 @@ public class GameStatTracker {
     public GameStatTracker(Dice characterDie, int initialTurnCount) {
         this.characterDie = characterDie;
         turnNumber = initialTurnCount;
+        turnMax = initialTurnCount;
         allyTotal = 0;
         distanceTotal = 0;
         coinTotal = 0;
@@ -107,5 +109,9 @@ public class GameStatTracker {
 
     public void decreamentTurn() {
         turnNumber = Math.max(0, turnNumber - 1);
+    }
+
+    public boolean isHalfwayOver() {
+        return (double)turnNumber / (double)turnMax <= 0.5;
     }
 }
