@@ -87,6 +87,11 @@ public class GraphDisplay {
                 "}\n" +
                 "node.vs {\n" +
                 "\tfill-image: url('images/VSSpace.png');\n" +
+                "}\n" +
+                "edge {\n" +
+                "\tstroke-mode: plain;\n" +
+                "\tstroke-color: #999;\n" +
+                "\tstroke-width: 2px;\n" +
                 "}";
     }
 }
