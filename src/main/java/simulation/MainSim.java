@@ -12,8 +12,8 @@ public class MainSim {
         GraphDisplay display = new GraphDisplay();
         display.display();
 
-//        Simulation simulation = new KamekSimulation();
-//        simulation.simulate();
+        Simulation simulation = new KamekSimulation();
+        simulation.simulate();
 
 //        ShortestAllyPath shortestAllyPath = new ShortestAllyPath();
 //        shortestAllyPath.shortestPathToFirstAlly();

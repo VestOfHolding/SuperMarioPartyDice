@@ -12,7 +12,7 @@ class GameStatTrackerTest {
 
     @BeforeEach
     void setUp() {
-        classUnderTest = new GameStatTracker(Dice.BOWSER);
+        classUnderTest = new GameStatTracker(Dice.BOWSER, 20);
     }
 
     @Test
