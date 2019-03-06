@@ -5,34 +5,21 @@ import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.apache.commons.lang3.Range;
 import stattracker.GameStatTracker;
+import utils.BadLuckEventTable;
+import utils.LuckEvent;
 import utils.RandomUtils;
 import utils.SpaceUIClass;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class BadLuckSpace extends EventSpace {
-    //List of known possible events on Bad Luck Spaces:
-    // * Give 3 coins to all other players (5)
-    // * Give 5 coins to all other players (9)
-    // * Lose 5 coins (11)
-    // * Lose 10 coins (16)
-    // * The Star moves (13)
-    // * Give 5 coins to the last-place player. (5)
-    // * Give 10 coins to the last-place player. (9)
-    // * Give 5 coins to a random player. (5)
-    // * Raise the coin cost for a Star (2)
-    // * Lose one item (0)
 
     public BadLuckSpace(int spaceID) {
         super(spaceID);
@@ -41,60 +28,56 @@ public class BadLuckSpace extends EventSpace {
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 GameStatTracker gameStatTracker, BaseSpace space) {
-        List<Option> options = new ArrayList<>();
+        BadLuckEventTable eventTable;
+        boolean coinFlip = RandomUtils.isFlippedCoinHeads();
 
-        for (int i = 0; i < 5; ++i) {
-            options.add(getNextOption(options));
+        if (gameStatTracker.getTurnNumber() - 3 <= 0) {
+            eventTable = getExtraBadLuckTable(coinFlip);
+        }
+        else if (gameStatTracker.isHalfwayOver()) {
+            eventTable = coinFlip ? BadLuckEventTable.SECOND_HALF_1ST_2ND : BadLuckEventTable.SECOND_HALF_3RD_4TH;
+        }
+        else {
+            eventTable = coinFlip ? BadLuckEventTable.FIRST_HALF_1ST_2ND : BadLuckEventTable.FIRST_HALF_3RD_4TH;
         }
 
-        Option chosenOption = options.get(RandomUtils.getRandomInt(4));
-        gameStatTracker.addCoins(chosenOption.getCoinGain());
+        return commonProcessEvent(eventTable, gameStatTracker);
+    }
+
+    @Override
+    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+                                     GameStatTracker gameStatTracker, BaseSpace space) {
+        BadLuckEventTable eventTable;
+        boolean coinFlip = RandomUtils.isFlippedCoinHeads();
+
+        if (gameStatTracker.getTurnNumber() - 3 <= 0) {
+            eventTable = getExtraBadLuckTable(coinFlip);
+        }
+        else if (gameStatTracker.isHalfwayOver()) {
+            eventTable = coinFlip ? BadLuckEventTable.KAMEK_SECOND_HALF_1ST_2ND : BadLuckEventTable.KAMEK_SECOND_HALF_3RD_4TH;
+        }
+        else {
+            eventTable = coinFlip ? BadLuckEventTable.KAMEK_FIRST_HALF_1ST_2ND : BadLuckEventTable.KAMEK_FIRST_HALF_3RD_4TH;
+        }
+
+        return commonProcessEvent(eventTable, gameStatTracker);
+    }
+
+    private BadLuckEventTable getExtraBadLuckTable(boolean coinFlip) {
+        return coinFlip ? BadLuckEventTable.SUPER_BAD_LUCK_1ST_2ND : BadLuckEventTable.SUPER_BAD_LUCK_3RD_4TH;
+    }
+
+    private boolean commonProcessEvent(BadLuckEventTable eventTable, GameStatTracker gameStatTracker) {
+        LuckEvent chosenEvent = new ArrayList<>(BadLuckEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
+
+        if (chosenEvent.getCoinGain() == Integer.MIN_VALUE) {
+            gameStatTracker.addCoins(-(gameStatTracker.getCoinTotal() / 2));
+        }
+        else {
+            gameStatTracker.addCoins(chosenEvent.getCoinGain());
+        }
 
         return false;
-    }
-
-    /**
-     * Generate the next Option we can put in our list of five.
-     * With the stipulation that no option can appear in the final list
-     * more than twice.
-     */
-    public Option getNextOption(List<Option> listSoFar) {
-        boolean foundNextOption = false;
-        Option returnedOption;
-        do {
-            Option nextOption = Option.getRandomOption();
-
-            if (nextOption == Option.ANYTHING_ELSE ||
-                    listSoFar.stream().filter(o -> o.equals(nextOption)).count() < 2) {
-                foundNextOption = true;
-            }
-            returnedOption = nextOption;
-        } while (!foundNextOption);
-        return returnedOption;
-    }
-
-    @Getter
-    private enum Option {
-        LOSE_5_COINS(-5, Range.between(0, 10)),
-        LOSE_10_COINS(5, Range.between(11, 25)),
-        ANYTHING_ELSE(0, Range.between(26, 69));
-
-        private final int coinGain;
-        private final Range<Integer> chance;
-
-        Option(int coinGain, Range<Integer>  chance) {
-            this.coinGain = coinGain;
-            this.chance = chance;
-        }
-
-        public static Option getRandomOption() {
-            int random = RandomUtils.getRandomInt(0, 69);
-
-            return Arrays.stream(Option.values())
-                    .filter(o -> o.getChance().contains(random))
-                    .findFirst()
-                    .orElse(ANYTHING_ELSE);
-        }
     }
 
     @Override

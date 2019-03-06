@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
-import utils.LuckyEvent;
+import utils.LuckEvent;
 import utils.LuckyEventTable;
 import utils.RandomUtils;
 import utils.SpaceUIClass;
@@ -60,7 +60,7 @@ public class LuckySpace extends EventSpace {
     }
 
     private boolean commonProcessEvent(LuckyEventTable eventTable, GameStatTracker gameStatTracker) {
-        LuckyEvent chosenEvent = new ArrayList<>(LuckyEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
+        LuckEvent chosenEvent = new ArrayList<>(LuckyEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
 
         gameStatTracker.addCoins(chosenEvent.getCoinGain());
 

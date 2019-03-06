@@ -12,24 +12,24 @@ import org.apache.commons.lang3.Range;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
-public class LuckyEvent {
+public class LuckEvent {
     private int coinGain;
     private boolean addAlly;
     private Range<Integer> chanceRange;
 
-    public LuckyEvent(int coinGain, Range<Integer> chanceRange) {
+    public LuckEvent(int coinGain, Range<Integer> chanceRange) {
         this.coinGain = coinGain;
         addAlly = false;
         this.chanceRange = chanceRange;
     }
 
-    public LuckyEvent(boolean addAlly, Range<Integer> chanceRange) {
+    public LuckEvent(boolean addAlly, Range<Integer> chanceRange) {
         this.coinGain = 0;
         this.addAlly = addAlly;
         this.chanceRange = chanceRange;
     }
 
-    public static LuckyEvent buildEmptyEvent(Range<Integer> chanceRange) {
-        return new LuckyEvent(0, false, chanceRange);
+    public static LuckEvent buildEmptyEvent(Range<Integer> chanceRange) {
+        return new LuckEvent(0, false, chanceRange);
     }
 }

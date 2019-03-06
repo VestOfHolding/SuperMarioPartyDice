@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public enum LuckyEventTable {
+public enum BadLuckEventTable {
     FIRST_HALF_1ST_2ND(Arrays.asList(
             new LuckEvent(3, Range.between(1, 18)),
             new LuckEvent(3, Range.between(19, 36)),
@@ -71,15 +71,35 @@ public enum LuckyEventTable {
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
             LuckEvent.buildEmptyEvent(Range.between(85, 100))
+    )),
+    SUPER_BAD_LUCK_1ST_2ND(Arrays.asList(
+            new LuckEvent(-20, Range.between(1, 13)),
+            new LuckEvent(Integer.MIN_VALUE, Range.between(14, 26)),
+            LuckEvent.buildEmptyEvent(Range.between(27, 39)),
+            LuckEvent.buildEmptyEvent(Range.between(40, 52)),
+            LuckEvent.buildEmptyEvent(Range.between(53, 64)),
+            LuckEvent.buildEmptyEvent(Range.between(65, 76)),
+            LuckEvent.buildEmptyEvent(Range.between(77, 88)),
+            LuckEvent.buildEmptyEvent(Range.between(89, 100))
+    )),
+    SUPER_BAD_LUCK_3RD_4TH(Arrays.asList(
+            new LuckEvent(-5, Range.between(1, 12)),
+            new LuckEvent(-10, Range.between(13, 24)),
+            new LuckEvent(-20, Range.between(25, 36)),
+            LuckEvent.buildEmptyEvent(Range.between(37, 50)),
+            LuckEvent.buildEmptyEvent(Range.between(51, 64)),
+            LuckEvent.buildEmptyEvent(Range.between(65, 76)),
+            LuckEvent.buildEmptyEvent(Range.between(77, 88)),
+            new LuckEvent(10, Range.between(89, 100))
     ));
 
     List<LuckEvent> events;
 
-    LuckyEventTable(List<LuckEvent> events) {
+    BadLuckEventTable(List<LuckEvent> events) {
         this.events = events;
     }
 
-    public static Set<LuckEvent> buildEventList(LuckyEventTable eventTable) {
+    public static Set<LuckEvent> buildEventList(BadLuckEventTable eventTable) {
         Set<LuckEvent> result = new HashSet<>();
 
         do {
