@@ -67,7 +67,7 @@ Simulation {
     }
 
     protected GameStatTracker simulateGame(Dice characterDie, BaseBoard gameBoard, SimulationStatTracker simulationStatTracker) {
-        GameStatTracker gameStatTracker = simulationStatTracker.startNewGame();
+        GameStatTracker gameStatTracker = simulationStatTracker.startNewGame(TURN_COUNT);
 
         BaseSpace currentSpace = gameBoard.getStartSpace();
 
@@ -108,6 +108,7 @@ Simulation {
             else if (currentSpace.addAlly()) {
                 gameStatTracker.addAlly(j + 1);
             }
+            gameStatTracker.decreamentTurn();
         }
 
         return gameStatTracker;

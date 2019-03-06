@@ -23,6 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 public class GameStatTracker {
     private Dice characterDie;
+    private int turnNumber;
 
     private int allyTotal;
     private int distanceTotal;
@@ -34,8 +35,9 @@ public class GameStatTracker {
 
     private Int2IntOpenHashMap landedSpacesAmounts;
 
-    public GameStatTracker(Dice characterDie) {
+    public GameStatTracker(Dice characterDie, int initialTurnCount) {
         this.characterDie = characterDie;
+        turnNumber = initialTurnCount;
         allyTotal = 0;
         distanceTotal = 0;
         coinTotal = 0;
@@ -101,5 +103,9 @@ public class GameStatTracker {
         Int2IntOpenHashMap result = new Int2IntOpenHashMap();
         result.defaultReturnValue(-1);
         return result;
+    }
+
+    public void decreamentTurn() {
+        turnNumber = Math.max(0, turnNumber - 1);
     }
 }

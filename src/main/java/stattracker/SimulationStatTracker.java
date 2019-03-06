@@ -31,8 +31,8 @@ public class SimulationStatTracker {
                 4, new AllyStatTracker(4));
     }
 
-    public GameStatTracker startNewGame() {
-        return new GameStatTracker(characterDie);
+    public GameStatTracker startNewGame(int turnCount) {
+        return new GameStatTracker(characterDie, turnCount);
     }
 
     public void endGame(GameStatTracker gameStatTracker) {
