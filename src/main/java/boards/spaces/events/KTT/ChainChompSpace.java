@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
+import utils.RandomUtils;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -29,7 +30,8 @@ public class ChainChompSpace extends EventSpace {
                                 GameStatTracker gameStatTracker, BaseSpace space) {
         //The Chain Chomp comes and steals coins.
         // Not fully sure what the range of possibilities is here yet.
-        gameStatTracker.addCoins(-5);
+        // I've seen both 5 and 7, though not sure what the percentage chance is.
+        gameStatTracker.addCoins(RandomUtils.getRandomInt(1) == 1 ? -5 : -7);
         return true;
     }
 }
