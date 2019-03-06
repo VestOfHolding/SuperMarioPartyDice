@@ -12,4 +12,8 @@ public class RandomUtils {
     public static int getRandomInt(int min, int max) {
         return RANDOM.nextInt((max - min) + 1) + min;
     }
+
+    public static boolean isFlippedCoinHeads() {
+        return getRandomInt(1) == 1;
+    }
 }
