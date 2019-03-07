@@ -53,7 +53,7 @@ These are goals that don't necessarily have a time when they're done, and I'll a
  * Gather data on what events come up when landing on a Lucky Space.
    * Done! Found the actual original probability tables.
  * Gather data on what events come up when landing on a Bad Luck Space (only non-Kamek boards since Kamek is different).
-   * * Done! Found the actual original probability tables.
+   * Done! Found the actual original probability tables.
  
  ## Future Goals
  
