@@ -9,10 +9,10 @@ public class MainSim {
 
         StopWatch stopWatch = StopWatch.createStarted();
 
-        GraphDisplay display = new GraphDisplay();
-        display.display();
+//        GraphDisplay display = new GraphDisplay();
+//        display.display();
 
-        Simulation simulation = new KamekSimulation();
+        Simulation simulation = new WhompsSimulation();
         simulation.simulate();
 
 //        ShortestAllyPath shortestAllyPath = new ShortestAllyPath();

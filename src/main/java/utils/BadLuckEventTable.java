@@ -9,65 +9,65 @@ import java.util.Set;
 
 public enum BadLuckEventTable {
     FIRST_HALF_1ST_2ND(Arrays.asList(
-            new LuckEvent(3, Range.between(1, 18)),
-            new LuckEvent(3, Range.between(19, 36)),
-            new LuckEvent(5, Range.between(37, 52)),
-            LuckEvent.buildEmptyEvent(Range.between(53, 68)),
-            LuckEvent.buildEmptyEvent(Range.between(69, 84)),
-            LuckEvent.buildEmptyEvent(Range.between(85, 100))
-    )),
-    FIRST_HALF_3RD_4TH(Arrays.asList(
-            new LuckEvent(5, Range.between(1, 17)),
-            new LuckEvent(5, Range.between(18, 34)),
-            LuckEvent.buildEmptyEvent(Range.between(35, 50)),
-            LuckEvent.buildEmptyEvent(Range.between(50, 66)),
-            LuckEvent.buildEmptyEvent(Range.between(67, 83)),
-            LuckEvent.buildEmptyEvent(Range.between(84, 100))
-    )),
-    SECOND_HALF_1ST_2ND(Arrays.asList(
-            new LuckEvent(3, Range.between(1, 17)),
-            new LuckEvent(5, Range.between(18, 34)),
+            new LuckEvent(-5, Range.between(1, 17)),
+            new LuckEvent(-10, Range.between(18, 34)),
             LuckEvent.buildEmptyEvent(Range.between(35, 51)),
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
             LuckEvent.buildEmptyEvent(Range.between(85, 100))
     )),
+    FIRST_HALF_3RD_4TH(Arrays.asList(
+            new LuckEvent(-5, Range.between(1, 16)),
+            new LuckEvent(-10, Range.between(17, 32)),
+            LuckEvent.buildEmptyEvent(Range.between(33, 50)),
+            LuckEvent.buildEmptyEvent(Range.between(51, 68)),
+            LuckEvent.buildEmptyEvent(Range.between(69, 84)),
+            LuckEvent.buildEmptyEvent(Range.between(85, 100))
+    )),
+    SECOND_HALF_1ST_2ND(Arrays.asList(
+            new LuckEvent(-5, Range.between(1, 16)),
+            new LuckEvent(-10, Range.between(17, 32)),
+            LuckEvent.buildEmptyEvent(Range.between(33, 48)),
+            LuckEvent.buildEmptyEvent(Range.between(49, 66)),
+            LuckEvent.buildEmptyEvent(Range.between(67, 84)),
+            LuckEvent.buildEmptyEvent(Range.between(85, 100))
+    )),
     SECOND_HALF_3RD_4TH(Arrays.asList(
-            new LuckEvent(5, Range.between(1, 17)),
-            LuckEvent.buildEmptyEvent(Range.between(18, 34)),
+            new LuckEvent(-5, Range.between(1, 17)),
+            new LuckEvent(-10, Range.between(18, 34)),
             LuckEvent.buildEmptyEvent(Range.between(35, 51)),
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
             LuckEvent.buildEmptyEvent(Range.between(85, 100))
     )),
     KAMEK_FIRST_HALF_1ST_2ND(Arrays.asList(
-            new LuckEvent(3, Range.between(1, 18)),
-            new LuckEvent(3, Range.between(19, 36)),
-            new LuckEvent(5, Range.between(37, 52)),
-            LuckEvent.buildEmptyEvent(Range.between(53, 68)),
-            LuckEvent.buildEmptyEvent(Range.between(69, 84)),
-            LuckEvent.buildEmptyEvent(Range.between(85, 100))
-    )),
-    KAMEK_FIRST_HALF_3RD_4TH(Arrays.asList(
-            new LuckEvent(5, Range.between(1, 17)),
-            new LuckEvent(5, Range.between(18, 34)),
-            LuckEvent.buildEmptyEvent(Range.between(35, 50)),
-            LuckEvent.buildEmptyEvent(Range.between(50, 66)),
-            LuckEvent.buildEmptyEvent(Range.between(67, 83)),
-            LuckEvent.buildEmptyEvent(Range.between(84, 100))
-    )),
-    KAMEK_SECOND_HALF_1ST_2ND(Arrays.asList(
-            new LuckEvent(3, Range.between(1, 17)),
-            new LuckEvent(5, Range.between(18, 34)),
-            new LuckEvent(7, Range.between(35, 51)),
+            new LuckEvent(-5, Range.between(1, 17)),
+            new LuckEvent(-10, Range.between(18, 34)),
+            LuckEvent.buildEmptyEvent(Range.between(35, 51)),
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
             LuckEvent.buildEmptyEvent(Range.between(85, 100))
     )),
+    KAMEK_FIRST_HALF_3RD_4TH(Arrays.asList(
+            new LuckEvent(-5, Range.between(1, 16)),
+            new LuckEvent(-10, Range.between(17, 32)),
+            LuckEvent.buildEmptyEvent(Range.between(33, 50)),
+            LuckEvent.buildEmptyEvent(Range.between(51, 68)),
+            LuckEvent.buildEmptyEvent(Range.between(69, 84)),
+            LuckEvent.buildEmptyEvent(Range.between(85, 100))
+    )),
+    KAMEK_SECOND_HALF_1ST_2ND(Arrays.asList(
+            new LuckEvent(-5, Range.between(1, 16)),
+            new LuckEvent(-10, Range.between(17, 32)),
+            LuckEvent.buildEmptyEvent(Range.between(33, 48)),
+            LuckEvent.buildEmptyEvent(Range.between(49, 66)),
+            LuckEvent.buildEmptyEvent(Range.between(67, 84)),
+            LuckEvent.buildEmptyEvent(Range.between(85, 100))
+    )),
     KAMEK_SECOND_HALF_3RD_4TH(Arrays.asList(
-            new LuckEvent(5, Range.between(1, 17)),
-            new LuckEvent(10, Range.between(18, 34)),
-            new LuckEvent(true, Range.between(35, 51)),
+            new LuckEvent(-5, Range.between(1, 17)),
+            new LuckEvent(-10, Range.between(18, 34)),
+            LuckEvent.buildEmptyEvent(Range.between(35, 51)),
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
             LuckEvent.buildEmptyEvent(Range.between(85, 100))

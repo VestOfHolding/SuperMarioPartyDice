@@ -20,7 +20,7 @@ public enum LuckyEventTable {
             new LuckEvent(5, Range.between(1, 17)),
             new LuckEvent(5, Range.between(18, 34)),
             LuckEvent.buildEmptyEvent(Range.between(35, 50)),
-            LuckEvent.buildEmptyEvent(Range.between(50, 66)),
+            LuckEvent.buildEmptyEvent(Range.between(51, 66)),
             LuckEvent.buildEmptyEvent(Range.between(67, 83)),
             LuckEvent.buildEmptyEvent(Range.between(84, 100))
     )),
@@ -52,7 +52,7 @@ public enum LuckyEventTable {
             new LuckEvent(5, Range.between(1, 17)),
             new LuckEvent(5, Range.between(18, 34)),
             LuckEvent.buildEmptyEvent(Range.between(35, 50)),
-            LuckEvent.buildEmptyEvent(Range.between(50, 66)),
+            LuckEvent.buildEmptyEvent(Range.between(51, 66)),
             LuckEvent.buildEmptyEvent(Range.between(67, 83)),
             LuckEvent.buildEmptyEvent(Range.between(84, 100))
     )),

@@ -17,7 +17,7 @@ import org.graphstream.ui.view.Viewer;
 
 public class GraphDisplay {
     public void display() {
-        BaseBoard board = new KameksTantalizingTower();
+        BaseBoard board = new WhompsDominoRuins();
 
         Graph gsGraph = new SingleGraph("Super Mario Party Board");
         gsGraph.setAttribute("ui.stylesheet", getStyleSheet());
@@ -28,7 +28,6 @@ public class GraphDisplay {
             Node node = gsGraph.addNode(Integer.toString(space.getSpaceID()));
 
             node.setAttribute("ui.class", space.getNodeClass().name().toLowerCase());
-//            node.setAttribute("ui.label", Integer.toString(space.getSpaceID()));
 
             if (space.getX() > 0 && space.getY() > 0) {
                 node.setAttribute("xyz", space.getX(), space.getY(), 0);

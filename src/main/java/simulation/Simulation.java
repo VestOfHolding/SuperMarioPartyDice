@@ -22,7 +22,7 @@ Simulation {
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
 
     protected static final int TURN_COUNT = 20;
-    protected static final int SIM_COUNT = 4000000;
+    protected static final int SIM_COUNT = 5000000;
 
     public void simulate() throws Exception {
         System.out.println("Character\tDistance Avg\tDistance SD\tCoin Avg\tCoin SD");
