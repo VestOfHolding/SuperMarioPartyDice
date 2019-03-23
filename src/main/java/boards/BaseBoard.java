@@ -183,13 +183,11 @@ public abstract class BaseBoard {
             //This is where the event space gets transformed into a blue space.
             eventSpace.processEvent(board, gameStatTracker);
         }
+        else if (this instanceof KameksTantalizingTower) {
+            currentSpace.processKamekEvent(board, gameStatTracker);
+        }
         else {
-            if (this instanceof KameksTantalizingTower) {
-                currentSpace.processKamekEvent(board, gameStatTracker);
-            }
-            else {
-                currentSpace.processEvent(board, gameStatTracker);
-            }
+            currentSpace.processEvent(board, gameStatTracker);
             currentSpace = board.getVertexById(currentSpace.getSpaceID());
         }
 

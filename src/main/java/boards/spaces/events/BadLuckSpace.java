@@ -31,7 +31,7 @@ public class BadLuckSpace extends EventSpace {
         BadLuckEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
 
-        if (gameStatTracker.getTurnNumber() - 3 <= 0) {
+        if (gameStatTracker.isLastThreeTurns()) {
             eventTable = getExtraBadLuckTable(coinFlip);
         }
         else if (gameStatTracker.isHalfwayOver()) {
@@ -50,7 +50,7 @@ public class BadLuckSpace extends EventSpace {
         BadLuckEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
 
-        if (gameStatTracker.getTurnNumber() - 3 <= 0) {
+        if (gameStatTracker.isLastThreeTurns()) {
             eventTable = getExtraBadLuckTable(coinFlip);
         }
         else if (gameStatTracker.isHalfwayOver()) {

@@ -38,7 +38,7 @@ public class GameStatTracker {
 
     public GameStatTracker(Dice characterDie, int initialTurnCount) {
         this.characterDie = characterDie;
-        turnNumber = initialTurnCount;
+        turnNumber = 1;
         turnMax = initialTurnCount;
         allyTotal = 0;
         distanceTotal = 0;
@@ -71,7 +71,7 @@ public class GameStatTracker {
         return bobombAllies == null ? allyTotal : allyTotal + bobombAllies.size();
     }
 
-    public void addAlly(int turnNumber) {
+    public void addAlly() {
         if (getTrueAllyCount() >= 4) {
             return;
         }
@@ -107,11 +107,15 @@ public class GameStatTracker {
         return result;
     }
 
-    public void decreamentTurn() {
-        turnNumber = Math.max(0, turnNumber - 1);
+    public void incrementTurn() {
+        turnNumber = Math.min(turnMax, turnNumber + 1);
     }
 
     public boolean isHalfwayOver() {
-        return (double)turnNumber / (double)turnMax <= 0.5;
+        return (double)turnNumber / (double)turnMax >= 0.5;
+    }
+
+    public boolean isLastThreeTurns() {
+        return turnMax - turnNumber <= 3;
     }
 }

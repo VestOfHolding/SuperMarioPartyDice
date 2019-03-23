@@ -21,8 +21,6 @@ import java.util.ArrayList;
 @ToString(callSuper = true)
 public class LuckySpace extends EventSpace {
 
-    private boolean allyOptionTriggered;
-
     public LuckySpace(int spaceID) {
         super(spaceID);
     }
@@ -64,22 +62,10 @@ public class LuckySpace extends EventSpace {
 
         gameStatTracker.addCoins(chosenEvent.getCoinGain());
 
-        //Set this here so that way when the general simulation logic checks
-        // if an ally needs to be added it'll find out through the same
-        // overridden method as usual.
         if (chosenEvent.isAddAlly()) {
-            allyOptionTriggered = true;
+            gameStatTracker.addAlly();
         }
 
-        return false;
-    }
-
-    @Override
-    public boolean addAlly() {
-        if (allyOptionTriggered) {
-            allyOptionTriggered = false;
-            return true;
-        }
         return false;
     }
 

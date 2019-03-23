@@ -32,10 +32,6 @@ public class BaseSpace {
         return 0;
     }
 
-    public boolean addAlly() {
-        return false;
-    }
-
     public int moveToSpace() {
         return -1;
     }

@@ -23,12 +23,11 @@ class GameStatTrackerTest {
 
         assertEquals(1, classUnderTest.getAllyGainOnTurn().get(0));
 
-        int turnGainedFirstAlly = 5;
-
-        classUnderTest.addAlly(turnGainedFirstAlly);
+        classUnderTest.setTurnNumber(5);
+        classUnderTest.addAlly();
 
         assertEquals(1, classUnderTest.getAllyTotal());
         assertEquals(2, classUnderTest.getAllyGainOnTurn().size());
-        assertEquals(turnGainedFirstAlly, classUnderTest.getAllyGainOnTurn().get(1));
+        assertEquals(5, classUnderTest.getAllyGainOnTurn().get(1));
     }
 }
