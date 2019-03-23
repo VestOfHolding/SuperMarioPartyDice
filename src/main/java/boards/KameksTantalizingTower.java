@@ -8,7 +8,6 @@ import boards.spaces.events.EventSpace;
 import boards.spaces.events.KTT.ChainChompSpace;
 import boards.spaces.events.KTT.ForcedShopSpace;
 import boards.spaces.events.KTT.ThwompShortcutSpace;
-import boards.spaces.events.SandBridgeCollapse;
 import stattracker.GameStatTracker;
 
 public class KameksTantalizingTower extends BaseBoard  {
@@ -121,16 +120,11 @@ public class KameksTantalizingTower extends BaseBoard  {
             currentSpace = getNextSpace(currentSpace, gameStatTracker);
 
             if (!currentSpace.affectsMovement()) {
-                i -= 1;
+                --i;
             }
 
             if (currentSpace.isPassingEvent()) {
-                if (currentSpace instanceof SandBridgeCollapse) {
-                    currentSpace = processBridgeCollapseEvent(gameStatTracker, currentSpace);
-                }
-                else {
-                    currentSpace = processEvent(gameStatTracker, currentSpace);
-                }
+                currentSpace = processEvent(gameStatTracker, currentSpace);
             }
         }
 

@@ -1,11 +1,7 @@
 package display;
 
 import boards.BaseBoard;
-import boards.KameksTantalizingTower;
-import boards.KingBobombsPowderkegMine;
 import boards.MPEdge;
-import boards.MegafruitParadise;
-import boards.WhompsDominoRuins;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import org.graphstream.graph.Graph;

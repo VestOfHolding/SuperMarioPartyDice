@@ -30,7 +30,7 @@ public class LakituSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
 //        gameStatTracker.addCoins(RandomUtils.getRandomInt(5, 10));
         return true;
     }

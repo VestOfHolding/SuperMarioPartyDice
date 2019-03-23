@@ -77,16 +77,11 @@ public abstract class BaseBoard {
             currentSpace = getNextSpace(currentSpace);
 
             if (!currentSpace.affectsMovement()) {
-                i -= 1;
+                --i;
             }
 
             if (currentSpace.isPassingEvent()) {
-                if (currentSpace instanceof SandBridgeCollapse) {
-                    currentSpace = processBridgeCollapseEvent(gameStatTracker, currentSpace);
-                }
-                else {
-                    currentSpace = processEvent(gameStatTracker, currentSpace);
-                }
+                currentSpace = processEvent(gameStatTracker, currentSpace);
             }
         }
 
@@ -177,38 +172,36 @@ public abstract class BaseBoard {
         }
     }
 
-    protected BaseSpace processBridgeCollapseEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
-        boolean bridgeCollapsed = currentSpace.processEvent(board, gameStatTracker, currentSpace);
-
-        if (bridgeCollapsed) {
-            return board.getVertexById(currentSpace.moveToSpace());
-        }
-        return currentSpace;
-    }
-
     protected BaseSpace processEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
-        if (currentSpace instanceof MoveEventSpace && currentSpace.moveToSpace() > -1) {
+        if (currentSpace instanceof SandBridgeCollapse) {
+            currentSpace = processBridgeCollapseEvent(gameStatTracker, currentSpace);
+        }
+        else if (currentSpace instanceof MoveEventSpace && currentSpace.moveToSpace() > -1) {
             MoveEventSpace eventSpace = (MoveEventSpace) currentSpace;
             currentSpace = board.getVertexById(eventSpace.moveToSpace());
 
-            if (this instanceof KameksTantalizingTower) {
-                eventSpace.processKamekEvent(board, gameStatTracker, eventSpace);
-            }
-            else {
-                //This is where the event space gets transformed into a blue space.
-                eventSpace.processEvent(board, gameStatTracker, eventSpace);
-            }
+            //This is where the event space gets transformed into a blue space.
+            eventSpace.processEvent(board, gameStatTracker);
         }
         else {
             if (this instanceof KameksTantalizingTower) {
-                currentSpace.processKamekEvent(board, gameStatTracker, currentSpace);
+                currentSpace.processKamekEvent(board, gameStatTracker);
             }
             else {
-                currentSpace.processEvent(board, gameStatTracker, currentSpace);
+                currentSpace.processEvent(board, gameStatTracker);
             }
             currentSpace = board.getVertexById(currentSpace.getSpaceID());
         }
 
+        return currentSpace;
+    }
+
+    protected BaseSpace processBridgeCollapseEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
+        boolean bridgeCollapsed = currentSpace.processEvent(board, gameStatTracker);
+
+        if (bridgeCollapsed) {
+            return board.getVertexById(currentSpace.moveToSpace());
+        }
         return currentSpace;
     }
 }

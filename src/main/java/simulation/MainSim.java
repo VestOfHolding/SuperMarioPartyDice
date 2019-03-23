@@ -2,7 +2,6 @@ package simulation;
 
 import boards.BaseBoard;
 import boards.MegafruitParadise;
-import display.GraphDisplay;
 import org.apache.commons.lang3.time.StopWatch;
 
 public class MainSim {
@@ -15,8 +14,8 @@ public class MainSim {
 //        GraphDisplay display = new GraphDisplay();
 //        display.display(board);
 
-//        Simulation simulation = new WhompsSimulation();
-//        simulation.simulate();
+        Simulation simulation = new WhompsSimulation();
+        simulation.simulate();
 
         ShortestAllyPath shortestAllyPath = new ShortestAllyPath();
         shortestAllyPath.shortestPathToFirstAlly(board);

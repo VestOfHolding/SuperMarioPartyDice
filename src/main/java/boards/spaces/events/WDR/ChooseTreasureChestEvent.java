@@ -44,7 +44,7 @@ public class ChooseTreasureChestEvent extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         if (REWARDS.isEmpty()) {
             return false;
         }

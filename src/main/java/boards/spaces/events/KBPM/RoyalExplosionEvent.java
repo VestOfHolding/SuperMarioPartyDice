@@ -25,7 +25,7 @@ public class RoyalExplosionEvent extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         boolean explosionTime = gameBoard.decrementCountdown();
 
         if (explosionTime) {

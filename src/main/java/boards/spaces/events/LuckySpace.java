@@ -29,7 +29,7 @@ public class LuckySpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         LuckyEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
 
@@ -45,7 +45,7 @@ public class LuckySpace extends EventSpace {
 
     @Override
     public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                     GameStatTracker gameStatTracker, BaseSpace space) {
+                                     GameStatTracker gameStatTracker) {
         LuckyEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
 

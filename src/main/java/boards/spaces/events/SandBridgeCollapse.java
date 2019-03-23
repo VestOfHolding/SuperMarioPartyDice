@@ -45,7 +45,7 @@ public class SandBridgeCollapse extends MoveEventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         decrementCountdown();
 
         if (countdown <= 0) {

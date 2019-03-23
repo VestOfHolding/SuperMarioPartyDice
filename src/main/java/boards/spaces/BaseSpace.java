@@ -40,12 +40,12 @@ public class BaseSpace {
         return -1;
     }
 
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker) {
         return false;
     }
 
-    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker, BaseSpace space) {
-        return processEvent(gameBoard, gameStatTracker, space);
+    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker) {
+        return processEvent(gameBoard, gameStatTracker);
     }
 
     public boolean affectsMovement() {

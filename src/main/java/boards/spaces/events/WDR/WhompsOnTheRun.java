@@ -39,7 +39,7 @@ public class WhompsOnTheRun extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         if (!isActive()) {
             return false;
         }

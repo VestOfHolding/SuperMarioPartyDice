@@ -30,7 +30,7 @@ public class BobombAllySpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         gameStatTracker.addBobombAlly();
         return true;
     }

@@ -1,8 +1,6 @@
 package simulation;
 
 import boards.BaseBoard;
-import boards.MegafruitParadise;
-import boards.WhompsDominoRuins;
 import boards.spaces.AllySpace;
 import boards.spaces.BaseSpace;
 import stattracker.GameStatTracker;

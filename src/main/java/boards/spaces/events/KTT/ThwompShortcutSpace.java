@@ -37,7 +37,7 @@ public class ThwompShortcutSpace extends NonMovementSpace {
 
     @Override
     public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                     GameStatTracker gameStatTracker) {
         if (nextCost < 0) {
             nextCost = calculateNextCost();
         }

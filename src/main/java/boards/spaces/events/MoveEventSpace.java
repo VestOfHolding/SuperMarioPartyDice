@@ -21,12 +21,6 @@ public class MoveEventSpace extends EventSpace {
 
     protected boolean turnsBlue;
 
-    public MoveEventSpace(int spaceID, Integer spaceToMoveToID) {
-        super(spaceID);
-        this.spaceToMoveToID = Objects.requireNonNullElse(spaceToMoveToID, -1);
-        turnsBlue = false;
-    }
-
     public MoveEventSpace(int spaceID, Integer spaceToMoveToID, int x, int y) {
         super(spaceID, x, y);
         this.spaceToMoveToID = Objects.requireNonNullElse(spaceToMoveToID, -1);
@@ -46,10 +40,10 @@ public class MoveEventSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         if (turnsBlue) {
             //For now, just handle the fact that this space becomes a Blue Space once it's used.
-            gameBoard.setOrReplaceVertex(space.getSpaceID(), new BlueSpace());
+            gameBoard.setOrReplaceVertex(spaceID, new BlueSpace());
             return true;
         }
         return false;

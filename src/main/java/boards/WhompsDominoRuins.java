@@ -4,7 +4,6 @@ import boards.spaces.BaseSpace;
 import boards.spaces.SpaceFactory;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.LakituSpace;
-import boards.spaces.events.SandBridgeCollapse;
 import boards.spaces.events.WDR.ChooseTreasureChestEvent;
 import boards.spaces.events.WDR.WhompSwitch;
 import boards.spaces.events.WDR.WhompsOnTheRun;
@@ -168,16 +167,11 @@ public class WhompsDominoRuins extends BaseBoard {
             currentSpace = getNextSpace(currentSpace, gameStatTracker);
 
             if (!currentSpace.affectsMovement()) {
-                i -= 1;
+                --i;
             }
 
             if (currentSpace.isPassingEvent()) {
-                if (currentSpace instanceof SandBridgeCollapse) {
-                    currentSpace = processBridgeCollapseEvent(gameStatTracker, currentSpace);
-                }
-                else {
-                    currentSpace = processEvent(gameStatTracker, currentSpace);
-                }
+                currentSpace = processEvent(gameStatTracker, currentSpace);
             }
         }
 

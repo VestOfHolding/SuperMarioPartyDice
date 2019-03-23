@@ -2,8 +2,6 @@ package simulation;
 
 import boards.BaseBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.BlueSpace;
-import boards.spaces.RedSpace;
 import partydice.Dice;
 import results.CoinResult;
 import results.DieResult;
@@ -104,10 +102,9 @@ Simulation {
 
 //            gameStatTracker.addLandedSpace(currentSpace);
 
-            if (currentSpace instanceof BlueSpace || currentSpace instanceof RedSpace) {
-                gameStatTracker.addCoins(currentSpace.coinGain());
-            }
-            else if (currentSpace.addAlly()) {
+            gameStatTracker.addCoins(currentSpace.coinGain());
+
+            if (currentSpace.addAlly()) {
                 gameStatTracker.addAlly(j + 1);
             }
             gameStatTracker.decreamentTurn();

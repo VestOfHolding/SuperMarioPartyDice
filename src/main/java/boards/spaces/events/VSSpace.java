@@ -32,7 +32,7 @@ public class VSSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         int wager = POSSIBLE_WAGERS.get(RandomUtils.getRandomInt(POSSIBLE_WAGERS.size() - 1));
 
         int totalPot = wager * 4;
@@ -50,7 +50,7 @@ public class VSSpace extends EventSpace {
 
 
         //Lastly, this space turns blue after it has been landed on.
-        gameBoard.setOrReplaceVertex(space.getSpaceID(), new BlueSpace());
+        gameBoard.setOrReplaceVertex(spaceID, new BlueSpace());
 
         return true;
     }

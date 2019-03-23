@@ -27,7 +27,7 @@ public class BadLuckSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker, BaseSpace space) {
+                                GameStatTracker gameStatTracker) {
         BadLuckEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
 
@@ -46,7 +46,7 @@ public class BadLuckSpace extends EventSpace {
 
     @Override
     public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                     GameStatTracker gameStatTracker, BaseSpace space) {
+                                     GameStatTracker gameStatTracker) {
         BadLuckEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
 
