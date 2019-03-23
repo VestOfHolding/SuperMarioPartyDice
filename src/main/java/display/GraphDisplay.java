@@ -16,9 +16,7 @@ import org.graphstream.ui.layout.springbox.implementations.LinLog;
 import org.graphstream.ui.view.Viewer;
 
 public class GraphDisplay {
-    public void display() {
-        BaseBoard board = new WhompsDominoRuins();
-
+    public void display(BaseBoard board) {
         Graph gsGraph = new SingleGraph("Super Mario Party Board");
         gsGraph.setAttribute("ui.stylesheet", getStyleSheet());
 

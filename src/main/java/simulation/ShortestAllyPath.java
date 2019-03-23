@@ -1,6 +1,7 @@
 package simulation;
 
 import boards.BaseBoard;
+import boards.MegafruitParadise;
 import boards.WhompsDominoRuins;
 import boards.spaces.AllySpace;
 import boards.spaces.BaseSpace;
@@ -25,11 +26,11 @@ public class ShortestAllyPath {
     private static final int DK_ROLL = 10;
 
 
-    public void shortestPathToFirstAlly() {
-        BaseBoard gameBoard = new WhompsDominoRuins();
-
-        Map<Integer, List<List<BaseSpace>>> firstAllyPaths = findAllyPaths(gameBoard, DIDDY_ROLL, NUM_TURNS).stream()
+    public void shortestPathToFirstAlly(BaseBoard board) {
+        Map<Integer, List<List<BaseSpace>>> firstAllyPaths = findAllyPaths(board, WARIO_ROLL, NUM_TURNS).stream()
                 .collect(Collectors.groupingBy(List::size));
+
+        int i = 0;
     }
 
     /**

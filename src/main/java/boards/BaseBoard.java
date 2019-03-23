@@ -118,10 +118,10 @@ public abstract class BaseBoard {
                     }
                 }
 
-                return returnList;
+                return processEventsOnLandedSpaces(returnList, gameStatTracker);
             }
             else {
-                return currentSpaces;
+                return processEventsOnLandedSpaces(currentSpaces, gameStatTracker);
             }
         }
 
@@ -141,6 +141,21 @@ public abstract class BaseBoard {
         return depthFirstSearch(getNextSpaces(space),
                 affectsMovement ? distance - 1 : distance,
                 gameStatTracker);
+    }
+
+    private List<BaseSpace> processEventsOnLandedSpaces(List<BaseSpace> spaces, GameStatTracker gameStatTracker) {
+        List<BaseSpace> resultSpaces = new ArrayList<>();
+
+        for (BaseSpace space : spaces) {
+            if (!space.isPassingEvent()) {
+                resultSpaces.add(processEvent(gameStatTracker, space));
+            }
+            else {
+                resultSpaces.add(space);
+            }
+        }
+
+        return resultSpaces;
     }
 
     public void lastThreeTurns() {
