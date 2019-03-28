@@ -36,20 +36,20 @@ public class WhompsDominoRuins extends BaseBoard {
                 SpaceFactory.createBlueSpace(index++, 28, 20),
                 SpaceFactory.createNonMovementSpace(index++, 28, 22), //ID = 8
                 SpaceFactory.createItemSpace(index++, 28, 25),
-                SpaceFactory.createBlueSpace(index++, 28, 28),
+                SpaceFactory.createStarSpace(index++, 28, 28),
                 SpaceFactory.createBlueSpace(index++, 28, 30), //ID = 11
                 SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 28, 32),
                 SpaceFactory.createBlueSpace(index++, 25, 32),
                 SpaceFactory.createBlueSpace(index++, 23, 32),
                 SpaceFactory.createAllySpace(index++, 20, 32), //ID = 15
                 SpaceFactory.createItemSpace(index++, 18, 32),
-                SpaceFactory.createBlueSpace(index++, 15, 32),
+                SpaceFactory.createStarSpace(index++, 15, 32),
                 SpaceFactory.createItemSpace(index++, 13, 32),
                 SpaceFactory.createBlueSpace(index++, 11, 32),
                 SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 8, 32),
                 SpaceFactory.createNonMovementSpace(index++, 6, 32), //ID = 21
                 SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 4, 32),
-                SpaceFactory.createBlueSpace(index++, 2, 32),
+                SpaceFactory.createStarSpace(index++, 2, 32),
                 SpaceFactory.createBlueSpace(index++, 2, 30),
                 SpaceFactory.createBlueSpace(index++, 2, 28),
                 new LakituSpace(index++, 2, 26),
@@ -65,7 +65,7 @@ public class WhompsDominoRuins extends BaseBoard {
                 SpaceFactory.createNonMovementSpace(index++, 2, 4),
                 SpaceFactory.createLuckySpace(index++, 2, 2),
                 SpaceFactory.createLuckySpace(index++, 6, 2),
-                SpaceFactory.createBlueSpace(index++, 10, 2),
+                SpaceFactory.createStarSpace(index++, 10, 2),
                 SpaceFactory.createBlueSpace(index++, 14, 2),
                 SpaceFactory.createAllySpace(index++, 14, 6), //ID = 40
                 SpaceFactory.createBadLuckSpace(index++, 17, 6),
@@ -77,7 +77,7 @@ public class WhompsDominoRuins extends BaseBoard {
                 new WhompsOnTheRun(index++, WHOMP1_1, true, 26, 16), //ID = 45
                 new WhompSwitch(index++, WHOMP1_1, WHOMP1_2, 23, 16),
                 SpaceFactory.createAllySpace(index++, 20, 16),
-                SpaceFactory.createBlueSpace(index++, 20, 13),
+                SpaceFactory.createStarSpace(index++, 20, 13),
                 SpaceFactory.createLuckySpace(index++, 20, 10) //ID = 49
         ).addEdgeChain(
                 //Side Path 1
@@ -89,7 +89,7 @@ public class WhompsDominoRuins extends BaseBoard {
         ).addEdgeChain(
                 //Side Path 2
                 SpaceFactory.createRedSpace(index++, 6, 30), //ID = 55
-                SpaceFactory.createBlueSpace(index++, 6, 27),
+                SpaceFactory.createStarSpace(index++, 6, 27),
                 SpaceFactory.createVSSpace(index++, 6, 23),
                 SpaceFactory.createAllySpace(index++, 6, 20) //ID = 58
         ).addEdgeChain(
@@ -98,13 +98,13 @@ public class WhompsDominoRuins extends BaseBoard {
                 new WhompSwitch(index++, WHOMP2_1, WHOMP2_2, 6, 16),
                 SpaceFactory.createItemSpace(index++, 9, 16),
                 SpaceFactory.createBlueSpace(index++, 12, 16),
-                SpaceFactory.createBlueSpace(index++, 12, 20),
+                SpaceFactory.createStarSpace(index++, 12, 20),
                 SpaceFactory.createBadLuckSpace(index++, 10, 20),
                 SpaceFactory.createBadLuckSpace(index++, 8, 20) //ID = 65
         ).addEdgeChain(
                 //Side Path 4
                 SpaceFactory.createRedSpace(index++, 5, 10), //ID = 66
-                SpaceFactory.createBlueSpace(index++, 8, 10),
+                SpaceFactory.createStarSpace(index++, 8, 10),
                 SpaceFactory.createBlueSpace(index++, 11, 10),
                 SpaceFactory.createItemSpace(index, 14, 10) //ID = 69
         );
