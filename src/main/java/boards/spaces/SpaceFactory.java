@@ -12,10 +12,6 @@ import java.util.Map;
 public class SpaceFactory {
     public static Map<Integer, BaseSpace> spaceCache = new HashMap<>();
 
-    public static StartSpace createStartSpace(int index) {
-        return createStartSpace(index, -1, -1);
-    }
-
     public static StartSpace createStartSpace(int index, int x, int y) {
         StartSpace space;
         if (!spaceCache.containsKey(index)) {
@@ -30,14 +26,6 @@ public class SpaceFactory {
         }
 
         return (StartSpace)setXandY(space, x, y);
-    }
-
-    public static BlueSpace createBlueSpace(int index) {
-        return createBlueSpace(index, 3);
-    }
-
-    public static BlueSpace createBlueSpace(int index, int coinAmount) {
-        return createBlueSpace(index, coinAmount, -1, -1);
     }
 
     public static BlueSpace createBlueSpace(int index, int x, int y) {
@@ -60,14 +48,6 @@ public class SpaceFactory {
         return (BlueSpace)setXandY(space, x, y);
     }
 
-    public static RedSpace createRedSpace(int index) {
-        return createRedSpace(index, 3);
-    }
-
-    public static RedSpace createRedSpace(int index, int coinAmount) {
-        return createRedSpace(index, coinAmount, -1, -1);
-    }
-
     public static RedSpace createRedSpace(int index, int x, int y) {
         return createRedSpace(index, 3, x, y);
     }
@@ -88,10 +68,6 @@ public class SpaceFactory {
         return (RedSpace)setXandY(space, x, y);
     }
 
-    public static EventSpace createEventSpace(int index) {
-        return createEventSpace(index, -1, -1);
-    }
-
     public static EventSpace createEventSpace(int index, int x, int y) {
         EventSpace space;
         if (!spaceCache.containsKey(index)) {
@@ -106,10 +82,6 @@ public class SpaceFactory {
         }
 
         return (EventSpace)setXandY(space, x, y);
-    }
-
-    public static MoveEventSpace createMoveEventSpace(int index, int destination) {
-        return createMoveEventSpace(index, destination, false);
     }
 
     public static MoveEventSpace createMoveEventSpace(int index, int destination, boolean turnsBlue) {
@@ -136,10 +108,6 @@ public class SpaceFactory {
         return (MoveEventSpace)setXandY(space, x, y);
     }
 
-    public static NonMovementSpace createNonMovementSpace(int index) {
-        return createNonMovementSpace(index, -1, -1);
-    }
-
     public static NonMovementSpace createNonMovementSpace(int index, int x, int y) {
         NonMovementSpace space;
         if (!spaceCache.containsKey(index)) {
@@ -154,30 +122,6 @@ public class SpaceFactory {
         }
 
         return (NonMovementSpace)setXandY(space, x, y);
-    }
-
-    public static OtherSpace createOtherSpace(int index) {
-        return createOtherSpace(index, -1, -1);
-    }
-
-    public static OtherSpace createOtherSpace(int index, int x, int y) {
-        OtherSpace space;
-        if (!spaceCache.containsKey(index)) {
-            space = new OtherSpace(index);
-            spaceCache.put(index, space);
-        }
-        else if (!(spaceCache.get(index) instanceof StartSpace)) {
-            space = new OtherSpace(index);
-        }
-        else {
-            space = (OtherSpace)spaceCache.get(index);
-        }
-
-        return (OtherSpace)setXandY(space, x, y);
-    }
-
-    public static AllySpace createAllySpace(int index) {
-        return createAllySpace(index, -1, -1);
     }
 
     public static AllySpace createAllySpace(int index, int x, int y) {
@@ -196,10 +140,6 @@ public class SpaceFactory {
         return (AllySpace)setXandY(space, x, y);
     }
 
-    public static LuckySpace createLuckySpace(int index) {
-        return createLuckySpace(index, -1, -1);
-    }
-
     public static LuckySpace createLuckySpace(int index, int x, int y) {
         LuckySpace space;
         if (!spaceCache.containsKey(index)) {
@@ -214,10 +154,6 @@ public class SpaceFactory {
         }
 
         return (LuckySpace)setXandY(space, x, y);
-    }
-
-    public static BadLuckSpace createBadLuckSpace(int index) {
-        return createBadLuckSpace(index, -1, -1);
     }
 
     public static BadLuckSpace createBadLuckSpace(int index, int x, int y) {
