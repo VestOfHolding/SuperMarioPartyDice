@@ -68,6 +68,9 @@ public class GraphDisplay {
                 "node.ally {\n" +
                 "\tfill-image: url('images/AllySpace.png');\n" +
                 "}\n" +
+                "node.star {\n" +
+                "\tfill-image: url('images/StarSpace.png');\n" +
+                "}\n" +
                 "node.nonmovement {\n" +
                 "\tsize: 6px;\n" +
                 "\tstroke-mode: plain;\n" +

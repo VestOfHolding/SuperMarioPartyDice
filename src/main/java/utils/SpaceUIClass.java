@@ -10,5 +10,6 @@ public enum SpaceUIClass {
     NONMOVEMENT,
     OTHER,
     VS,
-    ALLY
+    ALLY,
+    STAR
 }

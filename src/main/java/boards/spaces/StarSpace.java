@@ -28,7 +28,7 @@ public class StarSpace extends BlueSpace {
 
     @Override
     public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.BLUE;
+        return SpaceUIClass.STAR;
     }
 
     @Override
