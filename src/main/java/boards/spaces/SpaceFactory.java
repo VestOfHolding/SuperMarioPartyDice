@@ -208,6 +208,26 @@ public class SpaceFactory {
         return (ItemSpace)setXandY(space, x, y);
     }
 
+    public static StarSpace createStarSpace(int index, int x, int y) {
+        return createStarSpace(index, 3, x, y);
+    }
+
+    public static StarSpace createStarSpace(int index, int coinAmount, int x, int y) {
+        StarSpace space;
+        if (!spaceCache.containsKey(index)) {
+            space = new StarSpace(index, coinAmount);
+            spaceCache.put(index, space);
+        }
+        else if (!(spaceCache.get(index) instanceof StartSpace)) {
+            space = new StarSpace(index, coinAmount);
+        }
+        else {
+            space = (StarSpace)spaceCache.get(index);
+        }
+
+        return (StarSpace)setXandY(space, x, y);
+    }
+
     private static BaseSpace setXandY(BaseSpace space, int x, int y) {
         if (space != null && x > 0 && y > 0) {
             space.setX(x);

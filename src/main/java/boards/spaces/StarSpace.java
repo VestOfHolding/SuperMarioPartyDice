@@ -16,10 +16,6 @@ import utils.SpaceUIClass;
 public class StarSpace extends BlueSpace {
 
     @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private int coins;
-
-    @EqualsAndHashCode.Exclude
     private boolean starActive;
 
     public StarSpace(int spaceID) {
@@ -40,7 +36,7 @@ public class StarSpace extends BlueSpace {
         if (starActive) {
             return 0;
         }
-        return coins;
+        return super.coinGain();
     }
 
     @Override
@@ -55,9 +51,12 @@ public class StarSpace extends BlueSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker) {
-        if (starActive) {
+        if (starActive && gameStatTracker.getCoinTotal() >= 10) {
+            gameStatTracker.addCoins(-10);
+            gameStatTracker.addStar();
 
-            //All kinds of crazy things happening here.
+            gameBoard.setNeedToMoveStar(true);
+
             return true;
         }
         return false;

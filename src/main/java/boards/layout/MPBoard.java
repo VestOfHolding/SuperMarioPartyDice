@@ -2,6 +2,8 @@ package boards.layout;
 
 import boards.MPEdge;
 import boards.spaces.BaseSpace;
+import lombok.Getter;
+import lombok.Setter;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
 import java.util.HashMap;
@@ -15,6 +17,10 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
     private static final int kingBobombCountdownStart = 5;
 
     private int kingBobombCountdown = 5;
+
+    @Getter
+    @Setter
+    private boolean needToMoveStar = false;
 
     public MPBoard(Class<? extends E> edgeClass) {
         super(edgeClass);

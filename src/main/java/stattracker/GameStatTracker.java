@@ -29,6 +29,7 @@ public class GameStatTracker {
     private int allyTotal;
     private int distanceTotal;
     private int coinTotal;
+    private int starCount;
 
     private List<BobombAlly> bobombAllies;
 
@@ -52,6 +53,14 @@ public class GameStatTracker {
 
     public void addCoins(int coins) {
         coinTotal = Math.max(0, coinTotal + coins);
+    }
+
+    public void addStar() {
+        ++starCount;
+    }
+
+    public void loseStar() {
+        --starCount;
     }
 
     public void addDistance(int distanceTraveled) {

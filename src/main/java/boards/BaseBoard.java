@@ -4,10 +4,12 @@ import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
+import boards.spaces.StarSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.SandBridgeCollapse;
 import lombok.Getter;
+import lombok.Setter;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.builder.GraphBuilder;
 import stattracker.GameStatTracker;
@@ -22,6 +24,8 @@ public abstract class BaseBoard {
     protected MPBoard<BaseSpace, MPEdge> board;
 
     protected GraphBuilder<BaseSpace, MPEdge, MPBoard<BaseSpace, MPEdge>> graphBuilder;
+
+    protected List<StarSpace> starSpaces = new ArrayList<>();
 
     protected void initializeBoard() {
         board = new MPBoard<>(MPEdge.class);
