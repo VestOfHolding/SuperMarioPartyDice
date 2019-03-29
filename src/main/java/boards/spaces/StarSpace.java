@@ -16,14 +16,16 @@ import utils.SpaceUIClass;
 public class StarSpace extends BlueSpace {
 
     @EqualsAndHashCode.Exclude
-    private boolean starActive;
+    private boolean starActive = false;
 
     public StarSpace(int spaceID) {
         super(spaceID);
+        starActive = false;
     }
 
     public StarSpace(int spaceID, int coins) {
         super(spaceID, coins);
+        starActive = false;
     }
 
     @Override

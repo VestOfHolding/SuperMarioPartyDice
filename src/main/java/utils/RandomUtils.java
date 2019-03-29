@@ -5,6 +5,10 @@ import java.util.Random;
 public class RandomUtils {
     public static final Random RANDOM = new Random();
 
+    /**
+     * @param max
+     * @return An integer between 0 and the max parameter given.
+     */
     public static int getRandomInt(int max) {
         return RANDOM.nextInt(max + 1);
     }

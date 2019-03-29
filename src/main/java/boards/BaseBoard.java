@@ -18,6 +18,7 @@ import utils.RandomUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class BaseBoard {
     @Getter
@@ -32,6 +33,13 @@ public abstract class BaseBoard {
         graphBuilder = new GraphBuilder<>(new MPBoard<>(MPEdge.class));
 
         buildInitialGraph();
+
+        starSpaces = board.vertexSet().stream()
+                .filter(space -> space instanceof StarSpace)
+                .map(space -> (StarSpace)space)
+                .collect(Collectors.toList());
+
+        changeStarSpace();
     }
 
     protected abstract void buildInitialGraph();
@@ -39,6 +47,33 @@ public abstract class BaseBoard {
     public void resetBoard() {
         board = new MPBoard<>(MPEdge.class);
         initializeBoard();
+    }
+
+    /**
+     * Change which of the star spaces is currently active and selling a star.
+     * If none is currently active, activate one.
+     *
+     * Which star space is chosen to active is done by selecting one at random,
+     * as long as it's not the same space as the one already currently active.
+     *
+     * This also deactivates the currently active space, if one is already active.
+     */
+    public void changeStarSpace() {
+        StarSpace currentStarSpace = starSpaces.stream()
+                .filter(StarSpace::isStarActive)
+                .findFirst()
+                .orElse(null);
+
+        StarSpace nextStar;
+
+        do {
+            nextStar = starSpaces.get(RandomUtils.getRandomInt(starSpaces.size() - 1));
+        } while (currentStarSpace != null && currentStarSpace.getSpaceID() == nextStar.getSpaceID());
+
+        if (currentStarSpace != null) {
+            currentStarSpace.deactivateStar();
+        }
+        nextStar.activateStar();
     }
 
     public BaseSpace getStartSpace() {
@@ -193,6 +228,11 @@ public abstract class BaseBoard {
         else {
             currentSpace.processEvent(board, gameStatTracker);
             currentSpace = board.getVertexById(currentSpace.getSpaceID());
+        }
+
+        if (board.isNeedToMoveStar()) {
+            changeStarSpace();
+            board.setNeedToMoveStar(false);
         }
 
         return currentSpace;

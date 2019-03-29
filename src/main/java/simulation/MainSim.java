@@ -13,8 +13,8 @@ public class MainSim {
         StopWatch stopWatch = StopWatch.createStarted();
         BaseBoard board = new WhompsDominoRuins();
 
-        GraphDisplay display = new GraphDisplay();
-        display.display(board);
+//        GraphDisplay display = new GraphDisplay();
+//        display.display(board);
 
         Simulation simulation = new WhompsSimulation();
         simulation.simulate();
