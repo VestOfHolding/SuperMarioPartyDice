@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import partydice.Dice;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -19,11 +17,8 @@ public class SimulationStatTracker {
 
     private Map<Integer, AllyStatTracker> allyStatTrackers;
 
-    private List<GameStatTracker> gameStatTrackers;
-
     public SimulationStatTracker(Dice characterDie) {
         this.characterDie = characterDie;
-        gameStatTrackers = new ArrayList<>();
         allyStatTrackers = Map.of(0, new AllyStatTracker(0),
                 1, new AllyStatTracker(1),
                 2, new AllyStatTracker(2),
@@ -36,7 +31,6 @@ public class SimulationStatTracker {
     }
 
     public void endGame(GameStatTracker gameStatTracker) {
-        gameStatTrackers.add(gameStatTracker);
         int allyCount = gameStatTracker.getAllyTotal();
 
         AllyStatTracker allyStatTracker = allyStatTrackers.get(allyCount);
@@ -48,21 +42,5 @@ public class SimulationStatTracker {
         for (int allies : gameStatTracker.getAllyGainOnTurn().keySet()) {
             allyStatTrackers.get(allies).addTurnAdded(gameStatTracker.getAllyGainOnTurn().get(allies));
         }
-    }
-
-    public double getAverageDistance() {
-        return gameStatTrackers.stream()
-                .map(GameStatTracker::getDistanceTotal)
-                .mapToDouble(a -> a)
-                .average()
-                .orElse(0.0);
-    }
-
-    public double getAverageCoins() {
-        return gameStatTrackers.stream()
-                .map(GameStatTracker::getCoinTotal)
-                .mapToDouble(a -> a)
-                .average()
-                .orElse(0.0);
     }
 }
