@@ -25,6 +25,8 @@ public class AllyStatTracker {
 
     private OnlineStatistics coinCounts;
 
+    private OnlineStatistics starCounts;
+
     Map<Integer, OnlineStatistics> landedSpacesStats;
 
     public AllyStatTracker(int allyCount) {
@@ -32,6 +34,7 @@ public class AllyStatTracker {
         turnsAdded = new OnlineStatistics();
         distances = new OnlineStatistics();
         coinCounts = new OnlineStatistics();
+        starCounts = new OnlineStatistics();
         landedSpacesStats = new HashMap<>();
     }
 
@@ -45,6 +48,10 @@ public class AllyStatTracker {
 
     public void addCoinCount(int coinCount) {
         coinCounts.addValue(coinCount);
+    }
+
+    public void addStarCount(int starCount) {
+        starCounts.addValue(starCount);
     }
 
     public void addLandedSpaceCount(Map<Integer, Integer> landedSpaceCount) {
@@ -69,6 +76,10 @@ public class AllyStatTracker {
 
     public double getAverageCoinCount() {
         return coinCounts.getMean();
+    }
+
+    public double getAverageStarCount() {
+        return starCounts.getMean();
     }
 
     public int getAmountOccured() {
@@ -97,7 +108,13 @@ public class AllyStatTracker {
                 .append(DECIMAL_FORMAT.format(getAverageCoinCount())).append("\t")
                 .append(DECIMAL_FORMAT.format(coinCounts.getThirdQuartile())).append("\t")
                 .append(DECIMAL_FORMAT.format(coinCounts.getMax())).append("\t")
-                .append(DECIMAL_FORMAT.format(coinCounts.getStandardDeviation())).append("\t");
+                .append(DECIMAL_FORMAT.format(coinCounts.getStandardDeviation())).append("\t")
+                .append(DECIMAL_FORMAT.format(starCounts.getMin())).append("\t")
+                .append(DECIMAL_FORMAT.format(starCounts.getFirstQuartile())).append("\t")
+                .append(DECIMAL_FORMAT.format(getAverageStarCount())).append("\t")
+                .append(DECIMAL_FORMAT.format(starCounts.getThirdQuartile())).append("\t")
+                .append(DECIMAL_FORMAT.format(starCounts.getMax())).append("\t")
+                .append(DECIMAL_FORMAT.format(starCounts.getStandardDeviation())).append("\t");
 
 //        double spaceCountSum = landedSpacesStats.values().stream()
 //                .mapToDouble(OnlineStatistics::getCount)
