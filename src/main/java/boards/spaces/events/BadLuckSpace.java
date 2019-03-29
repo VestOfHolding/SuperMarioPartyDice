@@ -41,7 +41,7 @@ public class BadLuckSpace extends EventSpace {
             eventTable = coinFlip ? BadLuckEventTable.FIRST_HALF_1ST_2ND : BadLuckEventTable.FIRST_HALF_3RD_4TH;
         }
 
-        return commonProcessEvent(eventTable, gameStatTracker);
+        return commonProcessEvent(gameBoard, eventTable, gameStatTracker);
     }
 
     @Override
@@ -60,21 +60,38 @@ public class BadLuckSpace extends EventSpace {
             eventTable = coinFlip ? BadLuckEventTable.KAMEK_FIRST_HALF_1ST_2ND : BadLuckEventTable.KAMEK_FIRST_HALF_3RD_4TH;
         }
 
-        return commonProcessEvent(eventTable, gameStatTracker);
+        return commonProcessEvent(gameBoard, eventTable, gameStatTracker);
     }
 
     private BadLuckEventTable getExtraBadLuckTable(boolean coinFlip) {
         return coinFlip ? BadLuckEventTable.SUPER_BAD_LUCK_1ST_2ND : BadLuckEventTable.SUPER_BAD_LUCK_3RD_4TH;
     }
 
-    private boolean commonProcessEvent(BadLuckEventTable eventTable, GameStatTracker gameStatTracker) {
+    private boolean commonProcessEvent(MPBoard<BaseSpace, MPEdge> gameBoard, BadLuckEventTable eventTable, GameStatTracker gameStatTracker) {
         LuckEvent chosenEvent = new ArrayList<>(BadLuckEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
 
+        //Chosen MIN_VALUE to represent when we lose half our coins.
         if (chosenEvent.getCoinGain() == Integer.MIN_VALUE) {
             gameStatTracker.addCoins(-(gameStatTracker.getCoinTotal() / 2));
         }
         else {
             gameStatTracker.addCoins(chosenEvent.getCoinGain());
+        }
+
+        if (chosenEvent.isMoveStar()) {
+            gameBoard.setNeedToMoveStar(true);
+        }
+        if (chosenEvent.isLoseStar()) {
+            gameStatTracker.loseStar();
+        }
+        //The player is pitied and given coins if they have no stars to lose.
+        if (chosenEvent.isLoseStarOrGainCoins()) {
+            if (gameStatTracker.getStarCount() <= 0) {
+                gameStatTracker.addCoins(20);
+            }
+            else {
+                gameStatTracker.loseStar();
+            }
         }
 
         return false;

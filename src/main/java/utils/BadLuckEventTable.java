@@ -14,7 +14,7 @@ public enum BadLuckEventTable {
             LuckEvent.buildEmptyEvent(Range.between(35, 51)),
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
-            LuckEvent.buildEmptyEvent(Range.between(85, 100))
+            new LuckEvent(true, Range.between(85, 100))
     )),
     FIRST_HALF_3RD_4TH(Arrays.asList(
             new LuckEvent(-5, Range.between(1, 16)),
@@ -22,7 +22,7 @@ public enum BadLuckEventTable {
             LuckEvent.buildEmptyEvent(Range.between(33, 50)),
             LuckEvent.buildEmptyEvent(Range.between(51, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
-            LuckEvent.buildEmptyEvent(Range.between(85, 100))
+            new LuckEvent(true, Range.between(85, 100))
     )),
     SECOND_HALF_1ST_2ND(Arrays.asList(
             new LuckEvent(-5, Range.between(1, 16)),
@@ -30,7 +30,7 @@ public enum BadLuckEventTable {
             LuckEvent.buildEmptyEvent(Range.between(33, 48)),
             LuckEvent.buildEmptyEvent(Range.between(49, 66)),
             LuckEvent.buildEmptyEvent(Range.between(67, 84)),
-            LuckEvent.buildEmptyEvent(Range.between(85, 100))
+            new LuckEvent(true, Range.between(85, 100))
     )),
     SECOND_HALF_3RD_4TH(Arrays.asList(
             new LuckEvent(-5, Range.between(1, 17)),
@@ -38,7 +38,7 @@ public enum BadLuckEventTable {
             LuckEvent.buildEmptyEvent(Range.between(35, 51)),
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
-            LuckEvent.buildEmptyEvent(Range.between(85, 100))
+            new LuckEvent(true, Range.between(85, 100))
     )),
     KAMEK_FIRST_HALF_1ST_2ND(Arrays.asList(
             new LuckEvent(-5, Range.between(1, 17)),
@@ -79,7 +79,7 @@ public enum BadLuckEventTable {
             LuckEvent.buildEmptyEvent(Range.between(40, 52)),
             LuckEvent.buildEmptyEvent(Range.between(53, 64)),
             LuckEvent.buildEmptyEvent(Range.between(65, 76)),
-            LuckEvent.buildEmptyEvent(Range.between(77, 88)),
+            LuckEvent.builder().loseStar(true).chanceRange(Range.between(77, 88)).build(),
             LuckEvent.buildEmptyEvent(Range.between(89, 100))
     )),
     SUPER_BAD_LUCK_3RD_4TH(Arrays.asList(
@@ -89,7 +89,7 @@ public enum BadLuckEventTable {
             LuckEvent.buildEmptyEvent(Range.between(37, 50)),
             LuckEvent.buildEmptyEvent(Range.between(51, 64)),
             LuckEvent.buildEmptyEvent(Range.between(65, 76)),
-            LuckEvent.buildEmptyEvent(Range.between(77, 88)),
+            LuckEvent.builder().loseStarOrGainCoins(true).chanceRange(Range.between(77, 88)).build(),
             new LuckEvent(10, Range.between(89, 100))
     ));
 

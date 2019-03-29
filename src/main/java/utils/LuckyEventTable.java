@@ -67,7 +67,7 @@ public enum LuckyEventTable {
     KAMEK_SECOND_HALF_3RD_4TH(Arrays.asList(
             new LuckEvent(5, Range.between(1, 17)),
             new LuckEvent(10, Range.between(18, 34)),
-            new LuckEvent(true, Range.between(35, 51)),
+            LuckEvent.builder().addAlly(true).chanceRange(Range.between(35, 51)).build(),
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
             LuckEvent.buildEmptyEvent(Range.between(69, 84)),
             LuckEvent.buildEmptyEvent(Range.between(85, 100))

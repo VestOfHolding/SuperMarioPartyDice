@@ -15,7 +15,22 @@ import org.apache.commons.lang3.Range;
 public class LuckEvent {
     private int coinGain;
     private boolean addAlly;
+    private boolean moveStar;
+    private boolean loseStar;
+
+    //If the player has no stars to lose in this event, they are pitied and given 20 coins.
+    private boolean loseStarOrGainCoins;
+
     private Range<Integer> chanceRange;
+
+    public LuckEvent(Range<Integer> chanceRange) {
+        coinGain = 0;
+        addAlly = false;
+        moveStar = false;
+        loseStar = false;
+        loseStarOrGainCoins = false;
+        this.chanceRange = chanceRange;
+    }
 
     public LuckEvent(int coinGain, Range<Integer> chanceRange) {
         this.coinGain = coinGain;
@@ -23,13 +38,13 @@ public class LuckEvent {
         this.chanceRange = chanceRange;
     }
 
-    public LuckEvent(boolean addAlly, Range<Integer> chanceRange) {
+    public LuckEvent(boolean moveStar, Range<Integer> chanceRange) {
         this.coinGain = 0;
-        this.addAlly = addAlly;
+        this.moveStar = moveStar;
         this.chanceRange = chanceRange;
     }
 
     public static LuckEvent buildEmptyEvent(Range<Integer> chanceRange) {
-        return new LuckEvent(0, false, chanceRange);
+        return new LuckEvent(chanceRange);
     }
 }

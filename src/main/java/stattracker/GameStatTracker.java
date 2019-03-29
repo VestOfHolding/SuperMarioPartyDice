@@ -60,7 +60,7 @@ public class GameStatTracker {
     }
 
     public void loseStar() {
-        --starCount;
+        starCount = Math.max(0, starCount - 1);
     }
 
     public void addDistance(int distanceTraveled) {
