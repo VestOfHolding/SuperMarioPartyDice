@@ -3,6 +3,7 @@
 This project is for recreating the boards and character dice of Super Mario Party, and running simulations on those boards to learn all kinds of fun statistical things about the game such as:
 * Min, average, and max coins gained during any single game.
 * Min, average, and max distance gone during any single game.
+* Min, average, and max stars gained during any single game.
 * All of the above per the number of allies gained during that game.
 * How frequently that number of allies was able to be gained.
 * Min, average, and max of which turn each amount of allies was able to be gained.
@@ -23,8 +24,8 @@ For real though, with the introduction of the unique character dice in SMP, this
 
 The current version of these simulations is much more limited than the real SMP games due to complexity and setting more incremental, obtainable goals for myself. With this current state (plus any current goals/questions addressed), I believe that's at least a really good pausing place that still yields really good results that a SMP player could still use.
 
- * No stars. 
-    * The agents have no concept of what goals they might have are, and just pick which path they take randomly. While it is true that star spaces don't count against your movement, and therefore could shift the spaces an agent lands on for the rest of the game, this really only affects two players in a game: The player who gets the star, and the player who is ahead of the current star and behind the next star. This is minimal enough that I think we can still get good results without them.
+ * The stars work....mostly.
+    * Stars are on the board and work as you would expect. The only issue is that the agent currently doesn't care about them. Getting to a star space and buying the star is pure coincidence, as the agent is choosing which path to take randomly.
  * Character dice only. 
    * The agents only ever use the character die that they have from the beginning, though yes, in a real game a player can choose between their own character die, the character dice of any allies they have, and a standard d6. For now, this project is really about answering how effective each character die is on their own, so we can leave adding this choice for a later version of this. 
    * Though yes, that could end up changing things, as maybe even the stand d6 compliments some character dice far better than others.
@@ -45,23 +46,14 @@ The current version of these simulations is much more limited than the real SMP 
 - [x] Take advantage of the capabilities I get with JGraphT to create a visualization of the board graphs.
 - [ ] Fine-tune the Sand Bridge collapsing in Megafruit Paradise. I've heard it can randomly collapse after 3-5 uses, but in the four cases I've witnessed it's been 5. Either that's coincidence, or it's not 3-5, or the randomness isn't uniform. Without more data I don't know which it is for certain.
     * Partially done. I did find video evidence of the bridge collapsing after four crossings, and coded that in. That really messed up Diddy and Wario's ability to gain allies, lol.
-
-## Ongoing Goals
-
-These are goals that don't necessarily have a time when they're done, and I'll always appreciate more data/precision on these.
-
- * Gather data on what events come up when landing on a Lucky Space.
-   * Done! Found the actual original probability tables.
- * Gather data on what events come up when landing on a Bad Luck Space (only non-Kamek boards since Kamek is different).
-   * Done! Found the actual original probability tables.
+- [x] Part 1 of implementing the stars: Get them on the board and working.
+- [ ] Part 2 of implementing the stars: Add some percentage chance that another player got to the star before the computer did.
+- [ ] Part 3 of implementing the stars: Make the simulations smarter by having the computer choose the paths that are the shortest path to the star.
  
  ## Future Goals
  
  These are goals that are a long way off, and would be done as a proper next version rather than any time soon.
  
- * Implement the stars.
-   * Easy enough to implement these once I know the full list of possible spaces on each board that a star could show up on.
-   * Also include implementing some percentage chance that another player gets the star on any given turn.
  * Implement an AI.
    * With the stars in place, that gives the AI the goal of what they need to gather, and if it'd be great to make a proper learning agent so that it can figure out on its own just how important coins, allies, etc are towards the goal of gathering the most stars.
    * In some games, like Super Smash Bros, this is ends up being a lot waiting for the agents to train, because each character is different enough that you can't simply train an agent once, and expect it to do well for other characters. I don't believe that's the case here, as the strategies and tools available to you don't really change, only what spaces in front of you you're likely to land on based on your dice.
