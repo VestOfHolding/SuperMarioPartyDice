@@ -1,6 +1,5 @@
 package utils;
 
-import com.tdunning.math.stats.AVLTreeDigest;
 import com.tdunning.math.stats.TDigest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +16,7 @@ public class OnlineStatistics {
     private double mean = 0.0;
     private double sum = 0.0;
 
-    private TDigest tdigest = new AVLTreeDigest(100);
+    private TDigest tdigest = TDigest.createDigest(500);
 
     public void addValue(double value) {
         tdigest.add(value);

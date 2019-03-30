@@ -9,7 +9,6 @@ import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
 import boards.spaces.events.SandBridgeCollapse;
 import lombok.Getter;
-import lombok.Setter;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.builder.GraphBuilder;
 import stattracker.GameStatTracker;
@@ -74,6 +73,7 @@ public abstract class BaseBoard {
             currentStarSpace.deactivateStar();
         }
         nextStar.activateStar();
+        board.setNeedToMoveStar(false);
     }
 
     public BaseSpace getStartSpace() {
@@ -232,7 +232,6 @@ public abstract class BaseBoard {
 
         if (board.isNeedToMoveStar()) {
             changeStarSpace();
-            board.setNeedToMoveStar(false);
         }
 
         return currentSpace;
