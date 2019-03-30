@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ShortestAllyPath {
+public class ShortestPath {
 
     private static final int NUM_TURNS = 20;
 

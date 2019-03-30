@@ -19,7 +19,7 @@ public class MainSim {
         Simulation simulation = new WhompsSimulation();
         simulation.simulate();
 
-//        ShortestAllyPath shortestAllyPath = new ShortestAllyPath();
+//        ShortestPath shortestAllyPath = new ShortestPath();
 //        shortestAllyPath.shortestPathToFirstAlly(board);
 
         stopWatch.split();
