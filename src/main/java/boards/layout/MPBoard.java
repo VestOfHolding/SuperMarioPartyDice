@@ -5,13 +5,14 @@ import boards.spaces.BaseSpace;
 import lombok.Getter;
 import lombok.Setter;
 import org.jgrapht.graph.SimpleDirectedGraph;
+import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirectedGraph<V, E> {
+public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirectedWeightedGraph<V, E> {
     Map<Integer, V> VERTEX_MAP;
 
     private static final int kingBobombCountdownStart = 5;

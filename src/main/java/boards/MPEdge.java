@@ -1,9 +1,9 @@
 package boards;
 
 import boards.spaces.BaseSpace;
-import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultWeightedEdge;
 
-public class MPEdge extends DefaultEdge {
+public class MPEdge extends DefaultWeightedEdge {
 
     @Override
     public BaseSpace getSource() {
