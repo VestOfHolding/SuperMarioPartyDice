@@ -33,6 +33,13 @@ public abstract class BaseBoard {
 
         buildInitialGraph();
 
+        //All non-movement spaces will have the edges leading to them have no weight.
+        for (MPEdge edge : board.edgeSet()) {
+            if (!edge.getTarget().affectsMovement()) {
+                board.setEdgeWeight(edge, 0.0);
+            }
+        }
+
         starSpaces = board.vertexSet().stream()
                 .filter(space -> space instanceof StarSpace)
                 .map(space -> (StarSpace)space)

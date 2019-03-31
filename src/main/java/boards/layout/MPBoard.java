@@ -2,9 +2,9 @@ package boards.layout;
 
 import boards.MPEdge;
 import boards.spaces.BaseSpace;
+import boards.spaces.StarSpace;
 import lombok.Getter;
 import lombok.Setter;
-import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.HashMap;
@@ -47,6 +47,20 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
 
         VERTEX_MAP.remove(v.getSpaceID());
         return super.removeVertex(v);
+    }
+
+    /**
+     * Star spaces only don't count towards movement, and therefore don't have an incoming edge weight,
+     *  if the star is currently active, which can obviously change over the course of the game.
+     *
+     *  Therefore, if the target of this edge is a star space, check again if it currently affects movement.
+     */
+    @Override
+    public double getEdgeWeight(E e) {
+        double result = super.getEdgeWeight(e);
+
+        return e.getTarget() instanceof StarSpace && !e.getTarget().affectsMovement()
+                ? 0.0 : result;
     }
 
     public BaseSpace getStartSpace() {
