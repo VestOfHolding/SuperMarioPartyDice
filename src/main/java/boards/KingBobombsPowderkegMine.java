@@ -28,30 +28,30 @@ public class KingBobombsPowderkegMine extends BaseBoard {
                 SpaceFactory.createItemSpace(index++, 20, 22),
                 SpaceFactory.createLuckySpace(index++, 20, 24),
                 SpaceFactory.createBlueSpace(index++, 18, 24),
-                SpaceFactory.createBlueSpace(index++, 16, 24),
+                SpaceFactory.createStarSpace(index++, 16, 24),
                 SpaceFactory.createRedSpace(index++, 14, 24),
                 new RoyalExplosionEvent(index++, 12, 24), //ID = 13
                 SpaceFactory.createItemSpace(index++, 12, 22),
-                SpaceFactory.createBlueSpace(index++, 12, 20),
+                SpaceFactory.createStarSpace(index++, 12, 20),
                 new RoyalExplosionEvent(index++, 12, 18),
                 SpaceFactory.createNonMovementSpace(index++, 12, 16), //ID = 17
                 SpaceFactory.createBlueSpace(index++, 14, 16)
         ).addEdgeChain(
                 //Upper Loop
-                SpaceFactory.createBlueSpace(index++, 24, 20),
+                SpaceFactory.createStarSpace(index++, 24, 20),
                 SpaceFactory.createNonMovementSpace(index++, 28, 20), //ID = 20
                 SpaceFactory.createItemSpace(index++, 28, 22),
                 SpaceFactory.createItemSpace(index++, 28, 24),
                 SpaceFactory.createNonMovementSpace(index++, 28, 28),
                 SpaceFactory.createBlueSpace(index++, 28, 31),
                 SpaceFactory.createMoveEventSpace(index++, 54, 28, 34), //ID = 25
-                SpaceFactory.createBlueSpace(index++, 25, 32),
+                SpaceFactory.createStarSpace(index++, 25, 32),
                 new KBPMChangePathEvent(index++, 22, 32), //ID = 27
                 SpaceFactory.createLuckySpace(index++, 20, 30),
                 SpaceFactory.createLuckySpace(index++, 12, 30),
                 new KBPMChangePathEvent(index++, 10, 32), //ID = 30
                 SpaceFactory.createBlueSpace(index++, 7, 32),
-                SpaceFactory.createBlueSpace(index++, 4, 32),
+                SpaceFactory.createStarSpace(index++, 4, 32),
                 SpaceFactory.createBadLuckSpace(index++, 4, 30),
                 new LakituSpace(index++, 4, 28),
                 SpaceFactory.createBlueSpace(index++, 4, 24), //ID = 35
@@ -68,7 +68,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
                 SpaceFactory.createRedSpace(index++, 28, 14),
                 SpaceFactory.createItemSpace(index++, 28, 12),
                 SpaceFactory.createBadLuckSpace(index++, 28, 8),
-                SpaceFactory.createBlueSpace(index++, 24, 8),
+                SpaceFactory.createStarSpace(index++, 24, 8),
                 SpaceFactory.createItemSpace(index++, 22, 8),
                 SpaceFactory.createAllySpace(index++, 19, 8) //ID = 47
         ).addEdgeChain(
@@ -80,7 +80,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
                 SpaceFactory.createNonMovementSpace(index++, 4, 9),
                 SpaceFactory.createMoveEventSpace(index++, 25, 4, 6), //ID = 53
                 SpaceFactory.createAllySpace(index++, 8, 8),
-                SpaceFactory.createBlueSpace(index++, 10, 8),
+                SpaceFactory.createStarSpace(index++, 10, 8),
                 SpaceFactory.createVSSpace(index++, 13, 8) //ID = 56
         ).addEdgeChain(
                 //Middle Right

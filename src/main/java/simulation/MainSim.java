@@ -1,6 +1,7 @@
 package simulation;
 
 import boards.BaseBoard;
+import boards.KingBobombsPowderkegMine;
 import boards.MegafruitParadise;
 import boards.WhompsDominoRuins;
 import display.GraphDisplay;
@@ -11,7 +12,7 @@ public class MainSim {
         System.setProperty("org.graphstream.ui", "swing");
 
         StopWatch stopWatch = StopWatch.createStarted();
-        BaseBoard board = new WhompsDominoRuins();
+        BaseBoard board = new KingBobombsPowderkegMine();
 
 //        GraphDisplay display = new GraphDisplay();
 //        display.display(board);
