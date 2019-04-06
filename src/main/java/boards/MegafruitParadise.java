@@ -23,7 +23,7 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createStartSpace(index++, 42, 1), //ID = 0
                 SpaceFactory.createBlueSpace(index++, 42, 4),
                 SpaceFactory.createBlueSpace(index++, 42, 8),
-                SpaceFactory.createBlueSpace(index++, 41, 12),
+                SpaceFactory.createStarSpace(index++, 41, 12),
                 SpaceFactory.createItemSpace(index++, 38, 12),
                 SpaceFactory.createBlueSpace(index++, 36, 12),
                 SpaceFactory.createMoveEventSpace(index++, I2_DEST, 34, 12), //ID = 6
@@ -32,7 +32,7 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createNonMovementSpace(index++, 30, 8), //ID = 9
                 SpaceFactory.createLuckySpace(index++, 30, 4),
                 SpaceFactory.createNonMovementSpace(index++, 33, 4),
-                SpaceFactory.createBlueSpace(index++, 36, 4),
+                SpaceFactory.createStarSpace(index++, 36, 4),
                 SpaceFactory.createRedSpace(index++, 39, 4) //ID = 13
             ).addEdgeChain(
                 SpaceFactory.createNonMovementSpace(index++, 16, 8), //ID = 14
@@ -41,13 +41,13 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createRedSpace(index++, 12, 12),
                 SpaceFactory.createMoveEventSpace(index++, I3_DEST, 9, 12), //ID = 18
                 SpaceFactory.createMoveEventSpace(index++, I3_DEST, 7, 12),
-                SpaceFactory.createBlueSpace(index++, 4, 12),
+                SpaceFactory.createStarSpace(index++, 4, 12),
                 SpaceFactory.createAllySpace(index++, 4, 8),
                 SpaceFactory.createLuckySpace(index++, 4, 4),
                 SpaceFactory.createBlueSpace(index++, 6, 2),
                 SpaceFactory.createNonMovementSpace(index++, 9, 2),
                 SpaceFactory.createBlueSpace(index++, 12, 2),
-                SpaceFactory.createBlueSpace(index++, 14, 2),
+                SpaceFactory.createStarSpace(index++, 14, 2),
                 SpaceFactory.createLuckySpace(index++, 16, 4) //ID = 27
             ).addEdgeChain(
                 SpaceFactory.createNonMovementSpace(index++, 10, 24), //ID = 28
@@ -56,12 +56,12 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createAllySpace(index++, 8, 32),
                 SpaceFactory.createNonMovementSpace(index++, 10, 34),
                 SpaceFactory.createBlueSpace(index++, 6, 34),
-                SpaceFactory.createBlueSpace(index++, 3, 32),
+                SpaceFactory.createStarSpace(index++, 3, 32),
                 SpaceFactory.createItemSpace(index++, 2, 28),
                 SpaceFactory.createBlueSpace(index++, 2, 26),
                 SpaceFactory.createMoveEventSpace(index++, I0_DEST, 2, 23), //ID = 37
                 SpaceFactory.createMoveEventSpace(index++, I0_DEST, 4, 20),
-                SpaceFactory.createBlueSpace(index++, 7, 20),
+                SpaceFactory.createStarSpace(index++, 7, 20),
                 SpaceFactory.createRedSpace(index++, 10, 20),
                 SpaceFactory.createNonMovementSpace(index++, 10, 23), //ID = 41
                 SpaceFactory.createMoveEventSpace(index++, 0, 16, 23),
@@ -78,7 +78,7 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createMoveEventSpace(index++, I1_DEST, 42, 31), //ID = 53
                 SpaceFactory.createMoveEventSpace(index++, I1_DEST, 40, 33),
                 SpaceFactory.createBadLuckSpace(index++, 38, 34),
-                SpaceFactory.createBlueSpace(index++, 34, 34),
+                SpaceFactory.createStarSpace(index++, 34, 34),
                 SpaceFactory.createItemSpace(index++, 32, 33),
                 SpaceFactory.createVSSpace(index++, 30, 30),
                 SpaceFactory.createBlueSpace(index++, 30, 27),

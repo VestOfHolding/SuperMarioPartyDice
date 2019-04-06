@@ -12,12 +12,12 @@ public class MainSim {
         System.setProperty("org.graphstream.ui", "swing");
 
         StopWatch stopWatch = StopWatch.createStarted();
-        BaseBoard board = new KingBobombsPowderkegMine();
+        BaseBoard board = new MegafruitParadise();
 
 //        GraphDisplay display = new GraphDisplay();
 //        display.display(board);
 
-        Simulation simulation = new KingBobombSimulation();
+        Simulation simulation = new MegafruitSimulation();
         simulation.simulate();
 
 //        ShortestPath shortestAllyPath = new ShortestPath();
