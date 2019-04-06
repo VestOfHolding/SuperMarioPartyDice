@@ -83,6 +83,8 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createVSSpace(index++, 30, 30),
                 SpaceFactory.createBlueSpace(index++, 30, 27),
                 SpaceFactory.createNonMovementSpace(index++, 30, 24), //ID = 60
+                //Effectively adding a second bridge in the other direction to mimic
+                // the fact that the bridge is two-way in the game.
                 SpaceFactory.createMoveEventSpace(index++, 0, 16, 24), //ID = 61
                 SpaceFactory.createBlueSpace(index++, 18, 24),
                 SpaceFactory.createMoveEventSpace(index++, 0, 20, 24),
