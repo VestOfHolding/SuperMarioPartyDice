@@ -56,7 +56,7 @@ public class BaseSpace {
         return false;
     }
 
-    public boolean canCross(GameStatTracker gameStatTracker) {
+    public boolean canCross(GameStatTracker gameStatTracker, int starCost) {
         return false;
     }
 

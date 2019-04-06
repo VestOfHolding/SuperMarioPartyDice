@@ -106,7 +106,7 @@ public abstract class BaseBoard {
         List<BaseSpace> nextSpaces = new ArrayList<>();
 
         for (BaseSpace nextSpace : getNextSpaces(startingSpace)) {
-            if (!nextSpace.hasToll() || nextSpace.canCross(gameStatTracker)) {
+            if (!nextSpace.hasToll() || nextSpace.canCross(gameStatTracker, board.getStarCost())) {
                 nextSpaces.add(nextSpace);
             }
         }
@@ -115,7 +115,14 @@ public abstract class BaseBoard {
     }
 
     public List<BaseSpace> getNextSpaces(BaseSpace startingSpace) {
-        return Graphs.successorListOf(board, startingSpace);
+        List<BaseSpace> result = new ArrayList<>();
+        try {
+            result = Graphs.successorListOf(board, startingSpace);
+        }
+        catch (IllegalArgumentException iae) {
+            int i = 0;
+        }
+        return result;
     }
 
     public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
@@ -232,6 +239,7 @@ public abstract class BaseBoard {
         }
         else if (this instanceof KameksTantalizingTower) {
             currentSpace.processKamekEvent(board, gameStatTracker);
+            currentSpace = board.getVertexById(currentSpace.getSpaceID());
         }
         else {
             currentSpace.processEvent(board, gameStatTracker);

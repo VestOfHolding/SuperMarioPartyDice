@@ -4,13 +4,20 @@ import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
 import boards.spaces.SpaceFactory;
+import boards.spaces.StarSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.KTT.ChainChompSpace;
 import boards.spaces.events.KTT.ForcedShopSpace;
 import boards.spaces.events.KTT.ThwompShortcutSpace;
 import stattracker.GameStatTracker;
+import utils.RandomUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class KameksTantalizingTower extends BaseBoard  {
+    private List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
+
     public KameksTantalizingTower() {
         initializeBoard();
     }
@@ -42,7 +49,7 @@ public class KameksTantalizingTower extends BaseBoard  {
                 newBlueKamekSpace(index++, 7, 30), //ID = 17
                 SpaceFactory.createBadLuckSpace(index++, 7, 34),
                 SpaceFactory.createEventSpace(index++, 15, 34),
-                SpaceFactory.createNonMovementSpace(index++, 18, 34),
+                SpaceFactory.createStarSpace(index++, 18, 34),
                 SpaceFactory.createNonMovementSpace(index++, 20, 38) //ID = 21
         ).addEdgeChain(
                 //Past the Thwomp
@@ -133,5 +140,39 @@ public class KameksTantalizingTower extends BaseBoard  {
         }
 
         return currentSpace;
+    }
+
+    @Override
+    public void changeStarSpace() {
+        StarSpace currentStarSpace = starSpaces.stream()
+                .filter(StarSpace::isStarActive)
+                .findFirst()
+                .orElse(null);
+
+        //If no star is currently active, it's the beginning of the game.
+        if (currentStarSpace == null) {
+            currentStarSpace = starSpaces.get(0);
+            currentStarSpace.activateStar();
+
+            board.setStarCost(board.INIT_STAR_COST);
+        }
+        //Otherwise, leave the star alone, except for changing the price.
+        else {
+            changeKamekStarPrice();
+        }
+
+        board.setNeedToMoveStar(false);
+    }
+
+    /**
+     * The next price of the star must be different from the current price.
+     */
+    public void changeKamekStarPrice() {
+        int nextPrice;
+        do {
+            nextPrice = possibleStarPrices.get(RandomUtils.getRandomInt(possibleStarPrices.size() - 1));
+        } while (nextPrice == board.getStarCost());
+
+        board.setStarCost(nextPrice);
     }
 }

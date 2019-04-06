@@ -81,8 +81,8 @@ public class WhompsOnTheRun extends EventSpace {
     }
 
     @Override
-    public boolean canCross(GameStatTracker gameStatTracker) {
-        return gameStatTracker.getCoinTotal() - COST >= 0;
+    public boolean canCross(GameStatTracker gameStatTracker, int starCost) {
+        return gameStatTracker.getCoinTotal() - COST - starCost >= 0;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package simulation;
 
 import boards.BaseBoard;
+import boards.KameksTantalizingTower;
 import boards.KingBobombsPowderkegMine;
 import boards.MegafruitParadise;
 import boards.WhompsDominoRuins;
@@ -12,12 +13,12 @@ public class MainSim {
         System.setProperty("org.graphstream.ui", "swing");
 
         StopWatch stopWatch = StopWatch.createStarted();
-        BaseBoard board = new MegafruitParadise();
+        BaseBoard board = new KameksTantalizingTower();
 
 //        GraphDisplay display = new GraphDisplay();
 //        display.display(board);
 
-        Simulation simulation = new MegafruitSimulation();
+        Simulation simulation = new KamekSimulation();
         simulation.simulate();
 
 //        ShortestPath shortestAllyPath = new ShortestPath();

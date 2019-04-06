@@ -54,11 +54,11 @@ public class ThwompShortcutSpace extends NonMovementSpace {
     }
 
     @Override
-    public boolean canCross(GameStatTracker gameStatTracker) {
+    public boolean canCross(GameStatTracker gameStatTracker, int starCost) {
         if (nextCost < 0) {
             nextCost = calculateNextCost();
         }
-        return gameStatTracker.getCoinTotal() - nextCost >= 0;
+        return gameStatTracker.getCoinTotal() - nextCost - starCost >= 0;
     }
 
     private int calculateNextCost() {
