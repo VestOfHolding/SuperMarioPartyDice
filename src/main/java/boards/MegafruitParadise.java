@@ -50,7 +50,8 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createBlueSpace(index++, 14, 2),
                 SpaceFactory.createLuckySpace(index++, 16, 4) //ID = 27
             ).addEdgeChain(
-                SpaceFactory.createItemSpace(index++, 8, 26), //ID = 28
+                SpaceFactory.createNonMovementSpace(index++, 10, 24), //ID = 28
+                SpaceFactory.createItemSpace(index++, 8, 26),
                 SpaceFactory.createBadLuckSpace(index++, 8, 29),
                 SpaceFactory.createAllySpace(index++, 8, 32),
                 SpaceFactory.createNonMovementSpace(index++, 10, 34),
@@ -58,29 +59,35 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createBlueSpace(index++, 3, 32),
                 SpaceFactory.createItemSpace(index++, 2, 28),
                 SpaceFactory.createBlueSpace(index++, 2, 26),
-                SpaceFactory.createMoveEventSpace(index++, I0_DEST, 2, 23), //ID = 36
+                SpaceFactory.createMoveEventSpace(index++, I0_DEST, 2, 23), //ID = 37
                 SpaceFactory.createMoveEventSpace(index++, I0_DEST, 4, 20),
                 SpaceFactory.createBlueSpace(index++, 7, 20),
                 SpaceFactory.createRedSpace(index++, 10, 20),
-                SpaceFactory.createNonMovementSpace(index++, 10, 24), //ID = 40
-                SpaceFactory.createMoveEventSpace(index++, 0, 16, 24),
-                SpaceFactory.createBlueSpace(index++, 18, 24),
-                SpaceFactory.createMoveEventSpace(index++, 0, 20, 24),
-                SpaceFactory.createBlueSpace(index++, 22, 24),
-                SpaceFactory.createMoveEventSpace(index++, 0, 24, 24),
-                SpaceFactory.createNonMovementSpace(index++, 30, 24), //ID = 46
+                SpaceFactory.createNonMovementSpace(index++, 10, 23), //ID = 41
+                SpaceFactory.createMoveEventSpace(index++, 0, 16, 23),
+                SpaceFactory.createBlueSpace(index++, 18, 23),
+                SpaceFactory.createMoveEventSpace(index++, 0, 20, 23),
+                SpaceFactory.createBlueSpace(index++, 22, 23),
+                SpaceFactory.createMoveEventSpace(index++, 0, 24, 23),
+                SpaceFactory.createNonMovementSpace(index++, 30, 23), //ID = 47
                 SpaceFactory.createBlueSpace(index++, 32, 22),
                 new StarSparklerSpace(index++, 36, 20),
                 SpaceFactory.createItemSpace(index++, 40, 22),
                 SpaceFactory.createItemSpace(index++, 42, 24),
                 SpaceFactory.createBlueSpace(index++, 42, 27),
-                SpaceFactory.createMoveEventSpace(index++, I1_DEST, 42, 31), //ID = 52
+                SpaceFactory.createMoveEventSpace(index++, I1_DEST, 42, 31), //ID = 53
                 SpaceFactory.createMoveEventSpace(index++, I1_DEST, 40, 33),
                 SpaceFactory.createBadLuckSpace(index++, 38, 34),
                 SpaceFactory.createBlueSpace(index++, 34, 34),
                 SpaceFactory.createItemSpace(index++, 32, 33),
                 SpaceFactory.createVSSpace(index++, 30, 30),
-                SpaceFactory.createBlueSpace(index++, 30, 27) //ID = 58
+                SpaceFactory.createBlueSpace(index++, 30, 27),
+                SpaceFactory.createNonMovementSpace(index++, 30, 24), //ID = 60
+                SpaceFactory.createMoveEventSpace(index++, 0, 16, 24), //ID = 61
+                SpaceFactory.createBlueSpace(index++, 18, 24),
+                SpaceFactory.createMoveEventSpace(index++, 0, 20, 24),
+                SpaceFactory.createBlueSpace(index++, 22, 24),
+                SpaceFactory.createMoveEventSpace(index++, 0, 24, 24) //ID = 65
         )
                 .addVertex(new SandBridgeCollapse(index, 8, 22, 8));
 
@@ -90,22 +97,24 @@ public class MegafruitParadise extends BaseBoard {
 
     @Override
     public void resetBoard() {
-        board.setOrReplaceVertex(59, new SandBridgeCollapse(59, 8));
+        board.setOrReplaceVertex(66, new SandBridgeCollapse(66, 8));
 
-        board.setOrReplaceVertex(57, SpaceFactory.createVSSpace(57));
+        board.setOrReplaceVertex(58, SpaceFactory.createVSSpace(58));
 
         resetRedAndBlueCoinAmounts();
     }
 
     private void connectPaths() {
         //Sand bridge
-        board.addEdge(board.getVertexById(9), board.getVertexById(59));
-        board.addEdge(board.getVertexById(59), board.getVertexById(14));
+        board.addEdge(board.getVertexById(9), board.getVertexById(66));
+        board.addEdge(board.getVertexById(66), board.getVertexById(14));
 
         //Island loops
         board.addEdge(board.getVertexById(13), board.getVertexById(1));
         board.addEdge(board.getVertexById(27), board.getVertexById(14));
-        board.addEdge(board.getVertexById(40), board.getVertexById(28));
-        board.addEdge(board.getVertexById(58), board.getVertexById(46));
+        board.addEdge(board.getVertexById(41), board.getVertexById(28));
+        board.addEdge(board.getVertexById(60), board.getVertexById(47));
+
+        board.addEdge(board.getVertexById(65), board.getVertexById(28));
     }
 }
