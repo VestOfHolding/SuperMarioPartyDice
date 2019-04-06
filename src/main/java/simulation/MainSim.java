@@ -17,7 +17,7 @@ public class MainSim {
 //        GraphDisplay display = new GraphDisplay();
 //        display.display(board);
 
-        Simulation simulation = new WhompsSimulation();
+        Simulation simulation = new KingBobombSimulation();
         simulation.simulate();
 
 //        ShortestPath shortestAllyPath = new ShortestPath();

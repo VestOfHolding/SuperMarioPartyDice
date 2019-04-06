@@ -1,6 +1,7 @@
 package boards;
 
 import boards.spaces.SpaceFactory;
+import boards.spaces.events.MFP.StarSparklerSpace;
 import boards.spaces.events.SandBridgeCollapse;
 
 public class MegafruitParadise extends BaseBoard {
@@ -69,7 +70,7 @@ public class MegafruitParadise extends BaseBoard {
                 SpaceFactory.createMoveEventSpace(index++, 0, 24, 24),
                 SpaceFactory.createNonMovementSpace(index++, 30, 24), //ID = 46
                 SpaceFactory.createBlueSpace(index++, 32, 22),
-                SpaceFactory.createEventSpace(index++, 36, 20),
+                new StarSparklerSpace(index++, 36, 20),
                 SpaceFactory.createItemSpace(index++, 40, 22),
                 SpaceFactory.createItemSpace(index++, 42, 24),
                 SpaceFactory.createBlueSpace(index++, 42, 27),
