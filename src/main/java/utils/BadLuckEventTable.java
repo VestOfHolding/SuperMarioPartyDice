@@ -37,7 +37,7 @@ public enum BadLuckEventTable {
             new LuckEvent(-10, Range.between(18, 34)),
             LuckEvent.buildEmptyEvent(Range.between(35, 51)),
             LuckEvent.buildEmptyEvent(Range.between(52, 68)),
-            LuckEvent.buildEmptyEvent(Range.between(69, 84)),
+            LuckEvent.builder().doubleStarCost(true).chanceRange(Range.between(69, 84)).build(),
             new LuckEvent(true, Range.between(85, 100))
     )),
     KAMEK_FIRST_HALF_1ST_2ND(Arrays.asList(

@@ -81,6 +81,7 @@ public abstract class BaseBoard {
         }
         nextStar.activateStar();
         board.setNeedToMoveStar(false);
+        board.setStarCost(board.INIT_STAR_COST);
     }
 
     public BaseSpace getStartSpace() {

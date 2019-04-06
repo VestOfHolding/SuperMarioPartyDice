@@ -54,7 +54,7 @@ public class StarSpace extends BlueSpace {
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker) {
         if (starActive && gameStatTracker.getCoinTotal() >= 10) {
-            gameStatTracker.addCoins(-10);
+            gameStatTracker.addCoins(-1 * gameBoard.getStarCost());
             gameStatTracker.addStar();
 
             gameBoard.setNeedToMoveStar(true);

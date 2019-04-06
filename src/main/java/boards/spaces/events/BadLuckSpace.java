@@ -84,6 +84,9 @@ public class BadLuckSpace extends EventSpace {
         if (chosenEvent.isLoseStar()) {
             gameStatTracker.loseStar();
         }
+        if (chosenEvent.isDoubleStarCost()) {
+            gameBoard.setStarCost(gameBoard.INIT_STAR_COST * 2);
+        }
         //The player is pitied and given coins if they have no stars to lose.
         if (chosenEvent.isLoseStarOrGainCoins()) {
             if (gameStatTracker.getStarCount() <= 0) {

@@ -17,6 +17,7 @@ public class LuckEvent {
     private boolean addAlly;
     private boolean moveStar;
     private boolean loseStar;
+    private boolean doubleStarCost;
 
     //If the player has no stars to lose in this event, they are pitied and given 20 coins.
     private boolean loseStarOrGainCoins;
@@ -24,7 +25,11 @@ public class LuckEvent {
     private Range<Integer> chanceRange;
 
     public LuckEvent(Range<Integer> chanceRange) {
-        coinGain = 0;
+        this(0, chanceRange);
+    }
+
+    public LuckEvent(int coinGain, Range<Integer> chanceRange) {
+        this.coinGain = coinGain;
         addAlly = false;
         moveStar = false;
         loseStar = false;
@@ -32,15 +37,12 @@ public class LuckEvent {
         this.chanceRange = chanceRange;
     }
 
-    public LuckEvent(int coinGain, Range<Integer> chanceRange) {
-        this.coinGain = coinGain;
-        addAlly = false;
-        this.chanceRange = chanceRange;
-    }
-
     public LuckEvent(boolean moveStar, Range<Integer> chanceRange) {
-        this.coinGain = 0;
+        coinGain = 0;
+        addAlly = false;
         this.moveStar = moveStar;
+        loseStar = false;
+        loseStarOrGainCoins = false;
         this.chanceRange = chanceRange;
     }
 
