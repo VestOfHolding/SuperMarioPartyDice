@@ -65,41 +65,45 @@ public class Simulation {
         BaseSpace currentSpace = gameBoard.getStartSpace();
 
         gameStatTracker.setCoinTotal(5);
-        DieResult result;
 
         for (int j = 0; j < TURN_COUNT; ++j) {
-            result = characterDie.roll();
-
-            int moveAmount = 0;
-
             if (j == TURN_COUNT - 3) {
                 lastThreeTurns(gameBoard);
             }
 
-            if (result instanceof MoveResult) {
-                moveAmount = result.getResult();
-            }
-            else if (result instanceof CoinResult) {
-                gameStatTracker.addCoins(result.getResult());
-            }
-
-            if (gameStatTracker.getAllyTotal() > 0) {
-                moveAmount += rollAllies(gameStatTracker);
-            }
-
-            gameStatTracker.addDistance(moveAmount);
-
-            if (moveAmount > 0) {
-                currentSpace = gameBoard.getDestination(currentSpace, moveAmount, gameStatTracker);
-            }
-
-//            gameStatTracker.addLandedSpace(currentSpace);
-
-            gameStatTracker.addCoins(currentSpace.coinGain());
-            gameStatTracker.incrementTurn();
+            currentSpace = simulateTurn(characterDie, gameStatTracker, currentSpace);
         }
 
         return gameStatTracker;
+    }
+
+    protected BaseSpace simulateTurn(Dice characterDie, GameStatTracker gameStatTracker, BaseSpace currentSpace) {
+        DieResult result = characterDie.roll();
+
+        int moveAmount = 0;
+
+        if (result instanceof MoveResult) {
+            moveAmount = result.getResult();
+        }
+        else if (result instanceof CoinResult) {
+            gameStatTracker.addCoins(result.getResult());
+        }
+
+        if (gameStatTracker.getAllyTotal() > 0) {
+            moveAmount += rollAllies(gameStatTracker);
+        }
+
+        gameStatTracker.addDistance(moveAmount);
+
+        if (moveAmount > 0) {
+            currentSpace = gameBoard.getDestination(currentSpace, moveAmount, gameStatTracker);
+        }
+
+//        gameStatTracker.addLandedSpace(currentSpace);
+
+        gameStatTracker.addCoins(currentSpace.coinGain());
+        gameStatTracker.incrementTurn();
+        return currentSpace;
     }
 
     protected void lastThreeTurns(BaseBoard gameBoard) {
