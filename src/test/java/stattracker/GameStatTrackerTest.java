@@ -2,7 +2,6 @@ package stattracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import partydice.Dice;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,7 +11,7 @@ class GameStatTrackerTest {
 
     @BeforeEach
     void setUp() {
-        classUnderTest = new GameStatTracker(Dice.BOWSER, 20);
+        classUnderTest = new GameStatTracker(20);
     }
 
     @Test

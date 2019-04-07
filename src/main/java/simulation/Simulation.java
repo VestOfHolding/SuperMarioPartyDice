@@ -39,7 +39,8 @@ public class Simulation {
             simulationStatTracker = new SimulationStatTracker(characterDie);
 
             for (int i = 0; i < SIM_COUNT; ++i) {
-                simulationStatTracker.endGame(simulateGame(characterDie, simulationStatTracker));
+                simulateGame(simulationStatTracker);
+                simulationStatTracker.endGame();
                 gameBoard.resetBoard();
             }
 
@@ -59,26 +60,23 @@ public class Simulation {
         System.out.println();
     }
 
-    protected GameStatTracker simulateGame(Dice characterDie, SimulationStatTracker simulationStatTracker) {
-        GameStatTracker gameStatTracker = simulationStatTracker.startNewGame(TURN_COUNT);
+    protected void simulateGame(SimulationStatTracker simulationStatTracker) {
+        Player player = simulationStatTracker.startNewGame(TURN_COUNT);
 
         BaseSpace currentSpace = gameBoard.getStartSpace();
-
-        gameStatTracker.setCoinTotal(5);
 
         for (int j = 0; j < TURN_COUNT; ++j) {
             if (j == TURN_COUNT - 3) {
                 lastThreeTurns(gameBoard);
             }
 
-            currentSpace = simulateTurn(characterDie, gameStatTracker, currentSpace);
+            currentSpace = simulateTurn(player, currentSpace);
         }
-
-        return gameStatTracker;
     }
 
-    protected BaseSpace simulateTurn(Dice characterDie, GameStatTracker gameStatTracker, BaseSpace currentSpace) {
-        DieResult result = characterDie.roll();
+    protected BaseSpace simulateTurn(Player player, BaseSpace currentSpace) {
+        DieResult result = player.rollCharacterDie();
+        GameStatTracker gameStatTracker = player.getGameStatTracker();
 
         int moveAmount = 0;
 

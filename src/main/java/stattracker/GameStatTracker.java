@@ -22,7 +22,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GameStatTracker {
-    private Dice characterDie;
     private int turnNumber;
     private int turnMax;
 
@@ -37,8 +36,7 @@ public class GameStatTracker {
 
     private Int2IntOpenHashMap landedSpacesAmounts;
 
-    public GameStatTracker(Dice characterDie, int initialTurnCount) {
-        this.characterDie = characterDie;
+    public GameStatTracker(int initialTurnCount) {
         turnNumber = 1;
         turnMax = initialTurnCount;
         allyTotal = 0;

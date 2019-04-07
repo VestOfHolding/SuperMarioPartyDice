@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import partydice.Dice;
+import simulation.Player;
 
 import java.util.Map;
 
@@ -15,10 +16,14 @@ import java.util.Map;
 public class SimulationStatTracker {
     private Dice characterDie;
 
+    private Player mainPlayer;
+
     private Map<Integer, AllyStatTracker> allyStatTrackers;
 
     public SimulationStatTracker(Dice characterDie) {
-        this.characterDie = characterDie;
+        mainPlayer = new Player();
+        mainPlayer.setCharacterDice(characterDie);
+
         allyStatTrackers = Map.of(0, new AllyStatTracker(0),
                 1, new AllyStatTracker(1),
                 2, new AllyStatTracker(2),
@@ -26,11 +31,16 @@ public class SimulationStatTracker {
                 4, new AllyStatTracker(4));
     }
 
-    public GameStatTracker startNewGame(int turnCount) {
-        return new GameStatTracker(characterDie, turnCount);
+    public Player startNewGame(int turnCount) {
+        GameStatTracker gameStatTracker = new GameStatTracker(turnCount);
+        gameStatTracker.setCoinTotal(5);
+
+        mainPlayer.setGameStatTracker(gameStatTracker);
+        return mainPlayer;
     }
 
-    public void endGame(GameStatTracker gameStatTracker) {
+    public void endGame() {
+        GameStatTracker gameStatTracker = mainPlayer.getGameStatTracker();
         int allyCount = gameStatTracker.getAllyTotal();
 
         AllyStatTracker allyStatTracker = allyStatTrackers.get(allyCount);
