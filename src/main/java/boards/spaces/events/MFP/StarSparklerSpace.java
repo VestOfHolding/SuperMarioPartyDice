@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
 
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor

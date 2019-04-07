@@ -60,22 +60,5 @@ public class SandBridgeCollapse extends MoveEventSpace {
 
     protected void decrementCountdown() {
         countdown--;
-
-        //Admittedly arbitrary. At least better than 0%.
-
-        //Throw in a 5% chance that three players went across
-        // since the last time you were at the bridge.
-        int result = RandomUtils.getRandomInt(1, 20);
-        if (result <= 1) {
-            countdown -= 3;
-        }
-        //15% chance that one other player went across the bridge
-        else if (result <= 3) {
-            countdown -= 2;
-        }
-        //40% chance that one other player went across the bridge
-        else if (result <= 8) {
-            countdown -= 1;
-        }
     }
 }

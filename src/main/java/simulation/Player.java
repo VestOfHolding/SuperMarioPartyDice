@@ -1,9 +1,9 @@
 package simulation;
 
+import boards.spaces.BaseSpace;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 import partydice.Dice;
 import results.DieResult;
 import stattracker.GameStatTracker;
@@ -16,8 +16,17 @@ public class Player {
     @EqualsAndHashCode.Exclude
     private GameStatTracker gameStatTracker;
 
+    @EqualsAndHashCode.Exclude
+    private BaseSpace currentSpace;
+
     public Player(Dice characterDice) {
+        this(characterDice, null);
+    }
+
+    public Player(Dice characterDice, GameStatTracker gameStatTracker) {
         this.characterDice = characterDice;
+        this.gameStatTracker = gameStatTracker;
+        this.currentSpace = null;
     }
 
     public DieResult rollCharacterDie() {

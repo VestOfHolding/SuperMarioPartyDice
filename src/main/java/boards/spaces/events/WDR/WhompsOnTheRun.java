@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
-import utils.RandomUtils;
 import utils.SpaceUIClass;
 
 @EqualsAndHashCode(callSuper = true)
@@ -51,14 +50,6 @@ public class WhompsOnTheRun extends EventSpace {
     }
 
     public void whompSwitch(MPBoard<BaseSpace, MPEdge> gameBoard) {
-        // Let's go with a 10% chance that some other player has come along and also swapped the Whomps
-        // so you just swap them back.
-        // I fully acknowledge this is absolutely nothing more than a "better than nothing" approach
-        // that isn't the most accurate.
-        if (RandomUtils.getRandomInt(0, 9) == 0) {
-            return;
-        }
-
         active = !active;
 
         WhompsOnTheRun secondWhomp = (WhompsOnTheRun)gameBoard.getVertexById(partnerID);

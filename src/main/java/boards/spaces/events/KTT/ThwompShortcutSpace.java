@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import stattracker.GameStatTracker;
-import utils.RandomUtils;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -62,19 +61,7 @@ public class ThwompShortcutSpace extends NonMovementSpace {
     }
 
     private int calculateNextCost() {
-        int result = RandomUtils.getRandomInt(1, 20);
         //Every time you pass Thwomp, he wants at least one more coin than before.
-        int tempNextCost = cost + 1;
-
-        //5% chance two players also used Thwomp.
-        if (result <= 1) {
-            tempNextCost += 2;
-        }
-        //25% chance one other player also used Thwomp.
-        else if (result <= 6) {
-            tempNextCost++;
-        }
-
-        return tempNextCost;
+        return cost + 1;
     }
 }

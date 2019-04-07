@@ -13,6 +13,7 @@ import stattracker.SimulationStatTracker;
 import utils.RandomUtils;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class Simulation {
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
@@ -61,16 +62,16 @@ public class Simulation {
     }
 
     protected void simulateGame(SimulationStatTracker simulationStatTracker) {
-        Player player = simulationStatTracker.startNewGame(TURN_COUNT);
+        List<Player> players = simulationStatTracker.startNewGame(TURN_COUNT);
 
-        BaseSpace currentSpace = gameBoard.getStartSpace();
+        players.forEach(player -> player.setCurrentSpace(gameBoard.getStartSpace()));
 
         for (int j = 0; j < TURN_COUNT; ++j) {
             if (j == TURN_COUNT - 3) {
                 lastThreeTurns(gameBoard);
             }
 
-            currentSpace = simulateTurn(player, currentSpace);
+            players.forEach(player -> player.setCurrentSpace(simulateTurn(player, player.getCurrentSpace())));
         }
     }
 

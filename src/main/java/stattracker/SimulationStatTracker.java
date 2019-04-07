@@ -38,7 +38,7 @@ public class SimulationStatTracker {
                 4, new AllyStatTracker(4));
     }
 
-    public Player startNewGame(int turnCount) {
+    public List<Player> startNewGame(int turnCount) {
         mainPlayer.setGameStatTracker(new GameStatTracker(turnCount));
 
         //Easier to keep adding players to this set until there are 4 unique players.
@@ -54,7 +54,7 @@ public class SimulationStatTracker {
         // turn order for the characters that will now be consistent for the game.
         allPlayers = new ArrayList<>(allPlayerSet);
 
-        return mainPlayer;
+        return allPlayers;
     }
 
     public void endGame() {
