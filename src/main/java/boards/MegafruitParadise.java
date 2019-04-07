@@ -74,7 +74,7 @@ public class MegafruitParadise extends BaseBoard {
                 new StarSparklerSpace(index++, 36, 20),
                 SpaceFactory.createItemSpace(index++, 40, 22),
                 SpaceFactory.createItemSpace(index++, 42, 24),
-                SpaceFactory.createBlueSpace(index++, 42, 27),
+                SpaceFactory.createStarSpace(index++, 42, 27),
                 SpaceFactory.createMoveEventSpace(index++, I1_DEST, 42, 31), //ID = 53
                 SpaceFactory.createMoveEventSpace(index++, I1_DEST, 40, 33),
                 SpaceFactory.createBadLuckSpace(index++, 38, 34),
