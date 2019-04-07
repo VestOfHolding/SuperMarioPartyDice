@@ -21,9 +21,6 @@ public class MainSim {
         Simulation simulation = new Simulation(board);
         simulation.simulate();
 
-//        ShortestPath shortestAllyPath = new ShortestPath();
-//        shortestAllyPath.shortestPathToFirstAlly(board);
-
         stopWatch.split();
         System.out.println("\n\nTime elapsed: " + stopWatch.toSplitString());
         stopWatch.stop();

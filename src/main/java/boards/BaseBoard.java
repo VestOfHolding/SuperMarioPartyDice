@@ -16,7 +16,6 @@ import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -141,67 +140,6 @@ public abstract class BaseBoard {
         return currentSpace;
     }
 
-    public List<BaseSpace> getDestinations(BaseSpace startingSpace, int distance, GameStatTracker gameStatTracker) {
-        List<BaseSpace> currentSpaces = new ArrayList<>(Collections.singletonList(startingSpace));
-
-       return depthFirstSearch(currentSpaces, distance, gameStatTracker);
-    }
-
-    protected List<BaseSpace> depthFirstSearch(List<BaseSpace> currentSpaces, int distance, GameStatTracker gameStatTracker) {
-        List<BaseSpace> returnList = new ArrayList<>();
-
-        if (distance <= 0) {
-            //If we're left with any non-movement spaces, push those forward one more.
-            if (currentSpaces.stream().anyMatch(s -> !s.affectsMovement())) {
-                for (BaseSpace space : currentSpaces) {
-                    if (space.affectsMovement()) {
-                        returnList.add(space);
-                    }
-                    else {
-                        returnList.addAll(processSpaceForDFS(space, 0, gameStatTracker));
-                    }
-                }
-
-                return processEventsOnLandedSpaces(returnList, gameStatTracker);
-            }
-            else {
-                return processEventsOnLandedSpaces(currentSpaces, gameStatTracker);
-            }
-        }
-
-        for (BaseSpace space : currentSpaces) {
-            returnList.addAll(processSpaceForDFS(space, distance, gameStatTracker));
-        }
-
-        return returnList;
-    }
-
-    private List<BaseSpace> processSpaceForDFS(BaseSpace space, int distance, GameStatTracker gameStatTracker) {
-        boolean affectsMovement = space.affectsMovement();
-        if (space.isPassingEvent()) {
-            space = processEvent(gameStatTracker, space);
-        }
-
-        return depthFirstSearch(getNextSpaces(space),
-                affectsMovement ? distance - 1 : distance,
-                gameStatTracker);
-    }
-
-    private List<BaseSpace> processEventsOnLandedSpaces(List<BaseSpace> spaces, GameStatTracker gameStatTracker) {
-        List<BaseSpace> resultSpaces = new ArrayList<>();
-
-        for (BaseSpace space : spaces) {
-            if (!space.isPassingEvent()) {
-                resultSpaces.add(processEvent(gameStatTracker, space));
-            }
-            else {
-                resultSpaces.add(space);
-            }
-        }
-
-        return resultSpaces;
-    }
-
     public void lastThreeTurns() {
         setRedAndBlueCoinAmounts(6);
     }
@@ -221,7 +159,10 @@ public abstract class BaseBoard {
         }
     }
 
-    protected BaseSpace processEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
+    protected BaseSpace processEvent(Player player) {
+        BaseSpace currentSpace = player.getCurrentSpace();
+        GameStatTracker gameStatTracker = player.getGameStatTracker();
+
         if (currentSpace instanceof SandBridgeCollapse) {
             currentSpace = processBridgeCollapseEvent(gameStatTracker, currentSpace);
         }
@@ -246,10 +187,6 @@ public abstract class BaseBoard {
         }
 
         return currentSpace;
-    }
-
-    protected BaseSpace processEvent(Player player) {
-        return processEvent(player.getGameStatTracker(), player.getCurrentSpace());
     }
 
     protected BaseSpace processBridgeCollapseEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
