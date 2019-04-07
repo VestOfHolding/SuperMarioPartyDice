@@ -1,6 +1,7 @@
 package simulation;
 
 import boards.BaseBoard;
+import boards.WhompsDominoRuins;
 import boards.spaces.BaseSpace;
 import partydice.Dice;
 import results.CoinResult;
@@ -9,7 +10,6 @@ import results.MoveResult;
 import stattracker.AllyStatTracker;
 import stattracker.GameStatTracker;
 import stattracker.SimulationStatTracker;
-import utils.OnlineStatistics;
 import utils.RandomUtils;
 
 import java.text.DecimalFormat;
@@ -20,40 +20,34 @@ public class Simulation {
     protected static final int TURN_COUNT = 20;
     protected static final int SIM_COUNT = 6000000;
 
-    public void simulate() throws Exception {
-        System.out.println("Character\tDistance Avg\tDistance SD\tCoin Avg\tCoin SD");
+    protected BaseBoard gameBoard;
 
-        OnlineStatistics coins;
-        OnlineStatistics distance;
-        GameStatTracker gameStatTracker;
+    public Simulation() {
+        this.gameBoard = new WhompsDominoRuins();
+    }
+
+    public Simulation(BaseBoard gameBoard) {
+        this.gameBoard = gameBoard;
+    }
+
+    public void simulate() {
+        SimulationStatTracker simulationStatTracker;
+
+        printTableHeaders();
 
         for (Dice characterDie : Dice.values()) {
-            coins = new OnlineStatistics();
-            distance = new OnlineStatistics();
+            simulationStatTracker = new SimulationStatTracker(characterDie);
 
             for (int i = 0; i < SIM_COUNT; ++i) {
-                gameStatTracker = new GameStatTracker();
-
-                for (int j = 0; j < TURN_COUNT; ++j) {
-
-
-                    gameStatTracker.addDiceResult(characterDie.roll());
-                }
-
-                coins.addValue(gameStatTracker.getCoinTotal());
-                distance.addValue(gameStatTracker.getDistanceTotal());
+                simulationStatTracker.endGame(simulateGame(characterDie, simulationStatTracker));
+                gameBoard.resetBoard();
             }
 
-            System.out.println(String.join("\t",
-                    characterDie.getName(),
-                    DECIMAL_FORMAT.format(distance.getMean()),
-                    DECIMAL_FORMAT.format(distance.getStandardDeviation()),
-                    DECIMAL_FORMAT.format(coins.getMean()),
-                    DECIMAL_FORMAT.format(coins.getStandardDeviation())));
+            printSimulationResult(characterDie, simulationStatTracker, gameBoard.getTotalBoardSize());
         }
     }
 
-    protected void printTableHeaders(BaseBoard gameBoard) {
+    protected void printTableHeaders() {
         System.out.print("Character\tAllyCount\tFrequency\t" +
                 "Min Turn Gained\t1st Quartile Turn Gained\tAvg Turn Gained\t3rd Quartile Turn Gained\tMax Turn Gained\tTurn Gained SD\t" +
                 "Min Distance\t1st Quartile Distance\tDistance Avg\t3rd Quartile Distance\tMax Distance\tDistance SD\t" +
@@ -65,7 +59,7 @@ public class Simulation {
         System.out.println();
     }
 
-    protected GameStatTracker simulateGame(Dice characterDie, BaseBoard gameBoard, SimulationStatTracker simulationStatTracker) {
+    protected GameStatTracker simulateGame(Dice characterDie, SimulationStatTracker simulationStatTracker) {
         GameStatTracker gameStatTracker = simulationStatTracker.startNewGame(TURN_COUNT);
 
         BaseSpace currentSpace = gameBoard.getStartSpace();
