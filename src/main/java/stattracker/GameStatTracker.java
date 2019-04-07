@@ -41,7 +41,7 @@ public class GameStatTracker {
         turnMax = initialTurnCount;
         allyTotal = 0;
         distanceTotal = 0;
-        coinTotal = 0;
+        coinTotal = 5;
         landedSpacesAmounts = createNewInt2IntOpenHashMap();
 
         allyGainOnTurn = createNewInt2IntOpenHashMap();

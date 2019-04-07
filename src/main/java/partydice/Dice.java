@@ -64,6 +64,17 @@ public enum Dice {
         }
     }
 
+    public static Dice getRandomCharacterDie() {
+        Dice result;
+
+        //We only want to return a character die, not the normal one.
+        do {
+            result = Dice.values()[RandomUtils.getRandomInt(Dice.values().length - 1)];
+        } while (result == Dice.NORMAL_DICE);
+
+        return result;
+    }
+
     public DieResult roll() {
         return this.possibleRolls.get(RandomUtils.getRandomInt(5));
     }

@@ -7,7 +7,11 @@ import lombok.NoArgsConstructor;
 import partydice.Dice;
 import simulation.Player;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Getter
 @Builder
@@ -18,11 +22,14 @@ public class SimulationStatTracker {
 
     private Player mainPlayer;
 
+    private List<Player> allPlayers;
+
     private Map<Integer, AllyStatTracker> allyStatTrackers;
 
     public SimulationStatTracker(Dice characterDie) {
-        mainPlayer = new Player();
-        mainPlayer.setCharacterDice(characterDie);
+        mainPlayer = new Player(characterDie);
+
+        allPlayers = new ArrayList<>(4);
 
         allyStatTrackers = Map.of(0, new AllyStatTracker(0),
                 1, new AllyStatTracker(1),
@@ -32,10 +39,21 @@ public class SimulationStatTracker {
     }
 
     public Player startNewGame(int turnCount) {
-        GameStatTracker gameStatTracker = new GameStatTracker(turnCount);
-        gameStatTracker.setCoinTotal(5);
+        mainPlayer.setGameStatTracker(new GameStatTracker(turnCount));
 
-        mainPlayer.setGameStatTracker(gameStatTracker);
+        //Easier to keep adding players to this set until there are 4 unique players.
+        Set<Player> allPlayerSet = new HashSet<>();
+        allPlayerSet.add(mainPlayer);
+
+        //Across a series of simulations, only the main character we're testing will remain the same.
+        while (allPlayerSet.size() < 4) {
+            allPlayerSet.add(new Player(Dice.getRandomCharacterDie(), new GameStatTracker(turnCount)));
+        }
+
+        //Since order is not preserved in sets, this also kind of accidentally simulates a random
+        // turn order for the characters that will now be consistent for the game.
+        allPlayers = new ArrayList<>(allPlayerSet);
+
         return mainPlayer;
     }
 
