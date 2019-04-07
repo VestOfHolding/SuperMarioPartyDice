@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.collections4.CollectionUtils;
 import partydice.BobombAlly;
 import partydice.Dice;
 import results.CoinResult;
@@ -99,6 +100,14 @@ public class GameStatTracker {
         if (allyTotal >= 4) {
             allyTotal--;
         }
+    }
+
+    public void removeBobombAlly() {
+        if (CollectionUtils.isEmpty(bobombAllies)) {
+            return;
+        }
+
+        bobombAllies.remove(bobombAllies.size() - 1);
     }
 
     public void addLandedSpace(BaseSpace baseSpace) {

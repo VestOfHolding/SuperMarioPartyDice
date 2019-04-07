@@ -1,8 +1,11 @@
 package simulation;
 
 import boards.BaseBoard;
+import boards.KingBobombsPowderkegMine;
 import boards.WhompsDominoRuins;
 import boards.spaces.BaseSpace;
+import org.apache.commons.collections4.CollectionUtils;
+import partydice.BobombAlly;
 import partydice.Dice;
 import results.CoinResult;
 import results.DieResult;
@@ -124,6 +127,24 @@ public class Simulation {
         //Each ally rolls either 1 or 2.
         for (int i = 0; i < numAllies; ++i) {
             result += RandomUtils.getRandomInt(1, 2);
+        }
+
+        //Let's short circuit this a bit since we know only King Bo-bomb's map
+        // even has Bo-bomb allies.
+        if (gameBoard instanceof KingBobombsPowderkegMine) {
+            int explodedBobombAllyCount = 0;
+
+            for (BobombAlly bobombAlly : CollectionUtils.emptyIfNull(gameStatTracker.getBobombAllies())) {
+                result += bobombAlly.rollBobombAlly();
+
+                if (bobombAlly.explode()) {
+                    explodedBobombAllyCount++;
+                }
+            }
+
+            for (int i = 0; i < explodedBobombAllyCount; ++i) {
+                gameStatTracker.removeBobombAlly();
+            }
         }
 
         return result;
