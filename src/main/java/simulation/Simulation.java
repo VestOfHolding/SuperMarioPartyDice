@@ -26,6 +26,8 @@ public class Simulation {
 
     protected BaseBoard gameBoard;
 
+    protected SimulationStatTracker simulationStatTracker;
+
     public Simulation() {
         this.gameBoard = new WhompsDominoRuins();
     }
@@ -35,20 +37,18 @@ public class Simulation {
     }
 
     public void simulate() {
-        SimulationStatTracker simulationStatTracker;
-
         printTableHeaders();
 
         for (Dice characterDie : Dice.values()) {
             simulationStatTracker = new SimulationStatTracker(characterDie);
 
             for (int i = 0; i < SIM_COUNT; ++i) {
-                simulateGame(simulationStatTracker);
+                simulateGame();
                 simulationStatTracker.endGame();
                 gameBoard.resetBoard();
             }
 
-            printSimulationResult(characterDie, simulationStatTracker, gameBoard.getTotalBoardSize());
+            printSimulationResult(characterDie, gameBoard.getTotalBoardSize());
         }
     }
 
@@ -64,7 +64,7 @@ public class Simulation {
         System.out.println();
     }
 
-    protected void simulateGame(SimulationStatTracker simulationStatTracker) {
+    protected void simulateGame() {
         List<Player> players = simulationStatTracker.startNewGame(TURN_COUNT);
 
         players.forEach(player -> player.setCurrentSpace(gameBoard.getStartSpace()));
@@ -114,9 +114,7 @@ public class Simulation {
         gameBoard.lastThreeTurns();
     }
 
-    protected void printSimulationResult(Dice characterDie,
-                                         SimulationStatTracker simulationStatTracker,
-                                         int possibleSpaces) {
+    protected void printSimulationResult(Dice characterDie, int possibleSpaces) {
         for (AllyStatTracker allyStatTracker : simulationStatTracker.getAllyStatTrackers().values()) {
             System.out.println(characterDie.getName() + "\t" + allyStatTracker.toStatString(SIM_COUNT, possibleSpaces));
         }

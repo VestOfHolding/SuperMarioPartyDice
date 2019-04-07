@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 import partydice.BobombAlly;
-import partydice.Dice;
 import results.CoinResult;
 import results.DieResult;
 import results.MoveResult;
