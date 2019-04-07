@@ -9,6 +9,7 @@ import boards.spaces.events.EventSpace;
 import boards.spaces.events.KTT.ChainChompSpace;
 import boards.spaces.events.KTT.ForcedShopSpace;
 import boards.spaces.events.KTT.ThwompShortcutSpace;
+import simulation.Player;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
@@ -121,7 +122,9 @@ public class KameksTantalizingTower extends BaseBoard  {
     }
 
     @Override
-    public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
+    public BaseSpace getDestination(Player player, int distance) {
+        BaseSpace currentSpace = player.getCurrentSpace();
+        GameStatTracker gameStatTracker = player.getGameStatTracker();
 
         for (int i = 0; i < distance; ++i) {
             currentSpace = getNextSpace(currentSpace, gameStatTracker);
@@ -131,12 +134,12 @@ public class KameksTantalizingTower extends BaseBoard  {
             }
 
             if (currentSpace.isPassingEvent()) {
-                currentSpace = processEvent(gameStatTracker, currentSpace);
+                currentSpace = processEvent(player);
             }
         }
 
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
-            currentSpace = processEvent(gameStatTracker, currentSpace);
+            currentSpace = processEvent(player);
         }
 
         return currentSpace;

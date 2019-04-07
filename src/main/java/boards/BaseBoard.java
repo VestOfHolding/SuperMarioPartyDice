@@ -11,6 +11,7 @@ import boards.spaces.events.SandBridgeCollapse;
 import lombok.Getter;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.builder.GraphBuilder;
+import simulation.Player;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
@@ -115,17 +116,11 @@ public abstract class BaseBoard {
     }
 
     public List<BaseSpace> getNextSpaces(BaseSpace startingSpace) {
-        List<BaseSpace> result = new ArrayList<>();
-        try {
-            result = Graphs.successorListOf(board, startingSpace);
-        }
-        catch (IllegalArgumentException iae) {
-            int i = 0;
-        }
-        return result;
+        return Graphs.successorListOf(board, startingSpace);
     }
 
-    public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
+    public BaseSpace getDestination(Player player, int distance) {
+        BaseSpace currentSpace = player.getCurrentSpace();
 
         for (int i = 0; i < distance; ++i) {
             currentSpace = getNextSpace(currentSpace);
@@ -135,12 +130,12 @@ public abstract class BaseBoard {
             }
 
             if (currentSpace.isPassingEvent()) {
-                currentSpace = processEvent(gameStatTracker, currentSpace);
+                currentSpace = processEvent(player);
             }
         }
 
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
-            currentSpace = processEvent(gameStatTracker, currentSpace);
+            currentSpace = processEvent(player);
         }
 
         return currentSpace;
@@ -251,6 +246,10 @@ public abstract class BaseBoard {
         }
 
         return currentSpace;
+    }
+
+    protected BaseSpace processEvent(Player player) {
+        return processEvent(player.getGameStatTracker(), player.getCurrentSpace());
     }
 
     protected BaseSpace processBridgeCollapseEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {

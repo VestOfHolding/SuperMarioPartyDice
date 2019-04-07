@@ -74,11 +74,11 @@ public class Simulation {
                 lastThreeTurns(gameBoard);
             }
 
-            players.forEach(player -> player.setCurrentSpace(simulateTurn(player, player.getCurrentSpace())));
+            players.forEach(this::simulateTurn);
         }
     }
 
-    protected BaseSpace simulateTurn(Player player, BaseSpace currentSpace) {
+    protected void simulateTurn(Player player) {
         DieResult result = player.rollCharacterDie();
         GameStatTracker gameStatTracker = player.getGameStatTracker();
 
@@ -97,15 +97,17 @@ public class Simulation {
 
         gameStatTracker.addDistance(moveAmount);
 
+        BaseSpace currentSpace = player.getCurrentSpace();
         if (moveAmount > 0) {
-            currentSpace = gameBoard.getDestination(currentSpace, moveAmount, gameStatTracker);
+            currentSpace = gameBoard.getDestination(player, moveAmount);
         }
 
 //        gameStatTracker.addLandedSpace(currentSpace);
 
         gameStatTracker.addCoins(currentSpace.coinGain());
         gameStatTracker.incrementTurn();
-        return currentSpace;
+
+        player.setCurrentSpace(currentSpace);
     }
 
     protected void lastThreeTurns(BaseBoard gameBoard) {

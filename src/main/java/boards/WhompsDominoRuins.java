@@ -7,6 +7,7 @@ import boards.spaces.events.LakituSpace;
 import boards.spaces.events.WDR.ChooseTreasureChestEvent;
 import boards.spaces.events.WDR.WhompSwitch;
 import boards.spaces.events.WDR.WhompsOnTheRun;
+import simulation.Player;
 import stattracker.GameStatTracker;
 
 public class WhompsDominoRuins extends BaseBoard {
@@ -161,7 +162,9 @@ public class WhompsDominoRuins extends BaseBoard {
     }
 
     @Override
-    public BaseSpace getDestination(BaseSpace currentSpace, int distance, GameStatTracker gameStatTracker) {
+    public BaseSpace getDestination(Player player, int distance) {
+        BaseSpace currentSpace = player.getCurrentSpace();
+        GameStatTracker gameStatTracker = player.getGameStatTracker();
 
         for (int i = 0; i < distance; ++i) {
             currentSpace = getNextSpace(currentSpace, gameStatTracker);
@@ -171,12 +174,12 @@ public class WhompsDominoRuins extends BaseBoard {
             }
 
             if (currentSpace.isPassingEvent()) {
-                currentSpace = processEvent(gameStatTracker, currentSpace);
+                currentSpace = processEvent(player);
             }
         }
 
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
-            currentSpace = processEvent(gameStatTracker, currentSpace);
+            currentSpace = processEvent(player);
         }
 
         return currentSpace;
