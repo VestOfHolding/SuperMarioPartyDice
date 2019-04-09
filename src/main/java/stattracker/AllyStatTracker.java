@@ -27,6 +27,8 @@ public class AllyStatTracker {
 
     private OnlineStatistics starCounts;
 
+    private OnlineStatistics placings;
+
     Map<Integer, OnlineStatistics> landedSpacesStats;
 
     public AllyStatTracker(int allyCount) {
@@ -35,6 +37,7 @@ public class AllyStatTracker {
         distances = new OnlineStatistics();
         coinCounts = new OnlineStatistics();
         starCounts = new OnlineStatistics();
+        placings = new OnlineStatistics();
         landedSpacesStats = new HashMap<>();
     }
 
@@ -52,6 +55,10 @@ public class AllyStatTracker {
 
     public void addStarCount(int starCount) {
         starCounts.addValue(starCount);
+    }
+
+    public void addPlacement(Place place) {
+        placings.addValue(place.getPlaceNum());
     }
 
     public void addLandedSpaceCount(Map<Integer, Integer> landedSpaceCount) {
@@ -80,6 +87,10 @@ public class AllyStatTracker {
 
     public double getAverageStarCount() {
         return starCounts.getMean();
+    }
+
+    public double getAveragePlace() {
+        return placings.getMean();
     }
 
     public int getAmountOccured() {
@@ -114,7 +125,8 @@ public class AllyStatTracker {
                 .append(DECIMAL_FORMAT.format(getAverageStarCount())).append("\t")
                 .append(DECIMAL_FORMAT.format(starCounts.getThirdQuartile())).append("\t")
                 .append(DECIMAL_FORMAT.format(starCounts.getMax())).append("\t")
-                .append(DECIMAL_FORMAT.format(starCounts.getStandardDeviation())).append("\t");
+                .append(DECIMAL_FORMAT.format(starCounts.getStandardDeviation())).append("\t")
+                .append(DECIMAL_FORMAT.format(getAveragePlace())).append("\t");
 
 //        double spaceCountSum = landedSpacesStats.values().stream()
 //                .mapToDouble(OnlineStatistics::getCount)

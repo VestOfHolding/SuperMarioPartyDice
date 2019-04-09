@@ -2,27 +2,26 @@ package simulation;
 
 import boards.spaces.BaseSpace;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import partydice.Dice;
 import results.DieResult;
 import stattracker.GameStatTracker;
 import stattracker.Place;
 
 import java.util.Comparator;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class Player implements Comparable {
     private Dice characterDice;
 
-    @EqualsAndHashCode.Exclude
     private GameStatTracker gameStatTracker;
 
-    @EqualsAndHashCode.Exclude
     private BaseSpace currentSpace;
 
-    @EqualsAndHashCode.Exclude
     private Place currentPlace;
 
     public Player(Dice characterDice) {
@@ -39,6 +38,14 @@ public class Player implements Comparable {
         return characterDice.roll();
     }
 
+    public boolean isFirstOrSecond() {
+        return currentPlace == Place.FIRST || currentPlace == Place.SECOND;
+    }
+
+    public boolean isInLastPlace() {
+        return currentPlace == Place.FOURTH;
+    }
+
     @Override
     public int compareTo(Object o) {
         Player otherPlayer = (Player)o;
@@ -48,11 +55,21 @@ public class Player implements Comparable {
                 .compare(gameStatTracker, otherPlayer.gameStatTracker);
     }
 
-    public boolean isFirstOrSecond() {
-        return currentPlace == Place.FIRST || currentPlace == Place.SECOND;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Player player = (Player) o;
+        return characterDice == player.characterDice;
     }
 
-    public boolean isInLastPlace() {
-        return currentPlace == Place.FOURTH;
+    @Override
+    public int hashCode() {
+        return Objects.hash(characterDice);
     }
 }

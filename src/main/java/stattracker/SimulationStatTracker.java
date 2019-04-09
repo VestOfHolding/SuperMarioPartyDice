@@ -65,6 +65,7 @@ public class SimulationStatTracker {
         allyStatTracker.addCoinCount(gameStatTracker.getCoinTotal());
         allyStatTracker.addDistance(gameStatTracker.getDistanceTotal());
         allyStatTracker.addStarCount(gameStatTracker.getStarCount());
+        allyStatTracker.addPlacement(mainPlayer.getCurrentPlace());
 //        allyStatTracker.addLandedSpaceCount(gameStatTracker.getLandedSpacesAmounts());
 
         //Keep track of what turns all allies were gained, not just the last one.

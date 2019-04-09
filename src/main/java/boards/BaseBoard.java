@@ -129,12 +129,12 @@ public abstract class BaseBoard {
             }
 
             if (currentSpace.isPassingEvent()) {
-                currentSpace = processEvent(player);
+                currentSpace = processEvent(player.getGameStatTracker(), currentSpace);
             }
         }
 
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
-            currentSpace = processEvent(player);
+            currentSpace = processEvent(player.getGameStatTracker(), currentSpace);
         }
 
         return currentSpace;
@@ -159,9 +159,7 @@ public abstract class BaseBoard {
         }
     }
 
-    protected BaseSpace processEvent(Player player) {
-        BaseSpace currentSpace = player.getCurrentSpace();
-        GameStatTracker gameStatTracker = player.getGameStatTracker();
+    protected BaseSpace processEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
 
         if (currentSpace instanceof SandBridgeCollapse) {
             currentSpace = processBridgeCollapseEvent(gameStatTracker, currentSpace);

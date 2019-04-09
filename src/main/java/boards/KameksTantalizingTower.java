@@ -134,12 +134,12 @@ public class KameksTantalizingTower extends BaseBoard  {
             }
 
             if (currentSpace.isPassingEvent()) {
-                currentSpace = processEvent(player);
+                currentSpace = processEvent(player.getGameStatTracker(), currentSpace);
             }
         }
 
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
-            currentSpace = processEvent(player);
+            currentSpace = processEvent(player.getGameStatTracker(), currentSpace);
         }
 
         return currentSpace;
