@@ -7,6 +7,7 @@ import boards.spaces.SpaceFactory;
 import boards.spaces.StarSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.KTT.ChainChompSpace;
+import boards.spaces.events.KTT.ChangeStarPriceSpace;
 import boards.spaces.events.KTT.ForcedShopSpace;
 import boards.spaces.events.KTT.ThwompShortcutSpace;
 import simulation.Player;
@@ -49,7 +50,7 @@ public class KameksTantalizingTower extends BaseBoard  {
                 new ChainChompSpace(index++, 16, 30),
                 newBlueKamekSpace(index++, 7, 30), //ID = 17
                 SpaceFactory.createBadLuckSpace(index++, 7, 34),
-                SpaceFactory.createEventSpace(index++, 15, 34),
+                new ChangeStarPriceSpace(index++, 15, 34),
                 SpaceFactory.createStarSpace(index++, 18, 34),
                 SpaceFactory.createNonMovementSpace(index++, 20, 38) //ID = 21
         ).addEdgeChain(
