@@ -31,34 +31,33 @@ public class BadLuckSpace extends EventSpace {
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 Player currentPlayer, List<Player> allPlayers) {
         BadLuckEventTable eventTable;
-        boolean coinFlip = RandomUtils.isFlippedCoinHeads();
         GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
         if (gameStatTracker.isLastThreeTurns()) {
-            eventTable = getExtraBadLuckTable(coinFlip);
+            eventTable = getExtraBadLuckTable(currentPlayer);
         }
         else if (gameStatTracker.isHalfwayOver()) {
             if (gameBoard.isKamekBoard()) {
-                eventTable = coinFlip ? BadLuckEventTable.KAMEK_SECOND_HALF_1ST_2ND : BadLuckEventTable.KAMEK_SECOND_HALF_3RD_4TH;
+                eventTable = currentPlayer.isFirstOrSecond() ? BadLuckEventTable.KAMEK_SECOND_HALF_1ST_2ND : BadLuckEventTable.KAMEK_SECOND_HALF_3RD_4TH;
             }
             else {
-                eventTable = coinFlip ? BadLuckEventTable.SECOND_HALF_1ST_2ND : BadLuckEventTable.SECOND_HALF_3RD_4TH;
+                eventTable = currentPlayer.isFirstOrSecond() ? BadLuckEventTable.SECOND_HALF_1ST_2ND : BadLuckEventTable.SECOND_HALF_3RD_4TH;
             }
         }
         else {
             if (gameBoard.isKamekBoard()) {
-                eventTable = coinFlip ? BadLuckEventTable.KAMEK_FIRST_HALF_1ST_2ND : BadLuckEventTable.KAMEK_FIRST_HALF_3RD_4TH;
+                eventTable = currentPlayer.isFirstOrSecond() ? BadLuckEventTable.KAMEK_FIRST_HALF_1ST_2ND : BadLuckEventTable.KAMEK_FIRST_HALF_3RD_4TH;
             }
             else {
-                eventTable = coinFlip ? BadLuckEventTable.FIRST_HALF_1ST_2ND : BadLuckEventTable.FIRST_HALF_3RD_4TH;
+                eventTable = currentPlayer.isFirstOrSecond() ? BadLuckEventTable.FIRST_HALF_1ST_2ND : BadLuckEventTable.FIRST_HALF_3RD_4TH;
             }
         }
 
         return commonProcessEvent(gameBoard, eventTable, gameStatTracker);
     }
 
-    private BadLuckEventTable getExtraBadLuckTable(boolean coinFlip) {
-        return coinFlip ? BadLuckEventTable.SUPER_BAD_LUCK_1ST_2ND : BadLuckEventTable.SUPER_BAD_LUCK_3RD_4TH;
+    private BadLuckEventTable getExtraBadLuckTable(Player currentPlayer) {
+        return currentPlayer.isFirstOrSecond() ? BadLuckEventTable.SUPER_BAD_LUCK_1ST_2ND : BadLuckEventTable.SUPER_BAD_LUCK_3RD_4TH;
     }
 
     private boolean commonProcessEvent(MPBoard<BaseSpace, MPEdge> gameBoard, BadLuckEventTable eventTable, GameStatTracker gameStatTracker) {

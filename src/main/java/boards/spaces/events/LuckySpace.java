@@ -31,23 +31,22 @@ public class LuckySpace extends EventSpace {
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 Player currentPlayer, List<Player> allPlayers) {
         LuckyEventTable eventTable;
-        boolean coinFlip = RandomUtils.isFlippedCoinHeads();
         GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
         if (gameBoard.isKamekBoard()) {
             if (gameStatTracker.isHalfwayOver()) {
-                eventTable = coinFlip ? LuckyEventTable.KAMEK_SECOND_HALF_1ST_2ND : LuckyEventTable.KAMEK_SECOND_HALF_3RD_4TH;
+                eventTable = currentPlayer.isFirstOrSecond() ? LuckyEventTable.KAMEK_SECOND_HALF_1ST_2ND : LuckyEventTable.KAMEK_SECOND_HALF_3RD_4TH;
             }
             else {
-                eventTable = coinFlip ? LuckyEventTable.KAMEK_FIRST_HALF_1ST_2ND : LuckyEventTable.KAMEK_FIRST_HALF_3RD_4TH;
+                eventTable = currentPlayer.isFirstOrSecond() ? LuckyEventTable.KAMEK_FIRST_HALF_1ST_2ND : LuckyEventTable.KAMEK_FIRST_HALF_3RD_4TH;
             }
         }
         else {
             if (gameStatTracker.isHalfwayOver()) {
-                eventTable = coinFlip ? LuckyEventTable.SECOND_HALF_1ST_2ND : LuckyEventTable.SECOND_HALF_3RD_4TH;
+                eventTable = currentPlayer.isFirstOrSecond() ? LuckyEventTable.SECOND_HALF_1ST_2ND : LuckyEventTable.SECOND_HALF_3RD_4TH;
             }
             else {
-                eventTable = coinFlip ? LuckyEventTable.FIRST_HALF_1ST_2ND : LuckyEventTable.FIRST_HALF_3RD_4TH;
+                eventTable = currentPlayer.isFirstOrSecond() ? LuckyEventTable.FIRST_HALF_1ST_2ND : LuckyEventTable.FIRST_HALF_3RD_4TH;
             }
         }
 
