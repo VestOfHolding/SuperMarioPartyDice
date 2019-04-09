@@ -7,8 +7,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
 import utils.SpaceUIClass;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -30,7 +32,7 @@ public class LakituSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
 //        gameStatTracker.addCoins(RandomUtils.getRandomInt(5, 10));
         return true;
     }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import simulation.Player;
 import stattracker.GameStatTracker;
 import utils.LuckEvent;
 import utils.LuckyEventTable;
@@ -14,6 +15,7 @@ import utils.RandomUtils;
 import utils.SpaceUIClass;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,9 +29,10 @@ public class LuckySpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         LuckyEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
+        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
         if (gameStatTracker.isHalfwayOver()) {
             eventTable = coinFlip ? LuckyEventTable.SECOND_HALF_1ST_2ND : LuckyEventTable.SECOND_HALF_3RD_4TH;
@@ -43,9 +46,10 @@ public class LuckySpace extends EventSpace {
 
     @Override
     public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                     GameStatTracker gameStatTracker) {
+                                     Player currentPlayer, List<Player> allPlayers) {
         LuckyEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
+        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
         if (gameStatTracker.isHalfwayOver()) {
             eventTable = coinFlip ? LuckyEventTable.KAMEK_SECOND_HALF_1ST_2ND : LuckyEventTable.KAMEK_SECOND_HALF_3RD_4TH;

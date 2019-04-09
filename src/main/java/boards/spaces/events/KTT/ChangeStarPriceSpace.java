@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
 import utils.RandomUtils;
 
 import java.util.Arrays;
@@ -31,7 +31,7 @@ public class ChangeStarPriceSpace extends EventSpace {
 
     @Override
     public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                     Player currentPlayer, List<Player> allPlayers) {
         //The next price of the star must be different from the current price.
         int nextPrice;
         do {

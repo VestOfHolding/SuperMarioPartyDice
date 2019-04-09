@@ -8,8 +8,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
 import utils.RandomUtils;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,11 +29,11 @@ public class ChainChompSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         //The Chain Chomp comes and steals coins.
         // Not fully sure what the range of possibilities is here yet.
         // I've seen both 5 and 7, though not sure what the percentage chance is.
-        gameStatTracker.addCoins(RandomUtils.isFlippedCoinHeads() ? -5 : -7);
+        currentPlayer.getGameStatTracker().addCoins(RandomUtils.isFlippedCoinHeads() ? -5 : -7);
         return true;
     }
 }

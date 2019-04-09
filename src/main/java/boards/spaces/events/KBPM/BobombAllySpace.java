@@ -8,7 +8,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -30,8 +32,8 @@ public class BobombAllySpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
-        gameStatTracker.addBobombAlly();
+                                Player currentPlayer, List<Player> allPlayers) {
+        currentPlayer.getGameStatTracker().addBobombAlly();
         return true;
     }
 }

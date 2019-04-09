@@ -5,8 +5,11 @@ import boards.layout.MPBoard;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import simulation.Player;
 import stattracker.GameStatTracker;
 import utils.SpaceUIClass;
+
+import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -36,12 +39,12 @@ public class BaseSpace {
         return -1;
     }
 
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker) {
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, List<Player> allPlayers) {
         return false;
     }
 
-    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker) {
-        return processEvent(gameBoard, gameStatTracker);
+    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, List<Player> allPlayers) {
+        return processEvent(gameBoard, currentPlayer, allPlayers);
     }
 
     public boolean affectsMovement() {

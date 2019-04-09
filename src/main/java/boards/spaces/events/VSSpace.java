@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
 import utils.RandomUtils;
 import utils.SpaceUIClass;
 
@@ -32,7 +32,7 @@ public class VSSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         int wager = POSSIBLE_WAGERS.get(RandomUtils.getRandomInt(POSSIBLE_WAGERS.size() - 1));
 
         int totalPot = wager * 4;

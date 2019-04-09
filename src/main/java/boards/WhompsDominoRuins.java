@@ -174,12 +174,12 @@ public class WhompsDominoRuins extends BaseBoard {
             }
 
             if (currentSpace.isPassingEvent()) {
-                currentSpace = processEvent(player.getGameStatTracker(), currentSpace);
+                currentSpace = processEvent(player, currentSpace);
             }
         }
 
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
-            currentSpace = processEvent(player.getGameStatTracker(), currentSpace);
+            currentSpace = processEvent(player, currentSpace);
         }
 
         return currentSpace;

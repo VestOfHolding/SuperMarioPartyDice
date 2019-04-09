@@ -8,8 +8,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
 
+import java.util.List;
 import java.util.Objects;
 
 @EqualsAndHashCode(callSuper = true)
@@ -40,7 +41,7 @@ public class MoveEventSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         if (turnsBlue) {
             //For now, just handle the fact that this space becomes a Blue Space once it's used.
             gameBoard.setOrReplaceVertex(spaceID, new BlueSpace());

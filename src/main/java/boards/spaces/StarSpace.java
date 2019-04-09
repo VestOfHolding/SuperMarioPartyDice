@@ -6,8 +6,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import simulation.Player;
 import stattracker.GameStatTracker;
 import utils.SpaceUIClass;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -52,7 +55,8 @@ public class StarSpace extends BlueSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker) {
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, List<Player> allPlayers) {
+        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
         if (starActive && gameStatTracker.getCoinTotal() >= gameBoard.getStarCost()) {
             gameStatTracker.addCoins(-1 * gameBoard.getStarCost());
             gameStatTracker.addStar();
@@ -65,7 +69,8 @@ public class StarSpace extends BlueSpace {
     }
 
     @Override
-    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard, GameStatTracker gameStatTracker) {
+    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, List<Player> allPlayers) {
+        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
         //The star is always active on the same space on this board.
         if (gameStatTracker.getCoinTotal() >= gameBoard.getStarCost()) {
             gameStatTracker.addCoins(-1 * gameBoard.getStarCost());

@@ -7,8 +7,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
 import utils.RandomUtils;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -45,14 +47,14 @@ public class SandBridgeCollapse extends MoveEventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         decrementCountdown();
 
         if (countdown <= 0) {
             //The bridge collapses
             gameBoard.removeEdge(gameBoard.getVertexById(9), gameBoard.getVertexById(59));
             gameBoard.removeEdge(gameBoard.getVertexById(59), gameBoard.getVertexById(14));
-            gameStatTracker.addCoins(-3);
+            currentPlayer.getGameStatTracker().addCoins(-3);
             return true;
         }
         return false;

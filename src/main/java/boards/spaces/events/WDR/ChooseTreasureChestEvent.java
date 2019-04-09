@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class ChooseTreasureChestEvent extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         if (REWARDS.isEmpty()) {
             return false;
         }
@@ -53,7 +53,7 @@ public class ChooseTreasureChestEvent extends EventSpace {
 
         REWARDS.remove(reward);
 
-        gameStatTracker.addCoins(reward);
+        currentPlayer.getGameStatTracker().addCoins(reward);
 
         return true;
     }

@@ -8,8 +8,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import simulation.Player;
 import stattracker.GameStatTracker;
 import utils.SpaceUIClass;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -38,12 +41,12 @@ public class WhompsOnTheRun extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         if (!isActive()) {
             return false;
         }
 
-        gameStatTracker.addCoins(-COST);
+        currentPlayer.getGameStatTracker().addCoins(-COST);
 
         whompSwitch(gameBoard);
         return true;

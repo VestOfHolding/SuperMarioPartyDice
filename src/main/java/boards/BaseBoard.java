@@ -27,6 +27,8 @@ public abstract class BaseBoard {
 
     protected List<StarSpace> starSpaces = new ArrayList<>();
 
+    protected List<Player> players = new ArrayList<>();
+
     protected void initializeBoard() {
         board = new MPBoard<>(MPEdge.class);
         graphBuilder = new GraphBuilder<>(new MPBoard<>(MPEdge.class));
@@ -53,6 +55,10 @@ public abstract class BaseBoard {
     public void resetBoard() {
         board = new MPBoard<>(MPEdge.class);
         initializeBoard();
+    }
+
+    public void setCurrentPlayers(List<Player> players) {
+        this.players = players;
     }
 
     /**
@@ -129,12 +135,12 @@ public abstract class BaseBoard {
             }
 
             if (currentSpace.isPassingEvent()) {
-                currentSpace = processEvent(player.getGameStatTracker(), currentSpace);
+                currentSpace = processEvent(player, currentSpace);
             }
         }
 
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
-            currentSpace = processEvent(player.getGameStatTracker(), currentSpace);
+            currentSpace = processEvent(player, currentSpace);
         }
 
         return currentSpace;
@@ -159,24 +165,23 @@ public abstract class BaseBoard {
         }
     }
 
-    protected BaseSpace processEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
-
+    protected BaseSpace processEvent(Player player, BaseSpace currentSpace) {
         if (currentSpace instanceof SandBridgeCollapse) {
-            currentSpace = processBridgeCollapseEvent(gameStatTracker, currentSpace);
+            currentSpace = processBridgeCollapseEvent(player, currentSpace);
         }
         else if (currentSpace instanceof MoveEventSpace && currentSpace.moveToSpace() > -1) {
             MoveEventSpace eventSpace = (MoveEventSpace) currentSpace;
             currentSpace = board.getVertexById(eventSpace.moveToSpace());
 
             //This is where the event space gets transformed into a blue space.
-            eventSpace.processEvent(board, gameStatTracker);
+            eventSpace.processEvent(board, player, players);
         }
         else if (this instanceof KameksTantalizingTower) {
-            currentSpace.processKamekEvent(board, gameStatTracker);
+            currentSpace.processKamekEvent(board, player, players);
             currentSpace = board.getVertexById(currentSpace.getSpaceID());
         }
         else {
-            currentSpace.processEvent(board, gameStatTracker);
+            currentSpace.processEvent(board, player, players);
             currentSpace = board.getVertexById(currentSpace.getSpaceID());
         }
 
@@ -187,8 +192,8 @@ public abstract class BaseBoard {
         return currentSpace;
     }
 
-    protected BaseSpace processBridgeCollapseEvent(GameStatTracker gameStatTracker, BaseSpace currentSpace) {
-        boolean bridgeCollapsed = currentSpace.processEvent(board, gameStatTracker);
+    protected BaseSpace processBridgeCollapseEvent(Player player, BaseSpace currentSpace) {
+        boolean bridgeCollapsed = currentSpace.processEvent(board, player, players);
 
         if (bridgeCollapsed) {
             return board.getVertexById(currentSpace.moveToSpace());

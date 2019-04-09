@@ -8,7 +8,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -25,11 +27,11 @@ public class RoyalExplosionEvent extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         boolean explosionTime = gameBoard.decrementCountdown();
 
         if (explosionTime) {
-            gameStatTracker.setCoinTotal(gameStatTracker.getCoinTotal() / 2);
+            currentPlayer.getGameStatTracker().setCoinTotal(currentPlayer.getGameStatTracker().getCoinTotal() / 2);
             return true;
         }
         return false;

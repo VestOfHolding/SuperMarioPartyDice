@@ -71,6 +71,7 @@ public class Simulation {
 
     protected void simulateGame() {
         List<Player> players = simulationStatTracker.startNewGame(TURN_COUNT);
+        gameBoard.setCurrentPlayers(players);
 
         players.forEach(player -> player.setCurrentSpace(gameBoard.getStartSpace()));
 

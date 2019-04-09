@@ -8,7 +8,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import stattracker.GameStatTracker;
+import simulation.Player;
+
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -30,9 +32,9 @@ public class ForcedShopSpace extends NonMovementSpace {
 
     @Override
     public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                     GameStatTracker gameStatTracker) {
+                                     Player currentPlayer, List<Player> allPlayers) {
         //This is a shop that sells everything for 6 coins, and you MUST buy something.
-        gameStatTracker.addCoins(-6);
+        currentPlayer.getGameStatTracker().addCoins(-6);
         return true;
     }
 }

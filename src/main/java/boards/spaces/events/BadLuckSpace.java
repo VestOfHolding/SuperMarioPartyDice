@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import simulation.Player;
 import stattracker.GameStatTracker;
 import utils.BadLuckEventTable;
 import utils.LuckEvent;
@@ -14,6 +15,7 @@ import utils.RandomUtils;
 import utils.SpaceUIClass;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,9 +29,10 @@ public class BadLuckSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                GameStatTracker gameStatTracker) {
+                                Player currentPlayer, List<Player> allPlayers) {
         BadLuckEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
+        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
         if (gameStatTracker.isLastThreeTurns()) {
             eventTable = getExtraBadLuckTable(coinFlip);
@@ -46,9 +49,10 @@ public class BadLuckSpace extends EventSpace {
 
     @Override
     public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                     GameStatTracker gameStatTracker) {
+                                     Player currentPlayer, List<Player> allPlayers) {
         BadLuckEventTable eventTable;
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
+        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
         if (gameStatTracker.isLastThreeTurns()) {
             eventTable = getExtraBadLuckTable(coinFlip);
