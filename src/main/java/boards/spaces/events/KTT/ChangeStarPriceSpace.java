@@ -30,7 +30,7 @@ public class ChangeStarPriceSpace extends EventSpace {
     }
 
     @Override
-    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                      Player currentPlayer, List<Player> allPlayers) {
         //The next price of the star must be different from the current price.
         int nextPrice;

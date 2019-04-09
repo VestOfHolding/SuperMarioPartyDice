@@ -31,6 +31,7 @@ public abstract class BaseBoard {
 
     protected void initializeBoard() {
         board = new MPBoard<>(MPEdge.class);
+        board.setKamekBoard(false);
         graphBuilder = new GraphBuilder<>(new MPBoard<>(MPEdge.class));
 
         buildInitialGraph();
@@ -175,10 +176,6 @@ public abstract class BaseBoard {
 
             //This is where the event space gets transformed into a blue space.
             eventSpace.processEvent(board, player, players);
-        }
-        else if (this instanceof KameksTantalizingTower) {
-            currentSpace.processKamekEvent(board, player, players);
-            currentSpace = board.getVertexById(currentSpace.getSpaceID());
         }
         else {
             currentSpace.processEvent(board, player, players);

@@ -31,7 +31,7 @@ public class ForcedShopSpace extends NonMovementSpace {
     }
 
     @Override
-    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                      Player currentPlayer, List<Player> allPlayers) {
         //This is a shop that sells everything for 6 coins, and you MUST buy something.
         currentPlayer.getGameStatTracker().addCoins(-6);

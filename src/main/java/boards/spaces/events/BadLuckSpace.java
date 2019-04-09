@@ -38,30 +38,20 @@ public class BadLuckSpace extends EventSpace {
             eventTable = getExtraBadLuckTable(coinFlip);
         }
         else if (gameStatTracker.isHalfwayOver()) {
-            eventTable = coinFlip ? BadLuckEventTable.SECOND_HALF_1ST_2ND : BadLuckEventTable.SECOND_HALF_3RD_4TH;
+            if (gameBoard.isKamekBoard()) {
+                eventTable = coinFlip ? BadLuckEventTable.KAMEK_SECOND_HALF_1ST_2ND : BadLuckEventTable.KAMEK_SECOND_HALF_3RD_4TH;
+            }
+            else {
+                eventTable = coinFlip ? BadLuckEventTable.SECOND_HALF_1ST_2ND : BadLuckEventTable.SECOND_HALF_3RD_4TH;
+            }
         }
         else {
-            eventTable = coinFlip ? BadLuckEventTable.FIRST_HALF_1ST_2ND : BadLuckEventTable.FIRST_HALF_3RD_4TH;
-        }
-
-        return commonProcessEvent(gameBoard, eventTable, gameStatTracker);
-    }
-
-    @Override
-    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                     Player currentPlayer, List<Player> allPlayers) {
-        BadLuckEventTable eventTable;
-        boolean coinFlip = RandomUtils.isFlippedCoinHeads();
-        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
-
-        if (gameStatTracker.isLastThreeTurns()) {
-            eventTable = getExtraBadLuckTable(coinFlip);
-        }
-        else if (gameStatTracker.isHalfwayOver()) {
-            eventTable = coinFlip ? BadLuckEventTable.KAMEK_SECOND_HALF_1ST_2ND : BadLuckEventTable.KAMEK_SECOND_HALF_3RD_4TH;
-        }
-        else {
-            eventTable = coinFlip ? BadLuckEventTable.KAMEK_FIRST_HALF_1ST_2ND : BadLuckEventTable.KAMEK_FIRST_HALF_3RD_4TH;
+            if (gameBoard.isKamekBoard()) {
+                eventTable = coinFlip ? BadLuckEventTable.KAMEK_FIRST_HALF_1ST_2ND : BadLuckEventTable.KAMEK_FIRST_HALF_3RD_4TH;
+            }
+            else {
+                eventTable = coinFlip ? BadLuckEventTable.FIRST_HALF_1ST_2ND : BadLuckEventTable.FIRST_HALF_3RD_4TH;
+            }
         }
 
         return commonProcessEvent(gameBoard, eventTable, gameStatTracker);

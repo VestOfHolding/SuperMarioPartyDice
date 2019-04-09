@@ -29,6 +29,10 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
     @Setter
     private boolean needToMoveStar = false;
 
+    @Getter
+    @Setter
+    private boolean isKamekBoard;
+
     public MPBoard(Class<? extends E> edgeClass) {
         super(edgeClass);
 

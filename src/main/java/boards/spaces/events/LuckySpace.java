@@ -34,28 +34,21 @@ public class LuckySpace extends EventSpace {
         boolean coinFlip = RandomUtils.isFlippedCoinHeads();
         GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
-        if (gameStatTracker.isHalfwayOver()) {
-            eventTable = coinFlip ? LuckyEventTable.SECOND_HALF_1ST_2ND : LuckyEventTable.SECOND_HALF_3RD_4TH;
+        if (gameBoard.isKamekBoard()) {
+            if (gameStatTracker.isHalfwayOver()) {
+                eventTable = coinFlip ? LuckyEventTable.KAMEK_SECOND_HALF_1ST_2ND : LuckyEventTable.KAMEK_SECOND_HALF_3RD_4TH;
+            }
+            else {
+                eventTable = coinFlip ? LuckyEventTable.KAMEK_FIRST_HALF_1ST_2ND : LuckyEventTable.KAMEK_FIRST_HALF_3RD_4TH;
+            }
         }
         else {
-            eventTable = coinFlip ? LuckyEventTable.FIRST_HALF_1ST_2ND : LuckyEventTable.FIRST_HALF_3RD_4TH;
-        }
-
-        return commonProcessEvent(eventTable, gameStatTracker);
-    }
-
-    @Override
-    public boolean processKamekEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                     Player currentPlayer, List<Player> allPlayers) {
-        LuckyEventTable eventTable;
-        boolean coinFlip = RandomUtils.isFlippedCoinHeads();
-        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
-
-        if (gameStatTracker.isHalfwayOver()) {
-            eventTable = coinFlip ? LuckyEventTable.KAMEK_SECOND_HALF_1ST_2ND : LuckyEventTable.KAMEK_SECOND_HALF_3RD_4TH;
-        }
-        else {
-            eventTable = coinFlip ? LuckyEventTable.KAMEK_FIRST_HALF_1ST_2ND : LuckyEventTable.KAMEK_FIRST_HALF_3RD_4TH;
+            if (gameStatTracker.isHalfwayOver()) {
+                eventTable = coinFlip ? LuckyEventTable.SECOND_HALF_1ST_2ND : LuckyEventTable.SECOND_HALF_3RD_4TH;
+            }
+            else {
+                eventTable = coinFlip ? LuckyEventTable.FIRST_HALF_1ST_2ND : LuckyEventTable.FIRST_HALF_3RD_4TH;
+            }
         }
 
         return commonProcessEvent(eventTable, gameStatTracker);

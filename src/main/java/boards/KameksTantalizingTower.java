@@ -81,6 +81,7 @@ public class KameksTantalizingTower extends BaseBoard  {
 
         board = graphBuilder.build();
         connectPaths();
+        board.setKamekBoard(true);
     }
 
     @Override
