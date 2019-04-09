@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
+import simulation.PlayerGroup;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class ChooseTreasureChestEvent extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                Player currentPlayer, List<Player> allPlayers) {
+                                Player currentPlayer, PlayerGroup playerGroup) {
         if (REWARDS.isEmpty()) {
             return false;
         }

@@ -9,8 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
-
-import java.util.List;
+import simulation.PlayerGroup;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -32,7 +31,7 @@ public class ForcedShopSpace extends NonMovementSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                     Player currentPlayer, List<Player> allPlayers) {
+                                Player currentPlayer, PlayerGroup playerGroup) {
         //This is a shop that sells everything for 6 coins, and you MUST buy something.
         currentPlayer.getGameStatTracker().addCoins(-6);
         return true;

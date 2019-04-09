@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
+import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
 import utils.SpaceUIClass;
-
-import java.util.List;
 
 @NoArgsConstructor
 @Data
@@ -39,7 +38,7 @@ public class BaseSpace {
         return -1;
     }
 
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, List<Player> allPlayers) {
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
         return false;
     }
 

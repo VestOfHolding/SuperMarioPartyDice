@@ -8,9 +8,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
+import simulation.PlayerGroup;
 import utils.SpaceUIClass;
-
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -23,7 +22,7 @@ public class AllySpace extends EventSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, List<Player> allPlayers) {
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
         currentPlayer.getGameStatTracker().addAlly();
         return true;
     }

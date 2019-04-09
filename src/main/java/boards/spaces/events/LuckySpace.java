@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
+import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
 import utils.LuckEvent;
 import utils.LuckyEventTable;
@@ -15,7 +16,6 @@ import utils.RandomUtils;
 import utils.SpaceUIClass;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -29,7 +29,7 @@ public class LuckySpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                Player currentPlayer, List<Player> allPlayers) {
+                                Player currentPlayer, PlayerGroup playerGroup) {
         LuckyEventTable eventTable;
         GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
@@ -50,10 +50,10 @@ public class LuckySpace extends EventSpace {
             }
         }
 
-        return commonProcessEvent(eventTable, gameStatTracker);
+        return processLuckyEvent(eventTable, gameStatTracker);
     }
 
-    private boolean commonProcessEvent(LuckyEventTable eventTable, GameStatTracker gameStatTracker) {
+    private boolean processLuckyEvent(LuckyEventTable eventTable, GameStatTracker gameStatTracker) {
         LuckEvent chosenEvent = new ArrayList<>(LuckyEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
 
         gameStatTracker.addCoins(chosenEvent.getCoinGain());

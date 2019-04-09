@@ -9,8 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
+import simulation.PlayerGroup;
 
-import java.util.List;
 import java.util.Objects;
 
 @EqualsAndHashCode(callSuper = true)
@@ -41,7 +41,7 @@ public class MoveEventSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                Player currentPlayer, List<Player> allPlayers) {
+                                Player currentPlayer, PlayerGroup playerGroup) {
         if (turnsBlue) {
             //For now, just handle the fact that this space becomes a Blue Space once it's used.
             gameBoard.setOrReplaceVertex(spaceID, new BlueSpace());

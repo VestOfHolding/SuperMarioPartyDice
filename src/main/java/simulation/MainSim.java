@@ -13,7 +13,7 @@ public class MainSim {
         System.setProperty("org.graphstream.ui", "swing");
 
         StopWatch stopWatch = StopWatch.createStarted();
-        BaseBoard board = new KameksTantalizingTower();
+        BaseBoard board = new WhompsDominoRuins();
 
 //        GraphDisplay display = new GraphDisplay();
 //        display.display(board);

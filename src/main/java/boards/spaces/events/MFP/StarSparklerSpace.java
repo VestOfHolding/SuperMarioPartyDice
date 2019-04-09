@@ -9,8 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
-
-import java.util.List;
+import simulation.PlayerGroup;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -35,7 +34,7 @@ public class StarSparklerSpace extends EventSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
-                                Player currentPlayer, List<Player> allPlayers) {
+                                Player currentPlayer, PlayerGroup playerGroup) {
         countdown = Math.max(0, countdown - 1);
 
         if (countdown <= 0) {

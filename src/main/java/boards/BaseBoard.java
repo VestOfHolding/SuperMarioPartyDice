@@ -12,6 +12,7 @@ import lombok.Getter;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.builder.GraphBuilder;
 import simulation.Player;
+import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
@@ -27,7 +28,7 @@ public abstract class BaseBoard {
 
     protected List<StarSpace> starSpaces = new ArrayList<>();
 
-    protected List<Player> players = new ArrayList<>();
+    protected PlayerGroup playerGroup;
 
     protected void initializeBoard() {
         board = new MPBoard<>(MPEdge.class);
@@ -58,8 +59,8 @@ public abstract class BaseBoard {
         initializeBoard();
     }
 
-    public void setCurrentPlayers(List<Player> players) {
-        this.players = players;
+    public void setPlayerGroup(List<Player> players) {
+        playerGroup = new PlayerGroup(players);
     }
 
     /**
@@ -175,10 +176,10 @@ public abstract class BaseBoard {
             currentSpace = board.getVertexById(eventSpace.moveToSpace());
 
             //This is where the event space gets transformed into a blue space.
-            eventSpace.processEvent(board, player, players);
+            eventSpace.processEvent(board, player, playerGroup);
         }
         else {
-            currentSpace.processEvent(board, player, players);
+            currentSpace.processEvent(board, player, playerGroup);
             currentSpace = board.getVertexById(currentSpace.getSpaceID());
         }
 
@@ -190,7 +191,7 @@ public abstract class BaseBoard {
     }
 
     protected BaseSpace processBridgeCollapseEvent(Player player, BaseSpace currentSpace) {
-        boolean bridgeCollapsed = currentSpace.processEvent(board, player, players);
+        boolean bridgeCollapsed = currentSpace.processEvent(board, player, playerGroup);
 
         if (bridgeCollapsed) {
             return board.getVertexById(currentSpace.moveToSpace());
