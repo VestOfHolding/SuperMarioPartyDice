@@ -4,6 +4,7 @@ This project is for recreating the boards and character dice of Super Mario Part
 * Min, average, and max coins gained during any single game.
 * Min, average, and max distance gone during any single game.
 * Min, average, and max stars gained during any single game.
+* The average place (1st, 2nd, etc) gained at the end of all the games.
 * All of the above per the number of allies gained during that game.
 * How frequently that number of allies was able to be gained.
 * Min, average, and max of which turn each amount of allies was able to be gained.
@@ -30,25 +31,26 @@ The current version of these simulations is much more limited than the real SMP 
    * The agents only ever use the character die that they have from the beginning, though yes, in a real game a player can choose between their own character die, the character dice of any allies they have, and a standard d6. For now, this project is really about answering how effective each character die is on their own, so we can leave adding this choice for a later version of this. 
    * Though yes, that could end up changing things, as maybe even the stand d6 compliments some character dice far better than others.
    * Another reason to hold off on this is that I'm really worried that this will introduce even more variables. It seems likely to me that different character dice are actually better or worse vs different other character dice, and I can't handle even thinking about that right now, lol.
- * Only one player. 
-   * I have not implemented all four players running around the board simultaneously. Therefore, anything that involves the players interacting with each other, such as teleporting to another player, is not implemented.
-   * As far as giving and taking coins (such as by landing on Lucky and Bad Luck spaces), I'm very comfortable with not implementing these yet, as I have a very strong suspicion that anything like this that involves the coins staying within the "system" of the four players largely evens out in the statistics in the end.
+ * All four players
+   * While each simulation is centered on testing one main player, all four characters in a typical Mario Party game are running around the board, collecting coins and stars using the same strategies.
+   * Who the other three characters are for each game is chosen randomly, so the resulting statistics say how each character does generically against all characters.
  * No mini-games.
    * This entirely comes down to the skill of the human player. Sure, I could code something up where like, 3/4 of the time the agent wins or something, but.....eh? It sounds reasonable to me to say that any coins you get in mini-games are bonus coins on top of what these simulations say.
    * Also, figuring out which type of mini-game, and therefore what spread of coins you get, depends on what spaces everyone lands on; therefore, I would need to implement all four players first. Again, I could do random, but....eh. I don't feel confident enough that I'd get even close to the real odds.
  
 ## Current Goals/Questions
 
-- [x] Oh. Right. Character shouldn't be allowed to have less than zero coins. That will probably noticeably increase everyone's coin averages, lol. 
-- [x] Implement the "Whomps on the Move" event in the Whomp's Domino Ruins board.
-- [x] After addressing the above two issues, we need a look-ahead system for the paths that have some sort of coin toll. That way an agent knows that they can't take a path if they can't pay the toll.
-- [x] Get any data on what events come up for Extra Bad Luck spaces (though I have a feeling landing on them happens infrequently enough that it won't really affect the data in the end).
 - [x] Take advantage of the capabilities I get with JGraphT to create a visualization of the board graphs.
 - [ ] Fine-tune the Sand Bridge collapsing in Megafruit Paradise. I've heard it can randomly collapse after 3-5 uses, but in the four cases I've witnessed it's been 5. Either that's coincidence, or it's not 3-5, or the randomness isn't uniform. Without more data I don't know which it is for certain.
     * Partially done. I did find video evidence of the bridge collapsing after four crossings, and coded that in. That really messed up Diddy and Wario's ability to gain allies, lol.
 - [x] Part 1 of implementing the stars: Get them on the board and working.
-- [ ] Part 2 of implementing the stars: Add some percentage chance that another player got to the star before the computer did.
+- [x] ~~Part 2 of implementing the stars: Add some percentage chance that another player got to the star before the computer did.~~ No need because I implemented all four players!
 - [ ] Part 3 of implementing the stars: Make the simulations smarter by having the computer choose the paths that are the shortest path to the star.
+- [x] Implement all four places, and tracking what place they're always all in.
+- [ ] Any performance gains I can find in the simulations. It's slower than I'd like.
+- [ ] Implement all of the rest of the non-item Lucky and Bad Luck events now that all four characters are there.
+- [ ] Implement the Lakitu and VS spaces. Using random chance to decide who wins VS games.
+- [ ] Implement the logic that chooses what type of teams are created for the minigames.
  
  ## Future Goals
  
