@@ -54,7 +54,7 @@ public class ChooseTreasureChestEvent extends EventSpace {
 
         REWARDS.remove(reward);
 
-        currentPlayer.getGameStatTracker().addCoins(reward);
+        currentPlayer.addCoins(reward);
 
         return true;
     }

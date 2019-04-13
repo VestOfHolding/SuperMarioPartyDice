@@ -43,7 +43,7 @@ public class ThwompShortcutSpace extends NonMovementSpace {
             nextCost = calculateNextCost();
         }
 
-        currentPlayer.getGameStatTracker().addCoins(-cost);
+        currentPlayer.addCoins(-cost);
 
         nextCost = -1;
         return true;

@@ -53,40 +53,40 @@ public class BadLuckSpace extends EventSpace {
             }
         }
 
-        return commonProcessEvent(gameBoard, eventTable, gameStatTracker);
+        return processBadLuckEvent(gameBoard, eventTable, currentPlayer, playerGroup);
     }
 
     private BadLuckEventTable getExtraBadLuckTable(Player currentPlayer) {
         return currentPlayer.isFirstOrSecond() ? BadLuckEventTable.SUPER_BAD_LUCK_1ST_2ND : BadLuckEventTable.SUPER_BAD_LUCK_3RD_4TH;
     }
 
-    private boolean commonProcessEvent(MPBoard<BaseSpace, MPEdge> gameBoard, BadLuckEventTable eventTable, GameStatTracker gameStatTracker) {
+    private boolean processBadLuckEvent(MPBoard<BaseSpace, MPEdge> gameBoard, BadLuckEventTable eventTable, Player currentPlayer, PlayerGroup playerGroup) {
         LuckEvent chosenEvent = new ArrayList<>(BadLuckEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
 
         //Chosen MIN_VALUE to represent when we lose half our coins.
-        if (chosenEvent.getCoinGain() == Integer.MIN_VALUE) {
-            gameStatTracker.addCoins(-(gameStatTracker.getCoinTotal() / 2));
+        if (chosenEvent.getCoinChange() == Integer.MIN_VALUE) {
+            currentPlayer.addCoins(-(currentPlayer.getCoinTotal() / 2));
         }
         else {
-            gameStatTracker.addCoins(chosenEvent.getCoinGain());
+            currentPlayer.addCoins(chosenEvent.getCoinChange());
         }
 
         if (chosenEvent.isMoveStar()) {
             gameBoard.setNeedToMoveStar(true);
         }
         if (chosenEvent.isLoseStar()) {
-            gameStatTracker.loseStar();
+            currentPlayer.loseStar();
         }
         if (chosenEvent.isDoubleStarCost()) {
             gameBoard.setStarCost(gameBoard.INIT_STAR_COST * 2);
         }
         //The player is pitied and given coins if they have no stars to lose.
         if (chosenEvent.isLoseStarOrGainCoins()) {
-            if (gameStatTracker.getStarCount() <= 0) {
-                gameStatTracker.addCoins(20);
+            if (currentPlayer.getStarCount() <= 0) {
+                currentPlayer.addCoins(20);
             }
             else {
-                gameStatTracker.loseStar();
+                currentPlayer.loseStar();
             }
         }
 

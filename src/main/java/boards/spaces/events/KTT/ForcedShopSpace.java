@@ -33,7 +33,7 @@ public class ForcedShopSpace extends NonMovementSpace {
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         //This is a shop that sells everything for 6 coins, and you MUST buy something.
-        currentPlayer.getGameStatTracker().addCoins(-6);
+        currentPlayer.addCoins(-6);
         return true;
     }
 }

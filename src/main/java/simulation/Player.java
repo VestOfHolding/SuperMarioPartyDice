@@ -46,6 +46,26 @@ public class Player implements Comparable {
         return currentPlace == Place.FOURTH;
     }
 
+    public void addCoins(int coins) {
+        gameStatTracker.addCoins(coins);
+    }
+
+    public void addStar() {
+        gameStatTracker.addStar();
+    }
+
+    public void loseStar() {
+        gameStatTracker.loseStar();
+    }
+
+    public int getCoinTotal() {
+        return gameStatTracker.getCoinTotal();
+    }
+
+    public int getStarCount() {
+        return gameStatTracker.getStarCount();
+    }
+
     @Override
     public int compareTo(Object o) {
         Player otherPlayer = (Player)o;

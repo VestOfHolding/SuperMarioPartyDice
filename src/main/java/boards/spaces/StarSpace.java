@@ -55,17 +55,16 @@ public class StarSpace extends BlueSpace {
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
-        GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
         if (gameBoard.isKamekBoard()) {
             //The star is always active on the same space on this board.
-            if (gameStatTracker.getCoinTotal() >= gameBoard.getStarCost()) {
-                gameStatTracker.addCoins(-1 * gameBoard.getStarCost());
-                gameStatTracker.addStar();
+            if (currentPlayer.getCoinTotal() >= gameBoard.getStarCost()) {
+                currentPlayer.addCoins(-1 * gameBoard.getStarCost());
+                currentPlayer.addStar();
 
                 //If we have the coin, we can buy a second star while we're here.
-                if (gameStatTracker.getCoinTotal() >= gameBoard.getStarCost()) {
-                    gameStatTracker.addCoins(-1 * gameBoard.getStarCost());
-                    gameStatTracker.addStar();
+                if (currentPlayer.getCoinTotal() >= gameBoard.getStarCost()) {
+                    currentPlayer.addCoins(-1 * gameBoard.getStarCost());
+                    currentPlayer.addStar();
                 }
 
                 gameBoard.setNeedToMoveStar(true);
@@ -74,9 +73,9 @@ public class StarSpace extends BlueSpace {
             }
         }
         else {
-            if (starActive && gameStatTracker.getCoinTotal() >= gameBoard.getStarCost()) {
-                gameStatTracker.addCoins(-1 * gameBoard.getStarCost());
-                gameStatTracker.addStar();
+            if (starActive && currentPlayer.getCoinTotal() >= gameBoard.getStarCost()) {
+                currentPlayer.addCoins(-1 * gameBoard.getStarCost());
+                currentPlayer.addStar();
 
                 gameBoard.setNeedToMoveStar(true);
 

@@ -96,7 +96,7 @@ public class Simulation {
             moveAmount = result.getResult();
         }
         else if (result instanceof CoinResult) {
-            gameStatTracker.addCoins(result.getResult());
+            currentPlayer.addCoins(result.getResult());
         }
 
         if (gameStatTracker.getAllyTotal() > 0) {
@@ -112,7 +112,7 @@ public class Simulation {
 
 //        gameStatTracker.addLandedSpace(currentSpace);
 
-        gameStatTracker.addCoins(currentSpace.coinGain());
+        currentPlayer.addCoins(currentSpace.coinGain());
         gameStatTracker.incrementTurn();
 
         currentPlayer.setCurrentSpace(currentSpace);

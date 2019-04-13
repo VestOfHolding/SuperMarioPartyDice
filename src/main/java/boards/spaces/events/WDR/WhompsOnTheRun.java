@@ -45,7 +45,7 @@ public class WhompsOnTheRun extends EventSpace {
             return false;
         }
 
-        currentPlayer.getGameStatTracker().addCoins(-COST);
+        currentPlayer.addCoins(-COST);
 
         whompSwitch(gameBoard);
         return true;

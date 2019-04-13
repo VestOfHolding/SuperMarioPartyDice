@@ -50,16 +50,16 @@ public class LuckySpace extends EventSpace {
             }
         }
 
-        return processLuckyEvent(eventTable, gameStatTracker);
+        return processLuckyEvent(eventTable, currentPlayer, playerGroup);
     }
 
-    private boolean processLuckyEvent(LuckyEventTable eventTable, GameStatTracker gameStatTracker) {
+    private boolean processLuckyEvent(LuckyEventTable eventTable, Player currentPlayer, PlayerGroup playerGroup) {
         LuckEvent chosenEvent = new ArrayList<>(LuckyEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
 
-        gameStatTracker.addCoins(chosenEvent.getCoinGain());
+        currentPlayer.addCoins(chosenEvent.getCoinChange());
 
         if (chosenEvent.isAddAlly()) {
-            gameStatTracker.addAlly();
+            currentPlayer.getGameStatTracker().addAlly();
         }
 
         return false;

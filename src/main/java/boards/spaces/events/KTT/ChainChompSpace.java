@@ -32,7 +32,7 @@ public class ChainChompSpace extends EventSpace {
         //The Chain Chomp comes and steals coins.
         // Not fully sure what the range of possibilities is here yet.
         // I've seen both 5 and 7, though not sure what the percentage chance is.
-        currentPlayer.getGameStatTracker().addCoins(RandomUtils.isFlippedCoinHeads() ? -5 : -7);
+        currentPlayer.addCoins(RandomUtils.isFlippedCoinHeads() ? -5 : -7);
         return true;
     }
 }
