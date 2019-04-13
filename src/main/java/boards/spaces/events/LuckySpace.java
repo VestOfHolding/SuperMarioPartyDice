@@ -62,6 +62,10 @@ public class LuckySpace extends EventSpace {
             currentPlayer.getGameStatTracker().addAlly();
         }
 
+        if (chosenEvent.getRivalCoinChange() != 0) {
+            playerGroup.getRandomPlayerBesidesCurrent(currentPlayer).addCoins(chosenEvent.getRivalCoinChange());
+        }
+
         return false;
     }
 
