@@ -15,7 +15,7 @@ public class PlayerGroup {
     private List<Player> allPlayers;
 
     public PlayerGroup (List<Player> allPlayers) {
-        allPlayers = ListUtils.emptyIfNull(allPlayers);
+        this.allPlayers = ListUtils.emptyIfNull(allPlayers);
     }
 
     /**
