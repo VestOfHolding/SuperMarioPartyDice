@@ -4,7 +4,6 @@ import org.apache.commons.collections4.ListUtils;
 import stattracker.Place;
 import utils.RandomUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

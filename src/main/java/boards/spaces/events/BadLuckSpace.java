@@ -16,6 +16,7 @@ import utils.RandomUtils;
 import utils.SpaceUIClass;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -63,12 +64,43 @@ public class BadLuckSpace extends EventSpace {
     private boolean processBadLuckEvent(MPBoard<BaseSpace, MPEdge> gameBoard, BadLuckEventTable eventTable, Player currentPlayer, PlayerGroup playerGroup) {
         LuckEvent chosenEvent = new ArrayList<>(BadLuckEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
 
+        //Example: The player has to give 5 coins to all players, but doesn't actually have 15 coins to give.
+        // Only 12, so we need to do the math based on that.
+        //This will be a negative number.
+        int actualCoinChange = currentPlayer.getCoinTotal() + chosenEvent.getCoinChange() <= 0
+                ? -currentPlayer.getCoinTotal()
+                : chosenEvent.getCoinChange();
+
         //Chosen MIN_VALUE to represent when we lose half our coins.
         if (chosenEvent.getCoinChange() == Integer.MIN_VALUE) {
             currentPlayer.addCoins(-(currentPlayer.getCoinTotal() / 2));
         }
         else {
-            currentPlayer.addCoins(chosenEvent.getCoinChange());
+            currentPlayer.addCoins(actualCoinChange);
+        }
+
+        if (actualCoinChange > 0) {
+            if (chosenEvent.isGiveCoinsToLast()) {
+                playerGroup.getLastPlacePlayer().addCoins(-actualCoinChange);
+            }
+            else if (chosenEvent.isGiveCoinsToRandom()) {
+                playerGroup.getRandomPlayerBesidesCurrent(currentPlayer).addCoins(-actualCoinChange);
+            }
+            else if (chosenEvent.isGiveCoinsToAll()) {
+                int coinsPerPlayer = actualCoinChange / 3;
+
+                int leftoverAmount = Math.abs(coinsPerPlayer * 3 - actualCoinChange);
+
+
+                for (Player player : new HashSet<>(playerGroup.getAllPlayersExceptCurrent(currentPlayer))) {
+                    player.addCoins(-coinsPerPlayer);
+
+                    if (leftoverAmount > 0) {
+                        player.addCoins(1);
+                        --leftoverAmount;
+                    }
+                }
+            }
         }
 
         if (chosenEvent.isMoveStar()) {
