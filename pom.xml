@@ -78,18 +78,6 @@
             <version>3.2</version>
         </dependency>
 
-        <!--Used for graph visualization.-->
-        <dependency>
-            <groupId>com.github.graphstream</groupId>
-            <artifactId>gs-core</artifactId>
-            <version>dbdf94680e</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.graphstream</groupId>
-            <artifactId>gs-ui-swing</artifactId>
-            <version>6fc63626a9</version>
-        </dependency>
-
         <!--Haven't worked much with JUnit 5 yet, so why not?-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
