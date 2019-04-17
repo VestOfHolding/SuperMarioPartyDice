@@ -60,10 +60,6 @@ public class BaseSpace {
         return false;
     }
 
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.OTHER;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -10,7 +10,6 @@ import stattracker.GameStatTracker;
 import utils.BadLuckEventTable;
 import utils.LuckEvent;
 import utils.RandomUtils;
-import utils.SpaceUIClass;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -119,8 +118,4 @@ public class BadLuckSpace extends EventSpace {
         return false;
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.BADLUCK;
-    }
 }

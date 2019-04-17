@@ -2,7 +2,6 @@ package boards.spaces.events;
 
 import boards.spaces.BaseSpace;
 import lombok.ToString;
-import utils.SpaceUIClass;
 
 @ToString(callSuper = true)
 public class EventSpace extends BaseSpace {
@@ -15,8 +14,4 @@ public class EventSpace extends BaseSpace {
         super(spaceID, x, y);
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.EVENT;
-    }
 }

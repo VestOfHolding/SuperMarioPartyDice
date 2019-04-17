@@ -6,7 +6,6 @@ import boards.spaces.events.EventSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
-import utils.SpaceUIClass;
 
 @ToString(callSuper = true)
 public class AllySpace extends EventSpace {
@@ -21,8 +20,4 @@ public class AllySpace extends EventSpace {
         return true;
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.ALLY;
-    }
 }

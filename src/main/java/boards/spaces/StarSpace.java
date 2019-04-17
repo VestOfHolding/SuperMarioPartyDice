@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
-import utils.SpaceUIClass;
 
 @Getter
 @ToString(callSuper = true)
@@ -17,11 +16,6 @@ public class StarSpace extends BlueSpace {
     public StarSpace(int spaceID, int coins) {
         super(spaceID, coins);
         starActive = false;
-    }
-
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.STAR;
     }
 
     @Override

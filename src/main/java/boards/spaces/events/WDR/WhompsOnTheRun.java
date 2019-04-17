@@ -10,7 +10,6 @@ import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
-import utils.SpaceUIClass;
 
 @Getter
 @Setter
@@ -71,8 +70,4 @@ public class WhompsOnTheRun extends EventSpace {
         return gameStatTracker.getCoinTotal() - COST - starCost >= 0;
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.NONMOVEMENT;
-    }
 }

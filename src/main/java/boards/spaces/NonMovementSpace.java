@@ -1,7 +1,6 @@
 package boards.spaces;
 
 import lombok.ToString;
-import utils.SpaceUIClass;
 
 @ToString(callSuper = true)
 public class NonMovementSpace extends BaseSpace {
@@ -19,8 +18,4 @@ public class NonMovementSpace extends BaseSpace {
         return false;
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.NONMOVEMENT;
-    }
 }

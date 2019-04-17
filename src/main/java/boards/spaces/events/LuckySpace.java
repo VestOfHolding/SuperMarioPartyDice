@@ -10,7 +10,6 @@ import stattracker.GameStatTracker;
 import utils.LuckEvent;
 import utils.LuckyEventTable;
 import utils.RandomUtils;
-import utils.SpaceUIClass;
 
 import java.util.ArrayList;
 
@@ -63,8 +62,4 @@ public class LuckySpace extends EventSpace {
         return false;
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.LUCKY;
-    }
 }

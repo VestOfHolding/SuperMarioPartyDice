@@ -8,7 +8,6 @@ import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import utils.RandomUtils;
-import utils.SpaceUIClass;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,8 +48,4 @@ public class VSSpace extends EventSpace {
         return true;
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.VS;
-    }
 }

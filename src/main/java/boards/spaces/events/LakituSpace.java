@@ -6,7 +6,6 @@ import boards.spaces.BaseSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
-import utils.SpaceUIClass;
 
 @ToString(callSuper = true)
 public class LakituSpace extends EventSpace {
@@ -27,8 +26,4 @@ public class LakituSpace extends EventSpace {
         return true;
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.NONMOVEMENT;
-    }
 }

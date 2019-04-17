@@ -3,7 +3,6 @@ package boards.spaces;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import utils.SpaceUIClass;
 
 @Getter
 @Setter
@@ -28,8 +27,4 @@ public class BlueSpace extends BaseSpace {
         return coins;
     }
 
-    @Override
-    public SpaceUIClass getNodeClass() {
-        return SpaceUIClass.BLUE;
-    }
 }
