@@ -120,13 +120,6 @@ public class Simulation {
     }
 
     public void calculatePlaces(List<Player> players) {
-        boolean placesUpdated = IntStream.range(0, Place.values().length)
-                .anyMatch(i -> players.get(i).getCurrentPlace() != Place.values()[i]);
-
-        if (!placesUpdated) {
-            return;
-        }
-
         List<Player> sortedPlayerList = new ArrayList<>(players);
 
         Collections.sort(sortedPlayerList);
