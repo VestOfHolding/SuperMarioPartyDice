@@ -1,18 +1,17 @@
 package boards.spaces;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import utils.SpaceUIClass;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class RedSpace extends BaseSpace {
 
-    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private int coins;
 

@@ -3,16 +3,12 @@ package boards.spaces;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.events.EventSpace;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import utils.SpaceUIClass;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class AllySpace extends EventSpace {

@@ -3,8 +3,6 @@ package boards.spaces.events;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
@@ -17,8 +15,6 @@ import utils.SpaceUIClass;
 
 import java.util.ArrayList;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class LuckySpace extends EventSpace {

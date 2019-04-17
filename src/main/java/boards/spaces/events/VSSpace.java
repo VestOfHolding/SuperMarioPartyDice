@@ -4,9 +4,9 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
@@ -17,13 +17,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class VSSpace extends EventSpace {
 
-    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     List<Integer> POSSIBLE_WAGERS = Arrays.asList(5, 7, 10, 15, 20, 25, 30);
 

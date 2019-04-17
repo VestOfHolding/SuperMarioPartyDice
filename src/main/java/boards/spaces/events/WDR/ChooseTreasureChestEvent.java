@@ -4,9 +4,9 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class ChooseTreasureChestEvent extends EventSpace {
@@ -26,7 +26,6 @@ public class ChooseTreasureChestEvent extends EventSpace {
     //1. Golden Dash Mushroom
     //2. 10 coins
     //3. 3 coins
-    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     List<Integer> REWARDS;
 

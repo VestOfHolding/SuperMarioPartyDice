@@ -70,9 +70,12 @@ public class Player implements Comparable {
     public int compareTo(Object o) {
         Player otherPlayer = (Player)o;
 
-        return Comparator.comparing(GameStatTracker::getStarCount).reversed()
-                .thenComparing(GameStatTracker::getCoinTotal).reversed()
-                .compare(gameStatTracker, otherPlayer.gameStatTracker);
+        int result = otherPlayer.gameStatTracker.getStarCount() - gameStatTracker.getStarCount();
+
+        if (result == 0) {
+            return otherPlayer.gameStatTracker.getCoinTotal() - gameStatTracker.getCoinTotal();
+        }
+        return result;
     }
 
     @Override
@@ -91,5 +94,14 @@ public class Player implements Comparable {
     @Override
     public int hashCode() {
         return Objects.hash(characterDice);
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "stars=" + gameStatTracker.getStarCount() +
+                ", coins=" + gameStatTracker.getCoinTotal() +
+                ", currentPlace=" + currentPlace +
+                '}';
     }
 }

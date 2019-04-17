@@ -2,22 +2,20 @@ package boards.spaces;
 
 import boards.MPEdge;
 import boards.layout.MPBoard;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
-import stattracker.GameStatTracker;
 import utils.SpaceUIClass;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class StarSpace extends BlueSpace {
 
-    @EqualsAndHashCode.Exclude
     private boolean starActive = false;
 
     public StarSpace(int spaceID) {

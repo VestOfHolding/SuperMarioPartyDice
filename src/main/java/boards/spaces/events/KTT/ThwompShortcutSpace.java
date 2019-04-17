@@ -4,23 +4,21 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.NonMovementSpace;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class ThwompShortcutSpace extends NonMovementSpace {
-    @EqualsAndHashCode.Exclude
     private int cost;
 
-    @EqualsAndHashCode.Exclude
     private int nextCost;
 
     public ThwompShortcutSpace(int spaceID) {

@@ -4,17 +4,17 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
 import utils.SpaceUIClass;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class WhompsOnTheRun extends EventSpace {
@@ -22,7 +22,6 @@ public class WhompsOnTheRun extends EventSpace {
 
     private int partnerID;
 
-    @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private boolean active;
 

@@ -3,16 +3,12 @@ package boards.spaces.events;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import utils.SpaceUIClass;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class LakituSpace extends EventSpace {

@@ -2,16 +2,20 @@ package boards.spaces;
 
 import boards.MPEdge;
 import boards.layout.MPBoard;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
 import utils.SpaceUIClass;
 
+import java.util.Objects;
+
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @ToString
 public class BaseSpace {
 
@@ -60,5 +64,22 @@ public class BaseSpace {
 
     public SpaceUIClass getNodeClass() {
         return SpaceUIClass.OTHER;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        BaseSpace baseSpace = (BaseSpace) o;
+        return getSpaceID() == baseSpace.getSpaceID();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSpaceID());
     }
 }
