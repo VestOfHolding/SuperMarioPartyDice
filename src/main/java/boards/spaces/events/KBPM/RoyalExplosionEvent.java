@@ -4,17 +4,12 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class RoyalExplosionEvent extends EventSpace {
-    public RoyalExplosionEvent(int spaceID) {
-        super(spaceID);
-    }
 
     public RoyalExplosionEvent(int spaceID, int x, int y) {
         super(spaceID, x, y);

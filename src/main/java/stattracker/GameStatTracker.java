@@ -2,10 +2,7 @@ package stattracker;
 
 import boards.spaces.BaseSpace;
 import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 import partydice.BobombAlly;
@@ -18,9 +15,6 @@ import java.util.List;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class GameStatTracker {
     private int turnNumber;
     private int turnMax;

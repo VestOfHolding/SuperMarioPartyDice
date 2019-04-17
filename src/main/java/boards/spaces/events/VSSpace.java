@@ -4,9 +4,6 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
@@ -17,9 +14,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class VSSpace extends EventSpace {
 
@@ -50,7 +44,7 @@ public class VSSpace extends EventSpace {
 
 
         //Lastly, this space turns blue after it has been landed on.
-        gameBoard.setOrReplaceVertex(spaceID, new BlueSpace());
+        gameBoard.setOrReplaceVertex(spaceID, new BlueSpace(spaceID));
 
         return true;
     }

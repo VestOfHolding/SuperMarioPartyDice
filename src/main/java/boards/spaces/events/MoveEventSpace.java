@@ -4,18 +4,12 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 
 import java.util.Objects;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class MoveEventSpace extends EventSpace {
     protected Integer spaceToMoveToID;
@@ -44,7 +38,7 @@ public class MoveEventSpace extends EventSpace {
                                 Player currentPlayer, PlayerGroup playerGroup) {
         if (turnsBlue) {
             //For now, just handle the fact that this space becomes a Blue Space once it's used.
-            gameBoard.setOrReplaceVertex(spaceID, new BlueSpace());
+            gameBoard.setOrReplaceVertex(spaceID, new BlueSpace(spaceID));
             return true;
         }
         return false;

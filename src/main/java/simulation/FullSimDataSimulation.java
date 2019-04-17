@@ -36,7 +36,7 @@ public class FullSimDataSimulation extends Simulation {
                 distanceFrequencyMap = new Int2IntOpenHashMap();
 
                 for (int i = 0; i < SIM_COUNT; ++i) {
-                    gameStatTracker = new GameStatTracker();
+                    gameStatTracker = new GameStatTracker(TURN_COUNT);
 
                     for (int j = 0; j < TURN_COUNT; ++j) {
                         gameStatTracker.addDiceResult(characterDie.roll());

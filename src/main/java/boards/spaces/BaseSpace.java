@@ -3,7 +3,6 @@ package boards.spaces;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
@@ -13,7 +12,6 @@ import utils.SpaceUIClass;
 
 import java.util.Objects;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @ToString

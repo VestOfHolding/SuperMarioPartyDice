@@ -1,7 +1,6 @@
 package simulation;
 
 import boards.spaces.BaseSpace;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import partydice.Dice;
@@ -9,12 +8,10 @@ import results.DieResult;
 import stattracker.GameStatTracker;
 import stattracker.Place;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class Player implements Comparable {
     private Dice characterDice;
 

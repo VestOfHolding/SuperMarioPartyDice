@@ -3,13 +3,11 @@ package utils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.apache.commons.lang3.Range;
 
 @Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
 public class LuckEvent {

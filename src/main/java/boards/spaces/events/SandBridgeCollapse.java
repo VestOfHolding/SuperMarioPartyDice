@@ -3,17 +3,11 @@ package boards.spaces.events;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import utils.RandomUtils;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class SandBridgeCollapse extends MoveEventSpace {
 

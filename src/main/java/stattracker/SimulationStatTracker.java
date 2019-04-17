@@ -1,9 +1,6 @@
 package stattracker;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import partydice.Dice;
 import simulation.Player;
 
@@ -14,12 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class SimulationStatTracker {
-    private Dice characterDie;
-
     private Player mainPlayer;
 
     private List<Player> allPlayers;

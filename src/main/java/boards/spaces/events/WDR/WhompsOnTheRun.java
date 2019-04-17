@@ -5,7 +5,6 @@ import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
@@ -15,7 +14,6 @@ import utils.SpaceUIClass;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class WhompsOnTheRun extends EventSpace {
     private static int COST = 3;
@@ -24,10 +22,6 @@ public class WhompsOnTheRun extends EventSpace {
 
     @ToString.Exclude
     private boolean active;
-
-    public WhompsOnTheRun(int spaceID, int partnerID, boolean active) {
-        this(spaceID, partnerID, active, -1, -1);
-    }
 
     public WhompsOnTheRun(int spaceID, int partnerID, boolean active, int x, int y) {
         super(spaceID);

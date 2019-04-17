@@ -4,9 +4,6 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
@@ -16,9 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class ChooseTreasureChestEvent extends EventSpace {
 

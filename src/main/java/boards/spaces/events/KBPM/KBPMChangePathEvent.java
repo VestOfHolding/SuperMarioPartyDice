@@ -6,18 +6,13 @@ import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.LuckySpace;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.jgrapht.Graphs;
 import simulation.Player;
 import simulation.PlayerGroup;
 
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class KBPMChangePathEvent extends EventSpace {
-    public KBPMChangePathEvent(int spaceID) {
-        super(spaceID);
-    }
 
     public KBPMChangePathEvent(int spaceID, int x, int y) {
         super(spaceID, x, y);

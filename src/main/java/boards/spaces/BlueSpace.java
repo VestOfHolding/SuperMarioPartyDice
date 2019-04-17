@@ -1,14 +1,12 @@
 package boards.spaces;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import utils.SpaceUIClass;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class BlueSpace extends BaseSpace {
 

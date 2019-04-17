@@ -1,11 +1,9 @@
 package boards.spaces.events;
 
 import boards.spaces.BaseSpace;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import utils.SpaceUIClass;
 
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class EventSpace extends BaseSpace {
 

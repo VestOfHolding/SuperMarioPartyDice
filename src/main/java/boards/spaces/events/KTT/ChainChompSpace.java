@@ -4,19 +4,13 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import utils.RandomUtils;
 
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class ChainChompSpace extends EventSpace {
-
-    public ChainChompSpace(int spaceID) {
-        super(spaceID);
-    }
 
     public ChainChompSpace(int spaceID, int x, int y) {
         super(spaceID, x, y);

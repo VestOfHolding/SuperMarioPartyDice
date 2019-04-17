@@ -4,25 +4,15 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class StarSparklerSpace extends EventSpace {
 
     @ToString.Exclude
     int countdown = 2;
-
-    public StarSparklerSpace(int spaceID) {
-        this(spaceID, -1, -1);
-    }
 
     public StarSparklerSpace(int spaceID, int x, int y) {
         super(spaceID);

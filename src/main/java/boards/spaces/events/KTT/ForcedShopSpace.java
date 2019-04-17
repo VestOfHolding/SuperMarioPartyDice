@@ -4,17 +4,12 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.NonMovementSpace;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class ForcedShopSpace extends NonMovementSpace {
-    public ForcedShopSpace(int spaceID) {
-        super(spaceID);
-    }
 
     public ForcedShopSpace(int spaceID, int x, int y) {
         super(spaceID, x, y);

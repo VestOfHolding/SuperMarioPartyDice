@@ -3,25 +3,16 @@ package boards.spaces;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import utils.SpaceUIClass;
 
 @Getter
-@Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class StarSpace extends BlueSpace {
 
     private boolean starActive = false;
-
-    public StarSpace(int spaceID) {
-        super(spaceID);
-        starActive = false;
-    }
 
     public StarSpace(int spaceID, int coins) {
         super(spaceID, coins);

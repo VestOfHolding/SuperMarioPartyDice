@@ -4,25 +4,15 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.EventSpace;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class WhompSwitch extends EventSpace {
 
     private int firstWhompID;
     private int secondWhompID;
-
-    public WhompSwitch(int spaceID, int firstWhompID, int secondWhompID) {
-        this(spaceID, firstWhompID, secondWhompID, -1, -1);
-    }
 
     public WhompSwitch(int spaceID, int firstWhompID, int secondWhompID, int x, int y) {
         super(spaceID);

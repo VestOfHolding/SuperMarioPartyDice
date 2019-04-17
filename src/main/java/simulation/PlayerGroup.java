@@ -1,7 +1,6 @@
 package simulation;
 
 import org.apache.commons.collections4.ListUtils;
-import stattracker.Place;
 import utils.RandomUtils;
 
 import java.util.List;
@@ -41,7 +40,7 @@ public class PlayerGroup {
 
     public Player getLastPlacePlayer() {
         return allPlayers.stream()
-                .filter(p -> p.getCurrentPlace() == Place.FOURTH)
+                .filter(Player::isInLastPlace)
                 .findFirst()
                 .orElse(null);
     }
