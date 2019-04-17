@@ -6,7 +6,6 @@ import lombok.Setter;
 import partydice.Dice;
 import results.DieResult;
 import stattracker.GameStatTracker;
-import stattracker.Place;
 
 import java.util.Objects;
 
@@ -19,7 +18,7 @@ public class Player implements Comparable {
 
     private BaseSpace currentSpace;
 
-    private Place currentPlace;
+    private int currentPlace;
 
     public Player(Dice characterDice) {
         this(characterDice, null);
@@ -36,11 +35,11 @@ public class Player implements Comparable {
     }
 
     public boolean isFirstOrSecond() {
-        return currentPlace == Place.FIRST || currentPlace == Place.SECOND;
+        return currentPlace == 1|| currentPlace == 2;
     }
 
     public boolean isInLastPlace() {
-        return currentPlace == Place.FOURTH;
+        return currentPlace == 3;
     }
 
     public void addCoins(int coins) {

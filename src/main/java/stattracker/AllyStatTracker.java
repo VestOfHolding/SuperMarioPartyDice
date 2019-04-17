@@ -57,8 +57,8 @@ public class AllyStatTracker {
         starCounts.addValue(starCount);
     }
 
-    public void addPlacement(Place place) {
-        placings.addValue(place.getPlaceNum());
+    public void addPlacement(int place) {
+        placings.addValue(place);
     }
 
     public void addLandedSpaceCount(Map<Integer, Integer> landedSpaceCount) {

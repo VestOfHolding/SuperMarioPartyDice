@@ -12,7 +12,6 @@ import results.DieResult;
 import results.MoveResult;
 import stattracker.AllyStatTracker;
 import stattracker.GameStatTracker;
-import stattracker.Place;
 import stattracker.SimulationStatTracker;
 import utils.RandomUtils;
 
@@ -20,7 +19,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class Simulation {
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
@@ -129,15 +127,17 @@ public class Simulation {
         // For example, if three players share the same number of stars and coins,
         // with the fourth player lagging behind, then the placement spread
         // would be: 1st, 1st, 1st, 4th.
-        for (int i = 0; i < Place.values().length; ++i) {
+        for (int i = 0; i < 4; ++i) {
+            if (sortedPlayerList.get(i).getCurrentPlace() == i + 1) {
+                continue;
+            }
 
             if (i > 0 &&
-                    sortedPlayerList.get(i - 1).getCurrentPlace() != null &&
                     sortedPlayerList.get(i -1).compareTo(sortedPlayerList.get(i)) == 0) {
                 sortedPlayerList.get(i).setCurrentPlace(sortedPlayerList.get(i - 1).getCurrentPlace());
             }
             else {
-                sortedPlayerList.get(i).setCurrentPlace(Place.values()[i]);
+                sortedPlayerList.get(i).setCurrentPlace(i + 1);
             }
         }
     }
