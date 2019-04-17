@@ -99,9 +99,13 @@ public class MegafruitParadise extends BaseBoard {
 
     @Override
     public void resetBoard() {
-        board.setOrReplaceVertex(66, new SandBridgeCollapse(66, 8));
+        //Reset and repair sand bridge
+        board.getVertexById(66).reset();
 
-        board.setOrReplaceVertex(58, SpaceFactory.createVSSpace(58));
+        board.addEdge(board.getVertexById(9), board.getVertexById(59));
+        board.addEdge(board.getVertexById(59), board.getVertexById(14));
+
+        board.getVertexById(58).reset();
 
         resetRedAndBlueCoinAmounts();
     }

@@ -96,10 +96,10 @@ public class KameksTantalizingTower extends BaseBoard  {
 
     @Override
     public void resetBoard() {
-        board.setOrReplaceVertex(32, SpaceFactory.createVSSpace(32));
-        board.setOrReplaceVertex(37, SpaceFactory.createVSSpace(37));
+        board.getVertexById(32).reset();
+        board.getVertexById(37).reset();
 
-        board.setOrReplaceVertex(28, new ThwompShortcutSpace(28));
+        board.getVertexById(28).reset();
 
         resetRedAndBlueCoinAmounts();
     }

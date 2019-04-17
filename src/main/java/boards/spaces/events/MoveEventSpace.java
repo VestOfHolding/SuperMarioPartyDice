@@ -11,10 +11,12 @@ import simulation.PlayerGroup;
 import java.util.Objects;
 
 @ToString(callSuper = true)
-public class MoveEventSpace extends EventSpace {
+public class MoveEventSpace extends BlueSpace {
     protected Integer spaceToMoveToID;
 
     protected boolean turnsBlue;
+
+    private boolean used;
 
     public MoveEventSpace(int spaceID, Integer spaceToMoveToID, int x, int y) {
         super(spaceID, x, y);
@@ -30,17 +32,35 @@ public class MoveEventSpace extends EventSpace {
 
     @Override
     public int moveToSpace() {
+        if (turnsBlue && used) {
+            return super.moveToSpace();
+        }
         return spaceToMoveToID;
+    }
+
+    @Override
+    public int coinGain() {
+        if (turnsBlue && used) {
+            return super.coinGain();
+        }
+        return 0;
     }
 
     @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
-        if (turnsBlue) {
-            //For now, just handle the fact that this space becomes a Blue Space once it's used.
-            gameBoard.setOrReplaceVertex(spaceID, new BlueSpace(spaceID));
+        if (turnsBlue && used) {
+            return true;
+        }
+        else if (turnsBlue) {
+            used = true;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void reset() {
+        used = false;
     }
 }

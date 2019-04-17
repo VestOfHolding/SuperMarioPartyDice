@@ -22,9 +22,12 @@ public class BlueSpace extends BaseSpace {
         this.coins = coins;
     }
 
+    public BlueSpace(int spaceID, int x, int y) {
+        super(spaceID, x, y);
+    }
+
     @Override
     public int coinGain() {
         return coins;
     }
-
 }

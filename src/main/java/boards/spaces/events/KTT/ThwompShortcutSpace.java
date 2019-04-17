@@ -35,6 +35,7 @@ public class ThwompShortcutSpace extends NonMovementSpace {
             nextCost = calculateNextCost();
         }
 
+        cost = nextCost;
         currentPlayer.addCoins(-cost);
 
         nextCost = -1;
@@ -57,5 +58,11 @@ public class ThwompShortcutSpace extends NonMovementSpace {
     private int calculateNextCost() {
         //Every time you pass Thwomp, he wants at least one more coin than before.
         return cost + 1;
+    }
+
+    @Override
+    public void reset() {
+        cost = 0;
+        nextCost = -1;
     }
 }

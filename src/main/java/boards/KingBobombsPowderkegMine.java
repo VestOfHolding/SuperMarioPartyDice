@@ -95,9 +95,9 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
     @Override
     public void resetBoard() {
-        board.setOrReplaceVertex(36, SpaceFactory.createVSSpace(36));
-        board.setOrReplaceVertex(39, SpaceFactory.createVSSpace(39));
-        board.setOrReplaceVertex(56, SpaceFactory.createVSSpace(56));
+        board.getVertexById(36).reset();
+        board.getVertexById(39).reset();
+        board.getVertexById(56).reset();
 
         resetRedAndBlueCoinAmounts();
         board.resetCountdown();

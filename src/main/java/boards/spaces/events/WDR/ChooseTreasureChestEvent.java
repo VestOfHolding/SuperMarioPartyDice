@@ -51,4 +51,9 @@ public class ChooseTreasureChestEvent extends EventSpace {
 
         return true;
     }
+
+    @Override
+    public void reset() {
+        REWARDS = new ArrayList<>(Arrays.asList(0, 3, 10));
+    }
 }

@@ -52,6 +52,11 @@ public class SandBridgeCollapse extends MoveEventSpace {
         return false;
     }
 
+    @Override
+    public void reset() {
+        countdown = RandomUtils.getRandomInt(4, 5);
+    }
+
     protected void decrementCountdown() {
         countdown--;
     }

@@ -59,6 +59,8 @@ public class BaseSpace {
         return false;
     }
 
+    public void reset() { }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -116,14 +116,14 @@ public class WhompsDominoRuins extends BaseBoard {
 
     @Override
     public void resetBoard() {
-        board.setOrReplaceVertex(12, SpaceFactory.createMoveEventSpace(12, getMoveEventDestinationID(), true));
-        board.setOrReplaceVertex(20, SpaceFactory.createMoveEventSpace(20, getMoveEventDestinationID(), true));
-        board.setOrReplaceVertex(22, SpaceFactory.createMoveEventSpace(22, getMoveEventDestinationID(), true));
+        board.getVertexById(12).reset();
+        board.getVertexById(20).reset();
+        board.getVertexById(22).reset();
 
-        board.setOrReplaceVertex(55, new ChooseTreasureChestEvent(55));
+        board.getVertexById(55).reset();
 
-        board.setOrReplaceVertex(33, SpaceFactory.createVSSpace(33));
-        board.setOrReplaceVertex(59, SpaceFactory.createVSSpace(59));
+        board.getVertexById(33).reset();
+        board.getVertexById(59).reset();
 
         ((WhompsOnTheRun)board.getVertexById(WHOMP1_1)).setActive(true);
         ((WhompsOnTheRun)board.getVertexById(WHOMP1_2)).setActive(false);

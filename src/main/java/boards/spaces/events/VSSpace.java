@@ -14,18 +14,32 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @ToString(callSuper = true)
-public class VSSpace extends EventSpace {
+public class VSSpace extends BlueSpace {
 
     @ToString.Exclude
     List<Integer> POSSIBLE_WAGERS = Arrays.asList(5, 7, 10, 15, 20, 25, 30);
+
+    private boolean used;
 
     public VSSpace(int spaceID) {
         super(spaceID);
     }
 
     @Override
+    public int coinGain() {
+        if (used) {
+            return super.coinGain();
+        }
+        return 0;
+    }
+
+    @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
+        if (used) {
+            return true;
+        }
+
         int wager = POSSIBLE_WAGERS.get(RandomUtils.getRandomInt(POSSIBLE_WAGERS.size() - 1));
 
         int totalPot = wager * 4;
@@ -43,9 +57,13 @@ public class VSSpace extends EventSpace {
 
 
         //Lastly, this space turns blue after it has been landed on.
-        gameBoard.setOrReplaceVertex(spaceID, new BlueSpace(spaceID));
+        used = true;
 
         return true;
     }
 
+    @Override
+    public void reset() {
+        used = false;
+    }
 }

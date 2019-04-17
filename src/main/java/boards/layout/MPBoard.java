@@ -8,9 +8,7 @@ import lombok.Setter;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirectedWeightedGraph<V, E> {
     Map<Integer, V> VERTEX_MAP;
@@ -83,31 +81,6 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
 
     public int getGraphSize() {
         return vertexSet().size();
-    }
-
-    public void setOrReplaceVertex(int spaceId, V newVertex) {
-        newVertex.setSpaceID(spaceId);
-
-        V previous = VERTEX_MAP.getOrDefault(spaceId, null);
-
-        if (previous == null) {
-            addVertex(newVertex);
-            return;
-        }
-
-        //Need to preserve a copy of these before we remove the vertex.
-        Set<E> outgoingEdges = new HashSet<>(outgoingEdgesOf(previous));
-        Set<E> incomingEdges = new HashSet<>(incomingEdgesOf(previous));
-
-        removeVertex(previous);
-        addVertex(newVertex);
-
-        for (E edge : outgoingEdges) {
-            addEdge(newVertex, getEdgeTarget(edge), edge);
-        }
-        for (E edge : incomingEdges)  {
-            addEdge(getEdgeSource(edge), newVertex, edge);
-        }
     }
 
     public boolean decrementCountdown() {
