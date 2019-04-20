@@ -54,6 +54,20 @@ public class Player implements Comparable {
         gameStatTracker.loseStar();
     }
 
+    /**
+     * @param coinLoss How many coins you want to take from this player.
+     * @return The actual number of coins lost. Might be less than coinLoss if the player
+     *      doesn't actually have that many coins.
+     */
+    public int takeCoins(int coinLoss) {
+        int actualLoss = coinLoss;
+        if (gameStatTracker.getCoinTotal() - coinLoss < 0) {
+            actualLoss = gameStatTracker.getCoinTotal();
+        }
+        gameStatTracker.addCoins(-coinLoss);
+        return actualLoss;
+    }
+
     public int getCoinTotal() {
         return gameStatTracker.getCoinTotal();
     }

@@ -16,6 +16,14 @@ public class PlayerGroup {
         this.allPlayers = ListUtils.emptyIfNull(allPlayers);
     }
 
+    public List<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
+    public Player getRandomPlayer() {
+        return allPlayers.get(RandomUtils.getRandomInt(allPlayers.size() - 1));
+    }
+
     /**
      * Return a random player from the group that isn't the given player.
      */
@@ -23,7 +31,7 @@ public class PlayerGroup {
         Player result;
 
         do {
-            result = allPlayers.get(RandomUtils.getRandomInt(allPlayers.size() - 1));
+            result = getRandomPlayer();
         } while (result == currentPlayer);
 
         return result;
