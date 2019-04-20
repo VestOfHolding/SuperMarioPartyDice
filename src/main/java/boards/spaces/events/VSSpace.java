@@ -66,12 +66,10 @@ public class VSSpace extends BlueSpace {
         //If three players tie for second place, 1st gets the normal 60%,
         //    while the remaining three evenly split the remaining 40%.
 
-        //The leftover coins from rounding all the results down get
+        //The leftover coins from rounding all the results get
         // randomly distributed destination the 4 players.
-        if (totalPot > 0) {
-            for(; totalPot > 0; --totalPot) {
-                playerGroup.getRandomPlayer().addCoins(1);
-            }
+        for(; totalPot > 0; --totalPot) {
+            playerGroup.getRandomPlayer().addCoins(1);
         }
 
         //Lastly, this space turns blue after it has been landed on.

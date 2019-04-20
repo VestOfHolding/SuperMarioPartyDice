@@ -36,7 +36,7 @@ The current version of these simulations is much more limited than the real SMP 
    * Who the other three characters are for each game is chosen randomly, so the resulting statistics say how each character does generically against all characters.
  * No mini-games.
    * This entirely comes down to the skill of the human player. Sure, I could code something up where like, 3/4 of the time the agent wins or something, but.....eh? It sounds reasonable to me to say that any coins you get in mini-games are bonus coins on top of what these simulations say.
-   * Also, figuring out which type of mini-game, and therefore what spread of coins you get, depends on what spaces everyone lands on; therefore, I would need to implement all four players first. Again, I could do random, but....eh. I don't feel confident enough that I'd get even close to the real odds.
+   * I have discovered the chances that control how the mini-game teams are formed, so maybe this will change in the future.
  
 ## Current Goals/Questions
 
@@ -47,9 +47,10 @@ The current version of these simulations is much more limited than the real SMP 
 - [x] ~~Part 2 of implementing the stars: Add some percentage chance that another player got to the star before the computer did.~~ No need because I implemented all four players!
 - [ ] Part 3 of implementing the stars: Make the simulations smarter by having the computer choose the paths that are the shortest path to the star.
 - [x] Implement all four places, and tracking what place they're always all in.
-- [ ] Any performance gains I can find in the simulations. It's slower than I'd like.
-- [ ] Implement all of the rest of the non-item Lucky and Bad Luck events now that all four characters are there.
-- [ ] Implement the Lakitu and VS spaces. Using random chance to decide who wins VS games.
+- [x] Any performance gains I can find in the simulations. It's slower than I'd like.
+    * This is really a continuous task that I should always check, but at least for now I've done everything I can.
+- [x] Implement all of the rest of the non-item Lucky and Bad Luck events now that all four characters are there.
+- [x] Implement the Lakitu and VS spaces. Using random chance to decide who wins VS games.
 - [ ] Implement the logic that chooses what type of teams are created for the minigames.
  
  ## Future Goals
