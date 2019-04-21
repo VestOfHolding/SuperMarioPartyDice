@@ -29,7 +29,7 @@ public class Simulation implements Runnable{
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
 
     protected static final int TURN_COUNT = 20;
-    protected static final int SIM_COUNT = 6000000;
+    protected int SIM_COUNT = 6000000;
 
     protected BaseBoard gameBoard;
 
@@ -41,7 +41,8 @@ public class Simulation implements Runnable{
         this.gameBoard = new WhompsDominoRuins();
     }
 
-    public Simulation(BaseBoard gameBoard) {
+    public Simulation(BaseBoard gameBoard, int simCount) {
+        SIM_COUNT = simCount;
         this.gameBoard = gameBoard;
         fileOutputName = "output/" + gameBoard.getFileOutputName();
     }
