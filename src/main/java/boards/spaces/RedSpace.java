@@ -22,4 +22,8 @@ public class RedSpace extends BaseSpace {
         return coins;
     }
 
+    @Override
+    public SpaceColor getSpaceColor() {
+        return SpaceColor.RED;
+    }
 }

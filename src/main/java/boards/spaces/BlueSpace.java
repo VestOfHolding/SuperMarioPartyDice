@@ -30,4 +30,9 @@ public class BlueSpace extends BaseSpace {
     public int coinGain() {
         return coins;
     }
+
+    @Override
+    public SpaceColor getSpaceColor() {
+        return SpaceColor.BLUE;
+    }
 }

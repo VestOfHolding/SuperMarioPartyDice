@@ -1,6 +1,7 @@
 package simulation;
 
 import boards.spaces.BaseSpace;
+import boards.spaces.SpaceColor;
 import lombok.Getter;
 import lombok.Setter;
 import partydice.Dice;
@@ -19,6 +20,8 @@ public class Player implements Comparable {
     private BaseSpace currentSpace;
 
     private int currentPlace;
+
+    private SpaceColor landedSpaceColor;
 
     public Player(Dice characterDice) {
         this(characterDice, null);

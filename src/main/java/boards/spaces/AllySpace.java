@@ -19,5 +19,4 @@ public class AllySpace extends EventSpace {
         currentPlayer.getGameStatTracker().addAlly();
         return true;
     }
-
 }

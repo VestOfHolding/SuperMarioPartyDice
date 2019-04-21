@@ -4,6 +4,7 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
+import boards.spaces.SpaceColor;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
@@ -62,5 +63,10 @@ public class MoveEventSpace extends BlueSpace {
     @Override
     public void reset() {
         used = false;
+    }
+
+    @Override
+    public SpaceColor getSpaceColor() {
+        return SpaceColor.GREEN;
     }
 }

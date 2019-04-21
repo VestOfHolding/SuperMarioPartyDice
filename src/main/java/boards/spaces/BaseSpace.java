@@ -61,6 +61,10 @@ public class BaseSpace {
 
     public void reset() { }
 
+    public SpaceColor getSpaceColor() {
+        return SpaceColor.GREEN;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

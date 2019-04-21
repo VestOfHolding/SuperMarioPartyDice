@@ -3,6 +3,7 @@ package boards.spaces.events;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
+import boards.spaces.SpaceColor;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
@@ -118,4 +119,8 @@ public class BadLuckSpace extends EventSpace {
         return false;
     }
 
+    @Override
+    public SpaceColor getSpaceColor() {
+        return SpaceColor.RED;
+    }
 }
