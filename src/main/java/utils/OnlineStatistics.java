@@ -35,7 +35,7 @@ public class OnlineStatistics {
     }
 
     public double getMin() {
-        return tdigest.getMin();
+        return tdigest.getMin() == Double.POSITIVE_INFINITY ? 0 : tdigest.getMin();
     }
 
     public double getFirstQuartile() {

@@ -5,6 +5,7 @@ import boards.KingBobombsPowderkegMine;
 import boards.WhompsDominoRuins;
 import boards.spaces.BaseSpace;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.time.StopWatch;
 import partydice.BobombAlly;
 import partydice.Dice;
 import results.CoinResult;
@@ -19,11 +20,12 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Simulation {
+public class Simulation implements Runnable{
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
 
     protected static final int TURN_COUNT = 20;
@@ -41,10 +43,17 @@ public class Simulation {
 
     public Simulation(BaseBoard gameBoard) {
         this.gameBoard = gameBoard;
-        fileOutputName = gameBoard.getFileOutputName();
+        fileOutputName = "output/" + gameBoard.getFileOutputName();
+    }
+
+    @Override
+    public void run() {
+        simulate();
     }
 
     public void simulate() {
+        StopWatch stopWatch = StopWatch.createStarted();
+        System.out.println(gameBoard.getFileOutputName() + " time start!\t\t" + LocalDateTime.now());
         printTableHeaders();
 
         for (Dice characterDie : Dice.values()) {
@@ -58,6 +67,10 @@ public class Simulation {
 
             printSimulationResult(characterDie, gameBoard.getTotalBoardSize());
         }
+
+        stopWatch.split();
+        System.out.println(gameBoard.getFileOutputName() + " time elapsed: " + stopWatch.toSplitString() + "\t\t" + LocalDateTime.now());
+        stopWatch.stop();
     }
 
     protected void printTableHeaders() {
@@ -70,6 +83,7 @@ public class Simulation {
                     "Min Coins\t1st Quartile Coins\tCoin Avg\t3rd Quartile Coins\tMax Coins\tCoin SD\t" +
                     "Min Stars\t1st Quartile Stars\tStar Avg\t3rd Quartile Stars\tMax Stars\tStars SD\t" +
                     "Average Place");
+            writer.newLine();
     //        for (int i = 0; i < gameBoard.getTotalBoardSize(); ++i) {
     //            System.out.print("Space" + i + "\t");
     //        }
@@ -163,6 +177,7 @@ public class Simulation {
 
             for (AllyStatTracker allyStatTracker : simulationStatTracker.getAllyStatTrackers().values()) {
                 writer.write(characterDie.getName() + "\t" + allyStatTracker.toStatString(SIM_COUNT, possibleSpaces));
+                writer.newLine();
             }
         } catch (IOException exception) {
             System.out.println("ERROR: Could not write table contents to file: " + fileOutputName);
