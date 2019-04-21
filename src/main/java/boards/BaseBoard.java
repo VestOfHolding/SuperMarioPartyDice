@@ -144,7 +144,8 @@ public abstract class BaseBoard {
             }
         }
 
-        if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
+        if ((currentSpace instanceof EventSpace || currentSpace instanceof MoveEventSpace)
+                && !currentSpace.isPassingEvent()) {
             currentSpace = processEvent(player, currentSpace);
         }
 
