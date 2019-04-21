@@ -15,6 +15,9 @@ import stattracker.GameStatTracker;
 import stattracker.SimulationStatTracker;
 import utils.RandomUtils;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,12 +33,15 @@ public class Simulation {
 
     protected SimulationStatTracker simulationStatTracker;
 
+    protected String fileOutputName;
+
     public Simulation() {
         this.gameBoard = new WhompsDominoRuins();
     }
 
     public Simulation(BaseBoard gameBoard) {
         this.gameBoard = gameBoard;
+        fileOutputName = gameBoard.getFileOutputName();
     }
 
     public void simulate() {
@@ -55,15 +61,21 @@ public class Simulation {
     }
 
     protected void printTableHeaders() {
-        System.out.print("Character\tAllyCount\tFrequency\t" +
-                "Min Turn Gained\t1st Quartile Turn Gained\tAvg Turn Gained\t3rd Quartile Turn Gained\tMax Turn Gained\tTurn Gained SD\t" +
-                "Min Distance\t1st Quartile Distance\tDistance Avg\t3rd Quartile Distance\tMax Distance\tDistance SD\t" +
-                "Min Coins\t1st Quartile Coins\tCoin Avg\t3rd Quartile Coins\tMax Coins\tCoin SD\t" +
-                "Min Stars\t1st Quartile Stars\tStar Avg\t3rd Quartile Stars\tMax Stars\tStars SD\t" +
-                "Average Place");
-//        for (int i = 0; i < gameBoard.getTotalBoardSize(); ++i) {
-//            System.out.print("Space" + i + "\t");
-//        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileOutputName, false))) {
+
+            writer.write("Character\tAllyCount\tFrequency\t" +
+                    "Min Turn Gained\t1st Quartile Turn Gained\tAvg Turn Gained\t3rd Quartile Turn Gained\tMax Turn Gained\tTurn Gained SD\t" +
+                    "Min Distance\t1st Quartile Distance\tDistance Avg\t3rd Quartile Distance\tMax Distance\tDistance SD\t" +
+                    "Min Coins\t1st Quartile Coins\tCoin Avg\t3rd Quartile Coins\tMax Coins\tCoin SD\t" +
+                    "Min Stars\t1st Quartile Stars\tStar Avg\t3rd Quartile Stars\tMax Stars\tStars SD\t" +
+                    "Average Place");
+    //        for (int i = 0; i < gameBoard.getTotalBoardSize(); ++i) {
+    //            System.out.print("Space" + i + "\t");
+    //        }
+        } catch (IOException exception) {
+            System.out.println("ERROR: Could not write table headers to file: " + fileOutputName);
+        }
         System.out.println();
     }
 
@@ -147,8 +159,13 @@ public class Simulation {
     }
 
     protected void printSimulationResult(Dice characterDie, int possibleSpaces) {
-        for (AllyStatTracker allyStatTracker : simulationStatTracker.getAllyStatTrackers().values()) {
-            System.out.println(characterDie.getName() + "\t" + allyStatTracker.toStatString(SIM_COUNT, possibleSpaces));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileOutputName, true))) {
+
+            for (AllyStatTracker allyStatTracker : simulationStatTracker.getAllyStatTrackers().values()) {
+                writer.write(characterDie.getName() + "\t" + allyStatTracker.toStatString(SIM_COUNT, possibleSpaces));
+            }
+        } catch (IOException exception) {
+            System.out.println("ERROR: Could not write table contents to file: " + fileOutputName);
         }
     }
 

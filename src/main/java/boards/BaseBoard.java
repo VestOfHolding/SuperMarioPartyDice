@@ -24,6 +24,9 @@ public abstract class BaseBoard {
     @Getter
     protected MPBoard<BaseSpace, MPEdge> board;
 
+    @Getter
+    protected String fileOutputName;
+
     protected GraphBuilder<BaseSpace, MPEdge, MPBoard<BaseSpace, MPEdge>> graphBuilder;
 
     protected List<StarSpace> starSpaces = new ArrayList<>();

@@ -12,6 +12,7 @@ public class MegafruitParadise extends BaseBoard {
 
     public MegafruitParadise() {
         initializeBoard();
+        fileOutputName = "MegafruitParadise.txt";
     }
 
     @Override

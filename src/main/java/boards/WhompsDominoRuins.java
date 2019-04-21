@@ -19,6 +19,7 @@ public class WhompsDominoRuins extends BaseBoard {
 
     public WhompsDominoRuins() {
         initializeBoard();
+        fileOutputName = "WhompsDominoRuins.txt";
     }
 
     @Override

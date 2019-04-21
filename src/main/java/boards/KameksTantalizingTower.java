@@ -22,6 +22,7 @@ public class KameksTantalizingTower extends BaseBoard  {
 
     public KameksTantalizingTower() {
         initializeBoard();
+        fileOutputName = "KameksTantalizingTower.txt";
     }
 
     @Override

@@ -9,6 +9,7 @@ import boards.spaces.events.LakituSpace;
 public class KingBobombsPowderkegMine extends BaseBoard {
     public KingBobombsPowderkegMine() {
         initializeBoard();
+        fileOutputName = "KingBobombsPowderkegMine.txt";
     }
 
     @Override
