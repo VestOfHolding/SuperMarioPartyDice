@@ -106,24 +106,8 @@ public abstract class BaseBoard {
         return board.getGraphSize();
     }
 
-    public BaseSpace getNextSpace(BaseSpace startingSpace) {
-        List<BaseSpace> nextSpaces = getNextSpaces(startingSpace);
-
-        return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
-    }
-
-    /**
-     * This function is way noticeably expensive for some reason, so only use it with boards
-     *  that actually have a toll somewhere. Otherwise, use the function above.
-     */
     public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
-        List<BaseSpace> nextSpaces = new ArrayList<>();
-
-        for (BaseSpace nextSpace : getNextSpaces(startingSpace)) {
-            if (!nextSpace.hasToll() || nextSpace.canCross(gameStatTracker, board.getStarCost())) {
-                nextSpaces.add(nextSpace);
-            }
-        }
+        List<BaseSpace> nextSpaces = getNextSpaces(startingSpace);
 
         return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
     }
@@ -136,7 +120,7 @@ public abstract class BaseBoard {
         BaseSpace currentSpace = player.getCurrentSpace();
 
         for (int i = 0; i < distance; ++i) {
-            currentSpace = getNextSpace(currentSpace);
+            currentSpace = getNextSpace(currentSpace, player.getGameStatTracker());
 
             if (!currentSpace.affectsMovement()) {
                 --i;

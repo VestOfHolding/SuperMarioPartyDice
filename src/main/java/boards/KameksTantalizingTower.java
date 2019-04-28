@@ -4,15 +4,14 @@ import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
 import boards.spaces.StarSpace;
-import boards.spaces.events.EventSpace;
 import boards.spaces.events.KTT.ChainChompSpace;
 import boards.spaces.events.KTT.ChangeStarPriceSpace;
 import boards.spaces.events.KTT.ForcedShopSpace;
 import boards.spaces.events.KTT.ThwompShortcutSpace;
-import simulation.Player;
 import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -124,32 +123,16 @@ public class KameksTantalizingTower extends BaseBoard  {
     }
 
     @Override
-    public BaseSpace getDestination(Player player, int distance) {
-        BaseSpace currentSpace = player.getCurrentSpace();
-        GameStatTracker gameStatTracker = player.getGameStatTracker();
+    public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
+        List<BaseSpace> nextSpaces = new ArrayList<>();
 
-        for (int i = 0; i < distance; ++i) {
-            currentSpace = getNextSpace(currentSpace, gameStatTracker);
-
-            if (!currentSpace.affectsMovement()) {
-                --i;
-            }
-
-            if (currentSpace.isPassingEvent()) {
-                currentSpace = processEvent(player, currentSpace);
+        for (BaseSpace nextSpace : getNextSpaces(startingSpace)) {
+            if (!nextSpace.hasToll() || nextSpace.canCross(gameStatTracker, board.getStarCost())) {
+                nextSpaces.add(nextSpace);
             }
         }
 
-        //We set the color before processing the event, because of the case where
-        // the player lands on a space that moves them, but the color for this turn should
-        // still reflect that move event space they landed on, not the actual space they end their turn on.
-        player.setLandedSpaceColor(currentSpace.getSpaceColor());
-
-        if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
-            currentSpace = processEvent(player, currentSpace);
-        }
-
-        return currentSpace;
+        return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
     }
 
     @Override
