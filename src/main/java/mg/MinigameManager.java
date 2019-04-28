@@ -54,18 +54,19 @@ public class MinigameManager {
                 player.addCoins(WIN_AMOUNT);
             }
 
+            //Using the mod is the easiest way I can think of to do the other team.
             for (Player player : minigameTeams.get((winningTeamIndex + 1) % 2)) {
                 player.addCoins(LOSE_AMOUNT);
             }
         }
         //Four player games have a decreasing list of coin rewards
         else if (minigameTeams.size() == 4) {
+            //Randomizing who wins in what order.
             Set<Player> playerSet = new HashSet<>(playerGroup.getAllPlayers());
 
             int i = 0;
             for (Player player : playerSet) {
-                player.addCoins(FOUR_PLAYER_WIN_AMOUNTS.get(i));
-                ++i;
+                player.addCoins(FOUR_PLAYER_WIN_AMOUNTS.get(i++));
             }
         }
     }
@@ -91,13 +92,14 @@ public class MinigameManager {
                     Collections.singletonList(allPlayers.get(2)),
                     Collections.singletonList(allPlayers.get(3)));
         }
+        //We only care about transforming the green spaces, so it could be that there's nothing more to do.
         else if (greenCount == 0) {
             return new ArrayList<>(allPlayers.stream().collect(Collectors.groupingBy(Player::getLandedSpaceColor)).values());
         }
 
         Map<Integer, Integer> finalLayer = thisIsACryForHelp.get(greenCount).get(blueCount);
-        int randomChance = RandomUtils.getRandomInt(1, 10);
 
+        int randomChance = RandomUtils.getRandomInt(1, 10);
         if (!finalLayer.containsKey(randomChance)) {
             randomChance = 10;
         }
