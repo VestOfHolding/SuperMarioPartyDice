@@ -4,6 +4,7 @@ import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
+import boards.spaces.SpaceFactory;
 import boards.spaces.StarSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
@@ -33,10 +34,13 @@ public abstract class BaseBoard {
 
     protected PlayerGroup playerGroup;
 
+    protected SpaceFactory spaceFactory;
+
     protected void initializeBoard() {
         board = new MPBoard<>(MPEdge.class);
         board.setKamekBoard(false);
         graphBuilder = new GraphBuilder<>(new MPBoard<>(MPEdge.class));
+        spaceFactory = new SpaceFactory();
 
         buildInitialGraph();
 
@@ -58,7 +62,6 @@ public abstract class BaseBoard {
     protected abstract void buildInitialGraph();
 
     public void resetBoard() {
-        board = new MPBoard<>(MPEdge.class);
         initializeBoard();
     }
 

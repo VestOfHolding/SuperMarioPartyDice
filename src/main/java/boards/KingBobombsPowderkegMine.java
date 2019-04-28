@@ -1,6 +1,5 @@
 package boards;
 
-import boards.spaces.SpaceFactory;
 import boards.spaces.events.KBPM.BobombAllySpace;
 import boards.spaces.events.KBPM.KBPMChangePathEvent;
 import boards.spaces.events.KBPM.RoyalExplosionEvent;
@@ -18,76 +17,76 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
         graphBuilder.addEdgeChain(
                 //Start
-                SpaceFactory.createStartSpace(index++, 16, 2), //ID = 0
-                SpaceFactory.createBlueSpace(index++, 16, 8),
-                SpaceFactory.createRedSpace(index++, 16, 12),
-                SpaceFactory.createBlueSpace(index++, 16, 16), //ID = 3
+                spaceFactory.createStartSpace(index++, 16, 2), //ID = 0
+                spaceFactory.createBlueSpace(index++, 16, 8),
+                spaceFactory.createRedSpace(index++, 16, 12),
+                spaceFactory.createBlueSpace(index++, 16, 16), //ID = 3
                 new RoyalExplosionEvent(index++, 18, 16),
-                SpaceFactory.createAllySpace(index++, 20, 16),
+                spaceFactory.createAllySpace(index++, 20, 16),
                 new RoyalExplosionEvent(index++, 20, 18),
-                SpaceFactory.createNonMovementSpace(index++, 20, 20), //ID = 7
-                SpaceFactory.createItemSpace(index++, 20, 22),
-                SpaceFactory.createLuckySpace(index++, 20, 24),
-                SpaceFactory.createBlueSpace(index++, 18, 24),
-                SpaceFactory.createStarSpace(index++, 16, 24),
-                SpaceFactory.createRedSpace(index++, 14, 24),
+                spaceFactory.createNonMovementSpace(index++, 20, 20), //ID = 7
+                spaceFactory.createItemSpace(index++, 20, 22),
+                spaceFactory.createLuckySpace(index++, 20, 24),
+                spaceFactory.createBlueSpace(index++, 18, 24),
+                spaceFactory.createStarSpace(index++, 16, 24),
+                spaceFactory.createRedSpace(index++, 14, 24),
                 new RoyalExplosionEvent(index++, 12, 24), //ID = 13
-                SpaceFactory.createItemSpace(index++, 12, 22),
-                SpaceFactory.createStarSpace(index++, 12, 20),
+                spaceFactory.createItemSpace(index++, 12, 22),
+                spaceFactory.createStarSpace(index++, 12, 20),
                 new RoyalExplosionEvent(index++, 12, 18),
-                SpaceFactory.createNonMovementSpace(index++, 12, 16), //ID = 17
-                SpaceFactory.createBlueSpace(index++, 14, 16)
+                spaceFactory.createNonMovementSpace(index++, 12, 16), //ID = 17
+                spaceFactory.createBlueSpace(index++, 14, 16)
         ).addEdgeChain(
                 //Upper Loop
-                SpaceFactory.createStarSpace(index++, 24, 20),
-                SpaceFactory.createNonMovementSpace(index++, 28, 20), //ID = 20
-                SpaceFactory.createItemSpace(index++, 28, 22),
-                SpaceFactory.createItemSpace(index++, 28, 24),
-                SpaceFactory.createNonMovementSpace(index++, 28, 28),
-                SpaceFactory.createBlueSpace(index++, 28, 31),
-                SpaceFactory.createMoveEventSpace(index++, 54, 28, 34), //ID = 25
-                SpaceFactory.createStarSpace(index++, 25, 32),
+                spaceFactory.createStarSpace(index++, 24, 20),
+                spaceFactory.createNonMovementSpace(index++, 28, 20), //ID = 20
+                spaceFactory.createItemSpace(index++, 28, 22),
+                spaceFactory.createItemSpace(index++, 28, 24),
+                spaceFactory.createNonMovementSpace(index++, 28, 28),
+                spaceFactory.createBlueSpace(index++, 28, 31),
+                spaceFactory.createMoveEventSpace(index++, 54, 28, 34), //ID = 25
+                spaceFactory.createStarSpace(index++, 25, 32),
                 new KBPMChangePathEvent(index++, 22, 32), //ID = 27
-                SpaceFactory.createLuckySpace(index++, 20, 30),
-                SpaceFactory.createLuckySpace(index++, 12, 30),
+                spaceFactory.createLuckySpace(index++, 20, 30),
+                spaceFactory.createLuckySpace(index++, 12, 30),
                 new KBPMChangePathEvent(index++, 10, 32), //ID = 30
-                SpaceFactory.createBlueSpace(index++, 7, 32),
-                SpaceFactory.createStarSpace(index++, 4, 32),
-                SpaceFactory.createBadLuckSpace(index++, 4, 30),
+                spaceFactory.createBlueSpace(index++, 7, 32),
+                spaceFactory.createStarSpace(index++, 4, 32),
+                spaceFactory.createBadLuckSpace(index++, 4, 30),
                 new LakituSpace(index++, 4, 28),
-                SpaceFactory.createBlueSpace(index++, 4, 24), //ID = 35
-                SpaceFactory.createVSSpace(index++, 8, 24) //ID = 36
+                spaceFactory.createBlueSpace(index++, 4, 24), //ID = 35
+                spaceFactory.createVSSpace(index++, 8, 24) //ID = 36
         ).addEdgeChain(
                 //Upper Loop Side Path
-                SpaceFactory.createBlueSpace(index++, 20, 34), //ID = 37
+                spaceFactory.createBlueSpace(index++, 20, 34), //ID = 37
                 new BobombAllySpace(index++, 16, 34),
-                SpaceFactory.createVSSpace(index++, 12, 34) //ID = 39
+                spaceFactory.createVSSpace(index++, 12, 34) //ID = 39
         ).addEdgeChain(
                 //Lower Right
-                SpaceFactory.createBlueSpace(index++, 28, 18), //ID = 40
-                SpaceFactory.createBlueSpace(index++, 28, 16),
-                SpaceFactory.createRedSpace(index++, 28, 14),
-                SpaceFactory.createItemSpace(index++, 28, 12),
-                SpaceFactory.createBadLuckSpace(index++, 28, 8),
-                SpaceFactory.createStarSpace(index++, 24, 8),
-                SpaceFactory.createItemSpace(index++, 22, 8),
-                SpaceFactory.createAllySpace(index++, 19, 8) //ID = 47
+                spaceFactory.createBlueSpace(index++, 28, 18), //ID = 40
+                spaceFactory.createBlueSpace(index++, 28, 16),
+                spaceFactory.createRedSpace(index++, 28, 14),
+                spaceFactory.createItemSpace(index++, 28, 12),
+                spaceFactory.createBadLuckSpace(index++, 28, 8),
+                spaceFactory.createStarSpace(index++, 24, 8),
+                spaceFactory.createItemSpace(index++, 22, 8),
+                spaceFactory.createAllySpace(index++, 19, 8) //ID = 47
         ).addEdgeChain(
                 //Lower Left
-                SpaceFactory.createBadLuckSpace(index++, 8, 16), //ID = 48
-                SpaceFactory.createNonMovementSpace(index++, 4, 16), //ID = 49
-                SpaceFactory.createRedSpace(index++, 4, 14),
-                SpaceFactory.createBlueSpace(index++, 4, 12),
-                SpaceFactory.createNonMovementSpace(index++, 4, 9),
-                SpaceFactory.createMoveEventSpace(index++, 25, 4, 6), //ID = 53
-                SpaceFactory.createAllySpace(index++, 8, 8),
-                SpaceFactory.createStarSpace(index++, 10, 8),
-                SpaceFactory.createVSSpace(index++, 13, 8) //ID = 56
+                spaceFactory.createBadLuckSpace(index++, 8, 16), //ID = 48
+                spaceFactory.createNonMovementSpace(index++, 4, 16), //ID = 49
+                spaceFactory.createRedSpace(index++, 4, 14),
+                spaceFactory.createBlueSpace(index++, 4, 12),
+                spaceFactory.createNonMovementSpace(index++, 4, 9),
+                spaceFactory.createMoveEventSpace(index++, 25, 4, 6), //ID = 53
+                spaceFactory.createAllySpace(index++, 8, 8),
+                spaceFactory.createStarSpace(index++, 10, 8),
+                spaceFactory.createVSSpace(index++, 13, 8) //ID = 56
         ).addEdgeChain(
                 //Middle Right
-                SpaceFactory.createEventSpace(index++, 2, 18), //ID = 57
-                SpaceFactory.createBlueSpace(index++, 2, 20),
-                SpaceFactory.createEventSpace(index, 2, 22) //ID = 59
+                spaceFactory.createEventSpace(index++, 2, 18), //ID = 57
+                spaceFactory.createBlueSpace(index++, 2, 20),
+                spaceFactory.createEventSpace(index, 2, 22) //ID = 59
         );
 
         board = graphBuilder.build();

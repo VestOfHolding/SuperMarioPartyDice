@@ -1,7 +1,6 @@
 package boards;
 
 import boards.spaces.BaseSpace;
-import boards.spaces.SpaceFactory;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.LakituSpace;
 import boards.spaces.events.WDR.ChooseTreasureChestEvent;
@@ -28,87 +27,87 @@ public class WhompsDominoRuins extends BaseBoard {
 
         graphBuilder.addEdgeChain(
                 //Start
-                SpaceFactory.createStartSpace(index++, 28, 1), //ID = 0
-                SpaceFactory.createBlueSpace(index++, 28, 6),
-                SpaceFactory.createRedSpace(index++, 30, 8),
-                SpaceFactory.createBlueSpace(index++, 30, 11),
+                spaceFactory.createStartSpace(index++, 28, 1), //ID = 0
+                spaceFactory.createBlueSpace(index++, 28, 6),
+                spaceFactory.createRedSpace(index++, 30, 8),
+                spaceFactory.createBlueSpace(index++, 30, 11),
                 new WhompSwitch(index++, WHOMP1_1, WHOMP1_2, 28, 13),
-                SpaceFactory.createNonMovementSpace(index++, 28, 16), //ID = 5
+                spaceFactory.createNonMovementSpace(index++, 28, 16), //ID = 5
                 new WhompsOnTheRun(index++, WHOMP1_2, false, 28, 18),
-                SpaceFactory.createBlueSpace(index++, 28, 20),
-                SpaceFactory.createNonMovementSpace(index++, 28, 22), //ID = 8
-                SpaceFactory.createItemSpace(index++, 28, 25),
-                SpaceFactory.createStarSpace(index++, 28, 28),
-                SpaceFactory.createBlueSpace(index++, 28, 30), //ID = 11
-                SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 28, 32),
-                SpaceFactory.createBlueSpace(index++, 25, 32),
-                SpaceFactory.createBlueSpace(index++, 23, 32),
-                SpaceFactory.createAllySpace(index++, 20, 32), //ID = 15
-                SpaceFactory.createItemSpace(index++, 18, 32),
-                SpaceFactory.createStarSpace(index++, 15, 32),
-                SpaceFactory.createItemSpace(index++, 13, 32),
-                SpaceFactory.createBlueSpace(index++, 11, 32),
-                SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 8, 32),
-                SpaceFactory.createNonMovementSpace(index++, 6, 32), //ID = 21
-                SpaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 4, 32),
-                SpaceFactory.createStarSpace(index++, 2, 32),
-                SpaceFactory.createBlueSpace(index++, 2, 30),
-                SpaceFactory.createBlueSpace(index++, 2, 28),
+                spaceFactory.createBlueSpace(index++, 28, 20),
+                spaceFactory.createNonMovementSpace(index++, 28, 22), //ID = 8
+                spaceFactory.createItemSpace(index++, 28, 25),
+                spaceFactory.createStarSpace(index++, 28, 28),
+                spaceFactory.createBlueSpace(index++, 28, 30), //ID = 11
+                spaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 28, 32),
+                spaceFactory.createBlueSpace(index++, 25, 32),
+                spaceFactory.createBlueSpace(index++, 23, 32),
+                spaceFactory.createAllySpace(index++, 20, 32), //ID = 15
+                spaceFactory.createItemSpace(index++, 18, 32),
+                spaceFactory.createStarSpace(index++, 15, 32),
+                spaceFactory.createItemSpace(index++, 13, 32),
+                spaceFactory.createBlueSpace(index++, 11, 32),
+                spaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 8, 32),
+                spaceFactory.createNonMovementSpace(index++, 6, 32), //ID = 21
+                spaceFactory.createMoveEventSpace(index++, getMoveEventDestinationID(), true, 4, 32),
+                spaceFactory.createStarSpace(index++, 2, 32),
+                spaceFactory.createBlueSpace(index++, 2, 30),
+                spaceFactory.createBlueSpace(index++, 2, 28),
                 new LakituSpace(index++, 2, 26),
-                SpaceFactory.createBlueSpace(index++, 2, 24),
-                SpaceFactory.createBadLuckSpace(index++, 2, 22),
-                SpaceFactory.createItemSpace(index++, 2, 20), //ID = 28
+                spaceFactory.createBlueSpace(index++, 2, 24),
+                spaceFactory.createBadLuckSpace(index++, 2, 22),
+                spaceFactory.createItemSpace(index++, 2, 20), //ID = 28
                 new WhompSwitch(index++, WHOMP2_1, WHOMP2_2, 2, 18),
-                SpaceFactory.createNonMovementSpace(index++, 2, 16), //ID = 30
+                spaceFactory.createNonMovementSpace(index++, 2, 16), //ID = 30
                 new WhompsOnTheRun(index++, WHOMP2_2, false, 2, 14),
-                SpaceFactory.createVSSpace(index++, 2, 12),
-                SpaceFactory.createNonMovementSpace(index++, 2, 10), //ID = 33
-                SpaceFactory.createBlueSpace(index++, 2, 7),
-                SpaceFactory.createNonMovementSpace(index++, 2, 4),
-                SpaceFactory.createLuckySpace(index++, 2, 2),
-                SpaceFactory.createLuckySpace(index++, 6, 2),
-                SpaceFactory.createStarSpace(index++, 10, 2),
-                SpaceFactory.createBlueSpace(index++, 14, 2),
-                SpaceFactory.createAllySpace(index++, 14, 6), //ID = 40
-                SpaceFactory.createBadLuckSpace(index++, 17, 6),
-                SpaceFactory.createBlueSpace(index++, 20, 6), //ID = 42
-                SpaceFactory.createNonMovementSpace(index++, 22, 6),
-                SpaceFactory.createBlueSpace(index++, 25, 6) //ID = 44
+                spaceFactory.createVSSpace(index++, 2, 12),
+                spaceFactory.createNonMovementSpace(index++, 2, 10), //ID = 33
+                spaceFactory.createBlueSpace(index++, 2, 7),
+                spaceFactory.createNonMovementSpace(index++, 2, 4),
+                spaceFactory.createLuckySpace(index++, 2, 2),
+                spaceFactory.createLuckySpace(index++, 6, 2),
+                spaceFactory.createStarSpace(index++, 10, 2),
+                spaceFactory.createBlueSpace(index++, 14, 2),
+                spaceFactory.createAllySpace(index++, 14, 6), //ID = 40
+                spaceFactory.createBadLuckSpace(index++, 17, 6),
+                spaceFactory.createBlueSpace(index++, 20, 6), //ID = 42
+                spaceFactory.createNonMovementSpace(index++, 22, 6),
+                spaceFactory.createBlueSpace(index++, 25, 6) //ID = 44
         ).addEdgeChain(
                 //Inner Loop
                 new WhompsOnTheRun(index++, WHOMP1_1, true, 26, 16), //ID = 45
                 new WhompSwitch(index++, WHOMP1_1, WHOMP1_2, 23, 16),
-                SpaceFactory.createAllySpace(index++, 20, 16),
-                SpaceFactory.createStarSpace(index++, 20, 13),
-                SpaceFactory.createLuckySpace(index++, 20, 10) //ID = 49
+                spaceFactory.createAllySpace(index++, 20, 16),
+                spaceFactory.createStarSpace(index++, 20, 13),
+                spaceFactory.createLuckySpace(index++, 20, 10) //ID = 49
         ).addEdgeChain(
                 //Side Path 1
-                SpaceFactory.createBlueSpace(index++, 25, 22),  //ID = 50
-                SpaceFactory.createNonMovementSpace(index++, 23, 22),
-                SpaceFactory.createBlueSpace(index++, 20, 22),
+                spaceFactory.createBlueSpace(index++, 25, 22),  //ID = 50
+                spaceFactory.createNonMovementSpace(index++, 23, 22),
+                spaceFactory.createBlueSpace(index++, 20, 22),
                 new ChooseTreasureChestEvent(index++, 20, 26),
-                SpaceFactory.createBadLuckSpace(index++, 20, 30) //ID = 54
+                spaceFactory.createBadLuckSpace(index++, 20, 30) //ID = 54
         ).addEdgeChain(
                 //Side Path 2
-                SpaceFactory.createRedSpace(index++, 6, 30), //ID = 55
-                SpaceFactory.createStarSpace(index++, 6, 27),
-                SpaceFactory.createVSSpace(index++, 6, 23),
-                SpaceFactory.createAllySpace(index++, 6, 20) //ID = 58
+                spaceFactory.createRedSpace(index++, 6, 30), //ID = 55
+                spaceFactory.createStarSpace(index++, 6, 27),
+                spaceFactory.createVSSpace(index++, 6, 23),
+                spaceFactory.createAllySpace(index++, 6, 20) //ID = 58
         ).addEdgeChain(
                 //Side Path 3
                 new WhompsOnTheRun(index++, WHOMP2_1, true, 4, 16),  //ID = 59
                 new WhompSwitch(index++, WHOMP2_1, WHOMP2_2, 6, 16),
-                SpaceFactory.createItemSpace(index++, 9, 16),
-                SpaceFactory.createBlueSpace(index++, 12, 16),
-                SpaceFactory.createStarSpace(index++, 12, 20),
-                SpaceFactory.createBadLuckSpace(index++, 10, 20),
-                SpaceFactory.createBadLuckSpace(index++, 8, 20) //ID = 65
+                spaceFactory.createItemSpace(index++, 9, 16),
+                spaceFactory.createBlueSpace(index++, 12, 16),
+                spaceFactory.createStarSpace(index++, 12, 20),
+                spaceFactory.createBadLuckSpace(index++, 10, 20),
+                spaceFactory.createBadLuckSpace(index++, 8, 20) //ID = 65
         ).addEdgeChain(
                 //Side Path 4
-                SpaceFactory.createRedSpace(index++, 5, 10), //ID = 66
-                SpaceFactory.createStarSpace(index++, 8, 10),
-                SpaceFactory.createBlueSpace(index++, 11, 10),
-                SpaceFactory.createItemSpace(index, 14, 10) //ID = 69
+                spaceFactory.createRedSpace(index++, 5, 10), //ID = 66
+                spaceFactory.createStarSpace(index++, 8, 10),
+                spaceFactory.createBlueSpace(index++, 11, 10),
+                spaceFactory.createItemSpace(index, 14, 10) //ID = 69
         );
 
         board = graphBuilder.build();

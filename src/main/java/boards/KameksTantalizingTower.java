@@ -3,7 +3,6 @@ package boards;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
-import boards.spaces.SpaceFactory;
 import boards.spaces.StarSpace;
 import boards.spaces.events.EventSpace;
 import boards.spaces.events.KTT.ChainChompSpace;
@@ -31,18 +30,18 @@ public class KameksTantalizingTower extends BaseBoard  {
 
         graphBuilder.addEdgeChain(
                 //Start
-                SpaceFactory.createStartSpace(index++, 7, 2), //ID = 0
+                spaceFactory.createStartSpace(index++, 7, 2), //ID = 0
                 //Main path to star
-                SpaceFactory.createMoveEventSpace(index++, 23, 7, 7),
+                spaceFactory.createMoveEventSpace(index++, 23, 7, 7),
                 newBlueKamekSpace(index++, 13, 7),
                 newBlueKamekSpace(index++, 19, 7),
                 newBlueKamekSpace(index++, 24, 7),
-                SpaceFactory.createNonMovementSpace(index++, 28, 7),
+                spaceFactory.createNonMovementSpace(index++, 28, 7),
                 newBlueKamekSpace(index++, 28, 11),
                 newBlueKamekSpace(index++, 28, 16),
                 newBlueKamekSpace(index++, 24, 16),
-                SpaceFactory.createNonMovementSpace(index++, 20, 16), //ID = 9
-                SpaceFactory.createLuckySpace(index++, 18, 20),
+                spaceFactory.createNonMovementSpace(index++, 20, 16), //ID = 9
+                spaceFactory.createLuckySpace(index++, 18, 20),
                 newBlueKamekSpace(index++, 23, 20),
                 new ForcedShopSpace(index++, 23, 23), //ID = 12
                 newBlueKamekSpace(index++, 23, 27),
@@ -50,18 +49,18 @@ public class KameksTantalizingTower extends BaseBoard  {
                 new ChainChompSpace(index++, 20, 30),
                 new ChainChompSpace(index++, 16, 30),
                 newBlueKamekSpace(index++, 7, 30), //ID = 17
-                SpaceFactory.createBadLuckSpace(index++, 7, 34),
+                spaceFactory.createBadLuckSpace(index++, 7, 34),
                 new ChangeStarPriceSpace(index++, 15, 34),
-                SpaceFactory.createStarSpace(index++, 18, 34),
-                SpaceFactory.createNonMovementSpace(index++, 20, 38) //ID = 21
+                spaceFactory.createStarSpace(index++, 18, 34),
+                spaceFactory.createNonMovementSpace(index++, 20, 38) //ID = 21
         ).addEdgeChain(
                 //Past the Thwomp
                 newRedKamekSpace(index++, 16, 16), //ID = 22
                 newBlueKamekSpace(index++, 12, 16),
                 newBlueKamekSpace(index++, 8, 16),
-                SpaceFactory.createMoveEventSpace(index++, 30, 6, 20), //ID = 25
-                SpaceFactory.createNonMovementSpace(index++, 10, 20), //ID = 26
-                SpaceFactory.createItemSpace(index++, 14, 20) //ID = 27
+                spaceFactory.createMoveEventSpace(index++, 30, 6, 20), //ID = 25
+                spaceFactory.createNonMovementSpace(index++, 10, 20), //ID = 26
+                spaceFactory.createItemSpace(index++, 14, 20) //ID = 27
         ).addEdgeChain(
                 //Through the Thwomp
                 new ThwompShortcutSpace(index++, 10, 22), //ID = 28
@@ -69,15 +68,15 @@ public class KameksTantalizingTower extends BaseBoard  {
         ).addEdgeChain(
                 //Odd side path
                 newBlueKamekSpace(index++, 2, 26), //ID = 30
-                SpaceFactory.createNonMovementSpace(index++, 2, 29),
-                SpaceFactory.createVSSpace(index++, 2, 32),
-                SpaceFactory.createNonMovementSpace(index++, 2, 36)  //ID = 33
+                spaceFactory.createNonMovementSpace(index++, 2, 29),
+                spaceFactory.createVSSpace(index++, 2, 32),
+                spaceFactory.createNonMovementSpace(index++, 2, 36)  //ID = 33
         ).addEdgeChain(
                 //And wrapping it back around
                 newRedKamekSpace(index++, 2, 16), //ID = 34
-                SpaceFactory.createItemSpace(index++, 2, 13),
-                SpaceFactory.createAllySpace(index++, 2, 10),
-                SpaceFactory.createVSSpace(index, 2, 7) //ID = 37
+                spaceFactory.createItemSpace(index++, 2, 13),
+                spaceFactory.createAllySpace(index++, 2, 10),
+                spaceFactory.createVSSpace(index, 2, 7) //ID = 37
         );
 
         board = graphBuilder.build();
@@ -117,11 +116,11 @@ public class KameksTantalizingTower extends BaseBoard  {
     }
     
     private BlueSpace newBlueKamekSpace(int index, int x, int y) {
-        return SpaceFactory.createBlueSpace(index,6, x, y);
+        return spaceFactory.createBlueSpace(index,6, x, y);
     }
     
     private RedSpace newRedKamekSpace(int index, int x, int y) {
-        return SpaceFactory.createRedSpace(index,-6, x, y);
+        return spaceFactory.createRedSpace(index,-6, x, y);
     }
 
     @Override
