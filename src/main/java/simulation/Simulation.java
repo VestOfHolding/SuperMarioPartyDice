@@ -4,6 +4,7 @@ import boards.BaseBoard;
 import boards.KingBobombsPowderkegMine;
 import boards.WhompsDominoRuins;
 import boards.spaces.BaseSpace;
+import mg.MinigameManager;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.time.StopWatch;
 import partydice.BobombAlly;
@@ -29,13 +30,15 @@ public class Simulation implements Runnable{
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
 
     protected static final int TURN_COUNT = 20;
-    protected int SIM_COUNT = 20000000;
+    protected int SIM_COUNT = 10000000;
 
     protected BaseBoard gameBoard;
 
     protected SimulationStatTracker simulationStatTracker;
 
     protected String fileOutputName;
+
+    protected MinigameManager minigameManager;
 
     public Simulation() {
         this.gameBoard = new WhompsDominoRuins();
@@ -45,6 +48,7 @@ public class Simulation implements Runnable{
         SIM_COUNT = simCount;
         this.gameBoard = gameBoard;
         fileOutputName = "output/" + gameBoard.getFileOutputName();
+        minigameManager = new MinigameManager();
     }
 
     @Override
@@ -95,23 +99,25 @@ public class Simulation implements Runnable{
     }
 
     protected void simulateGame() {
-        List<Player> players = simulationStatTracker.startNewGame(TURN_COUNT);
+        PlayerGroup players = simulationStatTracker.startNewGame(TURN_COUNT);
         gameBoard.setPlayerGroup(players);
 
-        players.forEach(player -> player.setCurrentSpace(gameBoard.getStartSpace()));
+        players.getAllPlayers().forEach(player -> player.setCurrentSpace(gameBoard.getStartSpace()));
 
         for (int j = 0; j < TURN_COUNT; ++j) {
             if (j == TURN_COUNT - 3) {
                 lastThreeTurns(gameBoard);
             }
 
-            for (Player player : players) {
+            for (Player player : players.getAllPlayers()) {
                 simulateTurn(player, players);
             }
+            minigameManager.runMinigame(players);
+            calculatePlaces(players.getAllPlayers());
         }
     }
 
-    protected void simulateTurn(Player currentPlayer, List<Player> allPlayers) {
+    protected void simulateTurn(Player currentPlayer, PlayerGroup allPlayers) {
         DieResult result = currentPlayer.rollCharacterDie();
         GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
@@ -134,6 +140,9 @@ public class Simulation implements Runnable{
         if (moveAmount > 0) {
             currentSpace = gameBoard.getDestination(currentPlayer, moveAmount);
         }
+        else {
+            currentPlayer.setLandedSpaceColor(currentSpace.getSpaceColor());
+        }
 
 //        gameStatTracker.addLandedSpace(currentSpace);
 
@@ -141,7 +150,8 @@ public class Simulation implements Runnable{
         gameStatTracker.incrementTurn();
 
         currentPlayer.setCurrentSpace(currentSpace);
-        calculatePlaces(allPlayers);
+
+        calculatePlaces(allPlayers.getAllPlayers());
     }
 
     public void calculatePlaces(List<Player> players) {

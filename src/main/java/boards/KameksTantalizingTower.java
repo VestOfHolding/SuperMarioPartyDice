@@ -140,6 +140,11 @@ public class KameksTantalizingTower extends BaseBoard  {
             }
         }
 
+        //We set the color before processing the event, because of the case where
+        // the player lands on a space that moves them, but the color for this turn should
+        // still reflect that move event space they landed on, not the actual space they end their turn on.
+        player.setLandedSpaceColor(currentSpace.getSpaceColor());
+
         if (currentSpace instanceof EventSpace && !currentSpace.isPassingEvent()) {
             currentSpace = processEvent(player, currentSpace);
         }

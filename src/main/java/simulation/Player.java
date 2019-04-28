@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-public class Player implements Comparable {
+public class Player implements Comparable<Player> {
     private Dice characterDice;
 
     private GameStatTracker gameStatTracker;
@@ -80,9 +80,7 @@ public class Player implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        Player otherPlayer = (Player)o;
-
+    public int compareTo(Player otherPlayer) {
         int result = otherPlayer.gameStatTracker.getStarCount() - gameStatTracker.getStarCount();
 
         if (result == 0) {

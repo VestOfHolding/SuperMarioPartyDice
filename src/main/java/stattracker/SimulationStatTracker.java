@@ -3,6 +3,7 @@ package stattracker;
 import lombok.Getter;
 import partydice.Dice;
 import simulation.Player;
+import simulation.PlayerGroup;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,7 +31,7 @@ public class SimulationStatTracker {
                 4, new AllyStatTracker(4));
     }
 
-    public List<Player> startNewGame(int turnCount) {
+    public PlayerGroup startNewGame(int turnCount) {
         mainPlayer.setGameStatTracker(new GameStatTracker(turnCount));
 
         //Easier to keep adding players to this set until there are 4 unique players.
@@ -46,7 +47,7 @@ public class SimulationStatTracker {
         // turn order for the characters that will now be consistent for the game.
         allPlayers = new ArrayList<>(allPlayerSet);
 
-        return allPlayers;
+        return new PlayerGroup(allPlayers);
     }
 
     public void endGame() {

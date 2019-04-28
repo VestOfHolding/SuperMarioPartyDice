@@ -65,8 +65,8 @@ public abstract class BaseBoard {
         initializeBoard();
     }
 
-    public void setPlayerGroup(List<Player> players) {
-        playerGroup = new PlayerGroup(players);
+    public void setPlayerGroup(PlayerGroup players) {
+        playerGroup = players;
     }
 
     /**
