@@ -33,4 +33,9 @@ public class StarSparklerSpace extends EventSpace {
         }
         return true;
     }
+
+    @Override
+    public void reset() {
+        countdown = 2;
+    }
 }

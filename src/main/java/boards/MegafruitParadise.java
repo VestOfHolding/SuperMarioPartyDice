@@ -106,6 +106,7 @@ public class MegafruitParadise extends BaseBoard {
         board.addEdge(board.getVertexById(9), board.getVertexById(59));
         board.addEdge(board.getVertexById(59), board.getVertexById(14));
 
+        board.getVertexById(49).reset();
         board.getVertexById(58).reset();
 
         resetRedAndBlueCoinAmounts();
