@@ -30,7 +30,7 @@ public class Simulation implements Runnable{
     protected final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("####.#######");
 
     protected static final int TURN_COUNT = 20;
-    protected int SIM_COUNT = 10000000;
+    protected int SIM_COUNT = 6000000;
 
     protected BaseBoard gameBoard;
 

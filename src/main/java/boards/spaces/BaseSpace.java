@@ -4,20 +4,20 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
 
 @Getter
 @Setter
-@ToString
 public class BaseSpace {
 
     protected int spaceID;
 
     protected int x;
     protected int y;
+
+    protected int distanceToStar = Integer.MAX_VALUE;
 
     public BaseSpace(int spaceID) {
         this.spaceID = spaceID;
@@ -78,5 +78,11 @@ public class BaseSpace {
     @Override
     public int hashCode() {
         return spaceID;
+    }
+
+    public String toString() {
+        return "BaseSpace(spaceID=" + this.getSpaceID() +
+                ", x=" + this.getX() +
+                ", y=" + this.getY() + ")";
     }
 }
