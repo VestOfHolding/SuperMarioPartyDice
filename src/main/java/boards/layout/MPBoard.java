@@ -96,4 +96,25 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
     public void resetCountdown() {
         kingBobombCountdown = kingBobombCountdownStart;
     }
+
+    public void resetStarDistanceCounts(V starSpace) {
+        for (V vertex : VERTEX_MAP.values()) {
+            vertex.setDistanceToStar(Integer.MAX_VALUE);
+        }
+
+        starSpace.setDistanceToStar(0);
+
+        setDistanceToStar(starSpace, 0);
+    }
+
+    public void setDistanceToStar(V currentSpace, int distance) {
+        if (currentSpace.getDistanceToStar() != Integer.MAX_VALUE) {
+            return;
+        }
+        currentSpace.setDistanceToStar(distance);
+
+        for (MPEdge edge : incomingEdgesOf(currentSpace)) {
+            setDistanceToStar((V)edge.getSource(), distance + 1);
+        }
+    }
 }

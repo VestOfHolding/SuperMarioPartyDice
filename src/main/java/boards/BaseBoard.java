@@ -18,6 +18,7 @@ import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -96,6 +97,8 @@ public abstract class BaseBoard {
         nextStar.activateStar();
         board.setNeedToMoveStar(false);
         board.setStarCost(board.INIT_STAR_COST);
+
+        board.resetStarDistanceCounts(nextStar);
     }
 
     public BaseSpace getStartSpace() {
@@ -109,7 +112,14 @@ public abstract class BaseBoard {
     public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
         List<BaseSpace> nextSpaces = getNextSpaces(startingSpace);
 
-        return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
+        if (nextSpaces.size() == 1) {
+            return nextSpaces.get(0);
+        }
+
+        if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {
+            return nextSpaces.stream().min(Comparator.comparing(BaseSpace::getDistanceToStar)).orElse(null);
+        }
+        return nextSpaces.get(RandomUtils.getRandomInt(nextSpaces.size() - 1));
     }
 
     public List<BaseSpace> getNextSpaces(BaseSpace startingSpace) {

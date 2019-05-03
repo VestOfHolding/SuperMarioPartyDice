@@ -9,6 +9,7 @@ import stattracker.GameStatTracker;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class WhompsDominoRuins extends BaseBoard {
@@ -173,6 +174,13 @@ public class WhompsDominoRuins extends BaseBoard {
             }
         }
 
-        return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
+        if (nextSpaces.size() == 1) {
+            return nextSpaces.get(0);
+        }
+
+        if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {
+            return nextSpaces.stream().min(Comparator.comparing(BaseSpace::getDistanceToStar)).orElse(null);
+        }
+        return nextSpaces.get(RandomUtils.getRandomInt(nextSpaces.size() - 1));
     }
 }

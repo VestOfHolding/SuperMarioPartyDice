@@ -13,6 +13,7 @@ import utils.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class KameksTantalizingTower extends BaseBoard  {
@@ -132,7 +133,14 @@ public class KameksTantalizingTower extends BaseBoard  {
             }
         }
 
-        return nextSpaces.get(nextSpaces.size() > 1 ? RandomUtils.getRandomInt(nextSpaces.size() - 1) : 0);
+        if (nextSpaces.size() == 1) {
+            return nextSpaces.get(0);
+        }
+
+        if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {
+            return nextSpaces.stream().min(Comparator.comparing(BaseSpace::getDistanceToStar)).orElse(null);
+        }
+        return nextSpaces.get(RandomUtils.getRandomInt(nextSpaces.size() - 1));
     }
 
     @Override
@@ -148,6 +156,7 @@ public class KameksTantalizingTower extends BaseBoard  {
             currentStarSpace.activateStar();
 
             board.setStarCost(board.INIT_STAR_COST);
+            board.resetStarDistanceCounts(currentStarSpace);
         }
         //Otherwise, leave the star alone, except for changing the price.
         else {
