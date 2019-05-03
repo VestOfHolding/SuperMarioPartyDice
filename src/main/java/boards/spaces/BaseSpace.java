@@ -9,8 +9,6 @@ import simulation.Player;
 import simulation.PlayerGroup;
 import stattracker.GameStatTracker;
 
-import java.util.Objects;
-
 @Getter
 @Setter
 @ToString
@@ -79,6 +77,6 @@ public class BaseSpace {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSpaceID());
+        return spaceID;
     }
 }
