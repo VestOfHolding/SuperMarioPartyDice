@@ -102,9 +102,7 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
             vertex.setDistanceToStar(Integer.MAX_VALUE);
         }
 
-        starSpace.setDistanceToStar(0);
-
-        setDistanceToStar(starSpace, 0);
+        setDistanceToStar(starSpace, 1);
     }
 
     public void setDistanceToStar(V currentSpace, int distance) {
@@ -114,7 +112,8 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
         currentSpace.setDistanceToStar(distance);
 
         for (MPEdge edge : incomingEdgesOf(currentSpace)) {
-            setDistanceToStar((V)edge.getSource(), distance + 1);
+            setDistanceToStar((V)edge.getSource(),
+                    currentSpace.affectsMovement() ? distance + 1 : distance);
         }
     }
 }
