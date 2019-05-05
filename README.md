@@ -26,7 +26,8 @@ For real though, with the introduction of the unique character dice in SMP, this
 The current version of these simulations is much more limited than the real SMP games due to complexity and setting more incremental, obtainable goals for myself. With this current state (plus any current goals/questions addressed), I believe that's at least a really good pausing place that still yields really good results that a SMP player could still use.
 
  * The stars work....mostly.
-    * Stars are on the board and work as you would expect. The only issue is that the agent currently doesn't care about them. Getting to a star space and buying the star is pure coincidence, as the agent is choosing which path to take randomly.
+    * Stars are on the board and work as you would expect. 
+    * When the agent arrives at a branching path, it will choose which path to take based on whether it can currently afford the star and which path is the shortest to the star.
  * Character dice only. 
    * The agents only ever use the character die that they have from the beginning, though yes, in a real game a player can choose between their own character die, the character dice of any allies they have, and a standard d6. For now, this project is really about answering how effective each character die is on their own, so we can leave adding this choice for a later version of this. 
    * Though yes, that could end up changing things, as maybe even the stand d6 compliments some character dice far better than others.

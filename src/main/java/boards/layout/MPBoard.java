@@ -106,7 +106,8 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
     }
 
     public void setDistanceToStar(V currentSpace, int distance) {
-        if (currentSpace.getDistanceToStar() != Integer.MAX_VALUE) {
+        //Base case is we arrive at a space where a better route is already documented.
+        if (currentSpace.getDistanceToStar() <= distance) {
             return;
         }
         currentSpace.setDistanceToStar(distance);
