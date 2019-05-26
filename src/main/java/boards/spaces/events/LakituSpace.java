@@ -11,7 +11,7 @@ import utils.RandomUtils;
 import java.util.Comparator;
 
 @ToString(callSuper = true)
-public class LakituSpace extends EventSpace {
+public class LakituSpace extends BaseSpace {
 
     @ToString.Exclude
     private static final int STAR_STEAL_COST = 30;

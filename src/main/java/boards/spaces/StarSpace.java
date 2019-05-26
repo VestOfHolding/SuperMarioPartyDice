@@ -11,19 +11,11 @@ import simulation.PlayerGroup;
 @ToString(callSuper = true)
 public class StarSpace extends BlueSpace {
 
-    private boolean starActive = false;
+    private boolean starActive;
 
     public StarSpace(int spaceID, int coins) {
         super(spaceID, coins);
         starActive = false;
-    }
-
-    @Override
-    public int coinGain() {
-        if (starActive) {
-            return 0;
-        }
-        return super.coinGain();
     }
 
     @Override
@@ -63,6 +55,10 @@ public class StarSpace extends BlueSpace {
                 gameBoard.setNeedToMoveStar(true);
 
                 return true;
+            }
+            //When the star is inactive, it's just a blue space.
+            else if (!starActive) {
+                return super.processEvent(gameBoard, currentPlayer, playerGroup);
             }
         }
 

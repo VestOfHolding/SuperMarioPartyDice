@@ -2,7 +2,7 @@ package boards;
 
 import boards.spaces.events.MFP.PresentBoxSpace;
 import boards.spaces.events.MFP.StarSparklerSpace;
-import boards.spaces.events.SandBridgeCollapse;
+import boards.spaces.events.MFP.SandBridgeCollapse;
 
 public class MegafruitParadise extends BaseBoard {
     private static int I0_DEST = 7;

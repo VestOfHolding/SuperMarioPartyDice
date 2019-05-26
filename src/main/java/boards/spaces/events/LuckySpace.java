@@ -14,7 +14,7 @@ import utils.RandomUtils;
 import java.util.ArrayList;
 
 @ToString(callSuper = true)
-public class LuckySpace extends EventSpace {
+public class LuckySpace extends BaseSpace {
 
     public LuckySpace(int spaceID) {
         super(spaceID);

@@ -145,8 +145,6 @@ public class Simulation implements Runnable{
         }
 
 //        gameStatTracker.addLandedSpace(currentSpace);
-
-        currentPlayer.addCoins(currentSpace.coinGain());
         gameStatTracker.incrementTurn();
 
         currentPlayer.setCurrentSpace(currentSpace);

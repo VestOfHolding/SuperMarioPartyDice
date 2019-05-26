@@ -30,18 +30,11 @@ public class VSSpace extends BlueSpace {
     }
 
     @Override
-    public int coinGain() {
-        if (used) {
-            return super.coinGain();
-        }
-        return 0;
-    }
-
-    @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
+        //After the VS space has been landed on, it becomes a blue space.
         if (used) {
-            return true;
+            return super.processEvent(gameBoard, currentPlayer, playerGroup);
         }
 
         int wager = POSSIBLE_WAGERS.get(RandomUtils.getRandomInt(POSSIBLE_WAGERS.size() - 1));
@@ -55,7 +48,7 @@ public class VSSpace extends BlueSpace {
         List<Integer> normalSplitCopy = new ArrayList<>(NORMAL_SPLITS);
 
         for (Player player : new HashSet<>(playerGroup.getAllPlayers())) {
-            int split = normalSplitCopy.get(RandomUtils.getRandomInt(normalSplitCopy.size() - 1));
+            Integer split = normalSplitCopy.get(RandomUtils.getRandomInt(normalSplitCopy.size() - 1));
             int gainFromPot = totalPot * split / 10;
 
             player.addCoins(gainFromPot);

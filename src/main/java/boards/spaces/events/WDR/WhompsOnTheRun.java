@@ -3,7 +3,6 @@ package boards.spaces.events.WDR;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.events.EventSpace;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +13,7 @@ import stattracker.GameStatTracker;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class WhompsOnTheRun extends EventSpace {
+public class WhompsOnTheRun extends BaseSpace {
     private static int COST = 3;
 
     private int partnerID;

@@ -4,7 +4,6 @@ import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
-import boards.spaces.events.EventSpace;
 import boards.spaces.events.LuckySpace;
 import lombok.ToString;
 import org.jgrapht.Graphs;
@@ -12,7 +11,7 @@ import simulation.Player;
 import simulation.PlayerGroup;
 
 @ToString(callSuper = true)
-public class KBPMChangePathEvent extends EventSpace {
+public class KBPMChangePathEvent extends BaseSpace {
 
     public KBPMChangePathEvent(int spaceID, int x, int y) {
         super(spaceID, x, y);

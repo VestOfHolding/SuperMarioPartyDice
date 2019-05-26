@@ -113,6 +113,7 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
         currentSpace.setDistanceToStar(distance);
 
         for (MPEdge edge : incomingEdgesOf(currentSpace)) {
+            //noinspection unchecked
             setDistanceToStar((V)edge.getSource(),
                     currentSpace.affectsMovement() ? distance + 1 : distance);
         }

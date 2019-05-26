@@ -3,7 +3,6 @@ package boards.spaces.events.WDR;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.events.EventSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
@@ -14,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @ToString(callSuper = true)
-public class ChooseTreasureChestEvent extends EventSpace {
+public class ChooseTreasureChestEvent extends BaseSpace {
 
     //Three treasures event space. Rewards:
     //1. Golden Dash Mushroom

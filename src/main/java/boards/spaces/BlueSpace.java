@@ -1,8 +1,12 @@
 package boards.spaces;
 
+import boards.MPEdge;
+import boards.layout.MPBoard;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import simulation.Player;
+import simulation.PlayerGroup;
 
 @Getter
 @Setter
@@ -27,8 +31,9 @@ public class BlueSpace extends BaseSpace {
     }
 
     @Override
-    public int coinGain() {
-        return coins;
+    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
+        currentPlayer.addCoins(coins);
+        return false;
     }
 
     @Override

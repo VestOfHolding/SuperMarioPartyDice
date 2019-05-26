@@ -1,8 +1,9 @@
-package boards.spaces.events;
+package boards.spaces.events.MFP;
 
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
+import boards.spaces.events.MoveEventSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;

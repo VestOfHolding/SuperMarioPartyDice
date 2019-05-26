@@ -3,7 +3,6 @@ package boards.spaces.events.MFP;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.events.EventSpace;
 import boards.spaces.events.LakituSpace;
 import lombok.ToString;
 import simulation.Player;
@@ -11,7 +10,7 @@ import simulation.PlayerGroup;
 import utils.RandomUtils;
 
 @ToString(callSuper = true)
-public class PresentBoxSpace extends EventSpace {
+public class PresentBoxSpace extends BaseSpace {
     private static final LakituSpace lakituEvent = new LakituSpace(-1, -1, -1);
 
     public PresentBoxSpace(int spaceID, int x, int y) {

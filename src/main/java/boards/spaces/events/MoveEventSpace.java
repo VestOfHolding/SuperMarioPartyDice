@@ -40,17 +40,10 @@ public class MoveEventSpace extends BlueSpace {
     }
 
     @Override
-    public int coinGain() {
-        if (turnsBlue && used) {
-            return super.coinGain();
-        }
-        return 0;
-    }
-
-    @Override
     public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         if (turnsBlue && used) {
+            super.processEvent(gameBoard, currentPlayer, playerGroup);
             return true;
         }
         else if (turnsBlue) {

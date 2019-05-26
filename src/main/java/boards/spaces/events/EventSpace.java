@@ -1,7 +1,6 @@
 package boards.spaces.events;
 
 import boards.spaces.BaseSpace;
-import boards.spaces.SpaceColor;
 import lombok.ToString;
 
 @ToString(callSuper = true)

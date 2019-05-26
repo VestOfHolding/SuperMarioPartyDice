@@ -6,9 +6,8 @@ import boards.spaces.BlueSpace;
 import boards.spaces.RedSpace;
 import boards.spaces.SpaceFactory;
 import boards.spaces.StarSpace;
-import boards.spaces.events.EventSpace;
 import boards.spaces.events.MoveEventSpace;
-import boards.spaces.events.SandBridgeCollapse;
+import boards.spaces.events.MFP.SandBridgeCollapse;
 import lombok.Getter;
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.builder.GraphBuilder;
@@ -146,9 +145,7 @@ public abstract class BaseBoard {
         // still reflect that move event space they landed on, not the actual space they end their turn on.
         player.setLandedSpaceColor(currentSpace.getSpaceColor());
 
-        if ((currentSpace instanceof EventSpace || currentSpace instanceof MoveEventSpace)
-                && !currentSpace.isPassingEvent()) {
-
+        if (!currentSpace.isPassingEvent()) {
             currentSpace = processEvent(player, currentSpace);
         }
 

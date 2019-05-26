@@ -29,10 +29,6 @@ public class BaseSpace {
         this.y = y;
     }
 
-    public int coinGain() {
-        return 0;
-    }
-
     public int moveToSpace() {
         return -1;
     }

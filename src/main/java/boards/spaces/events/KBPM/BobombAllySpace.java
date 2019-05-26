@@ -3,13 +3,12 @@ package boards.spaces.events.KBPM;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.events.EventSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 
 @ToString(callSuper = true)
-public class BobombAllySpace extends EventSpace {
+public class BobombAllySpace extends BaseSpace {
 
     public BobombAllySpace(int spaceID, int x, int y) {
         super(spaceID, x, y);

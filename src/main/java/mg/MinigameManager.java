@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 /**
  * I am going to regret writing this class at midnight, lol.
- * I'm sure this must destroy the simulation performance.
  */
 public class MinigameManager {
     public static final int WIN_AMOUNT = 8;

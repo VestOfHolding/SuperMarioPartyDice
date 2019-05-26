@@ -3,13 +3,12 @@ package boards.spaces.events.WDR;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.events.EventSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 
 @ToString(callSuper = true)
-public class WhompSwitch extends EventSpace {
+public class WhompSwitch extends BaseSpace {
 
     private int firstWhompID;
     private int secondWhompID;

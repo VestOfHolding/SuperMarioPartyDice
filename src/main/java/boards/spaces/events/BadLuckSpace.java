@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 @ToString(callSuper = true)
-public class BadLuckSpace extends EventSpace {
+public class BadLuckSpace extends BaseSpace {
 
     public BadLuckSpace(int spaceID) {
         super(spaceID);

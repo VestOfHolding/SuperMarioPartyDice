@@ -3,7 +3,6 @@ package boards.spaces.events.KTT;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.events.EventSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
@@ -13,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @ToString(callSuper = true)
-public class ChangeStarPriceSpace extends EventSpace {
+public class ChangeStarPriceSpace extends BaseSpace {
     private List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
 
     public ChangeStarPriceSpace(int spaceID, int x, int y) {

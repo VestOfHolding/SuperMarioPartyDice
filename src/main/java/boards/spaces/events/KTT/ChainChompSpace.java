@@ -3,14 +3,13 @@ package boards.spaces.events.KTT;
 import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
-import boards.spaces.events.EventSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 import utils.RandomUtils;
 
 @ToString(callSuper = true)
-public class ChainChompSpace extends EventSpace {
+public class ChainChompSpace extends BaseSpace {
 
     public ChainChompSpace(int spaceID, int x, int y) {
         super(spaceID, x, y);

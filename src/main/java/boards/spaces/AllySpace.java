@@ -2,13 +2,12 @@ package boards.spaces;
 
 import boards.MPEdge;
 import boards.layout.MPBoard;
-import boards.spaces.events.EventSpace;
 import lombok.ToString;
 import simulation.Player;
 import simulation.PlayerGroup;
 
 @ToString(callSuper = true)
-public class AllySpace extends EventSpace {
+public class AllySpace extends BaseSpace {
 
     public AllySpace(int spaceID) {
         super(spaceID);
