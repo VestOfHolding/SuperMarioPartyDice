@@ -1,6 +1,5 @@
 package boards.spaces;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,7 +32,7 @@ public class BaseSpace {
         return -1;
     }
 
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
+    public boolean processEvent(MPBoard gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
         return false;
     }
 

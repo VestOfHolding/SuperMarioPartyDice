@@ -1,8 +1,6 @@
 package boards.spaces.events;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
-import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.SpaceColor;
 import lombok.ToString;
@@ -40,7 +38,7 @@ public class MoveEventSpace extends BlueSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         if (turnsBlue && used) {
             super.processEvent(gameBoard, currentPlayer, playerGroup);

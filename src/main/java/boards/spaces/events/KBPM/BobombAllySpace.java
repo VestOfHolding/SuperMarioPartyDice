@@ -1,6 +1,5 @@
 package boards.spaces.events.KBPM;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.ToString;
@@ -20,7 +19,7 @@ public class BobombAllySpace extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         currentPlayer.getGameStatTracker().addBobombAlly();
         return true;

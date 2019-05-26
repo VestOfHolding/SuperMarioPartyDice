@@ -1,6 +1,5 @@
 package boards.spaces.events.KBPM;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
@@ -18,7 +17,7 @@ public class KBPMChangePathEvent extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
 
         KBPMChangePathEvent firstEventSpace = (KBPMChangePathEvent)gameBoard.getVertexById(27);

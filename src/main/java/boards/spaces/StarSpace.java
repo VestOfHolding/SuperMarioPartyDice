@@ -1,6 +1,5 @@
 package boards.spaces;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import lombok.Getter;
 import lombok.ToString;
@@ -29,7 +28,7 @@ public class StarSpace extends BlueSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
+    public boolean processEvent(MPBoard gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
         if (gameBoard.isKamekBoard()) {
             //The star is always active on the same space on this board.
             if (currentPlayer.getCoinTotal() >= gameBoard.getStarCost()) {

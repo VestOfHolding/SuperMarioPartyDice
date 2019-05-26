@@ -1,6 +1,5 @@
 package boards.spaces.events.MFP;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.events.LakituSpace;
@@ -20,7 +19,7 @@ public class PresentBoxSpace extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         int chanceResult = RandomUtils.getRandomInt(2);
 

@@ -1,8 +1,6 @@
 package boards.spaces.events;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
-import boards.spaces.BaseSpace;
 import boards.spaces.BlueSpace;
 import boards.spaces.SpaceColor;
 import lombok.ToString;
@@ -30,7 +28,7 @@ public class VSSpace extends BlueSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         //After the VS space has been landed on, it becomes a blue space.
         if (used) {

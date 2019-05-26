@@ -10,14 +10,10 @@ import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirectedWeightedGraph<V, E> {
-    Map<Integer, V> VERTEX_MAP;
-
-    private static final int kingBobombCountdownStart = 5;
+public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
+    Map<Integer, BaseSpace> VERTEX_MAP;
 
     public final int INIT_STAR_COST = 10;
-
-    private int kingBobombCountdown = 5;
 
     @Getter
     @Setter
@@ -31,14 +27,14 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
     @Setter
     private boolean isKamekBoard;
 
-    public MPBoard(Class<? extends E> edgeClass) {
-        super(edgeClass);
+    public MPBoard() {
+        super(MPEdge.class);
 
         VERTEX_MAP = new HashMap<>();
     }
 
     @Override
-    public boolean addVertex(V v) {
+    public boolean addVertex(BaseSpace v) {
         if (v == null || VERTEX_MAP.containsKey(v.getSpaceID())) {
             return false;
         }
@@ -48,7 +44,7 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
     }
 
     @Override
-    public boolean removeVertex(V v) {
+    public boolean removeVertex(BaseSpace v) {
         if (v == null || !VERTEX_MAP.containsKey(v.getSpaceID())) {
             return false;
         }
@@ -64,7 +60,7 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
      *  Therefore, if the target of this edge is a star space, check again if it currently affects movement.
      */
     @Override
-    public double getEdgeWeight(E e) {
+    public double getEdgeWeight(MPEdge e) {
         double result = super.getEdgeWeight(e);
 
         return e.getTarget() instanceof StarSpace && !e.getTarget().affectsMovement()
@@ -83,29 +79,15 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
         return vertexSet().size();
     }
 
-    public boolean decrementCountdown() {
-        kingBobombCountdown--;
-
-        if (kingBobombCountdown <= 0) {
-            kingBobombCountdown = kingBobombCountdownStart;
-            return true;
-        }
-        return false;
-    }
-
-    public void resetCountdown() {
-        kingBobombCountdown = kingBobombCountdownStart;
-    }
-
-    public void resetStarDistanceCounts(V starSpace) {
-        for (V vertex : VERTEX_MAP.values()) {
+    public void resetStarDistanceCounts(BaseSpace starSpace) {
+        for (BaseSpace vertex : VERTEX_MAP.values()) {
             vertex.setDistanceToStar(Integer.MAX_VALUE);
         }
 
         setDistanceToStar(starSpace, 1);
     }
 
-    public void setDistanceToStar(V currentSpace, int distance) {
+    public void setDistanceToStar(BaseSpace currentSpace, int distance) {
         //Base case is we arrive at a space where a better route is already documented.
         if (currentSpace.getDistanceToStar() <= distance) {
             return;
@@ -113,8 +95,7 @@ public class MPBoard<V extends BaseSpace, E extends MPEdge> extends SimpleDirect
         currentSpace.setDistanceToStar(distance);
 
         for (MPEdge edge : incomingEdgesOf(currentSpace)) {
-            //noinspection unchecked
-            setDistanceToStar((V)edge.getSource(),
+            setDistanceToStar(edge.getSource(),
                     currentSpace.affectsMovement() ? distance + 1 : distance);
         }
     }

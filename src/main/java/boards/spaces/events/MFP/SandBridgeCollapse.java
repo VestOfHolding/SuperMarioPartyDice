@@ -1,8 +1,6 @@
 package boards.spaces.events.MFP;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
-import boards.spaces.BaseSpace;
 import boards.spaces.events.MoveEventSpace;
 import lombok.ToString;
 import simulation.Player;
@@ -39,7 +37,7 @@ public class SandBridgeCollapse extends MoveEventSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         decrementCountdown();
 

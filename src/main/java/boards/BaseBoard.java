@@ -23,12 +23,12 @@ import java.util.stream.Collectors;
 
 public abstract class BaseBoard {
     @Getter
-    protected MPBoard<BaseSpace, MPEdge> board;
+    protected MPBoard board;
 
     @Getter
     protected String fileOutputName;
 
-    protected GraphBuilder<BaseSpace, MPEdge, MPBoard<BaseSpace, MPEdge>> graphBuilder;
+    protected GraphBuilder<BaseSpace, MPEdge, MPBoard> graphBuilder;
 
     protected List<StarSpace> starSpaces = new ArrayList<>();
 
@@ -37,9 +37,13 @@ public abstract class BaseBoard {
     protected SpaceFactory spaceFactory;
 
     protected void initializeBoard() {
-        board = new MPBoard<>(MPEdge.class);
+        initializeBoard(new MPBoard());
+    }
+
+    protected void initializeBoard(MPBoard newBoard) {
+        board = newBoard;
         board.setKamekBoard(false);
-        graphBuilder = new GraphBuilder<>(new MPBoard<>(MPEdge.class));
+        graphBuilder = new GraphBuilder<>(board);
         spaceFactory = new SpaceFactory();
 
         buildInitialGraph();

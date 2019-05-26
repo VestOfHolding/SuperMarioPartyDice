@@ -1,6 +1,6 @@
 package boards.spaces.events.KBPM;
 
-import boards.MPEdge;
+import boards.layout.KingBobombsBoard;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.ToString;
@@ -15,9 +15,13 @@ public class RoyalExplosionEvent extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
-        boolean explosionTime = gameBoard.decrementCountdown();
+        if (!(gameBoard instanceof KingBobombsBoard)) {
+            return false;
+        }
+
+        boolean explosionTime = ((KingBobombsBoard)gameBoard).decrementCountdown();
 
         if (explosionTime) {
             currentPlayer.getGameStatTracker().setCoinTotal(currentPlayer.getGameStatTracker().getCoinTotal() / 2);

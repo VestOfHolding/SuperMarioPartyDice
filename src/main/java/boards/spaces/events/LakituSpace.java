@@ -1,6 +1,5 @@
 package boards.spaces.events;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.ToString;
@@ -13,7 +12,6 @@ import java.util.Comparator;
 @ToString(callSuper = true)
 public class LakituSpace extends BaseSpace {
 
-    @ToString.Exclude
     private static final int STAR_STEAL_COST = 30;
 
     public LakituSpace(int spaceID, int x, int y) {
@@ -26,7 +24,7 @@ public class LakituSpace extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         //If we have the coins, steal a star.
         if (currentPlayer.getCoinTotal() >= STAR_STEAL_COST + gameBoard.getStarCost()

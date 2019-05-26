@@ -1,6 +1,5 @@
 package boards.spaces;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import lombok.ToString;
 import simulation.Player;
@@ -14,7 +13,7 @@ public class AllySpace extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
+    public boolean processEvent(MPBoard gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
         currentPlayer.getGameStatTracker().addAlly();
         return true;
     }

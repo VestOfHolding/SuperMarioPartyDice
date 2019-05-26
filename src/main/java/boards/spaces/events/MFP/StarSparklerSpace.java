@@ -1,6 +1,5 @@
 package boards.spaces.events.MFP;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.ToString;
@@ -22,7 +21,7 @@ public class StarSparklerSpace extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         countdown = Math.max(0, countdown - 1);
 

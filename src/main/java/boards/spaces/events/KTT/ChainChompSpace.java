@@ -1,6 +1,5 @@
 package boards.spaces.events.KTT;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.ToString;
@@ -16,7 +15,7 @@ public class ChainChompSpace extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         //The Chain Chomp comes and steals coins.
         // Not fully sure what the range of possibilities is here yet.

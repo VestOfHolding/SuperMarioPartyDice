@@ -1,6 +1,5 @@
 package boards.spaces.events.WDR;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import lombok.Getter;
@@ -30,7 +29,7 @@ public class WhompsOnTheRun extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         if (!isActive()) {
             return false;
@@ -42,7 +41,7 @@ public class WhompsOnTheRun extends BaseSpace {
         return true;
     }
 
-    public void whompSwitch(MPBoard<BaseSpace, MPEdge> gameBoard) {
+    public void whompSwitch(MPBoard gameBoard) {
         active = !active;
 
         WhompsOnTheRun secondWhomp = (WhompsOnTheRun)gameBoard.getVertexById(partnerID);

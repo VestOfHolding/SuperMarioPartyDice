@@ -1,5 +1,6 @@
 package boards;
 
+import boards.layout.KingBobombsBoard;
 import boards.spaces.events.KBPM.BobombAllySpace;
 import boards.spaces.events.KBPM.KBPMChangePathEvent;
 import boards.spaces.events.KBPM.RoyalExplosionEvent;
@@ -7,7 +8,7 @@ import boards.spaces.events.LakituSpace;
 
 public class KingBobombsPowderkegMine extends BaseBoard {
     public KingBobombsPowderkegMine() {
-        initializeBoard();
+        initializeBoard(new KingBobombsBoard());
         fileOutputName = "KingBobombsPowderkegMine.txt";
     }
 
@@ -100,7 +101,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
         board.getVertexById(56).reset();
 
         resetRedAndBlueCoinAmounts();
-        board.resetCountdown();
+        ((KingBobombsBoard)board).resetCountdown();
 
         //Reset the path if needed
         if (board.containsEdge(board.getVertexById(27), board.getVertexById(37))) {

@@ -1,6 +1,5 @@
 package boards.spaces.events;
 
-import boards.MPEdge;
 import boards.layout.MPBoard;
 import boards.spaces.BaseSpace;
 import boards.spaces.SpaceColor;
@@ -23,7 +22,7 @@ public class BadLuckSpace extends BaseSpace {
     }
 
     @Override
-    public boolean processEvent(MPBoard<BaseSpace, MPEdge> gameBoard,
+    public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
         BadLuckEventTable eventTable;
         GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
@@ -55,7 +54,7 @@ public class BadLuckSpace extends BaseSpace {
         return currentPlayer.isFirstOrSecond() ? BadLuckEventTable.SUPER_BAD_LUCK_1ST_2ND : BadLuckEventTable.SUPER_BAD_LUCK_3RD_4TH;
     }
 
-    private boolean processBadLuckEvent(MPBoard<BaseSpace, MPEdge> gameBoard, BadLuckEventTable eventTable, Player currentPlayer, PlayerGroup playerGroup) {
+    private boolean processBadLuckEvent(MPBoard gameBoard, BadLuckEventTable eventTable, Player currentPlayer, PlayerGroup playerGroup) {
         LuckEvent chosenEvent = new ArrayList<>(BadLuckEventTable.buildEventList(eventTable)).get(RandomUtils.getRandomInt(4));
 
         //Example: The player has to give 5 coins to all players, but doesn't actually have 15 coins to give.
