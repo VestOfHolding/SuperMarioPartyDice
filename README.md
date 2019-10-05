@@ -30,7 +30,7 @@ The current version of these simulations is much more limited than the real SMP 
     * When the agent arrives at a branching path, it will choose which path to take based on whether it can currently afford the star and which path is the shortest to the star.
  * Character dice only. 
    * The agents only ever use the character die that they have from the beginning, though yes, in a real game a player can choose between their own character die, the character dice of any allies they have, and a standard d6. For now, this project is really about answering how effective each character die is on their own, so we can leave adding this choice for a later version of this. 
-   * Though yes, that could end up changing things, as maybe even the stand d6 compliments some character dice far better than others.
+   * Though yes, that could end up changing things, as maybe even the standard d6 compliments some character dice far better than others.
    * Another reason to hold off on this is that I'm really worried that this will introduce even more variables. It seems likely to me that different character dice are actually better or worse vs different other character dice, and I can't handle even thinking about that right now, lol.
  * All four players
    * While each simulation is centered on testing one main player, all four characters in a typical Mario Party game are running around the board, collecting coins and stars using the same strategies.
@@ -45,10 +45,8 @@ The current version of these simulations is much more limited than the real SMP 
 
 - [ ] Fine-tune the Sand Bridge collapsing in Megafruit Paradise. I've heard it can randomly collapse after 3-5 uses, but in the four cases I've witnessed it's been 5. Either that's coincidence, or it's not 3-5, or the randomness isn't uniform. Without more data I don't know which it is for certain.
     * Partially done. I did find video evidence of the bridge collapsing after four crossings, and coded that in. That really messed up Diddy and Wario's ability to gain allies, lol.
-- [ ] Make the simulations smarter by having the computer choose the paths that are the shortest path to the star.
 - [x] Any performance gains I can find in the simulations. It's slower than I'd like.
     * This is really a continuous task that I should always check, but at least for now I've done everything I can.
-- [x] Implement the logic that chooses what type of teams are created for the minigames.
  
  ## Future Goals
  
