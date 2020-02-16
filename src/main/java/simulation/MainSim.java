@@ -10,8 +10,8 @@ public class MainSim {
         int simCount = 7000;
         if (args.length == 1) {
             try {
-                if (Integer.valueOf(args[0]) > 0) {
-                    simCount = Integer.valueOf(args[0]);
+                if (Integer.parseInt(args[0]) > 0) {
+                    simCount = Integer.parseInt(args[0]);
                 }
             } catch (NumberFormatException ignored) { }
         }
