@@ -2,6 +2,7 @@ package boards;
 
 import boards.layout.KingBobombsBoard;
 import boards.spaces.events.KBPM.BobombAllySpace;
+import boards.spaces.events.KBPM.GoldMineGambleEvent;
 import boards.spaces.events.KBPM.KBPMChangePathEvent;
 import boards.spaces.events.KBPM.RoyalExplosionEvent;
 import boards.spaces.events.LakituSpace;
@@ -84,10 +85,10 @@ public class KingBobombsPowderkegMine extends BaseBoard {
                 spaceFactory.createStarSpace(index++, 10, 8),
                 spaceFactory.createVSSpace(index++, 13, 8) //ID = 56
         ).addEdgeChain(
-                //Middle Right
-                spaceFactory.createEventSpace(index++, 2, 18), //ID = 57
+                //Middle Left
+                new GoldMineGambleEvent(index++, 2, 18), //ID = 57
                 spaceFactory.createBlueSpace(index++, 2, 20),
-                spaceFactory.createEventSpace(index, 2, 22) //ID = 59
+                new GoldMineGambleEvent(index, 2, 22) //ID = 59
         );
 
         board = graphBuilder.build();

@@ -7,7 +7,7 @@ import boards.WhompsDominoRuins;
 
 public class MainSim {
     public static void main(String[] args) {
-        int simCount = 7000;
+        int simCount = 2000000;
         if (args.length == 1) {
             try {
                 if (Integer.parseInt(args[0]) > 0) {

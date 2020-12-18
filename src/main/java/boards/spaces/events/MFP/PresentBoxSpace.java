@@ -30,6 +30,7 @@ public class PresentBoxSpace extends BaseSpace {
             lakituEvent.processEvent(gameBoard, currentPlayer, playerGroup);
         }
         //The third possibility is that the player gets a Koopa Paratroopa, which is not implemented.
+        //  This event would allow the player to pay coins to move to someone else's space.
 
         return true;
     }

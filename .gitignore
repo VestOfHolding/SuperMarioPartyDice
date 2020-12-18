@@ -1,9 +1,6 @@
 # Compiled class file
 /target
 
-# Log file
-output/
-
 # IntelliJ
 .idea/
 *.iml

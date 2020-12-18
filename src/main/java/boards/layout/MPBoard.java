@@ -80,13 +80,17 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
     }
 
     public void resetStarDistanceCounts(BaseSpace starSpace) {
-        for (BaseSpace vertex : VERTEX_MAP.values()) {
-            vertex.setDistanceToStar(Integer.MAX_VALUE);
-        }
+        VERTEX_MAP.values().parallelStream()
+                .filter(vertex -> vertex.getDistanceToStar() != Integer.MAX_VALUE)
+                .forEach(vertex -> vertex.setDistanceToStar(Integer.MAX_VALUE));
 
         setDistanceToStar(starSpace, 1);
     }
 
+    /**
+     * This method is the CPU bottleneck of the program. Refactoring this method
+     *  is the key to better CPU performance right now.
+     */
     public void setDistanceToStar(BaseSpace currentSpace, int distance) {
         //Base case is we arrive at a space where a better route is already documented.
         if (currentSpace.getDistanceToStar() <= distance) {
