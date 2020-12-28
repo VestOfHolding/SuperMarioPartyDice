@@ -17,7 +17,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class KameksTantalizingTower extends BaseBoard  {
-    private List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
+    private final List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
 
     public KameksTantalizingTower() {
         initializeBoard();
@@ -138,17 +138,19 @@ public class KameksTantalizingTower extends BaseBoard  {
         }
 
         if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {
-            return nextSpaces.stream().min(Comparator.comparing(BaseSpace::getDistanceToStar)).orElse(null);
+            return nextSpaces.stream().min(Comparator.comparing(baseSpace -> board.getStarDistance(currentStarSpace, baseSpace))).orElse(null);
         }
         return nextSpaces.get(RandomUtils.getRandomInt(nextSpaces.size() - 1));
     }
 
     @Override
     public void changeStarSpace() {
-        StarSpace currentStarSpace = starSpaces.stream()
-                .filter(StarSpace::isStarActive)
-                .findFirst()
-                .orElse(null);
+        if (currentStarSpace == null) {
+            currentStarSpace = starSpaces.stream()
+                    .filter(StarSpace::isStarActive)
+                    .findFirst()
+                    .orElse(null);
+        }
 
         //If no star is currently active, it's the beginning of the game.
         if (currentStarSpace == null) {
@@ -156,7 +158,7 @@ public class KameksTantalizingTower extends BaseBoard  {
             currentStarSpace.activateStar();
 
             board.setStarCost(board.INIT_STAR_COST);
-            board.resetStarDistanceCounts(currentStarSpace);
+//            board.resetStarDistanceCounts(currentStarSpace);
         }
         //Otherwise, leave the star alone, except for changing the price.
         else {

@@ -179,7 +179,7 @@ public class WhompsDominoRuins extends BaseBoard {
         }
 
         if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {
-            return nextSpaces.stream().min(Comparator.comparing(BaseSpace::getDistanceToStar)).orElse(null);
+            return nextSpaces.stream().min(Comparator.comparing(baseSpace -> board.getStarDistance(currentStarSpace, baseSpace))).orElse(null);
         }
         return nextSpaces.get(RandomUtils.getRandomInt(nextSpaces.size() - 1));
     }

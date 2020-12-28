@@ -5,13 +5,17 @@ import boards.spaces.BaseSpace;
 import boards.spaces.StarSpace;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.collections4.MapUtils;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
-    Map<Integer, BaseSpace> VERTEX_MAP;
+    private final Map<Integer, BaseSpace> VERTEX_MAP;
+
+    private final Map<Integer, Map<Integer, Integer>> starDistanceMap = new HashMap<>();
 
     public final int INIT_STAR_COST = 10;
 
@@ -79,28 +83,37 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
         return vertexSet().size();
     }
 
-    public void resetStarDistanceCounts(BaseSpace starSpace) {
-        VERTEX_MAP.values().parallelStream()
-                .filter(vertex -> vertex.getDistanceToStar() != Integer.MAX_VALUE)
-                .forEach(vertex -> vertex.setDistanceToStar(Integer.MAX_VALUE));
-
-        setDistanceToStar(starSpace, 1);
-    }
-
-    /**
-     * This method is the CPU bottleneck of the program. Refactoring this method
-     *  is the key to better CPU performance right now.
-     */
-    public void setDistanceToStar(BaseSpace currentSpace, int distance) {
-        //Base case is we arrive at a space where a better route is already documented.
-        if (currentSpace.getDistanceToStar() <= distance) {
+    public void initStarDistances() {
+        if (MapUtils.isNotEmpty(starDistanceMap)) {
             return;
         }
-        currentSpace.setDistanceToStar(distance);
+        for (StarSpace starSpace : VERTEX_MAP.values().stream()
+                .filter(s -> s instanceof StarSpace)
+                .map(s -> (StarSpace)s)
+                .collect(Collectors.toList())) {
+            final Map<Integer, Integer> distanceMap = new HashMap<>();
+
+            VERTEX_MAP.values().forEach(vertex -> distanceMap.put(vertex.getSpaceID(), Integer.MAX_VALUE));
+
+            setDistanceToStar(distanceMap, starSpace, 1);
+            starDistanceMap.put(starSpace.getSpaceID(), distanceMap);
+        }
+    }
+    
+    private void setDistanceToStar(Map<Integer, Integer> distanceMap, BaseSpace currentSpace, int distance) {
+        //Base case is we arrive at a space where a better route is already documented.
+        if (distanceMap.get(currentSpace.getSpaceID()) <= distance) {
+            return;
+        }
+        distanceMap.put(currentSpace.getSpaceID(), distance);
 
         for (MPEdge edge : incomingEdgesOf(currentSpace)) {
-            setDistanceToStar(edge.getSource(),
+            setDistanceToStar(distanceMap, edge.getSource(),
                     currentSpace.affectsMovement() ? distance + 1 : distance);
         }
+    }
+
+    public int getStarDistance(StarSpace currentStar, BaseSpace currentSpace) {
+        return starDistanceMap.get(currentStar.getSpaceID()).get(currentSpace.getSpaceID());
     }
 }

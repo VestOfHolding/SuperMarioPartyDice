@@ -32,6 +32,8 @@ public abstract class BaseBoard {
 
     protected List<StarSpace> starSpaces = new ArrayList<>();
 
+    protected StarSpace currentStarSpace = null;
+
     protected PlayerGroup playerGroup;
 
     protected SpaceFactory spaceFactory;
@@ -60,6 +62,7 @@ public abstract class BaseBoard {
                 .map(space -> (StarSpace)space)
                 .collect(Collectors.toList());
 
+        board.initStarDistances();
         changeStarSpace();
     }
 
@@ -83,10 +86,12 @@ public abstract class BaseBoard {
      * This also deactivates the currently active space, if one is already active.
      */
     public void changeStarSpace() {
-        StarSpace currentStarSpace = starSpaces.stream()
-                .filter(StarSpace::isStarActive)
-                .findFirst()
-                .orElse(null);
+        if (currentStarSpace == null) {
+            currentStarSpace = starSpaces.stream()
+                    .filter(StarSpace::isStarActive)
+                    .findFirst()
+                    .orElse(null);
+        }
 
         StarSpace nextStar;
 
@@ -100,8 +105,7 @@ public abstract class BaseBoard {
         nextStar.activateStar();
         board.setNeedToMoveStar(false);
         board.setStarCost(board.INIT_STAR_COST);
-
-        board.resetStarDistanceCounts(nextStar);
+        currentStarSpace = nextStar;
     }
 
     public BaseSpace getStartSpace() {
@@ -120,7 +124,7 @@ public abstract class BaseBoard {
         }
 
         if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {
-            return nextSpaces.stream().min(Comparator.comparing(BaseSpace::getDistanceToStar)).orElse(null);
+            return nextSpaces.stream().min(Comparator.comparing(baseSpace -> board.getStarDistance(currentStarSpace, baseSpace))).orElse(null);
         }
         return nextSpaces.get(RandomUtils.getRandomInt(nextSpaces.size() - 1));
     }
