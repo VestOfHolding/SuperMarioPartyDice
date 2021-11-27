@@ -81,9 +81,7 @@ public class BadLuckSpace extends BaseSpace {
             }
             else if (chosenEvent.isGiveCoinsToAll()) {
                 int coinsPerPlayer = actualCoinChange / 3;
-
                 int leftoverAmount = Math.abs(coinsPerPlayer * 3 - actualCoinChange);
-
 
                 for (Player player : new HashSet<>(playerGroup.getAllPlayersExceptCurrent(currentPlayer))) {
                     player.addCoins(-coinsPerPlayer);

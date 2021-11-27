@@ -5,10 +5,10 @@ import boards.spaces.events.MFP.StarSparklerSpace;
 import boards.spaces.events.MFP.SandBridgeCollapse;
 
 public class MegafruitParadise extends BaseBoard {
-    private static int I0_DEST = 7;
-    private static int I1_DEST = 19;
-    private static int I2_DEST = 37;
-    private static int I3_DEST = 53;
+    private static final int I0_DEST = 7;
+    private static final int I1_DEST = 19;
+    private static final int I2_DEST = 37;
+    private static final int I3_DEST = 53;
 
     public MegafruitParadise() {
         initializeBoard();

@@ -9,8 +9,8 @@ import simulation.PlayerGroup;
 @ToString(callSuper = true)
 public class WhompSwitch extends BaseSpace {
 
-    private int firstWhompID;
-    private int secondWhompID;
+    private final int firstWhompID;
+    private final int secondWhompID;
 
     public WhompSwitch(int spaceID, int firstWhompID, int secondWhompID, int x, int y) {
         super(spaceID);

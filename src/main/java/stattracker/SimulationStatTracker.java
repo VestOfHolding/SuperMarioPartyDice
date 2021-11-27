@@ -13,11 +13,11 @@ import java.util.Set;
 
 @Getter
 public class SimulationStatTracker {
-    private Player mainPlayer;
+    private final Player mainPlayer;
 
     private List<Player> allPlayers;
 
-    private Map<Integer, AllyStatTracker> allyStatTrackers;
+    private final Map<Integer, AllyStatTracker> allyStatTrackers;
 
     public SimulationStatTracker(Dice characterDie) {
         mainPlayer = new Player(characterDie);

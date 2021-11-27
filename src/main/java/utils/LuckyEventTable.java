@@ -84,14 +84,11 @@ public enum LuckyEventTable {
 
         do {
             int random = RandomUtils.getRandomInt(1, 100);
-
-            LuckEvent luckEvent = eventTable.events.stream()
+            result.add(eventTable.events.stream()
                     .filter(event -> event.getChanceRange().contains(random))
                     .findFirst()
                     //This can never happen, given our number ranges.
-                    .orElse(null);
-
-            result.add(luckEvent);
+                    .orElse(null));
         } while (result.size() < 5);
 
         return result;

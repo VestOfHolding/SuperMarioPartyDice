@@ -16,7 +16,7 @@ public class OnlineStatistics {
     private double mean = 0.0;
     private double sum = 0.0;
 
-    private TDigest tdigest = TDigest.createDigest(500);
+    private final TDigest tdigest = TDigest.createDigest(500);
 
     public void addValue(double value) {
         tdigest.add(value);

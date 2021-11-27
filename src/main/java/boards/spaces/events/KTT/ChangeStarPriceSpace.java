@@ -12,7 +12,7 @@ import java.util.List;
 
 @ToString(callSuper = true)
 public class ChangeStarPriceSpace extends BaseSpace {
-    private List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
+    private final List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
 
     public ChangeStarPriceSpace(int spaceID, int x, int y) {
         super(spaceID, x, y);
