@@ -22,7 +22,11 @@ public class GameStatTracker {
     private int allyTotal;
     private int distanceTotal;
     private int coinTotal;
+    private int maxCoins;
     private int starCount;
+    private int miniGameWins;
+    private int eventActivations;
+    private int badLuckCount;
 
     private List<BobombAlly> bobombAllies;
 

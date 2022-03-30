@@ -115,6 +115,15 @@ public class Simulation implements Runnable{
             minigameManager.runMinigame(players);
             calculatePlaces(players.getAllPlayers());
         }
+        handleBonusStars(players);
+    }
+
+    protected void handleBonusStars(PlayerGroup players) {
+        for (BonusStar bonusStar : BonusStar.randomlyGetBonusStars()) {
+            Player bonusStarPlayer = bonusStar.findWinningPlayer(players);
+            bonusStarPlayer.addStar();
+        }
+        calculatePlaces(players.getAllPlayers());
     }
 
     protected void simulateTurn(Player currentPlayer, PlayerGroup allPlayers) {
