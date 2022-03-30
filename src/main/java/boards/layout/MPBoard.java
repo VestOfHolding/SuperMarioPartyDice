@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
     private final Map<Integer, BaseSpace> VERTEX_MAP;
 
-    private final Map<Integer, Map<Integer, Integer>> starDistanceMap = new HashMap<>();
+    private final Map<Integer, Map<Integer, Integer>> starDistanceMap = new HashMap<>(64);
 
     public final int INIT_STAR_COST = 10;
 
@@ -34,7 +34,7 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
     public MPBoard() {
         super(MPEdge.class);
 
-        VERTEX_MAP = new HashMap<>();
+        VERTEX_MAP = new HashMap<>(64);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
                 .filter(s -> s instanceof StarSpace)
                 .map(s -> (StarSpace)s)
                 .collect(Collectors.toList())) {
-            final Map<Integer, Integer> distanceMap = new HashMap<>();
+            final Map<Integer, Integer> distanceMap = new HashMap<>(64);
 
             VERTEX_MAP.values().forEach(vertex -> distanceMap.put(vertex.getSpaceID(), Integer.MAX_VALUE));
 

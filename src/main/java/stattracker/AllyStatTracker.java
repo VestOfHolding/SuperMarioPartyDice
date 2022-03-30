@@ -38,7 +38,7 @@ public class AllyStatTracker {
         coinCounts = new OnlineStatistics();
         starCounts = new OnlineStatistics();
         placings = new OnlineStatistics();
-        landedSpacesStats = new HashMap<>();
+        landedSpacesStats = new HashMap<>(64);
     }
 
     public void addTurnAdded(int turnAdded) {
@@ -93,12 +93,12 @@ public class AllyStatTracker {
         return placings.getMean();
     }
 
-    public int getAmountOccured() {
+    public int getAmountOccurred() {
         return distances.getCount();
     }
 
     public String toStatString(int gameCount, int possibleSpaces) {
-        String formatResult = DECIMAL_FORMAT.format((((double)getAmountOccured()) / ((double)gameCount)) * 100.0);
+        String formatResult = DECIMAL_FORMAT.format((((double) getAmountOccurred()) / ((double)gameCount)) * 100.0);
 
         StringBuilder result = new StringBuilder().append(allyCount).append("\t")
                 .append(formatResult).append("%\t")
