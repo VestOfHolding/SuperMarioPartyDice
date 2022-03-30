@@ -48,6 +48,7 @@ The current version of these simulations is much more limited than the real SMP 
 
 - [ ] Fine-tune the Sand Bridge collapsing in Megafruit Paradise. I've heard it can randomly collapse after 3-5 uses, but in the four cases I've witnessed it's been 5. Either that's coincidence, or it's not 3-5, or the randomness isn't uniform. Without more data I don't know which it is for certain.
     * Partially done. I did find video evidence of the bridge collapsing after four crossings, and coded that in. That really messed up Diddy and Wario's ability to gain allies, lol.
+- [ ] Confirm whether the bonus Coin Star is given for having the most coins at the end, or the most coins at any point in the game.
 - [x] Any performance gains I can find in the simulations. It's slower than I'd like.
     * This is really a continuous task that I should always check, but at least for now I've done everything I can.
  
