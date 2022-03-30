@@ -40,7 +40,10 @@ The current version of these simulations is much more limited than the real SMP 
    * I actually think this is better than trying to recreate all of the games and program AIs to actually try to beat them, because choosing a random winner removes the individual player skill from the equation, while still getting that regular injection of coins from the minigame rewards into the system.
  * No Items.
    * This would be a lot of work, and be tied into creating an AI that makes smarter decisions. I really don't see currently how the items could be done well in this program without an agent having some sort of decent decision making around when to buy an item, which one, and when to use it. So, for now at least, despite how helpful they can be in a game, I'm hoping the simulations are still really valuable without them.
-   
+* Bonus stars are mostly implemented.
+   * Specifically all but two. I don't have the Buddy Star (rewarded for having some randomly chosen ally), nor the Item Star, since no items.
+   * I have a sad feeling I should do that Buddy Star soon though...
+
 ## Current Goals/Questions
 
 - [ ] Fine-tune the Sand Bridge collapsing in Megafruit Paradise. I've heard it can randomly collapse after 3-5 uses, but in the four cases I've witnessed it's been 5. Either that's coincidence, or it's not 3-5, or the randomness isn't uniform. Without more data I don't know which it is for certain.
@@ -52,8 +55,6 @@ The current version of these simulations is much more limited than the real SMP 
  
  These are goals that are a long way off, and would be done as a proper next version rather than any time soon.
  
- * Bonus stars.
-   * With everything being this far along, I think I might actually be tracking enough info to theoretically implement bonus stars without too much more effort. Need to look at the list of possible bonus stars and think about how valuable this would really be for these simulations.
  * Implement an AI.
    * With the stars in place, that gives the AI the goal of what they need to gather, and if it'd be great to make a proper learning agent so that it can figure out on its own just how important coins, allies, etc are towards the goal of gathering the most stars.
    * In some games, like Super Smash Bros, this is ends up being a lot waiting for the agents to train, because each character is different enough that you can't simply train an agent once, and expect it to do well for other characters. I don't believe that's the case here, as the strategies and tools available to you don't really change, only what spaces in front of you you're likely to land on based on your dice.
