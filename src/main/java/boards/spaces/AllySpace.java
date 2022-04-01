@@ -14,7 +14,7 @@ public class AllySpace extends BaseSpace {
 
     @Override
     public boolean processEvent(MPBoard gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
-        currentPlayer.getGameStatTracker().addAlly();
+        currentPlayer.getGameStatTracker().addAlly(playerGroup);
         return true;
     }
 }

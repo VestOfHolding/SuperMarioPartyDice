@@ -41,8 +41,7 @@ The current version of these simulations is much more limited than the real SMP 
  * No Items.
    * This would be a lot of work, and be tied into creating an AI that makes smarter decisions. I really don't see currently how the items could be done well in this program without an agent having some sort of decent decision making around when to buy an item, which one, and when to use it. So, for now at least, despite how helpful they can be in a game, I'm hoping the simulations are still really valuable without them.
 * Bonus stars are mostly implemented.
-   * Specifically all but two. I don't have the Buddy Star (rewarded for having some randomly chosen ally), nor the Item Star, since no items.
-   * I have a sad feeling I should do that Buddy Star soon though...
+   * Specifically all but one. I don't have the Item Star, since no items.
 
 ## Current Goals/Questions
 

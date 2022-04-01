@@ -2,6 +2,9 @@ package stattracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import simulation.PlayerGroup;
+
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +26,7 @@ class GameStatTrackerTest {
         assertEquals(1, classUnderTest.getAllyGainOnTurn().get(0));
 
         classUnderTest.setTurnNumber(5);
-        classUnderTest.addAlly();
+        classUnderTest.addAlly(new PlayerGroup(Collections.emptyList()));
 
         assertEquals(1, classUnderTest.getAllyTotal());
         assertEquals(2, classUnderTest.getAllyGainOnTurn().size());

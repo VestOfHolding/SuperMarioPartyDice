@@ -6,9 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 import partydice.BobombAlly;
+import partydice.Dice;
 import results.CoinResult;
 import results.DieResult;
 import results.MoveResult;
+import simulation.PlayerGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,8 @@ public class GameStatTracker {
     private int turnNumber;
     private int turnMax;
 
-    private int allyTotal;
+    private List<String> allies;
+
     private int distanceTotal;
     private int coinTotal;
     private int maxCoins;
@@ -37,9 +40,9 @@ public class GameStatTracker {
     public GameStatTracker(int initialTurnCount) {
         turnNumber = 1;
         turnMax = initialTurnCount;
-        allyTotal = 0;
         distanceTotal = 0;
         coinTotal = 5;
+        allies = new ArrayList<>();
         landedSpacesAmounts = createNewInt2IntOpenHashMap();
 
         allyGainOnTurn = createNewInt2IntOpenHashMap();
@@ -73,15 +76,16 @@ public class GameStatTracker {
     }
 
     public int getTrueAllyCount() {
-        return bobombAllies == null ? allyTotal : allyTotal + bobombAllies.size();
+        return bobombAllies == null ? allies.size() : allies.size() + bobombAllies.size();
     }
 
-    public void addAlly() {
+    public void addAlly(PlayerGroup playerGroup) {
         if (getTrueAllyCount() >= 4) {
             return;
         }
-        allyTotal = Math.min(allyTotal + 1, 4);
-        allyGainOnTurn.put(allyTotal, turnNumber);
+        allies.add(Dice.getRandomCharacterDieNotInGroup(playerGroup).getName());
+
+        allyGainOnTurn.put(allies.size(), turnNumber);
     }
 
     public void addBobombAlly() {
@@ -94,8 +98,8 @@ public class GameStatTracker {
         bobombAllies.add(new BobombAlly());
 
         //Bo-bomb allies can replace real allies.
-        if (allyTotal >= 4) {
-            allyTotal--;
+        if (allies.size() >= 4) {
+            allies.remove(allies.size() - 1);
         }
     }
 
@@ -130,5 +134,9 @@ public class GameStatTracker {
 
     public boolean isLastThreeTurns() {
         return turnMax - turnNumber <= 3;
+    }
+
+    public int getAllyTotal() {
+        return CollectionUtils.size(allies) + CollectionUtils.size(bobombAllies);
     }
 }

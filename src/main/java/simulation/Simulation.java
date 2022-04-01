@@ -121,7 +121,9 @@ public class Simulation implements Runnable{
     protected void handleBonusStars(PlayerGroup players) {
         for (BonusStar bonusStar : BonusStar.randomlyGetBonusStars()) {
             Player bonusStarPlayer = bonusStar.findWinningPlayer(players);
-            bonusStarPlayer.addStar();
+            if (bonusStarPlayer != null) {
+                bonusStarPlayer.addStar();
+            }
         }
         calculatePlaces(players.getAllPlayers());
     }

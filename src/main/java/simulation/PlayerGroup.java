@@ -1,6 +1,7 @@
 package simulation;
 
 import org.apache.commons.collections4.ListUtils;
+import partydice.Dice;
 import utils.RandomUtils;
 
 import java.util.List;
@@ -51,5 +52,9 @@ public class PlayerGroup {
                 .filter(Player::isInLastPlace)
                 .findFirst()
                 .orElse(null);
+    }
+
+    public boolean isDieInGroup(Dice characterDie) {
+        return allPlayers.stream().anyMatch(p -> p.getCharacterDice() == characterDie);
     }
 }

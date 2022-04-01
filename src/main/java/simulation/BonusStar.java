@@ -1,13 +1,13 @@
 package simulation;
 
 import lombok.AllArgsConstructor;
+import partydice.Dice;
 import utils.RandomUtils;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 @AllArgsConstructor
 public enum BonusStar {
@@ -17,7 +17,7 @@ public enum BonusStar {
     EVENTFUL((Player p) -> p.getGameStatTracker().getEventActivations()),
     ALLY((Player p) -> p.getGameStatTracker().getAllyTotal()),
     SLOWPOKE((Player p) -> p.getGameStatTracker().getCoinTotal(), Mode.MIN),
-//    BUDDY((Player p) -> p.getGameStatTracker() have random specific ally),
+    BUDDY(null),
 //    ITEM((Player p) -> p.getGameStatTracker().getItemsUsed()),
     UNLUCKY((Player p) -> p.getGameStatTracker().getBadLuckCount());
 
@@ -44,12 +44,19 @@ public enum BonusStar {
     }
 
     public Player findWinningPlayer(PlayerGroup group) {
-        Stream<Player> playerStream = group.getAllPlayers().stream();
+        if (this == BUDDY) {
+            //The Buddy Star is given to a player that has a randomly selected ally.
+            Dice bonusBuddy = Dice.getRandomCharacterDieNotInGroup(group);
+            return group.getAllPlayers().stream()
+                    .filter(player -> player.getGameStatTracker().getAllies().contains(bonusBuddy.getName()))
+                    .findFirst()
+                    .orElse(null);
+        }
         if (mode == Mode.MAX) {
-            return playerStream.max(Comparator.comparing(p -> starFunction.apply(p))).orElse(null);
+            return group.getAllPlayers().stream().max(Comparator.comparing(p -> starFunction.apply(p))).orElse(null);
         }
         else {
-            return playerStream.min(Comparator.comparing(p -> starFunction.apply(p))).orElse(null);
+            return group.getAllPlayers().stream().min(Comparator.comparing(p -> starFunction.apply(p))).orElse(null);
         }
     }
 }

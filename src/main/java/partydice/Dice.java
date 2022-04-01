@@ -5,6 +5,7 @@ import org.apache.commons.text.WordUtils;
 import results.CoinResult;
 import results.DieResult;
 import results.MoveResult;
+import simulation.PlayerGroup;
 import utils.RandomUtils;
 
 import java.util.Arrays;
@@ -66,6 +67,14 @@ public enum Dice {
 
     public static Dice getRandomCharacterDie() {
         return Dice.values()[RandomUtils.getRandomInt(Dice.values().length - 1)];
+    }
+
+    public static Dice getRandomCharacterDieNotInGroup(PlayerGroup playerGroup) {
+        Dice result;
+        do {
+            result = getRandomCharacterDie();
+        } while (playerGroup.isDieInGroup(result));
+        return result;
     }
 
     public DieResult roll() {
