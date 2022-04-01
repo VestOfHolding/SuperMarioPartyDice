@@ -137,6 +137,6 @@ public class GameStatTracker {
     }
 
     public int getAllyTotal() {
-        return CollectionUtils.size(allies) + CollectionUtils.size(bobombAllies);
+        return CollectionUtils.size(allies);
     }
 }
