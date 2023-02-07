@@ -11,10 +11,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class FullSimDataSimulation extends Simulation {
+
+    protected static final int TURN_COUNT = 20;
     protected static final int SIM_COUNT = 10000000;
 
     @Override
-    public void simulate() {
+    public void run() {
         Int2IntOpenHashMap distanceFrequencyMap;
 
         GameStatTracker gameStatTracker;

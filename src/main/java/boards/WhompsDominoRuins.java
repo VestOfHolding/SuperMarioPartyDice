@@ -19,9 +19,10 @@ public class WhompsDominoRuins extends BaseBoard {
     private static final int WHOMP2_1 = 32;
     private static final int WHOMP2_2 = 60;
 
+    public static String OUTPUT_NAME = "WhompsDominoRuins.txt";
+
     public WhompsDominoRuins() {
         initializeBoard();
-        fileOutputName = "WhompsDominoRuins.txt";
     }
 
     @Override
@@ -115,6 +116,11 @@ public class WhompsDominoRuins extends BaseBoard {
 
         board = graphBuilder.build();
         connectPaths();
+    }
+
+    @Override
+    public String getFileOutputName() {
+        return OUTPUT_NAME;
     }
 
     @Override

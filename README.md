@@ -57,9 +57,29 @@ The current version of these simulations is much more limited than the real SMP 
  
  * Implement an AI.
    * With the stars in place, that gives the AI the goal of what they need to gather, and if it'd be great to make a proper learning agent so that it can figure out on its own just how important coins, allies, etc are towards the goal of gathering the most stars.
-   * In some games, like Super Smash Bros, this is ends up being a lot waiting for the agents to train, because each character is different enough that you can't simply train an agent once, and expect it to do well for other characters. I don't believe that's the case here, as the strategies and tools available to you don't really change, only what spaces in front of you you're likely to land on based on your dice.
+   * In some games, like Super Smash Bros, this is ends up being a lot of waiting for the agents to train, because each character is different enough that you can't simply train an agent once, and expect it to do well for other characters. I don't believe that's the case here, as the strategies and tools available to you don't really change, only what spaces in front of you you're likely to land on based on your dice.
  * Items
     * Definitely a long ways off, for all the reasons listed in the "No Items" section of "Current State".
  * Extend the AI to choose which dice to use.
    * Phase 1 can be being able to choose between their character dice and the d6.
    * Phase 2 would be also having access to their ally dice they could use.
+
+## Current Performance
+
+These are measurements done on my personal PC. Looks like the current multithreading that's being done is able to provide more and more benefit as I ask this program to perform more simulations, though still sticks pretty close to being around 1 simulation per millisecond.
+
+### Average Total Time of Simulations by Simulation Count (seconds)
+| Board Name | 5,000 | 10,000 | 50,000 | 100,000 | 500,000 | 1,000,000 |
+| --- |-------|--------|--------| --- | --- | --- |
+| Whomp's Domino Ruins | 6.029 | 11.811 | 54.568 | 106.939 | 535.098 | 1,027.327 |
+| Megafruit Paradise | 5.556 | 10.552 | 50.528 | 94.915 | 484.787 | 983.276 |
+| King Bobomb's Powderkeg Mine | 5.926 | 11.440 | 53.658 | 105.891 | 519.937 | 1012.499 |
+| Kamek's Tantalizing Tower | 4.577 | 9.008  | 41.031 | 80.294 | 407.605 | 755.122 |
+
+### Milliseconds per Simulation by Simulation Count
+| Board Name | 5,000 | 10,000 | 50,000 | 100,000 | 500,000 | 1,000,000 |
+| --- |-------|-------|-------| --- | --- | --- |
+| Whomp's Domino Ruins | 1.206 | 1.181 | 1.091 | 1.069 | 1.070 | 1.027 |
+| Megafruit Paradise | 1.111 | 1.055 | 1.011 | 0.949 | 0.970 | 0.983 |
+| King Bobomb's Powderkeg Mine | 1.185 | 1.144 | 1.073 | 1.059 | 1.040 | 1.012 |
+| Kamek's Tantalizing Tower | 0.915 | 0.901 | 0.821 | 0.803 | 0.815 | 0.755 |

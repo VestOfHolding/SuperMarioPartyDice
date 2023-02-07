@@ -17,11 +17,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public class KameksTantalizingTower extends BaseBoard  {
+
+    public static String OUTPUT_NAME = "KameksTantalizingTower.txt";
     private final List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
 
     public KameksTantalizingTower() {
         initializeBoard();
-        fileOutputName = "KameksTantalizingTower.txt";
     }
 
     @Override
@@ -82,6 +83,11 @@ public class KameksTantalizingTower extends BaseBoard  {
         board = graphBuilder.build();
         connectPaths();
         board.setKamekBoard(true);
+    }
+
+    @Override
+    public String getFileOutputName() {
+        return OUTPUT_NAME;
     }
 
     @Override

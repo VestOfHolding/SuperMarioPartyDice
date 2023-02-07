@@ -25,9 +25,6 @@ public abstract class BaseBoard {
     @Getter
     protected MPBoard board;
 
-    @Getter
-    protected String fileOutputName;
-
     protected GraphBuilder<BaseSpace, MPEdge, MPBoard> graphBuilder;
 
     protected List<StarSpace> starSpaces = new ArrayList<>();
@@ -67,6 +64,8 @@ public abstract class BaseBoard {
     }
 
     protected abstract void buildInitialGraph();
+
+    public abstract String getFileOutputName();
 
     public void resetBoard() {
         initializeBoard();

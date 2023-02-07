@@ -7,7 +7,7 @@ import boards.WhompsDominoRuins;
 
 public class MainSim {
     public static void main(String[] args) {
-        int simCount = 2000000;
+        int simCount = 1000000;
         if (args.length == 1) {
             try {
                 if (Integer.parseInt(args[0]) > 0) {
@@ -16,10 +16,10 @@ public class MainSim {
             } catch (NumberFormatException ignored) { }
         }
         
-        Thread whompsThread = new Thread(new Simulation(new WhompsDominoRuins(), simCount));
-        Thread kingBobombsThread = new Thread(new Simulation(new KingBobombsPowderkegMine(), simCount));
-        Thread megafruitThread = new Thread(new Simulation(new MegafruitParadise(), simCount));
-        Thread kameksThread = new Thread(new Simulation(new KameksTantalizingTower(), simCount));
+        Thread whompsThread = new Thread(new Simulation(WhompsDominoRuins::new, WhompsDominoRuins.OUTPUT_NAME, simCount));
+        Thread kingBobombsThread = new Thread(new Simulation(KingBobombsPowderkegMine::new, KingBobombsPowderkegMine.OUTPUT_NAME, simCount));
+        Thread megafruitThread = new Thread(new Simulation(MegafruitParadise::new, MegafruitParadise.OUTPUT_NAME, simCount));
+        Thread kameksThread = new Thread(new Simulation(KameksTantalizingTower::new, KameksTantalizingTower.OUTPUT_NAME, simCount));
 
         whompsThread.start();
         kingBobombsThread.start();
