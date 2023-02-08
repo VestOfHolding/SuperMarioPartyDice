@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 
@@ -39,19 +40,12 @@ public class Simulation implements Runnable {
         System.out.println(fileOutputName + " time start!\t\t" + LocalDateTime.now());
         printTableHeaders();
 
-        CompletableFuture<?>[] characterSims = Arrays.stream(Dice.values())
+        List<CompletableFuture<Void>> characterSims = Arrays.stream(Dice.values())
                 .map(characterDie -> new CharacterSimulation(gameBoard.get(), characterDie, SIM_COUNT))
-                .map(CompletableFuture::runAsync).toList()
-                .toArray(CompletableFuture<?>[]::new);
+                .map(CompletableFuture::runAsync)
+                .toList();
 
-        try {
-            while(!CompletableFuture.allOf(characterSims).isDone()) {
-                Thread.sleep(100);
-            }
-        }
-        catch (InterruptedException e) {
-            System.out.println("Error waiting for threads to complete.");
-        }
+        characterSims.forEach(CompletableFuture::join);
 
         stopWatch.split();
         System.out.println(fileOutputName + " time elapsed: " + stopWatch.getTime() + " ms\t\t" + LocalDateTime.now());
