@@ -67,7 +67,7 @@ public class LuckEvent {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (null == o || getClass() != o.getClass()) {
             return false;
         }
         LuckEvent luckEvent = (LuckEvent) o;

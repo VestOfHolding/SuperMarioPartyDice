@@ -27,15 +27,15 @@ public class CharacterSimulation implements Runnable {
     protected static final int TURN_COUNT = 20;
     protected int SIM_COUNT = 10;
 
-    protected BaseBoard gameBoard;
+    protected final BaseBoard gameBoard;
 
     protected SimulationStatTracker simulationStatTracker;
 
-    protected String fileOutputName;
+    protected final String fileOutputName;
 
-    protected MinigameManager minigameManager;
+    protected final MinigameManager minigameManager;
 
-    protected Dice characterDie;
+    protected final Dice characterDie;
 
     public CharacterSimulation(BaseBoard gameBoard, Dice characterDie, int simCount) {
         SIM_COUNT = simCount;
@@ -62,18 +62,18 @@ public class CharacterSimulation implements Runnable {
         PlayerGroup players = simulationStatTracker.startNewGame(TURN_COUNT);
         gameBoard.setPlayerGroup(players);
 
-        players.getAllPlayers().forEach(player -> player.setCurrentSpace(gameBoard.getStartSpace()));
+        players.allPlayers().forEach(player -> player.setCurrentSpace(gameBoard.getStartSpace()));
 
-        for (int j = 0; j < TURN_COUNT; ++j) {
-            if (j == TURN_COUNT - 3) {
+        for (int j = 0; TURN_COUNT > j; ++j) {
+            if (TURN_COUNT - 3 == j) {
                 lastThreeTurns(gameBoard);
             }
 
-            for (Player player : players.getAllPlayers()) {
+            for (Player player : players.allPlayers()) {
                 simulateTurn(player, players);
             }
             minigameManager.runMinigame(players);
-            calculatePlaces(players.getAllPlayers());
+            calculatePlaces(players.allPlayers());
         }
         handleBonusStars(players);
     }
@@ -81,11 +81,11 @@ public class CharacterSimulation implements Runnable {
     protected void handleBonusStars(PlayerGroup players) {
         for (BonusStar bonusStar : BonusStar.randomlyGetBonusStars()) {
             Player bonusStarPlayer = bonusStar.findWinningPlayer(players);
-            if (bonusStarPlayer != null) {
+            if (null != bonusStarPlayer) {
                 bonusStarPlayer.addStar();
             }
         }
-        calculatePlaces(players.getAllPlayers());
+        calculatePlaces(players.allPlayers());
     }
 
     protected void simulateTurn(Player currentPlayer, PlayerGroup allPlayers) {
@@ -101,14 +101,14 @@ public class CharacterSimulation implements Runnable {
             currentPlayer.addCoins(result.getResult());
         }
 
-        if (gameStatTracker.getAllyTotal() > 0) {
+        if (0 < gameStatTracker.getAllyTotal()) {
             moveAmount += rollAllies(gameStatTracker);
         }
 
         gameStatTracker.addDistance(moveAmount);
 
         BaseSpace currentSpace = currentPlayer.getCurrentSpace();
-        if (moveAmount > 0) {
+        if (0 < moveAmount) {
             currentSpace = gameBoard.getDestination(currentPlayer, moveAmount);
         }
         else {
@@ -120,7 +120,7 @@ public class CharacterSimulation implements Runnable {
 
         currentPlayer.setCurrentSpace(currentSpace);
 
-        calculatePlaces(allPlayers.getAllPlayers());
+        calculatePlaces(allPlayers.allPlayers());
     }
 
     public void calculatePlaces(List<Player> players) {
@@ -133,12 +133,12 @@ public class CharacterSimulation implements Runnable {
         // For example, if three players share the same number of stars and coins,
         // with the fourth player lagging behind, then the placement spread
         // would be: 1st, 1st, 1st, 4th.
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; 4 > i; ++i) {
             if (sortedPlayerList.get(i).getCurrentPlace() == i + 1) {
                 continue;
             }
 
-            if (i > 0 && sortedPlayerList.get(i -1).compareTo(sortedPlayerList.get(i)) == 0) {
+            if (0 < i && 0 == sortedPlayerList.get(i - 1).compareTo(sortedPlayerList.get(i))) {
                 sortedPlayerList.get(i).setCurrentPlace(sortedPlayerList.get(i - 1).getCurrentPlace());
             }
             else {

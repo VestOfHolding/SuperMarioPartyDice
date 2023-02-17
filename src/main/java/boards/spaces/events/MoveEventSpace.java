@@ -11,9 +11,9 @@ import java.util.Objects;
 
 @ToString(callSuper = true)
 public class MoveEventSpace extends BlueSpace {
-    protected Integer spaceToMoveToID;
+    protected final Integer spaceToMoveToID;
 
-    protected boolean turnsBlue;
+    protected final boolean turnsBlue;
 
     private boolean used;
 

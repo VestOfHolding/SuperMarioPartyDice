@@ -73,14 +73,14 @@ public enum LuckyEventTable {
             LuckEvent.builder().addAlly(true).chanceRange(Range.between(85, 100)).build()
     ));
 
-    List<LuckEvent> events;
+    final List<LuckEvent> events;
 
     LuckyEventTable(List<LuckEvent> events) {
         this.events = events;
     }
 
     public static Set<LuckEvent> buildEventList(LuckyEventTable eventTable) {
-        Set<LuckEvent> result = new HashSet<>();
+        Set<LuckEvent> result = new HashSet<>(5);
 
         do {
             int random = RandomUtils.getRandomInt(1, 100);
@@ -89,7 +89,7 @@ public enum LuckyEventTable {
                     .findFirst()
                     //This can never happen, given our number ranges.
                     .orElse(null));
-        } while (result.size() < 5);
+        } while (5 > result.size());
 
         return result;
     }

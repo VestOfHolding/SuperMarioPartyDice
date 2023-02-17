@@ -6,7 +6,7 @@ import boards.spaces.events.MFP.SandBridgeCollapse;
 
 public class MegafruitParadise extends BaseBoard {
 
-    public static String OUTPUT_NAME = "MegafruitParadise.txt";
+    public static final String OUTPUT_NAME = "MegafruitParadise.txt";
 
     private static final int I0_DEST = 7;
     private static final int I1_DEST = 19;

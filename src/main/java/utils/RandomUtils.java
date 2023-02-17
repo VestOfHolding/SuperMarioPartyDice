@@ -18,6 +18,6 @@ public class RandomUtils {
     }
 
     public static boolean isFlippedCoinHeads() {
-        return getRandomInt(1) == 1;
+        return 1 == getRandomInt(1);
     }
 }

@@ -60,19 +60,19 @@ public class BadLuckSpace extends BaseSpace {
         //Example: The player has to give 5 coins to all players, but doesn't actually have 15 coins to give.
         // Only 12, so we need to do the math based on that.
         //This will be a negative number.
-        int actualCoinChange = currentPlayer.getCoinTotal() + chosenEvent.getCoinChange() <= 0
+        int actualCoinChange = 0 >= currentPlayer.getCoinTotal() + chosenEvent.getCoinChange()
                 ? -currentPlayer.getCoinTotal()
                 : chosenEvent.getCoinChange();
 
         //Chosen MIN_VALUE to represent when we lose half our coins.
-        if (chosenEvent.getCoinChange() == Integer.MIN_VALUE) {
+        if (Integer.MIN_VALUE == chosenEvent.getCoinChange()) {
             currentPlayer.addCoins(-(currentPlayer.getCoinTotal() / 2));
         }
         else {
             currentPlayer.addCoins(actualCoinChange);
         }
 
-        if (actualCoinChange > 0) {
+        if (0 < actualCoinChange) {
             if (chosenEvent.isGiveCoinsToLast()) {
                 playerGroup.getLastPlacePlayer().addCoins(-actualCoinChange);
             }
@@ -86,7 +86,7 @@ public class BadLuckSpace extends BaseSpace {
                 for (Player player : new HashSet<>(playerGroup.getAllPlayersExceptCurrent(currentPlayer))) {
                     player.addCoins(-coinsPerPlayer);
 
-                    if (leftoverAmount > 0) {
+                    if (0 < leftoverAmount) {
                         player.addCoins(1);
                         --leftoverAmount;
                     }
@@ -105,7 +105,7 @@ public class BadLuckSpace extends BaseSpace {
         }
         //The player is pitied and given coins if they have no stars to lose.
         if (chosenEvent.isLoseStarOrGainCoins()) {
-            if (currentPlayer.getStarCount() <= 0) {
+            if (0 >= currentPlayer.getStarCount()) {
                 currentPlayer.addCoins(20);
             }
             else {

@@ -12,6 +12,6 @@ public class MoveResult extends DieResult {
 
     @Override
     public String toString() {
-        return result + "";
+        return String.valueOf(result);
     }
 }

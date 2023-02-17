@@ -24,9 +24,9 @@ public class PresentBoxSpace extends BaseSpace {
         int chanceResult = RandomUtils.getRandomInt(2);
 
         //A one in three chance of each event happening.
-        if (chanceResult == 0) {
+        if (0 == chanceResult) {
             currentPlayer.addCoins(-RandomUtils.getRandomInt(3, 10));
-        } else if (chanceResult == 1) {
+        } else if (1 == chanceResult) {
             lakituEvent.processEvent(gameBoard, currentPlayer, playerGroup);
         }
         //The third possibility is that the player gets a Koopa Paratroopa, which is not implemented.

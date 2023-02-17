@@ -42,7 +42,7 @@ public class GameStatTracker {
         turnMax = initialTurnCount;
         distanceTotal = 0;
         coinTotal = 5;
-        allies = new ArrayList<>();
+        allies = new ArrayList<>(5);
         landedSpacesAmounts = createNewInt2IntOpenHashMap();
 
         allyGainOnTurn = createNewInt2IntOpenHashMap();
@@ -76,11 +76,11 @@ public class GameStatTracker {
     }
 
     public int getTrueAllyCount() {
-        return bobombAllies == null ? allies.size() : allies.size() + bobombAllies.size();
+        return null == bobombAllies ? allies.size() : allies.size() + bobombAllies.size();
     }
 
     public void addAlly(PlayerGroup playerGroup) {
-        if (getTrueAllyCount() >= 4) {
+        if (4 <= getTrueAllyCount()) {
             return;
         }
         allies.add(Dice.getRandomCharacterDieNotInGroup(playerGroup).getName());
@@ -91,14 +91,14 @@ public class GameStatTracker {
     public void addBobombAlly() {
         //Most of the time it's not worth initializing, so only do it
         // when this actually comes up.
-        if (bobombAllies == null) {
-            bobombAllies = new ArrayList<>();
+        if (null == bobombAllies) {
+            bobombAllies = new ArrayList<>(1);
         }
 
         bobombAllies.add(new BobombAlly());
 
         //Bo-bomb allies can replace real allies.
-        if (allies.size() >= 4) {
+        if (4 <= allies.size()) {
             allies.remove(allies.size() - 1);
         }
     }
@@ -113,7 +113,7 @@ public class GameStatTracker {
 
     public void addLandedSpace(BaseSpace baseSpace) {
         int amount = landedSpacesAmounts.get(baseSpace.getSpaceID());
-        amount = amount > 0 ? 1 : amount + 1;
+        amount = 0 < amount ? 1 : amount + 1;
 
         landedSpacesAmounts.put(baseSpace.getSpaceID(), amount);
     }
@@ -129,11 +129,11 @@ public class GameStatTracker {
     }
 
     public boolean isHalfwayOver() {
-        return (double)turnNumber / (double)turnMax >= 0.5;
+        return 0.5 <= (double) turnNumber / (double) turnMax;
     }
 
     public boolean isLastThreeTurns() {
-        return turnMax - turnNumber <= 3;
+        return 3 >= turnMax - turnNumber;
     }
 
     public int getAllyTotal() {

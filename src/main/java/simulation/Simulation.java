@@ -20,12 +20,12 @@ public class Simulation implements Runnable {
 
     protected int SIM_COUNT;
 
-    protected Supplier<BaseBoard> gameBoard;
+    protected final Supplier<BaseBoard> gameBoard;
 
     protected String fileOutputName;
 
     public Simulation() {
-        this.gameBoard = WhompsDominoRuins::new;
+        gameBoard = WhompsDominoRuins::new;
     }
 
     public Simulation(Supplier<BaseBoard> gameBoard, String fileOutputName, int simCount) {

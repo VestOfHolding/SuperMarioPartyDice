@@ -62,10 +62,11 @@ public class AllyStatTracker {
     }
 
     public void addLandedSpaceCount(Map<Integer, Integer> landedSpaceCount) {
-        for (Integer spaceID : landedSpaceCount.keySet()) {
+        for (Map.Entry<Integer, Integer> entry : landedSpaceCount.entrySet()) {
+            Integer spaceID = entry.getKey();
             OnlineStatistics spaceStats = landedSpacesStats.get(spaceID);
 
-            if (spaceStats == null) {
+            if (null == spaceStats) {
                 spaceStats = new OnlineStatistics();
             }
             spaceStats.addValue(landedSpaceCount.get(spaceID));

@@ -19,7 +19,6 @@ import utils.RandomUtils;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class BaseBoard {
     @Getter
@@ -27,9 +26,9 @@ public abstract class BaseBoard {
 
     protected GraphBuilder<BaseSpace, MPEdge, MPBoard> graphBuilder;
 
-    protected List<StarSpace> starSpaces = new ArrayList<>();
+    protected List<StarSpace> starSpaces = new ArrayList<>(10);
 
-    protected StarSpace currentStarSpace = null;
+    protected StarSpace currentStarSpace;
 
     protected PlayerGroup playerGroup;
 
@@ -57,7 +56,7 @@ public abstract class BaseBoard {
                 .parallel()
                 .filter(space -> space instanceof StarSpace)
                 .map(space -> (StarSpace)space)
-                .collect(Collectors.toList());
+                .toList();
 
         board.initStarDistances();
         changeStarSpace();
@@ -85,7 +84,7 @@ public abstract class BaseBoard {
      * This also deactivates the currently active space, if one is already active.
      */
     public void changeStarSpace() {
-        if (currentStarSpace == null) {
+        if (null == currentStarSpace) {
             currentStarSpace = starSpaces.stream()
                     .filter(StarSpace::isStarActive)
                     .findFirst()
@@ -96,9 +95,9 @@ public abstract class BaseBoard {
 
         do {
             nextStar = starSpaces.get(RandomUtils.getRandomInt(starSpaces.size() - 1));
-        } while (currentStarSpace != null && currentStarSpace.getSpaceID() == nextStar.getSpaceID());
+        } while (null != currentStarSpace && currentStarSpace.getSpaceID() == nextStar.getSpaceID());
 
-        if (currentStarSpace != null) {
+        if (null != currentStarSpace) {
             currentStarSpace.deactivateStar();
         }
         nextStar.activateStar();
@@ -118,7 +117,7 @@ public abstract class BaseBoard {
     public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
         List<BaseSpace> nextSpaces = getNextSpaces(startingSpace);
 
-        if (nextSpaces.size() == 1) {
+        if (1 == nextSpaces.size()) {
             return nextSpaces.get(0);
         }
 
@@ -182,8 +181,7 @@ public abstract class BaseBoard {
         if (currentSpace instanceof SandBridgeCollapse) {
             currentSpace = processBridgeCollapseEvent(player, currentSpace);
         }
-        else if (currentSpace instanceof MoveEventSpace && currentSpace.moveToSpace() > -1) {
-            MoveEventSpace eventSpace = (MoveEventSpace) currentSpace;
+        else if (currentSpace instanceof MoveEventSpace eventSpace && -1 < currentSpace.moveToSpace()) {
             currentSpace = board.getVertexById(eventSpace.moveToSpace());
 
             //This is where the event space gets transformed into a blue space.

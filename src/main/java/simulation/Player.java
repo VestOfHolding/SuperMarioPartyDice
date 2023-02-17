@@ -30,7 +30,7 @@ public class Player implements Comparable<Player> {
     public Player(Dice characterDice, GameStatTracker gameStatTracker) {
         this.characterDice = characterDice;
         this.gameStatTracker = gameStatTracker;
-        this.currentSpace = null;
+        currentSpace = null;
     }
 
     public DieResult rollCharacterDie() {
@@ -38,11 +38,11 @@ public class Player implements Comparable<Player> {
     }
 
     public boolean isFirstOrSecond() {
-        return currentPlace == 1|| currentPlace == 2;
+        return 1 == currentPlace || 2 == currentPlace;
     }
 
     public boolean isInLastPlace() {
-        return currentPlace == 3;
+        return 3 == currentPlace;
     }
 
     public void addCoins(int coins) {
@@ -64,7 +64,7 @@ public class Player implements Comparable<Player> {
      */
     public int takeCoins(int coinLoss) {
         int actualLoss = coinLoss;
-        if (gameStatTracker.getCoinTotal() - coinLoss < 0) {
+        if (0 > gameStatTracker.getCoinTotal() - coinLoss) {
             actualLoss = gameStatTracker.getCoinTotal();
         }
         gameStatTracker.addCoins(-coinLoss);
@@ -83,7 +83,7 @@ public class Player implements Comparable<Player> {
     public int compareTo(Player otherPlayer) {
         int result = otherPlayer.gameStatTracker.getStarCount() - gameStatTracker.getStarCount();
 
-        if (result == 0) {
+        if (0 == result) {
             return otherPlayer.gameStatTracker.getCoinTotal() - gameStatTracker.getCoinTotal();
         }
         return result;
@@ -94,7 +94,7 @@ public class Player implements Comparable<Player> {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (null == o || getClass() != o.getClass()) {
             return false;
         }
 

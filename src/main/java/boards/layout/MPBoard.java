@@ -10,7 +10,6 @@ import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
     private final Map<Integer, BaseSpace> VERTEX_MAP;
@@ -25,7 +24,7 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
 
     @Getter
     @Setter
-    private boolean needToMoveStar = false;
+    private boolean needToMoveStar;
 
     @Getter
     @Setter
@@ -39,7 +38,7 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
 
     @Override
     public boolean addVertex(BaseSpace v) {
-        if (v == null || VERTEX_MAP.containsKey(v.getSpaceID())) {
+        if (null == v || VERTEX_MAP.containsKey(v.getSpaceID())) {
             return false;
         }
 
@@ -49,7 +48,7 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
 
     @Override
     public boolean removeVertex(BaseSpace v) {
-        if (v == null || !VERTEX_MAP.containsKey(v.getSpaceID())) {
+        if (null == v || !VERTEX_MAP.containsKey(v.getSpaceID())) {
             return false;
         }
 
@@ -90,8 +89,8 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
         for (StarSpace starSpace : VERTEX_MAP.values().stream()
                 .filter(s -> s instanceof StarSpace)
                 .map(s -> (StarSpace)s)
-                .collect(Collectors.toList())) {
-            final Map<Integer, Integer> distanceMap = new HashMap<>(64);
+                .toList()) {
+            Map<Integer, Integer> distanceMap = new HashMap<>(64);
 
             VERTEX_MAP.values().forEach(vertex -> distanceMap.put(vertex.getSpaceID(), Integer.MAX_VALUE));
 

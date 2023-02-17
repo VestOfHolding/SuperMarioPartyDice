@@ -60,13 +60,13 @@ public enum Dice {
     List<? extends DieResult> possibleRolls;
 
     Dice(List<? extends DieResult> possibleRolls) {
-        if (possibleRolls.size() == 6) {
+        if (6 == possibleRolls.size()) {
             this.possibleRolls = possibleRolls;
         }
     }
 
     public static Dice getRandomCharacterDie() {
-        return Dice.values()[RandomUtils.getRandomInt(Dice.values().length - 1)];
+        return values()[RandomUtils.getRandomInt(values().length - 1)];
     }
 
     public static Dice getRandomCharacterDieNotInGroup(PlayerGroup playerGroup) {
@@ -78,16 +78,16 @@ public enum Dice {
     }
 
     public DieResult roll() {
-        return this.possibleRolls.get(RandomUtils.getRandomInt(5));
+        return possibleRolls.get(RandomUtils.getRandomInt(5));
     }
 
     public String getName() {
-        return WordUtils.capitalizeFully(this.name().replaceAll("_", " "));
+        return WordUtils.capitalizeFully(name().replaceAll("_", " "));
     }
 
     @Override
     public String toString() {
-        String rolls = this.possibleRolls.stream().map(DieResult::toString).collect(Collectors.joining(","));
+        String rolls = possibleRolls.stream().map(DieResult::toString).collect(Collectors.joining(","));
 
         return String.join(",", getName(), rolls);
     }

@@ -19,7 +19,7 @@ public class WhompsDominoRuins extends BaseBoard {
     private static final int WHOMP2_1 = 32;
     private static final int WHOMP2_2 = 60;
 
-    public static String OUTPUT_NAME = "WhompsDominoRuins.txt";
+    public static final String OUTPUT_NAME = "WhompsDominoRuins.txt";
 
     public WhompsDominoRuins() {
         initializeBoard();
@@ -172,7 +172,7 @@ public class WhompsDominoRuins extends BaseBoard {
 
     @Override
     public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
-        List<BaseSpace> nextSpaces = new ArrayList<>();
+        List<BaseSpace> nextSpaces = new ArrayList<>(5);
 
         for (BaseSpace nextSpace : getNextSpaces(startingSpace)) {
             if (!nextSpace.hasToll() || nextSpace.canCross(gameStatTracker, board.getStarCost())) {
@@ -180,7 +180,7 @@ public class WhompsDominoRuins extends BaseBoard {
             }
         }
 
-        if (nextSpaces.size() == 1) {
+        if (1 == nextSpaces.size()) {
             return nextSpaces.get(0);
         }
 

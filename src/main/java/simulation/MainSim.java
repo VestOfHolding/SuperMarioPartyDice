@@ -8,9 +8,9 @@ import boards.WhompsDominoRuins;
 public class MainSim {
     public static void main(String[] args) {
         int simCount = 1000000;
-        if (args.length == 1) {
+        if (1 == args.length) {
             try {
-                if (Integer.parseInt(args[0]) > 0) {
+                if (0 < Integer.parseInt(args[0])) {
                     simCount = Integer.parseInt(args[0]);
                 }
             } catch (NumberFormatException ignored) { }

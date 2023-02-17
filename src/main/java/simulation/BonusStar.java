@@ -5,7 +5,7 @@ import partydice.Dice;
 import utils.RandomUtils;
 
 import java.util.Comparator;
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -21,9 +21,9 @@ public enum BonusStar {
 //    ITEM((Player p) -> p.getGameStatTracker().getItemsUsed()),
     UNLUCKY((Player p) -> p.getGameStatTracker().getBadLuckCount());
 
-    private Function<Player, Integer> starFunction;
+    private final Function<Player, Integer> starFunction;
 
-    private Mode mode;
+    private final Mode mode;
 
     private enum Mode { MIN, MAX }
 
@@ -36,27 +36,27 @@ public enum BonusStar {
      * This method assumes max turn games and returns 3.
      */
     public static Set<BonusStar> randomlyGetBonusStars() {
-        Set<BonusStar> bonusStars = new HashSet<>();
-        while (bonusStars.size() < 3) {
-            bonusStars.add(BonusStar.values()[RandomUtils.getRandomInt(BonusStar.values().length - 1)]);
+        Set<BonusStar> bonusStars = EnumSet.noneOf(BonusStar.class);
+        while (3 > bonusStars.size()) {
+            bonusStars.add(values()[RandomUtils.getRandomInt(values().length - 1)]);
         }
         return bonusStars;
     }
 
     public Player findWinningPlayer(PlayerGroup group) {
-        if (this == BUDDY) {
+        if (BUDDY == this) {
             //The Buddy Star is given to a player that has a randomly selected ally.
             Dice bonusBuddy = Dice.getRandomCharacterDieNotInGroup(group);
-            return group.getAllPlayers().stream()
+            return group.allPlayers().stream()
                     .filter(player -> player.getGameStatTracker().getAllies().contains(bonusBuddy.getName()))
                     .findFirst()
                     .orElse(null);
         }
-        if (mode == Mode.MAX) {
-            return group.getAllPlayers().stream().max(Comparator.comparing(p -> starFunction.apply(p))).orElse(null);
+        if (Mode.MAX == mode) {
+            return group.allPlayers().stream().max(Comparator.comparing(starFunction)).orElse(null);
         }
         else {
-            return group.getAllPlayers().stream().min(Comparator.comparing(p -> starFunction.apply(p))).orElse(null);
+            return group.allPlayers().stream().min(Comparator.comparing(starFunction)).orElse(null);
         }
     }
 }

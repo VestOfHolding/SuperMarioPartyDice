@@ -65,7 +65,7 @@ public class WhompsOnTheRun extends BaseSpace {
 
     @Override
     public boolean canCross(GameStatTracker gameStatTracker, int starCost) {
-        return gameStatTracker.getCoinTotal() - COST - starCost >= 0;
+        return 0 <= gameStatTracker.getCoinTotal() - COST - starCost;
     }
 
 }

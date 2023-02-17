@@ -93,14 +93,14 @@ public enum BadLuckEventTable {
             new LuckEvent(10, Range.between(89, 100))
     ));
 
-    List<LuckEvent> events;
+    final List<LuckEvent> events;
 
     BadLuckEventTable(List<LuckEvent> events) {
         this.events = events;
     }
 
     public static Set<LuckEvent> buildEventList(BadLuckEventTable eventTable) {
-        Set<LuckEvent> result = new HashSet<>();
+        Set<LuckEvent> result = new HashSet<>(5);
 
         do {
             int random = RandomUtils.getRandomInt(1, 100);
@@ -109,7 +109,7 @@ public enum BadLuckEventTable {
                     .findFirst()
                     //This can never happen, given our number ranges.
                     .orElse(null));
-        } while (result.size() < 5);
+        } while (5 > result.size());
 
         return result;
     }

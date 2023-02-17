@@ -10,15 +10,9 @@ import java.util.stream.Collectors;
 /**
  * Wrapper around the list of four players that comes with some handy utility methods.
  */
-public class PlayerGroup {
-    private final List<Player> allPlayers;
-
-    public PlayerGroup (List<Player> allPlayers) {
+public record PlayerGroup(List<Player> allPlayers) {
+    public PlayerGroup(List<Player> allPlayers) {
         this.allPlayers = ListUtils.emptyIfNull(allPlayers);
-    }
-
-    public List<Player> getAllPlayers() {
-        return allPlayers;
     }
 
     public Player getRandomPlayer() {

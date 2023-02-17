@@ -30,14 +30,14 @@ public class LakituSpace extends BaseSpace {
         if (currentPlayer.getCoinTotal() >= STAR_STEAL_COST + gameBoard.getStarCost()
                 //Oh right, and the opponents should actually have stars to steal.
                 && playerGroup.getAllPlayersExceptCurrent(currentPlayer).stream()
-                .anyMatch(p -> p.getStarCount() > 0)) {
+                .anyMatch(p -> 0 < p.getStarCount())) {
 
             //Ok, we're definitely stealing a star now. Steal from the person in first place/has the most stars.
             Player victim = playerGroup.getAllPlayersExceptCurrent(currentPlayer).stream()
                     .max(Comparator.comparing(Player::getCurrentPlace))
                     .orElse(null);
             
-            if (victim != null) {
+            if (null != victim) {
                 victim.loseStar();
                 currentPlayer.addStar();
                 currentPlayer.addCoins(-STAR_STEAL_COST);

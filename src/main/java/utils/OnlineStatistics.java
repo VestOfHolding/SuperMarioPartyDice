@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class OnlineStatistics {
-    private double mean = 0.0;
-    private double sum = 0.0;
+    private double mean;
+    private double sum;
 
     private final TDigest tdigest = TDigest.createDigest(500);
 
@@ -31,11 +31,11 @@ public class OnlineStatistics {
     }
 
     public double getStandardDeviation() {
-        return tdigest.size() > 0 ? Math.sqrt(getVariance()) : 0.0;
+        return 0 < tdigest.size() ? Math.sqrt(getVariance()) : 0.0;
     }
 
     public double getMin() {
-        return tdigest.getMin() == Double.POSITIVE_INFINITY ? 0 : tdigest.getMin();
+        return Double.POSITIVE_INFINITY == tdigest.getMin() ? 0 : tdigest.getMin();
     }
 
     public double getFirstQuartile() {

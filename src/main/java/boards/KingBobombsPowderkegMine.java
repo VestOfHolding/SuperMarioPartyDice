@@ -9,7 +9,7 @@ import boards.spaces.events.LakituSpace;
 
 public class KingBobombsPowderkegMine extends BaseBoard {
 
-    public static String OUTPUT_NAME = "KingBobombsPowderkegMine.txt";
+    public static final String OUTPUT_NAME = "KingBobombsPowderkegMine.txt";
 
     public KingBobombsPowderkegMine() {
         initializeBoard(new KingBobombsBoard());
