@@ -11,10 +11,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class FullSimDataSimulation extends Simulation {
+
+    protected static final int TURN_COUNT = 20;
     protected static final int SIM_COUNT = 10000000;
 
     @Override
-    public void simulate() {
+    public void run() {
         Int2IntOpenHashMap distanceFrequencyMap;
 
         GameStatTracker gameStatTracker;
@@ -35,14 +37,14 @@ public class FullSimDataSimulation extends Simulation {
 
                 distanceFrequencyMap = new Int2IntOpenHashMap();
 
-                for (int i = 0; i < SIM_COUNT; ++i) {
+                for (int i = 0; SIM_COUNT > i; ++i) {
                     gameStatTracker = new GameStatTracker(TURN_COUNT);
 
-                    for (int j = 0; j < TURN_COUNT; ++j) {
+                    for (int j = 0; TURN_COUNT > j; ++j) {
                         gameStatTracker.addDiceResult(characterDie.roll());
                     }
 
-                    if (distanceFrequencyMap.get(gameStatTracker.getDistanceTotal()) < 1) {
+                    if (1 > distanceFrequencyMap.get(gameStatTracker.getDistanceTotal())) {
                         distanceFrequencyMap.put(gameStatTracker.getDistanceTotal(), 1);
                     }
                     else {

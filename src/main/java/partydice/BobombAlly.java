@@ -20,6 +20,6 @@ public class BobombAlly {
     }
 
     public boolean explode() {
-        return countdown <= 0;
+        return 0 >= countdown;
     }
 }

@@ -17,9 +17,9 @@ import java.util.List;
 public class VSSpace extends BlueSpace {
 
     @ToString.Exclude
-    List<Integer> POSSIBLE_WAGERS = Arrays.asList(5, 7, 10, 15, 20, 25, 30);
+    final List<Integer> POSSIBLE_WAGERS = Arrays.asList(5, 7, 10, 15, 20, 25, 30);
 
-    List<Integer> NORMAL_SPLITS = Arrays.asList(6, 3, 1, 0);
+    final List<Integer> NORMAL_SPLITS = Arrays.asList(6, 3, 1, 0);
 
     private boolean used;
 
@@ -38,14 +38,14 @@ public class VSSpace extends BlueSpace {
         int wager = POSSIBLE_WAGERS.get(RandomUtils.getRandomInt(POSSIBLE_WAGERS.size() - 1));
 
         //Sometimes not everyone has enough coins for the wager.
-        int totalPot = playerGroup.getAllPlayers().stream()
+        int totalPot = playerGroup.allPlayers().stream()
                 .mapToInt(p -> p.takeCoins(wager))
                 .sum();
 
         //60%, 30%, 10%, 0%, rounded down.
         List<Integer> normalSplitCopy = new ArrayList<>(NORMAL_SPLITS);
 
-        for (Player player : new HashSet<>(playerGroup.getAllPlayers())) {
+        for (Player player : new HashSet<>(playerGroup.allPlayers())) {
             Integer split = normalSplitCopy.get(RandomUtils.getRandomInt(normalSplitCopy.size() - 1));
             int gainFromPot = totalPot * split / 10;
 
@@ -60,7 +60,7 @@ public class VSSpace extends BlueSpace {
 
         //The leftover coins from rounding all the results get
         // randomly distributed destination the 4 players.
-        for(; totalPot > 0; --totalPot) {
+        for(; 0 < totalPot; --totalPot) {
             playerGroup.getRandomPlayer().addCoins(1);
         }
 

@@ -8,9 +8,11 @@ import boards.spaces.events.KBPM.RoyalExplosionEvent;
 import boards.spaces.events.LakituSpace;
 
 public class KingBobombsPowderkegMine extends BaseBoard {
+
+    public static final String OUTPUT_NAME = "KingBobombsPowderkegMine.txt";
+
     public KingBobombsPowderkegMine() {
         initializeBoard(new KingBobombsBoard());
-        fileOutputName = "KingBobombsPowderkegMine.txt";
     }
 
     @Override
@@ -93,6 +95,11 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
         board = graphBuilder.build();
         connectPaths();
+    }
+
+    @Override
+    public String getFileOutputName() {
+        return OUTPUT_NAME;
     }
 
     @Override

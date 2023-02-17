@@ -63,7 +63,7 @@ public class BaseSpace {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (null == o || getClass() != o.getClass()) {
             return false;
         }
         BaseSpace baseSpace = (BaseSpace) o;
@@ -76,8 +76,8 @@ public class BaseSpace {
     }
 
     public String toString() {
-        return "BaseSpace(spaceID=" + this.getSpaceID() +
-                ", x=" + this.getX() +
-                ", y=" + this.getY() + ")";
+        return "BaseSpace(spaceID=" + getSpaceID() +
+                ", x=" + getX() +
+                ", y=" + getY() + ")";
     }
 }

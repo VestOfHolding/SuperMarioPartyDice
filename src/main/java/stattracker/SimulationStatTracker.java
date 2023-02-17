@@ -35,11 +35,11 @@ public class SimulationStatTracker {
         mainPlayer.setGameStatTracker(new GameStatTracker(turnCount));
 
         //Easier to keep adding players to this set until there are 4 unique players.
-        Set<Player> allPlayerSet = new HashSet<>();
+        Set<Player> allPlayerSet = new HashSet<>(4);
         allPlayerSet.add(mainPlayer);
 
         //Across a series of simulations, only the main character we're testing will remain the same.
-        while (allPlayerSet.size() < 4) {
+        while (4 > allPlayerSet.size()) {
             allPlayerSet.add(new Player(Dice.getRandomCharacterDie(), new GameStatTracker(turnCount)));
         }
 

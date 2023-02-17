@@ -6,14 +6,13 @@ public class KingBobombsBoard extends MPBoard {
     private int kingBobombCountdown = 5;
 
     public KingBobombsBoard() {
-        super();
         setKamekBoard(false);
     }
 
     public boolean decrementCountdown() {
         kingBobombCountdown--;
 
-        if (kingBobombCountdown <= 0) {
+        if (0 >= kingBobombCountdown) {
             kingBobombCountdown = kingBobombCountdownStart;
             return true;
         }

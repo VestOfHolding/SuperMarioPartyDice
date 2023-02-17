@@ -48,7 +48,7 @@ public class MinigameManager {
         //Something to consider adding at a later date:
         //  If the winning team consists of more than one player, they can high five and gain 2 more coins.
         //  This is super easy and common for human players to do basically every time if they wanted.
-        if (minigameTeams.size() == 2) {
+        if (2 == minigameTeams.size()) {
             for (Player player : minigameTeams.get(winningTeamIndex)) {
                 player.addCoins(WIN_AMOUNT);
             }
@@ -59,9 +59,9 @@ public class MinigameManager {
             }
         }
         //Four player games have a decreasing list of coin rewards
-        else if (minigameTeams.size() == 4) {
+        else if (4 == minigameTeams.size()) {
             //Randomizing who wins in what order.
-            Set<Player> playerSet = new HashSet<>(playerGroup.getAllPlayers());
+            Set<Player> playerSet = new HashSet<>(playerGroup.allPlayers());
 
             int i = 0;
             for (Player player : playerSet) {
@@ -71,28 +71,28 @@ public class MinigameManager {
     }
 
     public List<List<Player>> constructPlayerTeams(PlayerGroup playerGroup) {
-        List<Player> allPlayers = playerGroup.getAllPlayers();
+        List<Player> allPlayers = playerGroup.allPlayers();
 
         int greenCount = 0;
         int blueCount = 0;
 
         for (Player player : allPlayers) {
-            if (player.getLandedSpaceColor() == SpaceColor.GREEN) {
+            if (SpaceColor.GREEN == player.getLandedSpaceColor()) {
                 greenCount++;
             }
-            else if (player.getLandedSpaceColor() == SpaceColor.BLUE) {
+            else if (SpaceColor.BLUE == player.getLandedSpaceColor()) {
                 blueCount++;
             }
         }
 
-        if (greenCount == 4) {
+        if (4 == greenCount) {
             return Arrays.asList(Collections.singletonList(allPlayers.get(0)),
                     Collections.singletonList(allPlayers.get(1)),
                     Collections.singletonList(allPlayers.get(2)),
                     Collections.singletonList(allPlayers.get(3)));
         }
         //We only care about transforming the green spaces, so it could be that there's nothing more to do.
-        else if (greenCount == 0) {
+        else if (0 == greenCount) {
             return new ArrayList<>(allPlayers.stream().collect(Collectors.groupingBy(Player::getLandedSpaceColor)).values());
         }
 
@@ -106,8 +106,8 @@ public class MinigameManager {
         int newBlueCount = finalLayer.get(randomChance);
 
         for (Player player : allPlayers) {
-            if (player.getLandedSpaceColor() == SpaceColor.GREEN) {
-                if (newBlueCount > 0) {
+            if (SpaceColor.GREEN == player.getLandedSpaceColor()) {
+                if (0 < newBlueCount) {
                     player.setLandedSpaceColor(SpaceColor.BLUE);
                     newBlueCount--;
                 }

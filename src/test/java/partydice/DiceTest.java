@@ -22,7 +22,7 @@ class DiceTest {
                 new Player(playerDice.get(3), new GameStatTracker(5))
         ));
 
-        for (int i = 0; i < 40; ++i) {
+        for (int i = 0; 40 > i; ++i) {
             Dice result = Dice.getRandomCharacterDieNotInGroup(group);
             assertFalse(playerDice.contains(result));
         }

@@ -17,11 +17,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public class KameksTantalizingTower extends BaseBoard  {
+
+    public static final String OUTPUT_NAME = "KameksTantalizingTower.txt";
     private final List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
 
     public KameksTantalizingTower() {
         initializeBoard();
-        fileOutputName = "KameksTantalizingTower.txt";
     }
 
     @Override
@@ -85,6 +86,11 @@ public class KameksTantalizingTower extends BaseBoard  {
     }
 
     @Override
+    public String getFileOutputName() {
+        return OUTPUT_NAME;
+    }
+
+    @Override
     public void lastThreeTurns() {
         setRedAndBlueCoinAmounts(10);
     }
@@ -125,7 +131,7 @@ public class KameksTantalizingTower extends BaseBoard  {
 
     @Override
     public BaseSpace getNextSpace(BaseSpace startingSpace, GameStatTracker gameStatTracker) {
-        List<BaseSpace> nextSpaces = new ArrayList<>();
+        List<BaseSpace> nextSpaces = new ArrayList<>(4);
 
         for (BaseSpace nextSpace : getNextSpaces(startingSpace)) {
             if (!nextSpace.hasToll() || nextSpace.canCross(gameStatTracker, board.getStarCost())) {
@@ -133,7 +139,7 @@ public class KameksTantalizingTower extends BaseBoard  {
             }
         }
 
-        if (nextSpaces.size() == 1) {
+        if (1 == nextSpaces.size()) {
             return nextSpaces.get(0);
         }
 
@@ -145,7 +151,7 @@ public class KameksTantalizingTower extends BaseBoard  {
 
     @Override
     public void changeStarSpace() {
-        if (currentStarSpace == null) {
+        if (null == currentStarSpace) {
             currentStarSpace = starSpaces.stream()
                     .filter(StarSpace::isStarActive)
                     .findFirst()
@@ -153,7 +159,7 @@ public class KameksTantalizingTower extends BaseBoard  {
         }
 
         //If no star is currently active, it's the beginning of the game.
-        if (currentStarSpace == null) {
+        if (null == currentStarSpace) {
             currentStarSpace = starSpaces.get(0);
             currentStarSpace.activateStar();
 

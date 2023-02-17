@@ -33,7 +33,7 @@ public class SandBridgeCollapse extends MoveEventSpace {
 
     @Override
     public int moveToSpace() {
-        return countdown > 0 ? -1 : spaceToMoveToID;
+        return 0 < countdown ? -1 : spaceToMoveToID;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class SandBridgeCollapse extends MoveEventSpace {
                                 Player currentPlayer, PlayerGroup playerGroup) {
         decrementCountdown();
 
-        if (countdown <= 0) {
+        if (0 >= countdown) {
             //The bridge collapses
             gameBoard.removeEdge(gameBoard.getVertexById(9), gameBoard.getVertexById(59));
             gameBoard.removeEdge(gameBoard.getVertexById(59), gameBoard.getVertexById(14));

@@ -25,7 +25,7 @@ public class StarSparklerSpace extends BaseSpace {
                                 Player currentPlayer, PlayerGroup playerGroup) {
         countdown = Math.max(0, countdown - 1);
 
-        if (countdown <= 0) {
+        if (0 == countdown) {
             currentPlayer.getGameStatTracker().addStar();
             countdown = 2;
         }

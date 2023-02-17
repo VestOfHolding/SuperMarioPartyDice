@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SpaceFactory {
-    public Map<Integer, BaseSpace> spaceCache;
+    public final Map<Integer, BaseSpace> spaceCache;
     
     public SpaceFactory() {
         spaceCache = new HashMap<>(70);
@@ -225,7 +225,7 @@ public class SpaceFactory {
     }
 
     private static BaseSpace setXandY(BaseSpace space, int x, int y) {
-        if (space != null && x > 0 && y > 0) {
+        if (null != space && 0 < x && 0 < y) {
             space.setX(x);
             space.setY(y);
         }

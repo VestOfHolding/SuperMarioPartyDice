@@ -5,6 +5,9 @@ import boards.spaces.events.MFP.StarSparklerSpace;
 import boards.spaces.events.MFP.SandBridgeCollapse;
 
 public class MegafruitParadise extends BaseBoard {
+
+    public static final String OUTPUT_NAME = "MegafruitParadise.txt";
+
     private static final int I0_DEST = 7;
     private static final int I1_DEST = 19;
     private static final int I2_DEST = 37;
@@ -12,7 +15,6 @@ public class MegafruitParadise extends BaseBoard {
 
     public MegafruitParadise() {
         initializeBoard();
-        fileOutputName = "MegafruitParadise.txt";
     }
 
     @Override
@@ -96,6 +98,11 @@ public class MegafruitParadise extends BaseBoard {
 
         board = graphBuilder.build();
         connectPaths();
+    }
+
+    @Override
+    public String getFileOutputName() {
+        return OUTPUT_NAME;
     }
 
     @Override

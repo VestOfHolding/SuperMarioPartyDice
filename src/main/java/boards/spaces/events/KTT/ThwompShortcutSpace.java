@@ -29,7 +29,7 @@ public class ThwompShortcutSpace extends NonMovementSpace {
     @Override
     public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
-        if (nextCost < 0) {
+        if (0 > nextCost) {
             nextCost = calculateNextCost();
         }
 
@@ -47,10 +47,10 @@ public class ThwompShortcutSpace extends NonMovementSpace {
 
     @Override
     public boolean canCross(GameStatTracker gameStatTracker, int starCost) {
-        if (nextCost < 0) {
+        if (0 > nextCost) {
             nextCost = calculateNextCost();
         }
-        return gameStatTracker.getCoinTotal() - nextCost - starCost >= 0;
+        return 0 <= gameStatTracker.getCoinTotal() - nextCost - starCost;
     }
 
     private int calculateNextCost() {

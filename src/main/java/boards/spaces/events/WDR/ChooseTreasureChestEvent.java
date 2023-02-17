@@ -41,7 +41,7 @@ public class ChooseTreasureChestEvent extends BaseSpace {
             return false;
         }
 
-        Integer reward = REWARDS.get(REWARDS.size() == 1 ? 0 : RandomUtils.getRandomInt(REWARDS.size() - 1));
+        Integer reward = REWARDS.get(1 == REWARDS.size() ? 0 : RandomUtils.getRandomInt(REWARDS.size() - 1));
 
         REWARDS.remove(reward);
 
