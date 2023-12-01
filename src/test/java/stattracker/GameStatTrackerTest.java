@@ -2,7 +2,8 @@ package stattracker;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import simulation.PlayerGroup;
+import org.voh.smp.simulation.PlayerGroup;
+import org.voh.smp.stattracker.GameStatTracker;
 
 import java.util.Collections;
 

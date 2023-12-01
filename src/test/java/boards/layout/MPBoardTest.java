@@ -1,7 +1,8 @@
 package boards.layout;
 
-import boards.spaces.BaseSpace;
-import boards.spaces.StarSpace;
+import org.voh.smp.boards.layout.MPBoard;
+import org.voh.smp.boards.spaces.BaseSpace;
+import org.voh.smp.boards.spaces.StarSpace;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,9 +1,10 @@
 package partydice;
 
 import org.junit.jupiter.api.Test;
-import simulation.Player;
-import simulation.PlayerGroup;
-import stattracker.GameStatTracker;
+import org.voh.smp.partydice.Dice;
+import org.voh.smp.simulation.Player;
+import org.voh.smp.simulation.PlayerGroup;
+import org.voh.smp.stattracker.GameStatTracker;
 
 import java.util.Arrays;
 import java.util.List;

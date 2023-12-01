@@ -1,6 +1,7 @@
 package boards.layout;
 
 import org.junit.jupiter.api.Test;
+import org.voh.smp.boards.layout.KingBobombsBoard;
 
 import static org.junit.jupiter.api.Assertions.*;
 
