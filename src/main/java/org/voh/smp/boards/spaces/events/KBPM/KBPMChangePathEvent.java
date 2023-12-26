@@ -22,7 +22,7 @@ public class KBPMChangePathEvent extends BaseSpace {
 
         KBPMChangePathEvent firstEventSpace = (KBPMChangePathEvent)gameBoard.getVertexById(27);
 
-        BaseSpace nextSpace = Graphs.successorListOf(gameBoard, firstEventSpace).get(0);
+        BaseSpace nextSpace = Graphs.successorListOf(gameBoard, firstEventSpace).getFirst();
 
         if (nextSpace instanceof LuckySpace) {
             gameBoard.removeEdge(firstEventSpace, gameBoard.getVertexById(28));

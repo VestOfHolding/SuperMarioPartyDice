@@ -32,10 +32,10 @@ public class Simulation {
         gameBoard = WhompsDominoRuins::new;
     }
 
-    public Simulation(Supplier<BaseBoard> gameBoard, String fileOutputName, int simCount) {
+    public Simulation(Supplier<BaseBoard> gameBoard, int simCount) {
         SIM_COUNT = simCount;
         this.gameBoard = gameBoard;
-        this.fileOutputName = "output/" + fileOutputName;
+        this.fileOutputName = "output/" + gameBoard.get().getFileOutputName();
     }
 
     public String runWithTimeInfo() {

@@ -25,13 +25,12 @@ public class MainSim {
             } catch (NumberFormatException ignored) { }
         }
 
-        ExecutorService service = Executors.newWorkStealingPool();
-        Simulation whompsSim = new Simulation(WhompsDominoRuins::new, WhompsDominoRuins.OUTPUT_NAME, simCount);
-        Simulation bobombSim = new Simulation(KingBobombsPowderkegMine::new, KingBobombsPowderkegMine.OUTPUT_NAME, simCount);
-        Simulation megafruitSim = new Simulation(MegafruitParadise::new, MegafruitParadise.OUTPUT_NAME, simCount);
-        Simulation kameksSim = new Simulation(KameksTantalizingTower::new, KameksTantalizingTower.OUTPUT_NAME, simCount);
+        try (ExecutorService service = Executors.newVirtualThreadPerTaskExecutor()){
+            Simulation whompsSim = new Simulation(WhompsDominoRuins::new, simCount);
+            Simulation bobombSim = new Simulation(KingBobombsPowderkegMine::new, simCount);
+            Simulation megafruitSim = new Simulation(MegafruitParadise::new, simCount);
+            Simulation kameksSim = new Simulation(KameksTantalizingTower::new, simCount);
 
-        try {
             List<Callable<String>> simulations = List.of(
                     whompsSim::runWithTimeInfo, bobombSim::runWithTimeInfo, megafruitSim::runWithTimeInfo, kameksSim::runWithTimeInfo);
 
@@ -39,8 +38,6 @@ public class MainSim {
         } catch (Exception e) {
             LOG.error("Exception thrown when trying to run threads.", e);
             throw new RuntimeException(e);
-        } finally {
-            service.shutdown();
         }
     }
 }

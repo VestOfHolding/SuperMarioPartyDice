@@ -1,5 +1,6 @@
 package org.voh.smp.boards;
 
+import lombok.Setter;
 import org.voh.smp.boards.layout.MPBoard;
 import org.voh.smp.boards.spaces.BaseSpace;
 import org.voh.smp.boards.spaces.BlueSpace;
@@ -30,6 +31,7 @@ public abstract class BaseBoard {
 
     protected StarSpace currentStarSpace;
 
+    @Setter
     protected PlayerGroup playerGroup;
 
     protected SpaceFactory spaceFactory;
@@ -70,10 +72,6 @@ public abstract class BaseBoard {
         initializeBoard();
     }
 
-    public void setPlayerGroup(PlayerGroup players) {
-        playerGroup = players;
-    }
-
     /**
      * Change which of the star spaces is currently active and selling a star.
      * If none is currently active, activate one.
@@ -102,7 +100,7 @@ public abstract class BaseBoard {
         }
         nextStar.activateStar();
         board.setNeedToMoveStar(false);
-        board.setStarCost(board.INIT_STAR_COST);
+        board.setStarCost(MPBoard.INIT_STAR_COST);
         currentStarSpace = nextStar;
     }
 
@@ -118,7 +116,7 @@ public abstract class BaseBoard {
         List<BaseSpace> nextSpaces = getNextSpaces(startingSpace);
 
         if (1 == nextSpaces.size()) {
-            return nextSpaces.get(0);
+            return nextSpaces.getFirst();
         }
 
         if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {

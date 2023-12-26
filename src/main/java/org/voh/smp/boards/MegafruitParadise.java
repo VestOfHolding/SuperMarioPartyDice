@@ -3,10 +3,9 @@ package org.voh.smp.boards;
 import org.voh.smp.boards.spaces.events.MFP.PresentBoxSpace;
 import org.voh.smp.boards.spaces.events.MFP.StarSparklerSpace;
 import org.voh.smp.boards.spaces.events.MFP.SandBridgeCollapse;
+import org.voh.smp.utils.Constants;
 
 public class MegafruitParadise extends BaseBoard {
-
-    public static final String OUTPUT_NAME = "MegafruitParadise.txt";
 
     private static final int I0_DEST = 7;
     private static final int I1_DEST = 19;
@@ -102,7 +101,7 @@ public class MegafruitParadise extends BaseBoard {
 
     @Override
     public String getFileOutputName() {
-        return OUTPUT_NAME;
+        return Constants.MEGAFRUIT_OUTPUT;
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.voh.smp.boards.spaces.events.KTT.ChangeStarPriceSpace;
 import org.voh.smp.boards.spaces.events.KTT.ForcedShopSpace;
 import org.voh.smp.boards.spaces.events.KTT.ThwompShortcutSpace;
 import org.voh.smp.stattracker.GameStatTracker;
+import org.voh.smp.utils.Constants;
 import org.voh.smp.utils.RandomUtils;
 
 import java.util.ArrayList;
@@ -17,8 +18,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class KameksTantalizingTower extends BaseBoard  {
-
-    public static final String OUTPUT_NAME = "KameksTantalizingTower.txt";
     private final List<Integer> possibleStarPrices = Arrays.asList(5, 10, 15);
 
     public KameksTantalizingTower() {
@@ -87,7 +86,7 @@ public class KameksTantalizingTower extends BaseBoard  {
 
     @Override
     public String getFileOutputName() {
-        return OUTPUT_NAME;
+        return Constants.KAMEK_OUTPUT;
     }
 
     @Override
@@ -140,7 +139,7 @@ public class KameksTantalizingTower extends BaseBoard  {
         }
 
         if (1 == nextSpaces.size()) {
-            return nextSpaces.get(0);
+            return nextSpaces.getFirst();
         }
 
         if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {
@@ -160,7 +159,7 @@ public class KameksTantalizingTower extends BaseBoard  {
 
         //If no star is currently active, it's the beginning of the game.
         if (null == currentStarSpace) {
-            currentStarSpace = starSpaces.get(0);
+            currentStarSpace = starSpaces.getFirst();
             currentStarSpace.activateStar();
 
             board.setStarCost(board.INIT_STAR_COST);

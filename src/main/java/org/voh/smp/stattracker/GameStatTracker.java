@@ -99,7 +99,7 @@ public class GameStatTracker {
 
         //Bo-bomb allies can replace real allies.
         if (4 <= allies.size()) {
-            allies.remove(allies.size() - 1);
+            allies.removeLast();
         }
     }
 
@@ -108,7 +108,7 @@ public class GameStatTracker {
             return;
         }
 
-        bobombAllies.remove(bobombAllies.size() - 1);
+        bobombAllies.removeLast();
     }
 
     public void addLandedSpace(BaseSpace baseSpace) {

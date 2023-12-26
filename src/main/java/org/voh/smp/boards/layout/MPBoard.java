@@ -16,7 +16,7 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
 
     private final Map<Integer, Map<Integer, Integer>> starDistanceMap = new HashMap<>(64);
 
-    public final int INIT_STAR_COST = 10;
+    public static final int INIT_STAR_COST = 10;
 
     @Getter
     @Setter

@@ -6,6 +6,7 @@ import org.voh.smp.boards.spaces.events.WDR.ChooseTreasureChestEvent;
 import org.voh.smp.boards.spaces.events.WDR.WhompSwitch;
 import org.voh.smp.boards.spaces.events.WDR.WhompsOnTheRun;
 import org.voh.smp.stattracker.GameStatTracker;
+import org.voh.smp.utils.Constants;
 import org.voh.smp.utils.RandomUtils;
 
 import java.util.ArrayList;
@@ -18,8 +19,6 @@ public class WhompsDominoRuins extends BaseBoard {
     private static final int WHOMP1_2 = 46;
     private static final int WHOMP2_1 = 32;
     private static final int WHOMP2_2 = 60;
-
-    public static final String OUTPUT_NAME = "WhompsDominoRuins.txt";
 
     public WhompsDominoRuins() {
         initializeBoard();
@@ -120,7 +119,7 @@ public class WhompsDominoRuins extends BaseBoard {
 
     @Override
     public String getFileOutputName() {
-        return OUTPUT_NAME;
+        return Constants.WHOMP_OUTPUT;
     }
 
     @Override
@@ -181,7 +180,7 @@ public class WhompsDominoRuins extends BaseBoard {
         }
 
         if (1 == nextSpaces.size()) {
-            return nextSpaces.get(0);
+            return nextSpaces.getFirst();
         }
 
         if (gameStatTracker.getCoinTotal() >= board.getStarCost()) {

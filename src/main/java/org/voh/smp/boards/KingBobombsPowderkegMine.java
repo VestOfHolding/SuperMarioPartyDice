@@ -6,10 +6,9 @@ import org.voh.smp.boards.spaces.events.KBPM.GoldMineGambleEvent;
 import org.voh.smp.boards.spaces.events.KBPM.KBPMChangePathEvent;
 import org.voh.smp.boards.spaces.events.KBPM.RoyalExplosionEvent;
 import org.voh.smp.boards.spaces.events.LakituSpace;
+import org.voh.smp.utils.Constants;
 
 public class KingBobombsPowderkegMine extends BaseBoard {
-
-    public static final String OUTPUT_NAME = "KingBobombsPowderkegMine.txt";
 
     public KingBobombsPowderkegMine() {
         initializeBoard(new KingBobombsBoard());
@@ -99,7 +98,7 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
     @Override
     public String getFileOutputName() {
-        return OUTPUT_NAME;
+        return Constants.BOBOMB_OUTPUT;
     }
 
     @Override
