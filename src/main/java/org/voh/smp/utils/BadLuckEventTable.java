@@ -3,8 +3,10 @@ package org.voh.smp.utils;
 import org.apache.commons.lang3.Range;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public enum BadLuckEventTable {
@@ -93,22 +95,21 @@ public enum BadLuckEventTable {
             new LuckEvent(10, Range.of(89, 100))
     ));
 
-    final List<LuckEvent> events;
+    final Map<Integer, LuckEvent> eventMap = new HashMap<>();
 
     BadLuckEventTable(List<LuckEvent> events) {
-        this.events = events;
+        for (LuckEvent event : events) {
+            for (int i = event.getChanceRange().getMinimum(); i <= event.getChanceRange().getMaximum(); i++) {
+                eventMap.put(i, event);
+            }
+        }
     }
 
     public static Set<LuckEvent> buildEventList(BadLuckEventTable eventTable) {
         Set<LuckEvent> result = new HashSet<>(5);
 
         do {
-            int random = RandomUtils.getRandomInt(1, 100);
-            result.add(eventTable.events.stream()
-                    .filter(event -> event.getChanceRange().contains(random))
-                    .findFirst()
-                    //This can never happen, given our number ranges.
-                    .orElse(null));
+            result.add(eventTable.eventMap.get(RandomUtils.getRandomInt(1, 100)));
         } while (5 > result.size());
 
         return result;

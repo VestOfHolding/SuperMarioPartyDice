@@ -50,12 +50,10 @@ public abstract class BaseBoard {
 
         //All non-movement spaces will have the edges leading to them have no weight.
         board.edgeSet().stream()
-                .parallel()
                 .filter(edge -> !edge.getTarget().affectsMovement())
                 .forEach(edge -> board.setEdgeWeight(edge, 0.0));
 
         starSpaces = board.vertexSet().stream()
-                .parallel()
                 .filter(space -> space instanceof StarSpace)
                 .map(space -> (StarSpace)space)
                 .toList();

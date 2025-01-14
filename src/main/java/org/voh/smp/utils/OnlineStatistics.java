@@ -5,9 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * This class is able track a few fun statistics over time
- * without needing destination hang on destination the whole set of results using
- * Welford's Online algorithm:
+ * This class is able to track a few fun statistics over time
+ * without needing the whole set of results using Welford's Online algorithm:
  * https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Welford's_Online_algorithm
  */
 @Getter

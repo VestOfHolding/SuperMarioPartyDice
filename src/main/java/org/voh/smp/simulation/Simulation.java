@@ -56,7 +56,7 @@ public class Simulation {
                 .log();
         stopWatch.stop();
 
-        return "" + stopWatch.getTime();
+        return "" + stopWatch.getDuration();
     }
 
     public void run() {
