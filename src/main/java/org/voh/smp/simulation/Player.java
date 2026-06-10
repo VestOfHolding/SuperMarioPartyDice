@@ -5,7 +5,6 @@ import org.voh.smp.boards.spaces.SpaceColor;
 import lombok.Getter;
 import lombok.Setter;
 import org.voh.smp.partydice.Dice;
-import org.voh.smp.results.DieResult;
 import org.voh.smp.stattracker.GameStatTracker;
 
 import java.util.Objects;
@@ -33,8 +32,8 @@ public class Player implements Comparable<Player> {
         currentSpace = null;
     }
 
-    public DieResult rollCharacterDie() {
-        return characterDice.roll();
+    public int rollFace() {
+        return characterDice.rollFace();
     }
 
     public boolean isFirstOrSecond() {

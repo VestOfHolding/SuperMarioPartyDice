@@ -4,25 +4,35 @@ import lombok.Getter;
 import org.voh.smp.partydice.Dice;
 import org.voh.smp.simulation.Player;
 import org.voh.smp.simulation.PlayerGroup;
+import org.voh.smp.utils.RandomUtils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 public class SimulationStatTracker {
+
+    private static final Dice[] DICE_VALUES = Dice.values();
+
     private final Player mainPlayer;
+    private final Player[] players = new Player[4];
+    private final PlayerGroup playerGroup;
 
     private List<Player> allPlayers;
 
     private final Map<Integer, AllyStatTracker> allyStatTrackers;
 
-    public SimulationStatTracker(Dice characterDie) {
-        mainPlayer = new Player(characterDie);
+    private final boolean[] dieUsed = new boolean[DICE_VALUES.length];
 
-        allPlayers = new ArrayList<>(4);
+    public SimulationStatTracker(Dice characterDie) {
+        mainPlayer = new Player(characterDie, new GameStatTracker(1));
+
+        players[0] = mainPlayer;
+        for (int i = 1; i < 4; i++) {
+            // placeholder die; reassigned every game in startNewGame
+            players[i] = new Player(Dice.NORMAL_DICE, new GameStatTracker(1));
+        }
+
+        playerGroup = new PlayerGroup(Arrays.asList(players));
 
         allyStatTrackers = Map.of(0, new AllyStatTracker(0),
                 1, new AllyStatTracker(1),
@@ -32,22 +42,34 @@ public class SimulationStatTracker {
     }
 
     public PlayerGroup startNewGame(int turnCount) {
-        mainPlayer.setGameStatTracker(new GameStatTracker(turnCount));
-
-        //Easier to keep adding players to this set until there are 4 unique players.
-        Set<Player> allPlayerSet = new HashSet<>(4);
-        allPlayerSet.add(mainPlayer);
-
-        //Across a series of simulations, only the main character we're testing will remain the same.
-        while (4 > allPlayerSet.size()) {
-            allPlayerSet.add(new Player(Dice.getRandomCharacterDie(), new GameStatTracker(turnCount)));
+        // reset every player's tracker + per-game fields
+        for (Player p : players) {
+            p.getGameStatTracker().reset(turnCount);
+            p.setCurrentPlace(0);
+            p.setCurrentSpace(null);
         }
 
-        //Since order is not preserved in sets, this also kind of accidentally simulates a random
-        // turn order for the characters that will now be consistent for the game.
-        allPlayers = new ArrayList<>(allPlayerSet);
+        // main keeps its die; pick 3 distinct opponent dice (distinct from each other and from main)
+        Arrays.fill(dieUsed, false);
+        dieUsed[mainPlayer.getCharacterDice().ordinal()] = true;
+        for (int i = 1; i < 4; i++) {
+            Dice d;
+            do {
+                d = DICE_VALUES[RandomUtils.nextIntExclusive(DICE_VALUES.length)];
+            } while (dieUsed[d.ordinal()]);
+            dieUsed[d.ordinal()] = true;
+            players[i].setCharacterDice(d);
+        }
 
-        return new PlayerGroup(allPlayers);
+        // random, consistent-for-the-game turn order (in-place Fisher-Yates; reflected in playerGroup)
+        for (int i = 3; i > 0; i--) {
+            int j = RandomUtils.nextIntExclusive(i + 1);
+            Player tmp = players[i];
+            players[i] = players[j];
+            players[j] = tmp;
+        }
+
+        return playerGroup;
     }
 
     public void endGame() {

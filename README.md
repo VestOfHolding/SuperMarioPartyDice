@@ -70,16 +70,16 @@ These are measurements done on my personal PC. Looks like the current multithrea
 
 ### Average Total Time of Simulations by Simulation Count (seconds)
 | Board Name | 5,000 | 10,000 | 50,000 | 100,000 | 500,000 | 1,000,000 |
-| --- |-------|--------|--------| --- | --- | --- |
-| Whomp's Domino Ruins | 6.029 | 11.811 | 54.568 | 106.939 | 535.098 | 1,027.327 |
-| Megafruit Paradise | 5.556 | 10.552 | 50.528 | 94.915 | 484.787 | 983.276 |
-| King Bobomb's Powderkeg Mine | 5.926 | 11.440 | 53.658 | 105.891 | 519.937 | 1012.499 |
-| Kamek's Tantalizing Tower | 4.577 | 9.008  | 41.031 | 80.294 | 407.605 | 755.122 |
+| --- |------|-------|--------|----|--------|  |
+| Whomp's Domino Ruins | 3.219 | 6.102 | 27.834 | 54.291 | 275.38 | 541.009 |
+| Megafruit Paradise | 2.781 | 5.495 | 25.919 | 50.866 | 264.053 | 522.360 |
+| King Bobomb's Powderkeg Mine | 3.026 | 5.129 | 24.986 | 50.700 | 262.46 | 522.596 |
+| Kamek's Tantalizing Tower | 2.91 | 5.412 | 24.273 | 52.206 | 256.611 | 412.88 |
 
 ### Milliseconds per Simulation by Simulation Count
 | Board Name | 5,000 | 10,000 | 50,000 | 100,000 | 500,000 | 1,000,000 |
-| --- |-------|-------|-------| --- | --- | --- |
-| Whomp's Domino Ruins | 1.206 | 1.181 | 1.091 | 1.069 | 1.070 | 1.027 |
-| Megafruit Paradise | 1.111 | 1.055 | 1.011 | 0.949 | 0.970 | 0.983 |
-| King Bobomb's Powderkeg Mine | 1.185 | 1.144 | 1.073 | 1.059 | 1.040 | 1.012 |
-| Kamek's Tantalizing Tower | 0.915 | 0.901 | 0.821 | 0.803 | 0.815 | 0.755 |
+| --- |-------|-------|-------|-------|-----|----|
+| Whomp's Domino Ruins | 0.652 | 0.610 | 0.557 | 0.543 | 0.543 | 0.541 |
+| Megafruit Paradise | 0.556 | 0.550 | 0.518 | 0.509 | 0.509 | 0.522 |
+| King Bobomb's Powderkeg Mine | 0.513 | 0.500 | 0.507 | 0.525 | 0.507 | 0.523 |
+| Kamek's Tantalizing Tower | 0.582 | 0.541 | 0.530 | 0.513 | 0.530 | 0.413 |

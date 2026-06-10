@@ -8,9 +8,6 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.voh.smp.stattracker.SimulationStatTracker;
 import org.voh.smp.partydice.BobombAlly;
 import org.voh.smp.partydice.Dice;
-import org.voh.smp.results.CoinResult;
-import org.voh.smp.results.DieResult;
-import org.voh.smp.results.MoveResult;
 import org.voh.smp.stattracker.AllyStatTracker;
 import org.voh.smp.stattracker.GameStatTracker;
 import org.voh.smp.utils.RandomUtils;
@@ -36,6 +33,9 @@ public class CharacterSimulation implements Runnable {
     protected final MinigameManager minigameManager;
 
     protected final Dice characterDie;
+
+    // Reusable 4-element scratch so place calculation allocates nothing per call.
+    private final Player[] placeScratch = new Player[4];
 
     public CharacterSimulation(BaseBoard gameBoard, Dice characterDie, int simCount) {
         SIM_COUNT = simCount;
@@ -89,19 +89,22 @@ public class CharacterSimulation implements Runnable {
     }
 
     protected void simulateTurn(Player currentPlayer, PlayerGroup allPlayers) {
-        DieResult result = currentPlayer.rollCharacterDie();
         GameStatTracker gameStatTracker = currentPlayer.getGameStatTracker();
 
-        int moveAmount = 0;
+        Dice die = currentPlayer.getCharacterDice();
+        int face = die.rollFace();
 
-        if (result instanceof MoveResult) {
-            moveAmount = result.getResult();
-        }
-        else if (result instanceof CoinResult) {
-            currentPlayer.addCoins(result.getResult());
+        int coin = die.coin(face);
+        if (0 != coin) {
+            currentPlayer.addCoins(coin);
         }
 
-        if (0 < gameStatTracker.getAllyTotal()) {
+        int allyCountAtRoll = gameStatTracker.getAllyTotal();
+
+        int moveAmount = die.move(face);
+        if (0 < allyCountAtRoll) {
+            // Confirmed rule: a 0-move face still moves you via the ally bonus -- handled naturally
+            // because moveAmount started at die.move(face) (possibly 0) and we add the bonus here.
             moveAmount += rollAllies(gameStatTracker);
         }
 
@@ -124,25 +127,31 @@ public class CharacterSimulation implements Runnable {
     }
 
     public void calculatePlaces(List<Player> players) {
-        List<Player> sortedPlayerList = new ArrayList<>(players);
-
-        Collections.sort(sortedPlayerList);
+        for (int i = 0; i < 4; i++) {
+            placeScratch[i] = players.get(i);
+        }
 
         //If a player is tied with the previous player, then that player
         // is considered in the same placing as that previous player.
         // For example, if three players share the same number of stars and coins,
         // with the fourth player lagging behind, then the placement spread
         // would be: 1st, 1st, 1st, 4th.
-        for (int i = 0; 4 > i; ++i) {
-            if (sortedPlayerList.get(i).getCurrentPlace() == i + 1) {
-                continue;
+        for (int i = 1; i < 4; i++) {
+            Player key = placeScratch[i];
+            int j = i - 1;
+            while (j >= 0 && placeScratch[j].compareTo(key) > 0) {
+                placeScratch[j + 1] = placeScratch[j];
+                j--;
             }
+            placeScratch[j + 1] = key;
+        }
 
-            if (0 < i && 0 == sortedPlayerList.get(i - 1).compareTo(sortedPlayerList.get(i))) {
-                sortedPlayerList.get(i).setCurrentPlace(sortedPlayerList.get(i - 1).getCurrentPlace());
+        for (int i = 0; i < 4; i++) {
+            if (i > 0 && 0 == placeScratch[i - 1].compareTo(placeScratch[i])) {
+                placeScratch[i].setCurrentPlace(placeScratch[i - 1].getCurrentPlace());
             }
             else {
-                sortedPlayerList.get(i).setCurrentPlace(i + 1);
+                placeScratch[i].setCurrentPlace(i + 1);
             }
         }
     }

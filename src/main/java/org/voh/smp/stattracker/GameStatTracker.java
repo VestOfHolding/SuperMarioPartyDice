@@ -7,9 +7,6 @@ import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.voh.smp.partydice.BobombAlly;
 import org.voh.smp.partydice.Dice;
-import org.voh.smp.results.CoinResult;
-import org.voh.smp.results.DieResult;
-import org.voh.smp.results.MoveResult;
 import org.voh.smp.simulation.PlayerGroup;
 
 import java.util.ArrayList;
@@ -38,14 +35,30 @@ public class GameStatTracker {
     private Int2IntOpenHashMap landedSpacesAmounts;
 
     public GameStatTracker(int initialTurnCount) {
+        allies = new ArrayList<>(5);
+        landedSpacesAmounts = createNewInt2IntOpenHashMap();
+        allyGainOnTurn = createNewInt2IntOpenHashMap();
+
+        reset(initialTurnCount);
+    }
+
+    public void reset(int initialTurnCount) {
         turnNumber = 1;
         turnMax = initialTurnCount;
         distanceTotal = 0;
         coinTotal = 5;
-        allies = new ArrayList<>(5);
-        landedSpacesAmounts = createNewInt2IntOpenHashMap();
+        maxCoins = 0;
+        starCount = 0;
+        miniGameWins = 0;
+        eventActivations = 0;
+        badLuckCount = 0;
 
-        allyGainOnTurn = createNewInt2IntOpenHashMap();
+        allies.clear();
+        if (null != bobombAllies) {
+            bobombAllies.clear();
+        }
+
+        allyGainOnTurn.clear();
         //No allies "gained" on the first turn.
         allyGainOnTurn.put(0, 1);
     }
@@ -64,15 +77,6 @@ public class GameStatTracker {
 
     public void addDistance(int distanceTraveled) {
         distanceTotal += distanceTraveled;
-    }
-
-    public void addDiceResult(DieResult dieResult) {
-        if (dieResult instanceof MoveResult) {
-            addDistance(dieResult.getResult());
-        }
-        else if (dieResult instanceof CoinResult) {
-            addCoins(dieResult.getResult());
-        }
     }
 
     public int getTrueAllyCount() {

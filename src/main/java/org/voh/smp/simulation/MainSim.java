@@ -15,8 +15,8 @@ import java.util.concurrent.Executors;
 public class MainSim {
     private static final Logger LOG = LoggerFactory.getLogger(MainSim.class);
 
-    public static void main(String[] args) {
-        int simCount = 10000;
+    static void main(String[] args) {
+        int simCount = 1000000;
         if (1 == args.length) {
             try {
                 if (0 < Integer.parseInt(args[0])) {
