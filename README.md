@@ -70,11 +70,11 @@ These are measurements done on my personal PC. Looks like the current multithrea
 
 ### Average Total Time of Simulations by Simulation Count (seconds)
 | Board Name | 5,000 | 10,000 | 50,000 | 100,000 | 500,000 | 1,000,000 |
-| --- |------|-------|--------|----|--------|  |
-| Whomp's Domino Ruins | 3.219 | 6.102 | 27.834 | 54.291 | 275.38 | 541.009 |
-| Megafruit Paradise | 2.781 | 5.495 | 25.919 | 50.866 | 264.053 | 522.360 |
-| King Bobomb's Powderkeg Mine | 3.026 | 5.129 | 24.986 | 50.700 | 262.46 | 522.596 |
-| Kamek's Tantalizing Tower | 2.91 | 5.412 | 24.273 | 52.206 | 256.611 | 412.88 |
+| --- |------|-------|--------|----|--------|-----------|
+| Whomp's Domino Ruins | 3.219 | 6.102 | 27.834 | 54.291 | 275.38 | 541.009   |
+| Megafruit Paradise | 2.781 | 5.495 | 25.919 | 50.866 | 264.053 | 522.360   |
+| King Bobomb's Powderkeg Mine | 3.026 | 5.129 | 24.986 | 50.700 | 262.46 | 522.596   |
+| Kamek's Tantalizing Tower | 2.91 | 5.412 | 24.273 | 52.206 | 256.611 | 412.88    |
 
 ### Milliseconds per Simulation by Simulation Count
 | Board Name | 5,000 | 10,000 | 50,000 | 100,000 | 500,000 | 1,000,000 |
