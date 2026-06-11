@@ -16,7 +16,7 @@ public class MainSim {
     private static final Logger LOG = LoggerFactory.getLogger(MainSim.class);
 
     static void main(String[] args) {
-        int simCount = 1000000;
+        int simCount = 100000;
         if (1 == args.length) {
             try {
                 if (0 < Integer.parseInt(args[0])) {
