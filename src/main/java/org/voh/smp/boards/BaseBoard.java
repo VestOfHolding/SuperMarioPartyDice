@@ -10,7 +10,6 @@ import org.voh.smp.boards.spaces.StarSpace;
 import org.voh.smp.boards.spaces.events.MoveEventSpace;
 import org.voh.smp.boards.spaces.events.MFP.SandBridgeCollapse;
 import lombok.Getter;
-import org.jgrapht.Graphs;
 import org.jgrapht.graph.builder.GraphBuilder;
 import org.voh.smp.simulation.Player;
 import org.voh.smp.simulation.PlayerGroup;
@@ -124,7 +123,7 @@ public abstract class BaseBoard {
     }
 
     public List<BaseSpace> getNextSpaces(BaseSpace startingSpace) {
-        return Graphs.successorListOf(board, startingSpace);
+        return board.successorsOf(startingSpace);
     }
 
     public BaseSpace getDestination(Player player, int distance) {

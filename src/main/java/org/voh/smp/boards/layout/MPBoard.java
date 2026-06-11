@@ -1,5 +1,7 @@
 package org.voh.smp.boards.layout;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import org.jgrapht.Graphs;
 import org.voh.smp.boards.MPEdge;
 import org.voh.smp.boards.spaces.BaseSpace;
 import org.voh.smp.boards.spaces.StarSpace;
@@ -9,12 +11,15 @@ import org.apache.commons.collections4.MapUtils;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
     private final Map<Integer, BaseSpace> VERTEX_MAP;
 
     private final Map<Integer, Map<Integer, Integer>> starDistanceMap = new HashMap<>(64);
+
+    private final Int2ObjectOpenHashMap<List<BaseSpace>> successorCache = new Int2ObjectOpenHashMap<>(128);
 
     public static final int INIT_STAR_COST = 10;
 
@@ -54,6 +59,56 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
 
         VERTEX_MAP.remove(v.getSpaceID());
         return super.removeVertex(v);
+    }
+
+    public List<BaseSpace> successorsOf(BaseSpace space) {
+        int id = space.getSpaceID();
+        List<BaseSpace> cached = successorCache.get(id);
+        if (null == cached) {
+            cached = Graphs.successorListOf(this, space);
+            successorCache.put(id, cached);
+        }
+        return cached;
+    }
+
+    @Override
+    public MPEdge addEdge(BaseSpace sourceVertex, BaseSpace targetVertex) {
+        MPEdge edge = super.addEdge(sourceVertex, targetVertex);
+        if (null != sourceVertex) {
+            successorCache.remove(sourceVertex.getSpaceID());
+        }
+        return edge;
+    }
+
+    @Override
+    public boolean addEdge(BaseSpace sourceVertex, BaseSpace targetVertex, MPEdge edge) {
+        boolean added = super.addEdge(sourceVertex, targetVertex, edge);
+        if (added && null != sourceVertex) {
+            successorCache.remove(sourceVertex.getSpaceID());
+        }
+        return added;
+    }
+
+    @Override
+    public MPEdge removeEdge(BaseSpace sourceVertex, BaseSpace targetVertex) {
+        MPEdge edge = super.removeEdge(sourceVertex, targetVertex);
+        if (null != sourceVertex) {
+            successorCache.remove(sourceVertex.getSpaceID());
+        }
+        return edge;
+    }
+
+    @Override
+    public boolean removeEdge(MPEdge edge) {
+        if (null != edge) {
+            BaseSpace source = getEdgeSource(edge);
+            boolean removed = super.removeEdge(edge);
+            if (removed && null != source) {
+                successorCache.remove(source.getSpaceID());
+            }
+            return removed;
+        }
+        return super.removeEdge(edge);
     }
 
     /**
