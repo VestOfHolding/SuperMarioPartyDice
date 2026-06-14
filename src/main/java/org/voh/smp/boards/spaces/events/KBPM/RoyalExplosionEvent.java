@@ -29,4 +29,9 @@ public class RoyalExplosionEvent extends BaseSpace {
         }
         return false;
     }
+
+    @Override
+    public boolean isEventSpace() {
+        return true;
+    }
 }

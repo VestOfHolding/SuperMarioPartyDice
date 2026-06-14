@@ -59,4 +59,9 @@ public class GoldMineGambleEvent extends BaseSpace {
         currentPlayer.addCoins(coinsEarned);
         return true;
     }
+
+    @Override
+    public boolean isEventSpace() {
+        return true;
+    }
 }

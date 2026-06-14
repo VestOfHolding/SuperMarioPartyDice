@@ -45,7 +45,7 @@ public class SandBridgeCollapse extends MoveEventSpace {
             //The bridge collapses
             gameBoard.removeEdge(gameBoard.getVertexById(9), gameBoard.getVertexById(66));
             gameBoard.removeEdge(gameBoard.getVertexById(66), gameBoard.getVertexById(14));
-            currentPlayer.addCoins(-3);
+            currentPlayer.addCoins(-5);
             return true;
         }
         return false;

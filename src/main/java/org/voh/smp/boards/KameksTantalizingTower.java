@@ -1,5 +1,6 @@
 package org.voh.smp.boards;
 
+import org.voh.smp.boards.layout.MPBoard;
 import org.voh.smp.boards.spaces.BaseSpace;
 import org.voh.smp.boards.spaces.BlueSpace;
 import org.voh.smp.boards.spaces.RedSpace;
@@ -162,8 +163,7 @@ public class KameksTantalizingTower extends BaseBoard  {
             currentStarSpace = starSpaces.getFirst();
             currentStarSpace.activateStar();
 
-            board.setStarCost(board.INIT_STAR_COST);
-//            board.resetStarDistanceCounts(currentStarSpace);
+            board.setStarCost(MPBoard.INIT_STAR_COST);
         }
         //Otherwise, leave the star alone, except for changing the price.
         else {

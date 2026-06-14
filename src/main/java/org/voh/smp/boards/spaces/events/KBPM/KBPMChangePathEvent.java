@@ -26,12 +26,17 @@ public class KBPMChangePathEvent extends BaseSpace {
 
         if (nextSpace instanceof LuckySpace) {
             gameBoard.removeEdge(firstEventSpace, gameBoard.getVertexById(28));
-            gameBoard.addEdge(firstEventSpace, gameBoard.getVertexById(38));
+            gameBoard.addEdge(firstEventSpace, gameBoard.getVertexById(37));
         }
         else if (nextSpace instanceof BlueSpace) {
-            gameBoard.removeEdge(firstEventSpace, gameBoard.getVertexById(38));
+            gameBoard.removeEdge(firstEventSpace, gameBoard.getVertexById(37));
             gameBoard.addEdge(firstEventSpace, gameBoard.getVertexById(28));
         }
+        return true;
+    }
+
+    @Override
+    public boolean isEventSpace() {
         return true;
     }
 }

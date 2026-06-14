@@ -7,6 +7,7 @@ import org.voh.smp.boards.spaces.BlueSpace;
 import org.voh.smp.boards.spaces.RedSpace;
 import org.voh.smp.boards.spaces.SpaceFactory;
 import org.voh.smp.boards.spaces.StarSpace;
+import org.voh.smp.boards.spaces.events.BadLuckSpace;
 import org.voh.smp.boards.spaces.events.MoveEventSpace;
 import org.voh.smp.boards.spaces.events.MFP.SandBridgeCollapse;
 import lombok.Getter;
@@ -145,6 +146,15 @@ public abstract class BaseBoard {
         // the player lands on a space that moves them, but the color for this turn should
         // still reflect that move event space they landed on, not the actual space they end their turn on.
         player.setLandedSpaceColor(currentSpace.getSpaceColor());
+
+        //Track landings for Eventful and Unlucky bonus stars.
+        GameStatTracker gameStatTracker = player.getGameStatTracker();
+        if (currentSpace.isEventSpace()) {
+            gameStatTracker.incrementEventActivations();
+        }
+        if (currentSpace instanceof RedSpace || currentSpace instanceof BadLuckSpace) {
+            gameStatTracker.incrementBadLuckCount();
+        }
 
         if (!currentSpace.isPassingEvent()) {
             currentSpace = processEvent(player, currentSpace);

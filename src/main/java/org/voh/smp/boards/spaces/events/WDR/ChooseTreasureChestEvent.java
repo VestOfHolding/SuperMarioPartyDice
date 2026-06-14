@@ -54,4 +54,9 @@ public class ChooseTreasureChestEvent extends BaseSpace {
     public void reset() {
         REWARDS = new ArrayList<>(Arrays.asList(0, 3, 10));
     }
+
+    @Override
+    public boolean isEventSpace() {
+        return true;
+    }
 }

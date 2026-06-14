@@ -13,7 +13,7 @@ import java.util.function.Function;
 public enum BonusStar {
     SIGHTSEER((Player p) -> p.getGameStatTracker().getDistanceTotal()),
     RICH(Player::getCoinTotal),
-    MINIGAME((Player p) -> p.getGameStatTracker().getMiniGameWins()),
+    MINIGAME((Player p) -> p.getGameStatTracker().getMinigameCoinsWon()),
     EVENTFUL((Player p) -> p.getGameStatTracker().getEventActivations()),
     ALLY((Player p) -> p.getGameStatTracker().getAllyTotal()),
     SLOWPOKE((Player p) -> p.getGameStatTracker().getCoinTotal(), Mode.MIN),

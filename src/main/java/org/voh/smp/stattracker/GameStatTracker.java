@@ -24,7 +24,7 @@ public class GameStatTracker {
     private int coinTotal;
     private int maxCoins;
     private int starCount;
-    private int miniGameWins;
+    private int minigameCoinsWon;
     private int eventActivations;
     private int badLuckCount;
 
@@ -49,7 +49,7 @@ public class GameStatTracker {
         coinTotal = 5;
         maxCoins = 0;
         starCount = 0;
-        miniGameWins = 0;
+        minigameCoinsWon = 0;
         eventActivations = 0;
         badLuckCount = 0;
 
@@ -81,6 +81,18 @@ public class GameStatTracker {
 
     public int getTrueAllyCount() {
         return null == bobombAllies ? allies.size() : allies.size() + bobombAllies.size();
+    }
+
+    public void addMinigameCoins(int coins) {
+        minigameCoinsWon += Math.max(0, coins);
+    }
+
+    public void incrementEventActivations() {
+        ++eventActivations;
+    }
+
+    public void incrementBadLuckCount() {
+        ++badLuckCount;
     }
 
     public void addAlly(PlayerGroup playerGroup) {
@@ -117,7 +129,7 @@ public class GameStatTracker {
 
     public void addLandedSpace(BaseSpace baseSpace) {
         int amount = landedSpacesAmounts.get(baseSpace.getSpaceID());
-        amount = 0 < amount ? 1 : amount + 1;
+        amount = 0 > amount ? 1 : amount + 1;
 
         landedSpacesAmounts.put(baseSpace.getSpaceID(), amount);
     }

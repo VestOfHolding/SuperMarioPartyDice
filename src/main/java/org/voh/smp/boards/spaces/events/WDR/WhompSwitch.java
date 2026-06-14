@@ -36,4 +36,9 @@ public class WhompSwitch extends BaseSpace {
         System.out.println("Illegal state reached while trying to swap Whomps! These spaces aren't synced properly: " + firstWhomp + " and " + secondWhomp);
         return false;
     }
+
+    @Override
+    public boolean isEventSpace() {
+        return true;
+    }
 }

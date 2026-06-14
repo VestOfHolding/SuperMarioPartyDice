@@ -21,13 +21,12 @@ public class ChangeStarPriceSpace extends BaseSpace {
     @Override
     public boolean processEvent(MPBoard gameBoard,
                                 Player currentPlayer, PlayerGroup playerGroup) {
-        //The next price of the star must be different from the current price.
-        int nextPrice;
-        do {
-            nextPrice = possibleStarPrices.get(RandomUtils.getRandomInt(possibleStarPrices.size() - 1));
-        } while (nextPrice == gameBoard.getStarCost());
+        gameBoard.rollNewKamekStarPrice();
+        return true;
+    }
 
-        gameBoard.setStarCost(nextPrice);
+    @Override
+    public boolean isEventSpace() {
         return true;
     }
 }

@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.collections4.MapUtils;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
+import org.voh.smp.utils.RandomUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
     private final Int2ObjectOpenHashMap<List<BaseSpace>> successorCache = new Int2ObjectOpenHashMap<>(128);
 
     public static final int INIT_STAR_COST = 10;
+    private static final int[] KAMEK_STAR_PRICES = {5, 10, 15};
 
     @Getter
     @Setter
@@ -153,7 +155,25 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
             starDistanceMap.put(starSpace.getSpaceID(), distanceMap);
         }
     }
-    
+
+    public void reetStarDistances() {
+        starDistanceMap.clear();
+        initStarDistances();
+    }
+
+    /**
+     * On Kamek's board the Star never moves; instead its price changes between
+     * 5, 10, and 15 coins, and the new price is never the same as the old one.
+     */
+    public void rollNewKamekStarPrice() {
+        int nextPrice;
+        do {
+            nextPrice = KAMEK_STAR_PRICES[RandomUtils.nextIntExclusive(KAMEK_STAR_PRICES.length)];
+        } while (nextPrice == starCost);
+
+        setStarCost(nextPrice);
+    }
+
     private void setDistanceToStar(Map<Integer, Integer> distanceMap, BaseSpace currentSpace, int distance) {
         //Base case is we arrive at a space where a better route is already documented.
         if (distanceMap.get(currentSpace.getSpaceID()) <= distance) {

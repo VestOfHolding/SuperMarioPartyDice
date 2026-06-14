@@ -31,20 +31,22 @@ public class StarSpace extends BlueSpace {
     public boolean processEvent(MPBoard gameBoard, Player currentPlayer, PlayerGroup playerGroup) {
         if (gameBoard.isKamekBoard()) {
             //The star is always active on the same space on this board.
-            if (currentPlayer.getCoinTotal() >= gameBoard.getStarCost()) {
+            int maxStars = currentPlayer.getGameStatTracker().isLastThreeTurns() ? 3 : 2;
+            int starsBought = 0;
+
+            while (starsBought < maxStars && currentPlayer.getCoinTotal() >= gameBoard.getStarCost()) {
                 currentPlayer.addCoins(-1 * gameBoard.getStarCost());
                 currentPlayer.addStar();
+                ++starsBought;
 
-                //If we have the coin, we can buy a second star while we're here.
-                if (currentPlayer.getCoinTotal() >= gameBoard.getStarCost()) {
-                    currentPlayer.addCoins(-1 * gameBoard.getStarCost());
-                    currentPlayer.addStar();
-                }
-
-                gameBoard.setNeedToMoveStar(true);
-
-                return true;
+                gameBoard.rollNewKamekStarPrice();
             }
+
+            if (0 == starsBought) {
+                gameBoard.rollNewKamekStarPrice();
+            }
+
+            return 0 < starsBought;
         }
         else {
             if (starActive && currentPlayer.getCoinTotal() >= gameBoard.getStarCost()) {

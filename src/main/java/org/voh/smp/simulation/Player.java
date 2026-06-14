@@ -66,7 +66,7 @@ public class Player implements Comparable<Player> {
         if (0 > gameStatTracker.getCoinTotal() - coinLoss) {
             actualLoss = gameStatTracker.getCoinTotal();
         }
-        gameStatTracker.addCoins(-coinLoss);
+        gameStatTracker.addCoins(-actualLoss);
         return actualLoss;
     }
 

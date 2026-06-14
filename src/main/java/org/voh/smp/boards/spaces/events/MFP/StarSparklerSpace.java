@@ -36,4 +36,9 @@ public class StarSparklerSpace extends BaseSpace {
     public void reset() {
         countdown = 2;
     }
+
+    @Override
+    public boolean isEventSpace() {
+        return true;
+    }
 }

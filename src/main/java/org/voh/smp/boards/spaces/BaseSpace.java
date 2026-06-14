@@ -44,6 +44,10 @@ public class BaseSpace {
         return false;
     }
 
+    public boolean isEventSpace() {
+        return false;
+    }
+
     public boolean hasToll() {
         return false;
     }

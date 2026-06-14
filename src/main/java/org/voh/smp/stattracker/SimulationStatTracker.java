@@ -52,13 +52,16 @@ public class SimulationStatTracker {
         // main keeps its die; pick 3 distinct opponent dice (distinct from each other and from main)
         Arrays.fill(dieUsed, false);
         dieUsed[mainPlayer.getCharacterDice().ordinal()] = true;
-        for (int i = 1; i < 4; i++) {
+        for (Player p : players) {
+            if (p == mainPlayer)
+                continue; // never touch the main die
             Dice d;
             do {
                 d = DICE_VALUES[RandomUtils.nextIntExclusive(DICE_VALUES.length)];
-            } while (dieUsed[d.ordinal()]);
+            }
+            while (dieUsed[d.ordinal()]);
             dieUsed[d.ordinal()] = true;
-            players[i].setCharacterDice(d);
+            p.setCharacterDice(d);
         }
 
         // random, consistent-for-the-game turn order (in-place Fisher-Yates; reflected in playerGroup)

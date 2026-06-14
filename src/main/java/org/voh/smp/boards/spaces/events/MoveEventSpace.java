@@ -60,4 +60,10 @@ public class MoveEventSpace extends BlueSpace {
     public SpaceColor getSpaceColor() {
         return SpaceColor.GREEN;
     }
+
+    @Override
+    public boolean isEventSpace() {
+        //Move event spaces that have turned blue are no longer Event Spaces.
+        return !(turnsBlue && used);
+    }
 }

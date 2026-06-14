@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 /**
@@ -42,32 +43,37 @@ public class MinigameManager {
     public void runMinigame(PlayerGroup playerGroup) {
         List<List<Player>> minigameTeams = constructPlayerTeams(playerGroup);
 
-        int winningTeamIndex = RandomUtils.getRandomInt(minigameTeams.size() - 1);
-
         //In 2v2 or 1v3 games, the winning team gets 8 coins, while the losing team gets 2 coins.
         //Something to consider adding at a later date:
         //  If the winning team consists of more than one player, they can high five and gain 2 more coins.
         //  This is super easy and common for human players to do basically every time if they wanted.
         if (2 == minigameTeams.size()) {
+            int winningTeamIndex = RandomUtils.getRandomInt(minigameTeams.size() - 1);
+
             for (Player player : minigameTeams.get(winningTeamIndex)) {
-                player.addCoins(WIN_AMOUNT);
+                awardMinigameCoins(player, WIN_AMOUNT);
             }
 
             //Using the mod is the easiest way I can think of to do the other team.
             for (Player player : minigameTeams.get((winningTeamIndex + 1) % 2)) {
-                player.addCoins(LOSE_AMOUNT);
+                awardMinigameCoins(player, LOSE_AMOUNT);
             }
         }
-        //Four player games have a decreasing list of coin rewards
+        //Four player games have a decreasing list of coin rewards.
         else if (4 == minigameTeams.size()) {
             //Randomizing who wins in what order.
-            Set<Player> playerSet = new HashSet<>(playerGroup.allPlayers());
+            List<Player> shuffledPlayers = new ArrayList<>(playerGroup.allPlayers());
 
-            int i = 0;
-            for (Player player : playerSet) {
-                player.addCoins(FOUR_PLAYER_WIN_AMOUNTS.get(i++));
+            Collections.shuffle(shuffledPlayers, ThreadLocalRandom.current());
+            for (int i = 0; i < shuffledPlayers.size(); ++i) {
+                awardMinigameCoins(shuffledPlayers.get(i), FOUR_PLAYER_WIN_AMOUNTS.get(i));
             }
         }
+    }
+
+    private void awardMinigameCoins(Player player, int amount) {
+        player.addCoins(amount);
+        player.getGameStatTracker().addMinigameCoins(amount);
     }
 
     public List<List<Player>> constructPlayerTeams(PlayerGroup playerGroup) {
@@ -86,14 +92,11 @@ public class MinigameManager {
         }
 
         if (4 == greenCount) {
-            return Arrays.asList(Collections.singletonList(allPlayers.get(0)),
-                    Collections.singletonList(allPlayers.get(1)),
-                    Collections.singletonList(allPlayers.get(2)),
-                    Collections.singletonList(allPlayers.get(3)));
+            return buildFreeForAllTeams(allPlayers);
         }
         //We only care about transforming the green spaces, so it could be that there's nothing more to do.
         else if (0 == greenCount) {
-            return new ArrayList<>(allPlayers.stream().collect(Collectors.groupingBy(Player::getLandedSpaceColor)).values());
+            return groupTeamsByColor(allPlayers);
         }
 
         Map<Integer, Integer> finalLayer = thisIsACryForHelp.get(greenCount).get(blueCount);
@@ -117,5 +120,29 @@ public class MinigameManager {
             }
         }
         return new ArrayList<>(allPlayers.stream().collect(Collectors.groupingBy(Player::getLandedSpaceColor)).values());
+    }
+
+    /**
+     * Group the players into teams by the color of space they landed on.
+     *
+     * If all four players ended up on the same color, the real game runs a
+     * free-for-all minigame, so return four one-player teams instead of
+     * one four-player team (which would previously pay out nothing).
+     */
+    private List<List<Player>> groupTeamsByColor(List<Player> allPlayers) {
+        List<List<Player>> teams = new ArrayList<>(allPlayers.stream()
+                .collect(Collectors.groupingBy(Player::getLandedSpaceColor)).values());
+
+        if (1 == teams.size()) {
+            return buildFreeForAllTeams(allPlayers);
+        }
+        return teams;
+    }
+
+    private List<List<Player>> buildFreeForAllTeams(List<Player> allPlayers) {
+        return Arrays.asList(Collections.singletonList(allPlayers.get(0)),
+                Collections.singletonList(allPlayers.get(1)),
+                Collections.singletonList(allPlayers.get(2)),
+                Collections.singletonList(allPlayers.get(3)));
     }
 }

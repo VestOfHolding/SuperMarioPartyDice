@@ -109,8 +109,14 @@ public class MegafruitParadise extends BaseBoard {
         //Reset and repair sand bridge
         board.getVertexById(66).reset();
 
+        boolean bridgeCollapsed = !board.containsEdge(board.getVertexById(9), board.getVertexById(66));
+
         board.addEdge(board.getVertexById(9), board.getVertexById(66));
         board.addEdge(board.getVertexById(66), board.getVertexById(14));
+
+        if (bridgeCollapsed) {
+            board.reetStarDistances();
+        }
 
         board.getVertexById(49).reset();
         board.getVertexById(58).reset();

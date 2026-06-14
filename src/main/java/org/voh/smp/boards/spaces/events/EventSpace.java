@@ -13,4 +13,9 @@ public class EventSpace extends BaseSpace {
     public EventSpace(int spaceID, int x, int y) {
         super(spaceID, x, y);
     }
+
+    @Override
+    public boolean isEventSpace() {
+        return true;
+    }
 }

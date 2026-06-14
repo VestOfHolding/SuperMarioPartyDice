@@ -23,4 +23,9 @@ public class ChainChompSpace extends BaseSpace {
         currentPlayer.addCoins(RandomUtils.isFlippedCoinHeads() ? -5 : -7);
         return true;
     }
+
+    @Override
+    public boolean isEventSpace() {
+        return true;
+    }
 }
