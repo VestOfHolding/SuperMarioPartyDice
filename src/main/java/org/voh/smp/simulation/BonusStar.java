@@ -16,7 +16,7 @@ public enum BonusStar {
     MINIGAME((Player p) -> p.getGameStatTracker().getMinigameCoinsWon()),
     EVENTFUL((Player p) -> p.getGameStatTracker().getEventActivations()),
     ALLY((Player p) -> p.getGameStatTracker().getAllyTotal()),
-    SLOWPOKE((Player p) -> p.getGameStatTracker().getCoinTotal(), Mode.MIN),
+    SLOWPOKE((Player p) -> p.getGameStatTracker().getDistanceTotal(), Mode.MIN),
     BUDDY(null),
 //    ITEM((Player p) -> p.getGameStatTracker().getItemsUsed()),
     UNLUCKY((Player p) -> p.getGameStatTracker().getBadLuckCount());
