@@ -72,7 +72,6 @@ public class MinigameManager {
     }
 
     private void awardMinigameCoins(Player player, int amount) {
-        player.addCoins(amount);
         player.getGameStatTracker().addMinigameCoins(amount);
     }
 

@@ -24,6 +24,7 @@ public class GameStatTracker {
     private int coinTotal;
     private int maxCoins;
     private int starCount;
+    private int boardCoinsGained;
     private int minigameCoinsWon;
     private int eventActivations;
     private int badLuckCount;
@@ -49,6 +50,7 @@ public class GameStatTracker {
         coinTotal = 5;
         maxCoins = 0;
         starCount = 0;
+        boardCoinsGained = 0;
         minigameCoinsWon = 0;
         eventActivations = 0;
         badLuckCount = 0;
@@ -64,7 +66,10 @@ public class GameStatTracker {
     }
 
     public void addCoins(int coins) {
-        coinTotal = Math.max(0, coinTotal + coins);
+        applyCoinDelta(coins);
+        if (coins > 0) {
+            boardCoinsGained += coins;
+        }
     }
 
     public void addStar() {
@@ -83,8 +88,16 @@ public class GameStatTracker {
         return null == bobombAllies ? allies.size() : allies.size() + bobombAllies.size();
     }
 
+    private void applyCoinDelta(int coins) {
+        coinTotal = Math.max(0, coinTotal + coins);
+        maxCoins = Math.max(maxCoins, coinTotal);
+    }
+
     public void addMinigameCoins(int coins) {
-        minigameCoinsWon += Math.max(0, coins);
+        applyCoinDelta(coins);
+        if (coins > 0) {
+            minigameCoinsWon += coins;
+        }
     }
 
     public void incrementEventActivations() {

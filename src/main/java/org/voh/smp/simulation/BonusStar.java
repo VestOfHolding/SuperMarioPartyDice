@@ -12,7 +12,7 @@ import java.util.function.Function;
 @AllArgsConstructor
 public enum BonusStar {
     SIGHTSEER((Player p) -> p.getGameStatTracker().getDistanceTotal()),
-    RICH(Player::getCoinTotal),
+    RICH((Player p) -> p.getGameStatTracker().getBoardCoinsGained()),
     MINIGAME((Player p) -> p.getGameStatTracker().getMinigameCoinsWon()),
     EVENTFUL((Player p) -> p.getGameStatTracker().getEventActivations()),
     ALLY((Player p) -> p.getGameStatTracker().getAllyTotal()),
