@@ -80,7 +80,7 @@ public class SimulationStatTracker {
         int allyCount = gameStatTracker.getAllyTotal();
 
         AllyStatTracker allyStatTracker = allyStatTrackers.get(allyCount);
-        allyStatTracker.addCoinCount(gameStatTracker.getCoinTotal());
+        allyStatTracker.addCoinCount(gameStatTracker.getBoardCoinsGained());
         allyStatTracker.addDistance(gameStatTracker.getDistanceTotal());
         allyStatTracker.addStarCount(gameStatTracker.getStarCount());
         allyStatTracker.addPlacement(mainPlayer.getCurrentPlace());
