@@ -60,12 +60,9 @@ public class Simulation {
     }
 
     public void run() {
-        List<CompletableFuture<Void>> characterSims = Arrays.stream(Dice.values())
-                .map(characterDie -> new CharacterSimulation(gameBoard.get(), characterDie, SIM_COUNT))
-                .map(CompletableFuture::runAsync)
-                .toList();
-
-        characterSims.forEach(CompletableFuture::join);
+        for (Dice characterDie : Dice.values()) {
+            new CharacterSimulation(gameBoard.get(), characterDie, SIM_COUNT).run();
+        }
     }
 
     protected void printTableHeaders() {
