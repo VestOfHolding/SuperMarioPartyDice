@@ -102,12 +102,7 @@ public class KameksTantalizingTower extends BaseBoard  {
 
     @Override
     public void resetBoard() {
-        board.getVertexById(32).reset();
-        board.getVertexById(37).reset();
-
-        board.getVertexById(28).reset();
-
-        resetRedAndBlueCoinAmounts();
+        super.resetBoard();
         board.setStarCost(MPBoard.INIT_STAR_COST);
     }
 

@@ -103,11 +103,8 @@ public class KingBobombsPowderkegMine extends BaseBoard {
 
     @Override
     public void resetBoard() {
-        board.getVertexById(36).reset();
-        board.getVertexById(39).reset();
-        board.getVertexById(56).reset();
+        super.resetBoard();
 
-        resetRedAndBlueCoinAmounts();
         ((KingBobombsBoard)board).resetCountdown();
 
         //Reset the path if needed

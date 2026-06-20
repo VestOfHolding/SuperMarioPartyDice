@@ -124,21 +124,12 @@ public class WhompsDominoRuins extends BaseBoard {
 
     @Override
     public void resetBoard() {
-        board.getVertexById(12).reset();
-        board.getVertexById(20).reset();
-        board.getVertexById(22).reset();
-
-        board.getVertexById(55).reset();
-
-        board.getVertexById(33).reset();
-        board.getVertexById(59).reset();
+        super.resetBoard();
 
         ((WhompsOnTheRun)board.getVertexById(WHOMP1_1)).setActive(true);
         ((WhompsOnTheRun)board.getVertexById(WHOMP1_2)).setActive(false);
         ((WhompsOnTheRun)board.getVertexById(WHOMP2_1)).setActive(true);
         ((WhompsOnTheRun)board.getVertexById(WHOMP2_2)).setActive(false);
-
-        resetRedAndBlueCoinAmounts();
     }
 
     private void connectPaths() {

@@ -47,10 +47,29 @@ public class CharacterSimulation implements Runnable {
     public void run() {
         simulationStatTracker = new SimulationStatTracker(characterDie);
 
+        boolean probe = characterDie == Dice.POM_POM;   // just one character
+        double firstHalf = 0, secondHalf = 0; long n1 = 0, n2 = 0;
+
         for (int i = 0; i < SIM_COUNT; ++i) {
             simulateGame();
+            if (probe) {
+                int coins = simulationStatTracker.getMainPlayer().getGameStatTracker().getBoardCoinsGained();
+                if (i < SIM_COUNT / 2) {
+                    firstHalf += coins; n1++;
+                }
+                else {
+                    secondHalf += coins; n2++;
+                }
+                if (i % 50_000 == 49_999)
+                    System.out.printf("  [%s] [%s] games=%d running coin mean=%.3f%n",
+                            gameBoard.getClass().getName(), characterDie.getName(), i + 1, (firstHalf + secondHalf) / (i + 1));
+            }
             simulationStatTracker.endGame();
             gameBoard.resetBoard();
+        }
+        if (probe) {
+            System.out.printf("  [%s] [%s] firstHalf=%.3f secondHalf=%.3f Δ=%.3f%n",
+                    gameBoard.getClass().getName(), characterDie.getName(), firstHalf / n1, secondHalf / n2, firstHalf / n1 - secondHalf / n2);
         }
 
         printSimulationResult(characterDie, gameBoard.getTotalBoardSize());

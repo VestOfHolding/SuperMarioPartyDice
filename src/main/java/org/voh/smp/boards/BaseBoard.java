@@ -67,7 +67,11 @@ public abstract class BaseBoard {
     public abstract String getFileOutputName();
 
     public void resetBoard() {
-        initializeBoard();
+        for (BaseSpace space : board.vertexSet()) {
+            space.reset();
+        }
+        resetRedAndBlueCoinAmounts();
+        changeStarSpace();
     }
 
     /**
