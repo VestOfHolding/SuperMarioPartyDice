@@ -14,23 +14,25 @@ import lombok.NoArgsConstructor;
 public class OnlineStatistics {
     private double mean;
     private double sum;
+    private long count;
 
     private final TDigest tdigest = TDigest.createDigest(500);
 
     public void addValue(double value) {
         tdigest.add(value);
 
-        double nextMean = mean + (value - mean) / tdigest.size();
+        count++;
+        double nextMean = mean + (value - mean) / count;
         sum += (value - mean) * (value - nextMean);
         mean = nextMean;
     }
 
     public double getVariance() {
-        return sum / (double)tdigest.size();
+        return count > 0 ? sum / count : 0.0;
     }
 
     public double getStandardDeviation() {
-        return 0 < tdigest.size() ? Math.sqrt(getVariance()) : 0.0;
+        return 0 < count ? Math.sqrt(getVariance()) : 0.0;
     }
 
     public double getMin() {
@@ -50,6 +52,6 @@ public class OnlineStatistics {
     }
 
     public int getCount() {
-        return (int)tdigest.size();
+        return (int)count;
     }
 }

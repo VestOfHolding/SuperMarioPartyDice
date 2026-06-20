@@ -47,6 +47,7 @@ public class SimulationStatTracker {
             p.getGameStatTracker().reset(turnCount);
             p.setCurrentPlace(0);
             p.setCurrentSpace(null);
+            p.setLandedSpaceColor(null);
         }
 
         // main keeps its die; pick 3 distinct opponent dice (distinct from each other and from main)

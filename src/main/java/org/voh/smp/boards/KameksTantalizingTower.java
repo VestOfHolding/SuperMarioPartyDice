@@ -108,6 +108,7 @@ public class KameksTantalizingTower extends BaseBoard  {
         board.getVertexById(28).reset();
 
         resetRedAndBlueCoinAmounts();
+        board.setStarCost(MPBoard.INIT_STAR_COST);
     }
 
     private void connectPaths() {
