@@ -32,6 +32,8 @@ public class CharacterSimulation implements Runnable {
 
     protected final Dice characterDie;
 
+    private int probeBonusToMain;
+
     // Reusable 4-element scratch so place calculation allocates nothing per call.
     private final Player[] placeScratch = new Player[4];
 
@@ -48,29 +50,26 @@ public class CharacterSimulation implements Runnable {
         RandomUtils.newStream();
         simulationStatTracker = new SimulationStatTracker(characterDie);
 
-        boolean probe = characterDie == Dice.POM_POM;   // just one character
-        double firstHalf = 0, secondHalf = 0; long n1 = 0, n2 = 0;
+        boolean probe = characterDie == Dice.MARIO;
+        double cCoins = 0, cStars = 0, cBonus = 0, cPlace = 0; long pn = 0;
 
         for (int i = 0; i < SIM_COUNT; ++i) {
             simulateGame();
             if (probe) {
-                int coins = simulationStatTracker.getMainPlayer().getGameStatTracker().getBoardCoinsGained();
-                if (i < SIM_COUNT / 2) {
-                    firstHalf += coins; n1++;
-                }
-                else {
-                    secondHalf += coins; n2++;
-                }
-                if (i % 50_000 == 49_999)
-                    System.out.printf("  [%s] [%s] games=%d running coin mean=%.3f%n",
-                            gameBoard.getClass().getName(), characterDie.getName(), i + 1, (firstHalf + secondHalf) / (i + 1));
+                var t = simulationStatTracker.getMainPlayer().getGameStatTracker();
+                cCoins += t.getBoardCoinsGained();
+                cStars += t.getStarCount();
+                cBonus += probeBonusToMain;
+                cPlace += simulationStatTracker.getMainPlayer().getCurrentPlace();
+                pn++;
             }
             simulationStatTracker.endGame();
             gameBoard.resetBoard();
         }
         if (probe) {
-            System.out.printf("  [%s] [%s] firstHalf=%.3f secondHalf=%.3f Δ=%.3f%n",
-                    gameBoard.getClass().getName(), characterDie.getName(), firstHalf / n1, secondHalf / n2, firstHalf / n1 - secondHalf / n2);
+            System.out.printf(
+                    "[%s] MARIO  coins=%.3f  stars=%.3f  bonus=%.3f  bought=%.3f  place=%.4f%n",
+                    gameBoard.getClass().getName(), cCoins/pn, cStars/pn, cBonus/pn, (cStars - cBonus)/pn, cPlace/pn);
         }
 
         printSimulationResult(characterDie, gameBoard.getTotalBoardSize());
@@ -101,6 +100,10 @@ public class CharacterSimulation implements Runnable {
             Player bonusStarPlayer = bonusStar.findWinningPlayer(players);
             if (null != bonusStarPlayer) {
                 bonusStarPlayer.addStar();
+            }
+
+            if (bonusStarPlayer == simulationStatTracker.getMainPlayer()) {
+                probeBonusToMain++;
             }
         }
         calculatePlaces(players.allPlayers());
