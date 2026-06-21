@@ -45,6 +45,7 @@ public class CharacterSimulation implements Runnable {
 
     @Override
     public void run() {
+        RandomUtils.newStream();
         simulationStatTracker = new SimulationStatTracker(characterDie);
 
         boolean probe = characterDie == Dice.POM_POM;   // just one character

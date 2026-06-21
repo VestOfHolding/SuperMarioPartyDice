@@ -71,7 +71,14 @@ public abstract class BaseBoard {
             space.reset();
         }
         resetRedAndBlueCoinAmounts();
-        changeStarSpace();
+
+        if (currentStarSpace != null) {
+            currentStarSpace.deactivateStar();
+        }
+        currentStarSpace = starSpaces.getFirst();
+        currentStarSpace.activateStar();
+        board.setNeedToMoveStar(false);
+        board.setStarCost(MPBoard.INIT_STAR_COST);
     }
 
     /**
