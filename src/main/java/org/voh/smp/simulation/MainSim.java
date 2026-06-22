@@ -16,7 +16,7 @@ public class MainSim {
     private static final Logger LOG = LoggerFactory.getLogger(MainSim.class);
 
     static void main(String[] args) {
-        int simCount = 500000;
+        int simCount = 5000000;
         if (1 == args.length) {
             try {
                 if (0 < Integer.parseInt(args[0])) {
@@ -27,12 +27,9 @@ public class MainSim {
 
         try (ExecutorService service = Executors.newVirtualThreadPerTaskExecutor()){
             Simulation whompsSim = new Simulation(WhompsDominoRuins::new, simCount);
-            Simulation bobombSim = new Simulation(KingBobombsPowderkegMine::new, simCount);
-            Simulation megafruitSim = new Simulation(MegafruitParadise::new, simCount);
-            Simulation kameksSim = new Simulation(KameksTantalizingTower::new, simCount);
 
             List<Callable<String>> simulations = List.of(
-                    whompsSim::runWithTimeInfo, bobombSim::runWithTimeInfo, megafruitSim::runWithTimeInfo, kameksSim::runWithTimeInfo);
+                    whompsSim::runWithTimeInfo);
 
             service.invokeAll(simulations);
         } catch (Exception e) {
