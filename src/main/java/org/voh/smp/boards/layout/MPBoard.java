@@ -11,6 +11,7 @@ import org.apache.commons.collections4.MapUtils;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 import org.voh.smp.utils.RandomUtils;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,7 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
         List<BaseSpace> cached = successorCache.get(id);
         if (null == cached) {
             cached = Graphs.successorListOf(this, space);
+            cached.sort(Comparator.comparingInt(BaseSpace::getSpaceID));
             successorCache.put(id, cached);
         }
         return cached;

@@ -45,7 +45,7 @@ public class CharacterSimulation implements Runnable {
 
     @Override
     public void run() {
-        RandomUtils.setStream(42L + characterDie.ordinal());
+        RandomUtils.newStream();
         simulationStatTracker = new SimulationStatTracker(characterDie);
 
         boolean probe = characterDie == Dice.MARIO;
