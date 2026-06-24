@@ -26,8 +26,6 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
     public static final int INIT_STAR_COST = 10;
     private static final int[] KAMEK_STAR_PRICES = {5, 10, 15};
 
-    private static boolean FINGERPRINTED = false;
-
     @Getter
     @Setter
     private int starCost = INIT_STAR_COST;
@@ -157,16 +155,6 @@ public class MPBoard extends SimpleDirectedWeightedGraph<BaseSpace, MPEdge> {
 
             setDistanceToStar(distanceMap, starSpace, 1);
             starDistanceMap.put(starSpace.getSpaceID(), distanceMap);
-        }
-
-        if (!FINGERPRINTED) {
-            FINGERPRINTED = true;
-            StringBuilder sb = new StringBuilder();
-            vertexSet().forEach(v -> sb.append(v.getSpaceID()).append("->")
-                    .append(successorsOf(v).stream().map(s -> String.valueOf(s.getSpaceID())).toList())
-                    .append(" "));
-            System.out.println("[FP successors] " + sb);
-            System.out.println("[FP starDistances] " + starDistanceMap);
         }
     }
 

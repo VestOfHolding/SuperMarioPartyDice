@@ -8,11 +8,8 @@ import org.voh.smp.utils.RandomUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 /**
@@ -64,7 +61,9 @@ public class MinigameManager {
             //Randomizing who wins in what order.
             List<Player> shuffledPlayers = new ArrayList<>(playerGroup.allPlayers());
 
-            Collections.shuffle(shuffledPlayers, ThreadLocalRandom.current());
+            for (int i = shuffledPlayers.size() - 1; i > 0; i--) {
+                Collections.swap(shuffledPlayers, i, RandomUtils.nextIntExclusive(i + 1));
+            }
             for (int i = 0; i < shuffledPlayers.size(); ++i) {
                 awardMinigameCoins(shuffledPlayers.get(i), FOUR_PLAYER_WIN_AMOUNTS.get(i));
             }

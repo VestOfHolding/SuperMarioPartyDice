@@ -1,7 +1,6 @@
 package org.voh.smp.utils;
 
 import java.util.SplittableRandom;
-import java.util.concurrent.ThreadLocalRandom;
 
 public final class RandomUtils {
     private RandomUtils() { }
