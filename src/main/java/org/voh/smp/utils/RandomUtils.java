@@ -1,12 +1,17 @@
 package org.voh.smp.utils;
 
 import java.util.SplittableRandom;
+import java.util.concurrent.ThreadLocalRandom;
 
 public final class RandomUtils {
     private RandomUtils() { }
 
     private static final ThreadLocal<SplittableRandom> RNG =
             ThreadLocal.withInitial(SplittableRandom::new);
+
+    public static void setStream(long seed) {
+        RNG.set(new SplittableRandom(seed));
+    }
 
     public static void newStream() {
         RNG.set(new SplittableRandom());
