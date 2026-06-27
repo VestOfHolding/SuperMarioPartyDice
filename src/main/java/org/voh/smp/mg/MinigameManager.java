@@ -5,11 +5,7 @@ import org.voh.smp.simulation.Player;
 import org.voh.smp.simulation.PlayerGroup;
 import org.voh.smp.utils.RandomUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -117,7 +113,10 @@ public class MinigameManager {
                 }
             }
         }
-        return new ArrayList<>(allPlayers.stream().collect(Collectors.groupingBy(Player::getLandedSpaceColor)).values());
+        return new ArrayList<>(allPlayers.stream()
+                .collect(Collectors.groupingBy(Player::getLandedSpaceColor,
+                        () -> new EnumMap<>(SpaceColor.class), Collectors.toList()))
+                .values());
     }
 
     /**
@@ -129,7 +128,9 @@ public class MinigameManager {
      */
     private List<List<Player>> groupTeamsByColor(List<Player> allPlayers) {
         List<List<Player>> teams = new ArrayList<>(allPlayers.stream()
-                .collect(Collectors.groupingBy(Player::getLandedSpaceColor)).values());
+                .collect(Collectors.groupingBy(Player::getLandedSpaceColor,
+                        () -> new EnumMap<>(SpaceColor.class), Collectors.toList()))
+                .values());
 
         if (1 == teams.size()) {
             return buildFreeForAllTeams(allPlayers);

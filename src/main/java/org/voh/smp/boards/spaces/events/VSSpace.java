@@ -45,7 +45,7 @@ public class VSSpace extends BlueSpace {
         //60%, 30%, 10%, 0%, rounded down.
         List<Integer> normalSplitCopy = new ArrayList<>(NORMAL_SPLITS);
 
-        for (Player player : new HashSet<>(playerGroup.allPlayers())) {
+        for (Player player : playerGroup.allPlayers()) {
             Integer split = normalSplitCopy.get(RandomUtils.getRandomInt(normalSplitCopy.size() - 1));
             int gainFromPot = totalPot * split / 10;
 

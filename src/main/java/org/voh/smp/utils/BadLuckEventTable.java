@@ -2,12 +2,7 @@ package org.voh.smp.utils;
 
 import org.apache.commons.lang3.Range;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public enum BadLuckEventTable {
     FIRST_HALF_1ST_2ND(Arrays.asList(
@@ -106,7 +101,7 @@ public enum BadLuckEventTable {
     }
 
     public static Set<LuckEvent> buildEventList(BadLuckEventTable eventTable) {
-        Set<LuckEvent> result = new HashSet<>(5);
+        Set<LuckEvent> result = new LinkedHashSet<>(5);
 
         do {
             result.add(eventTable.eventMap.get(RandomUtils.getRandomInt(1, 100)));
