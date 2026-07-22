@@ -13,8 +13,6 @@ This project is for recreating the boards and character dice of Super Mario Part
 
 These simulations are run for each of the four game boards since one of the main questions is how each character die ends up impacting which spaces on each board you're more likely to land on, and how that goes on to affect everything else.
 
-Not sure it's the greatest design, lol. Contrary to what may seem fine at the time, the hours between 8 PM and midnight are not the optimal times to be programming and bashing away at these kinds of simulations, lol.
-
 ## Why do this?
 
 Because I'm a giant nerd, lol.
@@ -26,12 +24,10 @@ For real though, with the introduction of the unique character dice in SMP, this
 The current version of these simulations is much more limited than the real SMP games due to complexity and setting more incremental, obtainable goals for myself. With this current state (plus any current goals/questions addressed), I believe that's at least a really good pausing place that still yields really good results that a SMP player could still use.
 
  * The stars work....mostly.
-    * Stars are on the board and work as you would expect. 
-    * When the agent arrives at a branching path, it will choose which path to take based on whether it can currently afford the star and which path is the shortest to the star.
+   * The only exception is the bonus star associated with items, since items are not implemented.
  * Character dice only. 
    * The agents only ever use the character die that they have from the beginning, though yes, in a real game a player can choose between their own character die, the character dice of any allies they have, and a standard d6. For now, this project is really about answering how effective each character die is on their own, so we can leave adding this choice for a later version of this. 
    * Though yes, that could end up changing things, as maybe even the standard d6 compliments some character dice far better than others.
-   * Another reason to hold off on this is that I'm really worried that this will introduce even more variables. It seems likely to me that different character dice are actually better or worse vs different other character dice, and I can't handle even thinking about that right now, lol.
  * All four players
    * While each simulation is centered on testing one main player, all four characters in a typical Mario Party game are running around the board, collecting coins and stars using the same strategies.
    * Who the other three characters are for each game is chosen randomly, so the resulting statistics say how each character does generically against all characters.
@@ -40,16 +36,11 @@ The current version of these simulations is much more limited than the real SMP 
    * I actually think this is better than trying to recreate all of the games and program AIs to actually try to beat them, because choosing a random winner removes the individual player skill from the equation, while still getting that regular injection of coins from the minigame rewards into the system.
  * No Items.
    * This would be a lot of work, and be tied into creating an AI that makes smarter decisions. I really don't see currently how the items could be done well in this program without an agent having some sort of decent decision making around when to buy an item, which one, and when to use it. So, for now at least, despite how helpful they can be in a game, I'm hoping the simulations are still really valuable without them.
-* Bonus stars are mostly implemented.
-   * Specifically all but one. I don't have the Item Star, since no items.
 
 ## Current Goals/Questions
 
 - [ ] Fine-tune the Sand Bridge collapsing in Megafruit Paradise. I've heard it can randomly collapse after 3-5 uses, but in the four cases I've witnessed it's been 5. Either that's coincidence, or it's not 3-5, or the randomness isn't uniform. Without more data I don't know which it is for certain.
     * Partially done. I did find video evidence of the bridge collapsing after four crossings, and coded that in. That really messed up Diddy and Wario's ability to gain allies, lol.
-- [ ] Confirm whether the bonus Coin Star is given for having the most coins at the end, or the most coins at any point in the game.
-- [x] Any performance gains I can find in the simulations. It's slower than I'd like.
-    * This is really a continuous task that I should always check, but at least for now I've done everything I can.
  
  ## Future Goals
  
@@ -66,7 +57,7 @@ The current version of these simulations is much more limited than the real SMP 
 
 ## Current Performance
 
-These are measurements done on my personal PC. Looks like the current multithreading that's being done is able to provide more and more benefit as I ask this program to perform more simulations, though still sticks pretty close to being around 1 simulation per millisecond.
+These are measurements done on my personal PC.
 
 ### Average Total Time of Simulations by Simulation Count (seconds)
 | Board Name | 5,000 | 10,000 | 50,000 | 100,000 | 500,000 | 1,000,000 |
